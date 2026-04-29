@@ -1,0 +1,10 @@
+{
+  "name": "client-sites",
+  "private": true,
+  "scripts": {
+    "dev": "pnpm --filter $npm_config_app dev",
+    "build": "pnpm --filter $npm_config_app build",
+    "lint": "pnpm --filter $npm_config_app lint"
+  },
+  "packageManager": "pnpm@10.33.2"
+}
