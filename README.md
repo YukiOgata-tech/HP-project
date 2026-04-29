@@ -15,7 +15,7 @@
 ```
 client-sites/
 ├── apps/                   # 各クライアントサイト
-│   └── hair-salon01/
+│   └── ...
 ├── packages/               # 共有コード（UIコンポーネント等）
 ├── scripts/
 │   └── create-app.mjs      # 新規アプリ作成スクリプト

@@ -1,0 +1,217 @@
+/* ═══════════════════════════════
+   Hero Background — アニメーション
+   ═══════════════════════════════ */
+
+/* ── Keyframes ── */
+@keyframes blob-1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  30%       { transform: translate(70px, 55px) scale(1.1); }
+  60%       { transform: translate(25px, -40px) scale(0.92); }
+}
+@keyframes blob-2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  40%       { transform: translate(-75px, -55px) scale(1.14); }
+  70%       { transform: translate(55px, 40px) scale(0.88); }
+}
+@keyframes blob-3 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%       { transform: translate(-60px, -50px) scale(1.18); }
+}
+@keyframes ring-cw  { to { transform: rotate(360deg); } }
+@keyframes ring-ccw { to { transform: rotate(-360deg); } }
+@keyframes dot-float {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50%       { transform: translateY(-20px) scale(1.15); }
+}
+@keyframes arc-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* ══════════════════════════════════
+   Base gradient overlay
+   ══════════════════════════════════ */
+.hero-bg-base {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 70% 60% at -5% 50%,  rgba(214,173,141,0.35) 0%, transparent 65%),
+    radial-gradient(ellipse 55% 70% at 105% 55%, rgba(182,132,105,0.28) 0%, transparent 65%),
+    radial-gradient(ellipse 40% 40% at 50% 5%,   rgba(199,152,112,0.15) 0%, transparent 60%);
+}
+.dark .hero-bg-base {
+  background:
+    radial-gradient(ellipse 70% 60% at -5% 50%,  rgba(90,58,37,0.55) 0%, transparent 65%),
+    radial-gradient(ellipse 55% 70% at 105% 55%, rgba(61,36,24,0.45) 0%, transparent 65%),
+    radial-gradient(ellipse 40% 40% at 50% 5%,   rgba(107,62,40,0.2) 0%, transparent 60%);
+}
+
+/* ══════════════════════════════════
+   Gradient orbs
+   ══════════════════════════════════ */
+.hero-orb {
+  position: absolute;
+  border-radius: 9999px;
+  pointer-events: none;
+  will-change: transform;
+}
+.hero-orb-1 {
+  width: 720px; height: 720px;
+  background: radial-gradient(circle at 35% 35%, var(--blob-1) 0%, transparent 55%);
+  filter: blur(60px);
+  opacity: 0.65;
+  top: -260px; left: -280px;
+  animation: blob-1 18s ease-in-out infinite;
+}
+.hero-orb-2 {
+  width: 520px; height: 520px;
+  background: radial-gradient(circle at 65% 65%, var(--blob-2) 0%, transparent 55%);
+  filter: blur(55px);
+  opacity: 0.5;
+  bottom: -160px; right: -160px;
+  animation: blob-2 24s ease-in-out infinite;
+}
+.hero-orb-3 {
+  width: 360px; height: 360px;
+  background: radial-gradient(circle, var(--accent-warm) 0%, transparent 60%);
+  filter: blur(50px);
+  opacity: 0.38;
+  top: 30%; left: 28%;
+  animation: blob-3 14s ease-in-out infinite;
+}
+.dark .hero-orb-1 { opacity: 0.8; }
+.dark .hero-orb-2 { opacity: 0.7; }
+.dark .hero-orb-3 { opacity: 0.55; background: radial-gradient(circle, #7a5035 0%, transparent 60%); }
+
+/* ══════════════════════════════════
+   Decorative rings
+   ══════════════════════════════════ */
+.hero-ring {
+  position: absolute;
+  border-radius: 9999px;
+  pointer-events: none;
+}
+.hero-ring-1 {
+  width: 580px; height: 580px;
+  border: 1.5px solid var(--accent);
+  opacity: 0.45;
+  top: -220px; right: -140px;
+  animation: ring-cw 32s linear infinite;
+}
+.hero-ring-2 {
+  width: 380px; height: 380px;
+  border: 1px solid var(--accent);
+  opacity: 0.3;
+  bottom: -140px; left: 6%;
+  animation: ring-ccw 22s linear infinite;
+}
+.dark .hero-ring-1 { opacity: 0.55; border-color: var(--accent-warm); }
+.dark .hero-ring-2 { opacity: 0.4;  border-color: var(--accent-warm); }
+
+/* glow dots on rings */
+.hero-ring-1::before,
+.hero-ring-1::after,
+.hero-ring-2::before,
+.hero-ring-2::after {
+  content: '';
+  position: absolute;
+  border-radius: 9999px;
+}
+.hero-ring-1::before {
+  width: 10px; height: 10px;
+  background: var(--accent);
+  box-shadow: 0 0 10px 3px var(--accent);
+  top: 50%; left: -5px;
+  margin-top: -5px;
+  opacity: 0.9;
+}
+.hero-ring-1::after {
+  width: 7px; height: 7px;
+  background: var(--blob-1);
+  box-shadow: 0 0 8px 2px var(--blob-1);
+  bottom: 22%; right: -3.5px;
+  opacity: 0.75;
+}
+.hero-ring-2::before {
+  width: 8px; height: 8px;
+  background: var(--blob-2);
+  box-shadow: 0 0 7px 2px var(--blob-2);
+  top: 15%; right: -4px;
+  opacity: 0.8;
+}
+.hero-ring-2::after {
+  width: 6px; height: 6px;
+  background: var(--accent);
+  box-shadow: 0 0 6px 2px var(--accent);
+  bottom: 12%; left: -3px;
+  opacity: 0.65;
+}
+
+/* ══════════════════════════════════
+   Floating dots
+   ══════════════════════════════════ */
+.hero-dot {
+  position: absolute;
+  border-radius: 9999px;
+  background: var(--accent);
+  pointer-events: none;
+}
+.hero-dot-1 {
+  width: 14px; height: 14px; opacity: 0.6;
+  top: 18%; left: 11%;
+  box-shadow: 0 0 12px 4px var(--accent);
+  animation: dot-float 5s ease-in-out infinite;
+}
+.hero-dot-2 {
+  width: 9px; height: 9px; opacity: 0.45;
+  top: 62%; left: 7%;
+  box-shadow: 0 0 8px 2px var(--accent);
+  animation: dot-float 7s ease-in-out infinite 1.2s;
+}
+.hero-dot-3 {
+  width: 11px; height: 11px; opacity: 0.4;
+  top: 28%; right: 14%;
+  box-shadow: 0 0 9px 3px var(--accent);
+  animation: dot-float 6.5s ease-in-out infinite 2.5s;
+}
+.hero-dot-4 {
+  width: 7px; height: 7px; opacity: 0.5;
+  top: 72%; right: 22%;
+  box-shadow: 0 0 6px 2px var(--accent);
+  animation: dot-float 8s ease-in-out infinite 0.8s;
+}
+.hero-dot-5 {
+  width: 10px; height: 10px; opacity: 0.35;
+  top: 48%; left: 52%;
+  box-shadow: 0 0 8px 2px var(--accent);
+  animation: dot-float 5.5s ease-in-out infinite 3.5s;
+}
+
+/* ══════════════════════════════════
+   Large decorative arc (quarter ring)
+   ══════════════════════════════════ */
+.hero-arc {
+  position: absolute;
+  border-radius: 9999px;
+  pointer-events: none;
+  width: 900px; height: 900px;
+  border: 1px solid var(--accent-border);
+  opacity: 0.5;
+  bottom: -500px; left: -200px;
+  animation: ring-cw 55s linear infinite;
+}
+.dark .hero-arc { opacity: 0.35; border-color: var(--accent-border); }
+
+/* ══════════════════════════════════
+   Grain texture
+   ══════════════════════════════════ */
+.hero-grain {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.06;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 256px 256px;
+}
+.dark .hero-grain { opacity: 0.09; }
