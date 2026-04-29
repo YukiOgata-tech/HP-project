@@ -16,63 +16,29 @@ client-sites/               ← ここで pnpm コマンドを実行する（ル
 
 ## 新しいサイトを追加する
 
-### 手順
-
-**1. apps/ 内にフォルダを作成し、必要なファイルを用意する**
-
-```
-apps/
-└── new-site/
-    ├── package.json
-    ├── next.config.ts
-    ├── tsconfig.json
-    ├── postcss.config.mjs
-    ├── eslint.config.mjs
-    └── app/
-        ├── layout.tsx
-        ├── page.tsx
-        └── globals.css
-```
-
-**2. package.json の `name` を一意にする**
-
-```json
-{
-  "name": "new-site",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "eslint"
-  },
-  "dependencies": {
-    "next": "16.2.4",
-    "react": "19.2.4",
-    "react-dom": "19.2.4"
-  },
-  "devDependencies": {
-    "@tailwindcss/postcss": "^4",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "eslint": "^9",
-    "eslint-config-next": "16.2.4",
-    "tailwindcss": "^4",
-    "typescript": "^5"
-  }
-}
-```
-
-**3. ルートで pnpm install を実行**
+### コマンド一発で作成する（推奨）
 
 ```bash
-# client-sites/ ディレクトリで実行
-pnpm install
+# ルート（client-sites/）で実行
+pnpm create-app サイト名
 ```
 
-これだけで新しいサイトが共有 node_modules に接続される。
+**例:**
+
+```bash
+pnpm create-app hair-salon02
+pnpm create-app restaurant-01
+```
+
+- `apps/サイト名/` に Next.js + TypeScript + Tailwind v4 の構成が自動生成される
+- `pnpm install` も自動実行される
+- 名前は小文字・数字・ハイフンのみ使用可
+
+**作成後すぐ開発を始められる:**
+
+```bash
+pnpm --filter hair-salon02 dev
+```
 
 ---
 
