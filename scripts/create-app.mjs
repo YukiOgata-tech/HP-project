@@ -45,9 +45,17 @@ writeFileSync(`${appDir}/package.json`, JSON.stringify({
     lint: "eslint",
   },
   dependencies: {
+    clsx: "^2.1.1",
+    "embla-carousel-react": "^8.6.0",
+    "framer-motion": "^12.38.0",
+    "lucide-react": "^1.14.0",
     next: "16.2.4",
     react: "19.2.4",
     "react-dom": "19.2.4",
+    "react-hook-form": "^7.74.0",
+    "react-intersection-observer": "^10.0.3",
+    "tailwind-merge": "^3.5.0",
+    zod: "^4.3.6",
   },
   devDependencies: {
     "@tailwindcss/postcss": "^4",
@@ -120,7 +128,9 @@ export default eslintConfig;
 `);
 
 // app/globals.css
-writeFileSync(`${appDir}/app/globals.css`, `@import "tailwindcss";\n`);
+writeFileSync(`${appDir}/app/globals.css`, `@import "tailwindcss";
+@source "../../../packages/components/src";
+`);
 
 // app/layout.tsx
 writeFileSync(`${appDir}/app/layout.tsx`, `import type { Metadata } from "next";
