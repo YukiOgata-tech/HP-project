@@ -1,0 +1,82 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ── ヘルパー関数 ─────────────────────────────────────────────
+    function isAuth() {
+      return request.auth != null;
+    }
+
+    function userData() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data;
+    }
+
+    function isSuperAdmin() {
+      return isAuth() && userData().role == 'superAdmin';
+    }
+
+    function hasSiteAccess(siteId) {
+      return isAuth() && (
+        userData().role == 'superAdmin' ||
+        siteId in userData().siteIds
+      );
+    }
+
+    function canEditSite(siteId) {
+      let u = userData();
+      return isAuth() && (
+        u.role == 'superAdmin' ||
+        (siteId in u.siteIds && u.role in ['siteAdmin', 'editor'])
+      );
+    }
+
+    function canDeleteSite(siteId) {
+      let u = userData();
+      return isAuth() && (
+        u.role == 'superAdmin' ||
+        (siteId in u.siteIds && u.role in ['siteAdmin'])
+      );
+    }
+
+    // ── users コレクション ──────────────────────────────────────
+    match /users/{uid} {
+      // 本人または superAdmin のみ読み取り可
+      allow read: if isAuth() && (request.auth.uid == uid || isSuperAdmin());
+      // superAdmin のみ作成・削除
+      allow create, delete: if isSuperAdmin();
+      // superAdmin は全フィールド更新可。本人は role / siteIds 以外を更新可
+      allow update: if isSuperAdmin() ||
+        (isAuth() && request.auth.uid == uid &&
+          !request.resource.data.diff(resource.data)
+            .affectedKeys()
+            .hasAny(['role', 'siteIds']));
+    }
+
+    // ── sites コレクション ──────────────────────────────────────
+    match /sites/{siteId} {
+      // サイトメタデータは公開読み取り可
+      allow read: if true;
+      // superAdmin のみ作成・更新・削除
+      allow write: if isSuperAdmin();
+
+      // ── posts サブコレクション ────────────────────────────────
+      match /posts/{postId} {
+        // 公開記事は誰でも読み取り可。下書きはアクセス権ユーザーのみ
+        allow read: if resource.data.status == 'published' ||
+                       hasSiteAccess(siteId);
+
+        // 作成: editor 以上かつ createdBy が自分の uid
+        allow create: if canEditSite(siteId) &&
+                         request.resource.data.createdBy == request.auth.uid;
+
+        // 更新: editor 以上かつ updatedBy が自分の uid
+        allow update: if canEditSite(siteId) &&
+                         request.resource.data.updatedBy == request.auth.uid;
+
+        // 削除: siteAdmin 以上
+        allow delete: if canDeleteSite(siteId);
+      }
+    }
+  }
+}

@@ -180,7 +180,7 @@ export default function Home() {
                 alt="店内写真"
                 width={520}
                 height={680}
-                className="h-[320px] rounded-[2rem] object-cover"
+                className="h-80 rounded-4xl object-cover"
               />
               <Image
                 src="/images/salon-02.jpg"

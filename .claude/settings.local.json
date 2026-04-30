@@ -7,7 +7,10 @@
       "Bash(git add *)",
       "Bash(git commit -m ' *)",
       "Bash(pnpm --filter hair-salon01 add next-themes)",
-      "Bash(pnpm *)"
+      "Bash(pnpm *)",
+      "Read(//c/Users/81801/AppData/Local/Temp/claude/C--projects-client-sites/a253a6c4-9569-4dd3-a234-732319921687/tasks/**)",
+      "Bash(npx tsc *)",
+      "Bash(git -C /c/projects/client-sites status)"
     ]
   }
 }
