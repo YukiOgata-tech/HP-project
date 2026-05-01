@@ -139,7 +139,7 @@ export default async function Home() {
                   alt="RISPLENDERE BROLETTOのサロンイメージ"
                   width={720}
                   height={920}
-                  className="h-[460px] w-full object-cover"
+                  className="h-115 w-full object-cover"
                   priority
                 />
               </div>
@@ -153,7 +153,7 @@ export default async function Home() {
                     className="h-48 w-full object-cover"
                   />
                 </div>
-                <div className="rounded-[2rem] bg-[var(--card-solid)] p-4 shadow-xl shadow-black/10">
+                <div className="rounded-4xl bg-[var(--card-solid)] p-4 shadow-xl shadow-black/10">
                   <p className="text-xs font-bold text-[var(--accent-light)]">Cut price</p>
                   <p className="mt-0.5 text-2xl font-black">¥5,400</p>
                   <p className="mt-2 text-xs leading-5 text-[var(--fg-muted)]">
@@ -359,7 +359,7 @@ export default async function Home() {
       {/* ── News Guide ── */}
       <section className="bg-[var(--bg-section)] px-5 py-10 md:py-16">
         <div className="mx-auto max-w-7xl">
-          <div className="overflow-hidden rounded-[2rem] border border-[var(--border)] bg-[linear-gradient(135deg,rgba(255,255,255,0.92),rgba(245,236,227,0.92))] shadow-[0_24px_60px_-40px_rgba(44,36,31,0.45)]">
+          <div className="overflow-hidden rounded-4xl border border-[var(--border)] bg-[linear-gradient(135deg,rgba(255,255,255,0.92),rgba(245,236,227,0.92))] shadow-[0_24px_60px_-40px_rgba(44,36,31,0.45)]">
             <div className="grid gap-8 px-6 py-7 md:grid-cols-[0.85fr_1.15fr] md:px-8 md:py-9">
               <FadeUp>
                 <p className="text-xs font-black uppercase tracking-[0.35em] text-[var(--accent)]">

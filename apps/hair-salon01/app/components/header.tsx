@@ -113,7 +113,7 @@ export function Header() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -6 }}
             transition={{ duration: 0.18, ease: "easeOut" }}
-            className="fixed inset-x-0 top-[56px] z-40 border-b border-[var(--header-border)] bg-[var(--bg)]/95 backdrop-blur-xl md:hidden"
+            className="fixed inset-x-0 top-14 z-40 border-b border-[var(--header-border)] bg-[var(--bg)]/95 backdrop-blur-xl md:hidden"
           >
             <nav className="mx-auto flex max-w-7xl flex-col px-5">
               {navLinks.map(({ href, label, match }) => (
