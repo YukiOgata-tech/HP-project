@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { cookies, headers } from "next/headers";
 import { Noto_Sans_JP, Playfair_Display } from "next/font/google";
+import { Footer } from "./components/footer";
 import { Header } from "./components/header";
 import { Providers } from "./providers";
 import "./globals.css";
@@ -58,6 +59,7 @@ export default async function RootLayout({
         <Providers initialTheme={savedTheme}>
           {!isAdminRoute && <Header />}
           {children}
+          {!isAdminRoute && <Footer />}
         </Providers>
       </body>
     </html>

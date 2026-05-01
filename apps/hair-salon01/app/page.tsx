@@ -1,4 +1,6 @@
+import Link from "next/link";
 import Image from "next/image";
+import { getPublishedPosts } from "@client-sites/lib/cms";
 import {
   CalendarDays,
   Car,
@@ -68,7 +70,11 @@ const styles = [
   "/images/style-04.jpg",
 ];
 
-export default function Home() {
+const SITE_ID = process.env.SITE_ID!;
+
+export default async function Home() {
+  const latestPosts = await getPublishedPosts(SITE_ID, 3);
+
   return (
     <main className="min-h-screen">
 
@@ -138,7 +144,7 @@ export default function Home() {
                 />
               </div>
               <div className="col-span-2 flex flex-col gap-3 pt-8">
-                <div className="overflow-hidden rounded-[2rem] shadow-xl shadow-black/10">
+                <div className="overflow-hidden rounded-4rem shadow-xl shadow-black/10">
                   <Image
                     src="/images/hero-02.jpg"
                     alt="ヘアスタイルイメージ"
@@ -350,6 +356,97 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ── News Guide ── */}
+      <section className="bg-[var(--bg-section)] px-5 py-10 md:py-16">
+        <div className="mx-auto max-w-7xl">
+          <div className="overflow-hidden rounded-[2rem] border border-[var(--border)] bg-[linear-gradient(135deg,rgba(255,255,255,0.92),rgba(245,236,227,0.92))] shadow-[0_24px_60px_-40px_rgba(44,36,31,0.45)]">
+            <div className="grid gap-8 px-6 py-7 md:grid-cols-[0.85fr_1.15fr] md:px-8 md:py-9">
+              <FadeUp>
+                <p className="text-xs font-black uppercase tracking-[0.35em] text-[var(--accent)]">
+                  Journal
+                </p>
+                <h2 className="mt-2 text-3xl font-black leading-tight md:text-4xl">
+                  サロンのお知らせや
+                  <br />
+                  日々のことをまとめています。
+                </h2>
+                <p className="mt-4 max-w-md text-sm leading-7 text-[var(--fg-subtle)] md:text-base md:leading-8">
+                  営業日のお知らせ、ヘアケアの話題、新しいスタイル提案など、
+                  BROLETTOからの発信を一覧でご覧いただけます。
+                </p>
+                <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+                  <Link
+                    href="/news"
+                    className="inline-flex items-center justify-center gap-2 rounded-full bg-[var(--cta)] px-6 py-3 text-sm font-bold text-white transition-all duration-200 hover:-translate-y-0.5 hover:brightness-110"
+                  >
+                    ブログ一覧を見る
+                    <ChevronRight size={16} />
+                  </Link>
+                  <a
+                    href={reservationUrl}
+                    className="inline-flex items-center justify-center rounded-full border border-[var(--border)] px-6 py-3 text-sm font-bold transition-all duration-200 hover:-translate-y-0.5 hover:border-[var(--accent)]"
+                  >
+                    ご予約はこちら
+                  </a>
+                </div>
+              </FadeUp>
+
+              <div className="grid gap-3">
+                {latestPosts.length === 0 ? (
+                  <div className="rounded-[1.6rem] border border-dashed border-[var(--accent-border)] bg-[var(--card)] px-5 py-8 text-sm text-[var(--fg-subtle)]">
+                    現在、公開中の記事はありません。更新後にこちらへ表示されます。
+                  </div>
+                ) : (
+                  latestPosts.map((post, index) => (
+                    <Link
+                      key={post.id}
+                      href={`/news/${post.slug}`}
+                      className="group rounded-[1.6rem] border border-[var(--border)] bg-white/75 p-4 transition-all duration-200 hover:-translate-y-1 hover:border-[var(--accent-border)] hover:shadow-lg hover:shadow-black/5 md:p-5"
+                    >
+                      <div className="flex flex-col gap-4 sm:flex-row sm:items-start">
+                        {post.coverImageUrl ? (
+                          <img
+                            src={post.coverImageUrl}
+                            alt={post.title}
+                            className="h-24 w-full rounded-2xl object-cover sm:w-36"
+                          />
+                        ) : (
+                          <div className="flex h-24 w-full items-center justify-center rounded-2xl bg-[var(--card)] text-[var(--accent)] sm:w-36">
+                            <Sparkles size={18} />
+                          </div>
+                        )}
+                        <div className="min-w-0 flex-1">
+                          <div className="flex flex-wrap items-center gap-2">
+                            <span className="rounded-full bg-[var(--bg)] px-2.5 py-1 text-[10px] font-black uppercase tracking-[0.22em] text-[var(--accent)]">
+                              {index === 0 ? "Latest" : "News"}
+                            </span>
+                            <time className="text-xs text-[var(--fg-subtle)]">
+                              {post.publishedAt
+                                ? new Date(post.publishedAt).toLocaleDateString("ja-JP", {
+                                    year: "numeric",
+                                    month: "long",
+                                    day: "numeric",
+                                  })
+                                : ""}
+                            </time>
+                          </div>
+                          <h3 className="mt-3 text-base font-black text-[var(--fg)] transition-colors group-hover:text-[var(--accent)] md:text-lg">
+                            {post.title}
+                          </h3>
+                          <p className="mt-2 line-clamp-2 text-sm leading-6 text-[var(--fg-subtle)]">
+                            {post.excerpt || "詳細は記事ページでご覧ください。"}
+                          </p>
+                        </div>
+                      </div>
+                    </Link>
+                  ))
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ── Access ── */}
       <section id="access" className="bg-[var(--bg-dark)] px-5 py-10 text-white md:py-16">
         <div className="mx-auto max-w-7xl md:grid md:grid-cols-[1fr_1fr] md:gap-10">
@@ -414,16 +511,6 @@ export default function Home() {
           </FadeIn>
         </div>
       </section>
-
-      {/* ── Footer ── */}
-      <footer className="bg-[var(--bg-darkest)] px-5 py-5 text-white/70 md:py-6">
-        <div className="mx-auto flex max-w-7xl flex-col gap-1.5 md:flex-row md:items-center md:justify-between">
-          <p className="text-base font-black tracking-[0.2em] text-white md:text-lg">
-            RISPLENDERE BROLETTO
-          </p>
-          <p className="text-xs">© RISPLENDERE BROLETTO. All Rights Reserved.</p>
-        </div>
-      </footer>
     </main>
   );
 }

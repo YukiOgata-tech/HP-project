@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, Moon, Sun, X } from "lucide-react";
 import { useTheme } from "../lib/theme";
@@ -8,13 +10,15 @@ import { useTheme } from "../lib/theme";
 const reservationUrl = "https://beauty.hotpepper.jp/slnH000142482/";
 
 const navLinks = [
-  { href: "#concept", label: "Concept" },
-  { href: "#stylists", label: "Stylists" },
-  { href: "#menu", label: "Menu" },
-  { href: "#access", label: "Access" },
+  { href: "/#concept", label: "Concept", match: "/" },
+  { href: "/#stylists", label: "Stylists", match: "/" },
+  { href: "/#menu", label: "Menu", match: "/" },
+  { href: "/#access", label: "Access", match: "/" },
+  { href: "/news", label: "Journal", match: "/news" },
 ];
 
 export function Header() {
+  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const { resolvedTheme, setTheme } = useTheme();
@@ -23,23 +27,32 @@ export function Header() {
     setMounted(true);
   }, []);
 
+  useEffect(() => {
+    setIsOpen(false);
+  }, [pathname]);
+
   return (
     <>
       <header className="fixed inset-x-0 top-0 z-50 border-b border-[var(--header-line)] bg-[var(--bg)]/90 backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 md:py-3">
-          <a href="#" className="font-serif text-lg font-bold tracking-[0.2em] md:text-xl">
+          <Link href="/" className="font-serif text-lg font-bold tracking-[0.2em] md:text-xl">
             BROLETTO
-          </a>
+          </Link>
 
           <nav className="hidden gap-8 text-sm font-bold md:flex">
-            {navLinks.map(({ href, label }) => (
-              <a
+            {navLinks.map(({ href, label, match }) => (
+              <Link
                 key={href}
                 href={href}
-                className="transition-colors hover:text-[var(--accent)]"
+                className={[
+                  "transition-colors hover:text-[var(--accent)]",
+                  pathname === match || (match !== "/" && pathname.startsWith(match))
+                    ? "text-[var(--accent)]"
+                    : "",
+                ].join(" ")}
               >
                 {label}
-              </a>
+              </Link>
             ))}
           </nav>
 
@@ -103,15 +116,22 @@ export function Header() {
             className="fixed inset-x-0 top-[56px] z-40 border-b border-[var(--header-border)] bg-[var(--bg)]/95 backdrop-blur-xl md:hidden"
           >
             <nav className="mx-auto flex max-w-7xl flex-col px-5">
-              {navLinks.map(({ href, label }) => (
-                <a
+              {navLinks.map(({ href, label, match }) => (
+                <Link
                   key={href}
                   href={href}
-                  onClick={() => setIsOpen(false)}
                   className="border-b border-[var(--border-light)] py-3.5 text-sm font-bold transition-colors last:border-b-0 hover:text-[var(--accent)]"
                 >
-                  {label}
-                </a>
+                  <span
+                    className={
+                      pathname === match || (match !== "/" && pathname.startsWith(match))
+                        ? "text-[var(--accent)]"
+                        : ""
+                    }
+                  >
+                    {label}
+                  </span>
+                </Link>
               ))}
               <a
                 href={reservationUrl}
