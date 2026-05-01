@@ -22,6 +22,10 @@ import { FadeUp, FadeIn, StaggerList, StaggerItem } from "./components/animated"
 
 const reservationUrl = "https://beauty.hotpepper.jp/slnH000142482/";
 const tel = "025-278-7274";
+const mapUrl =
+  "https://www.google.com/maps?q=%E6%96%B0%E6%BD%9F%E7%9C%8C%E6%96%B0%E6%BD%9F%E5%B8%82%E4%B8%AD%E5%A4%AE%E5%8C%BA%E6%9C%AC%E9%A6%AC%E8%B6%8A2%E4%B8%81%E7%9B%AE8%E7%95%AA17%E5%8F%B7&output=embed";
+const mapLink =
+  "https://www.google.com/maps/search/?api=1&query=%E6%96%B0%E6%BD%9F%E7%9C%8C%E6%96%B0%E6%BD%9F%E5%B8%82%E4%B8%AD%E5%A4%AE%E5%8C%BA%E6%9C%AC%E9%A6%AC%E8%B6%8A2%E4%B8%81%E7%9B%AE8%E7%95%AA17%E5%8F%B7";
 
 const stylists = [
   {
@@ -492,6 +496,34 @@ export default async function Home() {
               <Info icon={<CreditCard />} title="お支払い">
                 各種クレジットカード対応。
               </Info>
+            </div>
+
+            <div className="mt-5 overflow-hidden rounded-[1.6rem] border border-[var(--border)] bg-[var(--card)] shadow-lg shadow-black/5">
+              <div className="flex items-center justify-between border-b border-[var(--border-light)] px-4 py-3">
+                <div>
+                  <p className="text-xs font-black uppercase tracking-[0.25em] text-[var(--accent)]">
+                    Map
+                  </p>
+                  <p className="mt-1 text-sm font-bold">周辺マップ</p>
+                </div>
+                <a
+                  href={mapLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xs font-bold text-[var(--accent)] transition-colors hover:text-[var(--accent-light)]"
+                >
+                  Googleマップで開く ↗
+                </a>
+              </div>
+              <iframe
+                title="RISPLENDERE BROLETTO の地図"
+                src={mapUrl}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="h-64 w-full md:h-72"
+                style={{ border: 0 }}
+                allowFullScreen
+              />
             </div>
 
             <div className="mt-5 grid gap-2.5 sm:grid-cols-2">
