@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { cookies } from "next/headers";
+import { cookies, headers } from "next/headers";
 import { Noto_Sans_JP, Playfair_Display } from "next/font/google";
 import { Header } from "./components/header";
 import { Providers } from "./providers";
@@ -43,6 +43,8 @@ export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   const cookieStore = await cookies();
+  const pathname = (await headers()).get("x-admin-pathname");
+  const isAdminRoute = pathname?.startsWith("/admin") ?? false;
   const savedTheme = cookieStore.get("theme")?.value as "dark" | "light" | undefined;
 
   return (
@@ -54,7 +56,7 @@ export default async function RootLayout({
     >
       <body>
         <Providers initialTheme={savedTheme}>
-          <Header />
+          {!isAdminRoute && <Header />}
           {children}
         </Providers>
       </body>

@@ -4,10 +4,14 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { verifyIdToken, getCmsUser, hasSiteAccess } from "@client-sites/lib/cms";
 import type { CmsUser } from "@client-sites/lib/cms/types";
+import {
+  createSessionToken,
+  SESSION_COOKIE,
+  SESSION_MAX_AGE,
+  verifySessionToken,
+} from "../lib/session-token";
 
 const SITE_ID = process.env.SITE_ID!;
-const SESSION_COOKIE = "__session";
-const SESSION_MAX_AGE = 60 * 60 * 24 * 7; // 7 days
 
 export async function createSession(idToken: string): Promise<void> {
   const verified = await verifyIdToken(idToken);
@@ -18,7 +22,8 @@ export async function createSession(idToken: string): Promise<void> {
   if (!hasSiteAccess(user, SITE_ID)) throw new Error("Access denied");
 
   const jar = await cookies();
-  jar.set(SESSION_COOKIE, idToken, {
+  const sessionToken = await createSessionToken(user.uid);
+  jar.set(SESSION_COOKIE, sessionToken, {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
     sameSite: "lax",
@@ -38,8 +43,11 @@ export async function getSessionUser(): Promise<CmsUser | null> {
   const token = jar.get(SESSION_COOKIE)?.value;
   if (!token) return null;
 
-  const verified = await verifyIdToken(token);
+  const verified = await verifySessionToken(token);
   if (!verified) return null;
 
-  return getCmsUser(verified.uid);
+  const user = await getCmsUser(verified.uid);
+  if (!user) return null;
+  if (!hasSiteAccess(user, SITE_ID)) return null;
+  return user;
 }

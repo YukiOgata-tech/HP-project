@@ -1,6 +1,10 @@
 import { notFound } from "next/navigation";
 import { getPost } from "@client-sites/lib/cms";
 import { PostForm } from "../../../components/PostForm";
+import {
+  AdminPageHeader,
+  AdminSecondaryLink,
+} from "../../../components/AdminUi";
 
 const SITE_ID = process.env.SITE_ID!;
 
@@ -14,8 +18,20 @@ export default async function EditPostPage({ params }: Props) {
   if (!post) notFound();
 
   return (
-    <div className="space-y-6">
-      <h1 className="text-2xl font-semibold text-gray-800">記事を編集</h1>
+    <div className="space-y-8">
+      <AdminPageHeader
+        eyebrow="Edit"
+        title="記事を編集"
+        description="内容の更新、公開状態の切り替え、スラッグ調整をこの画面から行えます。公開中の記事はフロントへの反映も確認しやすくしています。"
+        actions={
+          <div className="flex flex-wrap gap-3">
+            <AdminSecondaryLink href="/admin/posts">一覧へ戻る</AdminSecondaryLink>
+            {post.status === "published" ? (
+              <AdminSecondaryLink href={`/news/${post.slug}`}>公開ページを見る</AdminSecondaryLink>
+            ) : null}
+          </div>
+        }
+      />
       <PostForm post={post} />
     </div>
   );
