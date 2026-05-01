@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, Moon, Sun, X } from "lucide-react";
-import { useTheme } from "next-themes";
+import { useTheme } from "../lib/theme";
 
 const reservationUrl = "https://beauty.hotpepper.jp/slnH000142482/";
 
@@ -25,7 +25,7 @@ export function Header() {
 
   return (
     <>
-      <header className="fixed inset-x-0 top-0 z-50 border-b border-amber-950 dark:border-white bg-[var(--bg)]/90 backdrop-blur-xl">
+      <header className="fixed inset-x-0 top-0 z-50 border-b border-[var(--header-line)] bg-[var(--bg)]/90 backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 md:py-3">
           <a href="#" className="font-serif text-lg font-bold tracking-[0.2em] md:text-xl">
             BROLETTO

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { cookies } from "next/headers";
 import { Noto_Sans_JP, Playfair_Display } from "next/font/google";
 import { Header } from "./components/header";
 import { Providers } from "./providers";
@@ -38,13 +39,21 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
+  const cookieStore = await cookies();
+  const savedTheme = cookieStore.get("theme")?.value as "dark" | "light" | undefined;
+
   return (
-    <html lang="ja" suppressHydrationWarning className={`${noto.variable} ${playfair.variable}`}>
+    <html
+      lang="ja"
+      data-scroll-behavior="smooth"
+      suppressHydrationWarning
+      className={[noto.variable, playfair.variable, savedTheme ?? ""].join(" ").trim()}
+    >
       <body>
-        <Providers>
+        <Providers initialTheme={savedTheme}>
           <Header />
           {children}
         </Providers>

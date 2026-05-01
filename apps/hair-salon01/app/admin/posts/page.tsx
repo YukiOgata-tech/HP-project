@@ -1,6 +1,7 @@
 import { getAllPosts } from "@client-sites/lib/cms";
 import Link from "next/link";
 import { deletePostAndRedirect } from "../actions/posts";
+import { ConfirmSubmitButton } from "../components/ConfirmSubmitButton";
 
 const SITE_ID = process.env.SITE_ID!;
 
@@ -83,17 +84,12 @@ export default async function AdminPostsPage() {
                       <form
                         action={deletePostAndRedirect.bind(null, post.id)}
                       >
-                        <button
-                          type="submit"
+                        <ConfirmSubmitButton
                           className="text-red-500 hover:text-red-700 underline transition-colors"
-                          onClick={(e) => {
-                            if (!confirm("この記事を削除しますか？")) {
-                              e.preventDefault();
-                            }
-                          }}
+                          confirmMessage="この記事を削除しますか？"
                         >
                           削除
-                        </button>
+                        </ConfirmSubmitButton>
                       </form>
                     </div>
                   </td>

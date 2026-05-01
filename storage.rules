@@ -1,0 +1,17 @@
+rules_version = '2';
+
+service firebase.storage {
+  match /b/{bucket}/o {
+
+    // 画像ファイル（認証済みユーザーのみアップロード可）
+    match /{siteId}/images/{filename} {
+      // 公開読み取り可（contentHtml に埋め込まれた URL から直接アクセスされるため）
+      allow read: if true;
+
+      // アップロードは認証済みユーザーのみ・画像ファイルに限定
+      allow write: if request.auth != null
+        && request.resource.contentType.matches('image/.*')
+        && request.resource.size < 10 * 1024 * 1024; // 10MB 上限
+    }
+  }
+}

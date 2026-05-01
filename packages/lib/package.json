@@ -2,6 +2,9 @@
   "name": "@client-sites/lib",
   "version": "0.1.0",
   "private": true,
+  "scripts": {
+    "create-cms-user": "node --env-file=../../apps/hair-salon01/.env.local scripts/create-cms-user.mjs"
+  },
   "exports": {
     ".": "./src/index.ts",
     "./utils": "./src/utils.ts",
@@ -19,6 +22,7 @@
     "@tiptap/extension-table-row": "^2",
     "@tiptap/extension-text-align": "^2",
     "@tiptap/extension-underline": "^2",
+    "@tiptap/html": "2.27.2",
     "@tiptap/starter-kit": "^2",
     "firebase": "^11",
     "firebase-admin": "^13",

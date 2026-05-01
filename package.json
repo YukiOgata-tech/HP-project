@@ -3,9 +3,13 @@
   "private": true,
   "scripts": {
     "create-app": "node scripts/create-app.mjs",
+    "create-cms-user": "pnpm --filter @client-sites/lib run create-cms-user",
     "dev": "pnpm --filter $npm_config_app dev",
     "build": "pnpm --filter $npm_config_app build",
     "lint": "pnpm --filter $npm_config_app lint"
   },
-  "packageManager": "pnpm@10.33.2"
+  "packageManager": "pnpm@10.33.2",
+  "dependencies": {
+    "firebase": "^12.12.1"
+  }
 }

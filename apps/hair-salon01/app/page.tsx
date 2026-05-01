@@ -170,6 +170,7 @@ export default function Home() {
               width={800}
               height={480}
               className="h-48 w-full object-cover sm:h-56"
+              priority
             />
           </FadeIn>
 
@@ -181,6 +182,7 @@ export default function Home() {
                 width={520}
                 height={680}
                 className="h-80 rounded-4xl object-cover"
+                priority
               />
               <Image
                 src="/images/salon-02.jpg"

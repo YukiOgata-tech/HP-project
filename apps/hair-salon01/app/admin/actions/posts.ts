@@ -25,17 +25,26 @@ async function requireEditor() {
   return user;
 }
 
+function parseContent(content: string): JSONContent {
+  try {
+    return JSON.parse(content) as JSONContent;
+  } catch {
+    throw new Error("本文データの形式が不正です");
+  }
+}
+
 export async function createPostAction(formData: {
   title: string;
   slug: string;
   excerpt: string;
-  content: JSONContent;
+  content: string;
   status: "draft" | "published";
   coverImageUrl: string;
   tags: string[];
 }): Promise<ActionResult<{ id: string }>> {
   try {
     const user = await requireEditor();
+    const content = parseContent(formData.content);
 
     if (await slugExists(SITE_ID, formData.slug)) {
       return { ok: false, error: "このスラッグはすでに使われています" };
@@ -43,6 +52,7 @@ export async function createPostAction(formData: {
 
     const post = await createPost(SITE_ID, {
       ...formData,
+      content,
       publishedAt:
         formData.status === "published" ? new Date().toISOString() : null,
       createdBy: user.uid,
@@ -53,6 +63,7 @@ export async function createPostAction(formData: {
     revalidatePath("/news");
     return { ok: true, data: { id: post.id } };
   } catch (e) {
+    console.error("createPostAction failed", e);
     return { ok: false, error: (e as Error).message };
   }
 }
@@ -63,7 +74,7 @@ export async function updatePostAction(
     title: string;
     slug: string;
     excerpt: string;
-    content: JSONContent;
+    content: string;
     status: "draft" | "published";
     coverImageUrl: string;
     tags: string[];
@@ -71,6 +82,7 @@ export async function updatePostAction(
 ): Promise<ActionResult> {
   try {
     const user = await requireEditor();
+    const content = parseContent(formData.content);
 
     if (await slugExists(SITE_ID, formData.slug, postId)) {
       return { ok: false, error: "このスラッグはすでに使われています" };
@@ -78,6 +90,7 @@ export async function updatePostAction(
 
     await updatePost(SITE_ID, postId, {
       ...formData,
+      content,
       ...(formData.status === "published" && {
         publishedAt: new Date().toISOString(),
       }),
@@ -90,6 +103,7 @@ export async function updatePostAction(
     revalidatePath(`/news/${formData.slug}`);
     return { ok: true };
   } catch (e) {
+    console.error("updatePostAction failed", e);
     return { ok: false, error: (e as Error).message };
   }
 }
@@ -102,6 +116,7 @@ export async function deletePostAction(postId: string): Promise<ActionResult> {
     revalidatePath("/news");
     return { ok: true };
   } catch (e) {
+    console.error("deletePostAction failed", e);
     return { ok: false, error: (e as Error).message };
   }
 }

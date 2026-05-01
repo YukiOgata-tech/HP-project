@@ -1,3 +1,4 @@
+import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { getSessionUser, deleteSession } from "./actions/session";
 
@@ -6,8 +7,16 @@ export default async function AdminLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const pathname = (await headers()).get("x-admin-pathname");
+  if (pathname === "/admin/login") {
+    return children;
+  }
+
   const user = await getSessionUser();
-  if (!user) redirect("/admin/login");
+  if (!user) {
+    // Route Handler で __session を削除してからログインへ（無限ループ防止）
+    redirect("/admin/clear-session");
+  }
 
   return (
     <div className="min-h-screen bg-gray-50">

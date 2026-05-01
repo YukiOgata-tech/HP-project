@@ -24,18 +24,17 @@ service cloud.firestore {
     }
 
     function canEditSite(siteId) {
-      let u = userData();
+      // isAuth() を先に評価し、未認証時に userData() が呼ばれないようにする
       return isAuth() && (
-        u.role == 'superAdmin' ||
-        (siteId in u.siteIds && u.role in ['siteAdmin', 'editor'])
+        userData().role == 'superAdmin' ||
+        (siteId in userData().siteIds && userData().role in ['siteAdmin', 'editor'])
       );
     }
 
     function canDeleteSite(siteId) {
-      let u = userData();
       return isAuth() && (
-        u.role == 'superAdmin' ||
-        (siteId in u.siteIds && u.role in ['siteAdmin'])
+        userData().role == 'superAdmin' ||
+        (siteId in userData().siteIds && userData().role == 'siteAdmin')
       );
     }
 

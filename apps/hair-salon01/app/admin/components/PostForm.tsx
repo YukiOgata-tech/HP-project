@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { TiptapEditor } from "@client-sites/components/cms";
 import type { Post } from "@client-sites/lib/cms/types";
 import type { JSONContent } from "@client-sites/lib/cms/types";
-import { uploadImageToStorage } from "../../../lib/firebase-storage";
+import { uploadImageToStorage } from "@client-sites/lib/cms/client";
 import { createPostAction, updatePostAction } from "../actions/posts";
 
 const SITE_ID = process.env.NEXT_PUBLIC_SITE_ID ?? "hair-salon01";
@@ -66,7 +66,15 @@ export function PostForm({ post }: PostFormProps) {
       .map((t) => t.trim())
       .filter(Boolean);
 
-    const formData = { title, slug, excerpt, content, status, coverImageUrl, tags };
+    const formData = {
+      title,
+      slug,
+      excerpt,
+      content: JSON.stringify(content),
+      status,
+      coverImageUrl,
+      tags,
+    };
 
     try {
       const result = isEdit
