@@ -10,7 +10,8 @@
     "./utils": "./src/utils.ts",
     "./cms": "./src/cms/index.ts",
     "./cms/types": "./src/cms/types.ts",
-    "./cms/client": "./src/cms/firebase-client.ts"
+    "./cms/client": "./src/cms/firebase-client.ts",
+    "./cms/firebase-admin": "./src/cms/firebase-admin.ts"
   },
   "dependencies": {
     "@tiptap/core": "^2",

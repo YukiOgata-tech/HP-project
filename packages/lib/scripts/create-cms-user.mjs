@@ -33,11 +33,11 @@ const auth = getAuth();
 const db = getFirestore();
 
 // ── 設定（ここを編集して実行してください） ───────────────────────────────────
-const EMAIL = "admin@example.com"; // ← 変更
-const PASSWORD = "ChangeMe123!"; // ← 変更（初回ログイン後に変更推奨）
-const DISPLAY_NAME = "管理者"; // ← 変更
-const ROLE = "siteAdmin"; // superAdmin / siteAdmin / editor / viewer
-const SITE_IDS = ["hair-salon01"]; // アクセスを許可するサイト
+const EMAIL = "info@make-it-tech.com"; // ← 変更
+const PASSWORD = "Password123!"; // ← 変更（初回ログイン後に変更推奨）
+const DISPLAY_NAME = "System Admin"; // ← 変更
+const ROLE = "superAdmin"; // superAdmin / siteAdmin / editor / viewer
+const SITE_IDS = ["maharaja-night-2026", "hair-salon01"]; // アクセスを許可するサイト
 // ────────────────────────────────────────────────────────────────────────────
 
 try {

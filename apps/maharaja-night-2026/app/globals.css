@@ -1,0 +1,33 @@
+@import "tailwindcss";
+@source "../../../packages/components/src";
+
+@theme {
+  --color-gold: #D4AF37;
+  --color-gold-light: #F9E596;
+  --color-gold-dark: #997A00;
+  --color-neon-pink: #FF007F;
+  --color-laser-blue: #00E5FF;
+  --color-dark-bg: #0A0A0A;
+  --color-dark-surface: #141414;
+}
+
+@layer base {
+  body {
+    @apply bg-[#0A0A0A] text-white overflow-x-hidden;
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-white/5 backdrop-blur-md border border-white/10 shadow-[0_4px_30px_rgba(0,0,0,0.1)];
+  }
+  .glass-gold {
+    @apply bg-[#D4AF37]/10 backdrop-blur-md border border-[#D4AF37]/30 shadow-[0_0_15px_rgba(212,175,55,0.2)];
+  }
+  .glass-neon {
+    @apply bg-[#FF007F]/10 backdrop-blur-md border border-[#FF007F]/30 shadow-[0_0_15px_rgba(255,0,127,0.2)];
+  }
+  .text-gradient-gold {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-[#D4AF37] via-[#F9E596] to-[#D4AF37];
+  }
+}
