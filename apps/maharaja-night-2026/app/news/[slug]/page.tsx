@@ -4,6 +4,8 @@ import { Metadata } from "next";
 import Link from "next/link";
 import { CalendarDays, ChevronLeft } from "lucide-react";
 import { PublicPageFrame } from "@/components/PublicPageFrame";
+import { StructuredData } from "@/components/StructuredData";
+import { absoluteUrl, defaultOgImage, pageMetadata, siteName } from "@/components/seo";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -17,13 +19,22 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = await getPostBySlug(siteId, slug);
   if (!post) return {};
 
+  const metadata = pageMetadata({
+    title: post.title,
+    description: post.excerpt || `${siteName} の公式お知らせです。`,
+    path: `/news/${post.slug}`,
+    image: post.coverImageUrl || defaultOgImage,
+    type: "article",
+  });
+
   return {
-    title: `${post.title} | MAHARAJA NIGHT 2026`,
-    description: post.excerpt,
+    ...metadata,
+    authors: [{ name: siteName }],
     openGraph: {
-      title: post.title,
-      description: post.excerpt,
-      images: post.coverImageUrl ? [post.coverImageUrl] : [],
+      ...metadata.openGraph,
+      type: "article",
+      publishedTime: post.publishedAt ?? undefined,
+      modifiedTime: post.updatedAt ?? undefined,
     },
   };
 }
@@ -37,9 +48,33 @@ export default async function NewsDetail({ params }: Props) {
   if (!post) {
     notFound();
   }
+  const articleJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "NewsArticle",
+    headline: post.title,
+    description: post.excerpt || `${siteName} の公式お知らせです。`,
+    url: absoluteUrl(`/news/${post.slug}`),
+    image: post.coverImageUrl ? [post.coverImageUrl] : [absoluteUrl(defaultOgImage)],
+    datePublished: post.publishedAt,
+    dateModified: post.updatedAt,
+    author: {
+      "@type": "Organization",
+      name: siteName,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: siteName,
+      logo: {
+        "@type": "ImageObject",
+        url: absoluteUrl(defaultOgImage),
+      },
+    },
+    mainEntityOfPage: absoluteUrl(`/news/${post.slug}`),
+  };
 
   return (
     <PublicPageFrame>
+      <StructuredData data={articleJsonLd} />
       <main className="min-h-screen bg-[#070508] px-3 pb-10 pt-20 text-white sm:px-6 sm:pb-20 sm:pt-36">
         <article className="mx-auto max-w-4xl">
           <Link

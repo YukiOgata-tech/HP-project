@@ -1,5 +1,15 @@
 import { getAdminDb } from "@client-sites/lib/cms/firebase-admin";
 import { HomePageClient } from "@/components/HomePageClient";
+import { StructuredData } from "@/components/StructuredData";
+import { eventJsonLd, faqJsonLd, pageMetadata } from "@/components/seo";
+
+export const metadata = pageMetadata({
+  title: "新潟の大人向けディスコイベント公式サイト",
+  description:
+    "MAHARAJA NIGHT in Niigata 2026 公式サイト。2026年10月24日、STUDIO NEXSで開催。マーク・パンサー、ミノルクリス滝沢、DJ NaO、DJ MITSUKURIが出演。",
+  path: "/",
+  image: "/images/event/hero-disco-floor.jpg",
+});
 
 const SITE_ID = process.env.SITE_ID!;
 
@@ -20,5 +30,10 @@ async function getSponsors() {
 
 export default async function Home() {
   const sponsors = await getSponsors();
-  return <HomePageClient sponsors={sponsors} />;
+  return (
+    <>
+      <StructuredData data={[eventJsonLd, faqJsonLd]} />
+      <HomePageClient sponsors={sponsors} />
+    </>
+  );
 }

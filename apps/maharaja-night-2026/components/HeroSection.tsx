@@ -56,7 +56,7 @@ export function HeroSection({ onOpenModal }: HeroSectionProps) {
           <div className="absolute -inset-3 rounded-2xl bg-[#d9b84f]/10 blur-2xl sm:-inset-6 sm:rounded-[2rem] sm:blur-3xl" />
           <div className="relative overflow-hidden rounded-2xl border border-white/12 bg-black/45 shadow-black/30 backdrop-blur sm:rounded-[1.6rem] sm:shadow-2xl">
             <img
-              src="/images/event/proposal-p08-04.jpg"
+              src="/images/event/hero-disco-floor.jpg"
               alt="MAHARAJA NIGHT in Niigataの過去開催の熱気"
               className="h-32 w-full object-cover opacity-80 sm:h-64 md:h-80"
             />

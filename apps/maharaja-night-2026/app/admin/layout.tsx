@@ -1,7 +1,22 @@
 import { headers } from "next/headers";
+import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { getSessionUser } from "./actions/session";
 import { AdminHeader } from "./components/AdminHeader";
+
+export const metadata: Metadata = {
+  title: "管理画面",
+  robots: {
+    index: false,
+    follow: false,
+    nocache: true,
+    googleBot: {
+      index: false,
+      follow: false,
+      noimageindex: true,
+    },
+  },
+};
 
 export default async function AdminLayout({
   children,

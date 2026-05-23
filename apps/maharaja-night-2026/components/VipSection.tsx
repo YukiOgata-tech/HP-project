@@ -8,7 +8,7 @@ export function VipSection({ onOpenModal }: VipSectionProps) {
   return (
     <section id="vip" className="relative overflow-hidden border-y border-[#d9b84f]/20 bg-black px-3 py-8 sm:px-6 sm:py-24">
       <img
-        src="/images/event/proposal-p05-01.jpg"
+        src="/images/event/venue-studio-nexs-vip.jpg"
         alt="STUDIO NEXSのVIPとフロア"
         className="absolute inset-0 h-full w-full object-cover opacity-18"
       />

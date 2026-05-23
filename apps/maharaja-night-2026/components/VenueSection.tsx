@@ -36,7 +36,7 @@ export function VenueSection() {
 
         <div className="overflow-hidden rounded-2xl border border-white/10 bg-black/40 shadow-black/30 sm:rounded-[1.6rem] sm:shadow-2xl">
           <img
-            src="/images/event/proposal-p05-01.jpg"
+            src="/images/event/venue-studio-nexs-vip.jpg"
             alt="STUDIO NEXSの会場イメージ"
             className="h-40 w-full object-cover sm:h-64 md:h-80"
           />

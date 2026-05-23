@@ -2,6 +2,8 @@ import { ExternalLink, Handshake, Sparkles } from "lucide-react";
 import { getAdminDb } from "@client-sites/lib/cms/firebase-admin";
 import { PublicPageFrame } from "@/components/PublicPageFrame";
 import { eventInfo } from "@/components/eventData";
+import { StructuredData } from "@/components/StructuredData";
+import { absoluteUrl, pageMetadata, siteName } from "@/components/seo";
 
 const SITE_ID = process.env.SITE_ID!;
 
@@ -38,11 +40,14 @@ function tierLabel(tier?: string) {
   return "Sponsor";
 }
 
-export const metadata = {
-  title: "協賛企業一覧 | MAHARAJA NIGHT in Niigata 2026",
-  description:
-    "MAHARAJA NIGHT in Niigata 2026 を支える協賛企業・協力企業の一覧です。",
-};
+const sponsorsDescription =
+  "MAHARAJA NIGHT in Niigata 2026 を支える協賛企業・協力企業の一覧です。";
+
+export const metadata = pageMetadata({
+  title: "協賛企業一覧",
+  description: sponsorsDescription,
+  path: "/sponsors",
+});
 
 export default async function SponsorsPage() {
   const sponsors = await getSponsors();
@@ -55,9 +60,23 @@ export default async function SponsorsPage() {
           tier: "regular",
           isActive: true,
         }));
+  const sponsorsJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: `${siteName} 協賛企業一覧`,
+    description: sponsorsDescription,
+    url: absoluteUrl("/sponsors"),
+    mainEntity: displaySponsors.map((sponsor) => ({
+      "@type": "Organization",
+      name: sponsor.name,
+      url: sponsor.websiteUrl,
+      logo: sponsor.logoUrl,
+    })),
+  };
 
   return (
     <PublicPageFrame>
+      <StructuredData data={sponsorsJsonLd} />
       <main className="min-h-screen bg-[#070508] px-3 pb-10 pt-20 text-white sm:px-6 sm:pb-20 sm:pt-36">
         <section className="mx-auto max-w-7xl">
           <div className="grid gap-3 border-b border-white/10 pb-5 sm:gap-8 sm:pb-10 lg:grid-cols-[0.82fr_1.18fr] lg:items-end">

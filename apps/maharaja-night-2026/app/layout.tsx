@@ -1,5 +1,13 @@
 import type { Metadata } from "next";
 import { Bebas_Neue, Noto_Sans_JP } from "next/font/google";
+import {
+  absoluteUrl,
+  defaultDescription,
+  defaultOgImage,
+  seoKeywords,
+  siteName,
+  siteUrl,
+} from "@/components/seo";
 import "./globals.css";
 
 const bodyFont = Noto_Sans_JP({
@@ -16,38 +24,55 @@ const displayFont = Bebas_Neue({
   display: "swap",
 });
 
-const siteTitle = "MAHARAJA NIGHT in Niigata 2026";
-const siteDescription =
-  "2026年10月24日、STUDIO NEXSで開催。伝説のディスコが一夜限りで新潟のまちに蘇る、MAHARAJA NIGHT in Niigata 2026 公式サイト。";
-const logoImage = "/images/maharaja_logo_whiteBG.jpg";
-
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
-  title: siteTitle,
-  description: siteDescription,
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: siteName,
+    template: `%s | ${siteName}`,
+  },
+  description: defaultDescription,
+  applicationName: siteName,
+  generator: "Next.js",
+  keywords: seoKeywords,
+  category: "event",
   icons: {
-    icon: logoImage,
-    shortcut: logoImage,
-    apple: logoImage,
+    icon: defaultOgImage,
+    shortcut: defaultOgImage,
+    apple: defaultOgImage,
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
+  alternates: {
+    canonical: absoluteUrl("/"),
   },
   openGraph: {
-    title: siteTitle,
-    description: siteDescription,
-    siteName: siteTitle,
+    title: siteName,
+    description: defaultDescription,
+    url: absoluteUrl("/"),
+    siteName,
     locale: "ja_JP",
     type: "website",
     images: [
       {
-        url: logoImage,
-        alt: siteTitle,
+        url: defaultOgImage,
+        alt: siteName,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: siteTitle,
-    description: siteDescription,
-    images: [logoImage],
+    title: siteName,
+    description: defaultDescription,
+    images: [defaultOgImage],
   },
 };
 

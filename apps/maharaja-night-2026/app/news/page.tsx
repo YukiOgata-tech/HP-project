@@ -3,17 +3,43 @@ import Link from "next/link";
 import { CalendarDays, ChevronRight, Newspaper } from "lucide-react";
 import { PublicPageFrame } from "@/components/PublicPageFrame";
 import { eventInfo } from "@/components/eventData";
+import { StructuredData } from "@/components/StructuredData";
+import { absoluteUrl, pageMetadata, siteName } from "@/components/seo";
 
 export const dynamic = "force-dynamic";
+
+const newsDescription =
+  "MAHARAJA NIGHT in Niigata 2026 の出演者情報、チケット、VIP、協賛、当日の案内など公式ニュースを掲載します。";
+
+export const metadata = pageMetadata({
+  title: "お知らせ",
+  description: newsDescription,
+  path: "/news",
+});
 
 export default async function NewsList() {
   const siteId = process.env.SITE_ID;
   if (!siteId) throw new Error("SITE_ID is not defined");
 
   const posts = await getPublishedPosts(siteId);
+  const collectionJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: `${siteName} お知らせ`,
+    description: newsDescription,
+    url: absoluteUrl("/news"),
+    mainEntity: posts.map((post) => ({
+      "@type": "NewsArticle",
+      headline: post.title,
+      url: absoluteUrl(`/news/${post.slug}`),
+      datePublished: post.publishedAt,
+      dateModified: post.updatedAt,
+    })),
+  };
 
   return (
     <PublicPageFrame>
+      <StructuredData data={collectionJsonLd} />
       <main className="min-h-screen bg-[#070508] px-3 pb-10 pt-20 text-white sm:px-6 sm:pb-20 sm:pt-36">
         <section className="mx-auto max-w-7xl">
           <div className="grid gap-2 border-b border-white/10 pb-4 sm:gap-8 sm:pb-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
