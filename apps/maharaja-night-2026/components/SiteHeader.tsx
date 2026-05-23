@@ -25,11 +25,12 @@ export function SiteHeader({ onOpenModal }: SiteHeaderProps) {
     <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-[#070508]/85 backdrop-blur-xl">
       <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-3 sm:h-20 sm:px-6">
         <Link href="/" className="group min-w-0">
-          <img
-            src="/images/maharaja-logo-blackBG.webp"
-            alt="MAHARAJA NIGHT in Niigata 2026 Official Site"
-            className="h-8 w-auto object-contain sm:h-12"
-          />
+          <p className="hidden sm:block font-label text-[12px] uppercase text-[#d9b84f] sm:text-[12px]">
+            Official Site
+          </p>
+          <p className="font-jp-display mt-0.5 truncate text-lg leading-none text-white sm:mt-1 sm:text-3xl">
+            MAHARAJA NIGHT in NIIGATA
+          </p>
         </Link>
 
         <nav className="hidden items-center gap-6 lg:flex">
