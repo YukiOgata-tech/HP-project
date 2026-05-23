@@ -15,12 +15,17 @@
 ```
 client-sites/
 ├── apps/                   # 各クライアントサイト
-│   └── ...
-├── packages/               # 共有コード（UIコンポーネント等）
+│   ├── hair-salon01
+│   └── maharaja-night-2026
+├── packages/
+│   ├── components          # 共有UI・CMSエディタ部品
+│   └── lib                 # Firebase/CMS/共通ユーティリティ
 ├── scripts/
 │   └── create-app.mjs      # 新規アプリ作成スクリプト
 ├── docs/
-│   └── pnpm-commands.md    # pnpmコマンドマニュアル
+│   ├── pnpm-commands.md    # pnpmコマンドマニュアル
+│   ├── sites_details-01    # hair-salon01 関連資料
+│   └── sites_details-02    # maharaja-night-2026 関連資料
 ├── package.json
 └── pnpm-workspace.yaml
 ```
@@ -29,7 +34,8 @@ client-sites/
 
 | アプリ名 | 概要 | URL | 顧客情報 |
 |---|---|---|---|
-| [hair-salon01](./apps/hair-salon01) | 美容室サイト | - | - |
+| [hair-salon01](./apps/hair-salon01) | 美容室サイト / ニュースCMS | - | docs/sites_details-01 |
+| [maharaja-night-2026](./apps/maharaja-night-2026) | MAHARAJA NIGHT 2026 イベントLP / 参加登録 / CMS | - | docs/sites_details-02 |
 
 ## セットアップ
 
@@ -57,8 +63,11 @@ pnpm create-app restaurant-01
 # 開発サーバー起動
 pnpm --filter <アプリ名> dev
 
-# 例
+# 例: 美容室サイト
 pnpm --filter hair-salon01 dev
+
+# 例: マハラジャイベントサイト
+pnpm --filter maharaja-night-2026 dev
 ```
 
 ## ビルド
@@ -70,6 +79,17 @@ pnpm --filter <アプリ名> build
 # ビルド結果の動作確認
 pnpm --filter <アプリ名> start
 ```
+
+## CMS / Firebase
+
+両アプリとも Firebase / Firestore を使った CMS または管理機能を持ちます。共通の投稿・認証ロジックは `packages/lib/src/cms`、CMS エディタ UI は `packages/components/src/cms` にあります。
+
+```bash
+# CMSユーザー作成
+pnpm create-cms-user
+```
+
+現状の `create-cms-user` は `apps/hair-salon01/.env.local` を読み込みます。作成するユーザーの対象サイトは `packages/lib/scripts/create-cms-user.mjs` 内の `SITE_IDS` で管理します。
 
 ## Vercelデプロイ
 

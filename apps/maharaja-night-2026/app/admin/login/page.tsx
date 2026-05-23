@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { LockKeyhole, Mail, ShieldCheck } from "lucide-react";
+import { Eye, EyeOff, LockKeyhole, Mail, ShieldCheck } from "lucide-react";
 import { getClientAuth } from "@client-sites/lib/cms/client";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { createSession } from "../actions/session";
@@ -14,6 +14,7 @@ export default function AdminLoginPage() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -30,7 +31,13 @@ export default function AdminLoginPage() {
       router.push(redirect);
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : "ログインに失敗しました";
-      setError(msg.includes("invalid") ? "メールアドレスまたはパスワードが正しくありません" : msg);
+      if (msg.includes("network-request-failed")) {
+        setError(
+          "Firebase Authへの通信に失敗しました。ネットワーク、VPN、広告ブロック、Firebase APIキー制限、Auth設定を確認してください。",
+        );
+      } else {
+        setError(msg.includes("invalid") ? "メールアドレスまたはパスワードが正しくありません" : msg);
+      }
     } finally {
       setLoading(false);
     }
@@ -98,13 +105,21 @@ export default function AdminLoginPage() {
                   <div className="flex items-center gap-3 rounded-xl border border-white/10 bg-black/50 px-4 py-3 focus-within:border-[#D4AF37] transition-colors">
                     <LockKeyhole size={16} className="text-[#D4AF37]" />
                     <input
-                      type="password"
+                      type={showPassword ? "text" : "password"}
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       required
                       className="w-full bg-transparent text-sm text-white outline-none placeholder:text-gray-600"
                       placeholder="••••••••"
                     />
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword((current) => !current)}
+                      aria-label={showPassword ? "パスワードを非表示" : "パスワードを表示"}
+                      className="grid size-8 shrink-0 place-items-center rounded-lg text-gray-400 transition-colors hover:bg-white/10 hover:text-[#F9E596]"
+                    >
+                      {showPassword ? <EyeOff size={17} /> : <Eye size={17} />}
+                    </button>
                   </div>
                 </div>
 

@@ -30,11 +30,11 @@ function ToolbarButton({
       disabled={disabled}
       title={title}
       className={[
-        "inline-flex items-center justify-center w-8 h-8 rounded text-sm font-medium transition-colors",
-        "focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-gray-400",
+        "inline-flex h-8 w-8 shrink-0 items-center justify-center rounded border text-sm font-semibold transition-colors sm:h-8 sm:w-8",
+        "focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-[#8c694d]",
         active
-          ? "bg-gray-800 text-white"
-          : "text-gray-700 hover:bg-gray-100",
+          ? "border-gray-900 bg-gray-900 text-white"
+          : "border-gray-300 text-gray-800 hover:border-gray-500 hover:bg-gray-100",
         disabled ? "opacity-40 cursor-not-allowed" : "cursor-pointer",
       ]
         .filter(Boolean)
@@ -46,7 +46,7 @@ function ToolbarButton({
 }
 
 function Divider() {
-  return <div className="w-px h-6 bg-gray-200 mx-1 self-center" />;
+  return <div className="mx-0.5 h-6 w-px shrink-0 self-center bg-gray-300 sm:mx-1" />;
 }
 
 export function EditorToolbar({ editor, onImageUpload }: EditorToolbarProps) {
@@ -102,7 +102,7 @@ export function EditorToolbar({ editor, onImageUpload }: EditorToolbarProps) {
   }, [editor]);
 
   return (
-    <div className="flex flex-wrap items-center gap-0.5 p-2 border-b border-gray-200 bg-white rounded-t-lg">
+    <div className="flex max-w-full items-center gap-1 overflow-x-auto border-b border-gray-300 bg-[#f8f8f8] p-1.5 [scrollbar-width:thin] sm:flex-wrap sm:gap-0.5 sm:p-2">
       {/* undo / redo */}
       <ToolbarButton
         onClick={() => editor.chain().focus().undo().run()}

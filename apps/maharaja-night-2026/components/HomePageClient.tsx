@@ -1,15 +1,28 @@
 "use client";
 
 import { useState } from "react";
+import { SiteHeader } from "./SiteHeader";
 import { HeroSection } from "./HeroSection";
+import { EventOverviewSection } from "./EventOverviewSection";
 import { AboutSection } from "./AboutSection";
 import { GuestSection } from "./GuestSection";
 import { VipSection } from "./VipSection";
 import { HistorySection } from "./HistorySection";
 import { SponsorsSection } from "./SponsorsSection";
 import { RegisterModal } from "./RegisterModal";
+import { VenueSection } from "./VenueSection";
+import { FaqSection } from "./FaqSection";
+import { SiteFooter } from "./SiteFooter";
 
-export function HomePageClient({ sponsors }: { sponsors: any[] }) {
+interface Sponsor {
+  id: string;
+  name?: string;
+  logoUrl?: string;
+  websiteUrl?: string;
+  isActive?: boolean;
+}
+
+export function HomePageClient({ sponsors }: { sponsors: Sponsor[] }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalType, setModalType] = useState<"general" | "vip">("general");
 
@@ -20,19 +33,19 @@ export function HomePageClient({ sponsors }: { sponsors: any[] }) {
 
   return (
     <>
-      <main className="min-h-screen bg-black text-white selection:bg-[#D4AF37] selection:text-black pb-20 sm:pb-0">
-        <HeroSection onOpenModal={() => openModal("general")} />
+      <SiteHeader onOpenModal={openModal} />
+      <main className="min-h-screen bg-[#070508] text-white selection:bg-[#d9b84f] selection:text-black">
+        <HeroSection onOpenModal={openModal} />
+        <EventOverviewSection />
         <AboutSection />
         <GuestSection />
         <VipSection onOpenModal={() => openModal("vip")} />
         <HistorySection />
+        <VenueSection />
         <SponsorsSection sponsors={sponsors} />
-        
-        {/* Footer */}
-        <footer className="py-8 sm:py-12 border-t border-white/10 bg-[#050505] text-center">
-          <p className="text-[10px] sm:text-xs text-gray-500 tracking-widest">© 2026 MAHARAJA NIGHT in NIIGATA.</p>
-        </footer>
+        <FaqSection onOpenModal={openModal} />
       </main>
+      <SiteFooter />
 
       <RegisterModal 
         isOpen={isModalOpen} 

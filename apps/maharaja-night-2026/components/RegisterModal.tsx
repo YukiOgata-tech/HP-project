@@ -43,25 +43,25 @@ export function RegisterModal({ isOpen, onClose, initialType = "general" }: Regi
 
   return (
     <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/80 backdrop-blur-sm transition-opacity">
-      <div className="w-full max-w-2xl bg-[#0a0a0a] border border-[#D4AF37]/30 sm:rounded-2xl rounded-t-3xl p-6 sm:p-12 relative max-h-[90vh] overflow-y-auto animate-in slide-in-from-bottom-10 sm:slide-in-from-bottom-0 sm:fade-in-0 duration-300">
+      <div className="relative max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-t-2xl border border-[#D4AF37]/30 bg-[#0a0a0a] p-4 animate-in slide-in-from-bottom-10 duration-300 sm:rounded-2xl sm:p-12 sm:slide-in-from-bottom-0 sm:fade-in-0">
         
         <button 
           onClick={onClose}
-          className="absolute right-4 top-4 sm:right-6 sm:top-6 p-2 bg-black/50 hover:bg-white/10 rounded-full transition-colors z-10"
+          className="absolute right-3 top-3 z-10 rounded-full bg-black/50 p-2 transition-colors hover:bg-white/10 sm:right-6 sm:top-6"
         >
-          <X className="w-6 h-6 text-gray-400" />
+          <X className="size-4 text-gray-400 sm:size-6" />
         </button>
 
-        <h2 className="text-2xl sm:text-4xl font-black mb-2 text-gradient-gold text-center tracking-widest">チケット / VIP予約</h2>
-        <p className="text-center text-[#FF007F] text-[10px] sm:text-sm mb-6 sm:mb-8 font-bold">
-          ※詳細な質問内容は共有待ちのため、仮のフォームとなっています。
+        <h2 className="mb-1 text-center text-2xl font-black tracking-widest text-gradient-gold sm:mb-2 sm:text-4xl">事前申込 / VIP問い合わせ</h2>
+        <p className="mb-4 text-center text-sm leading-5 text-white/58 sm:mb-8 sm:text-sm sm:leading-6">
+          申込内容を確認後、運営より詳細をご案内します。
         </p>
 
         {isSuccess ? (
           <div className="text-center py-8 sm:py-12">
             <div className="text-5xl sm:text-6xl mb-4 sm:mb-6 animate-bounce">✨</div>
             <h3 className="text-xl sm:text-2xl font-bold text-[#F9E596] mb-3 sm:mb-4">お申し込み完了！</h3>
-            <p className="text-xs sm:text-base text-gray-300">ご登録ありがとうございます。追って担当者よりご連絡いたします。</p>
+            <p className="text-sm sm:text-base text-gray-300">ご登録ありがとうございます。追って担当者よりご連絡いたします。</p>
             <button 
               onClick={onClose}
               className="mt-8 px-8 py-3 bg-white/10 hover:bg-white/20 rounded-full text-sm font-bold transition-colors"
@@ -70,43 +70,71 @@ export function RegisterModal({ isOpen, onClose, initialType = "general" }: Regi
             </button>
           </div>
         ) : (
-          <form onSubmit={onSubmit} className="space-y-4 sm:space-y-6">
+          <form onSubmit={onSubmit} className="grid gap-3 sm:gap-6">
             <div>
-              <label className="block text-[10px] sm:text-sm text-gray-300 mb-1.5 sm:mb-2 tracking-widest font-bold">お名前</label>
+              <label className="block text-[12px] sm:text-sm text-gray-300 mb-1.5 sm:mb-2 tracking-widest font-bold">お名前</label>
               <input 
                 name="name" 
                 required 
-                className="w-full bg-black/50 border border-[#D4AF37]/30 rounded-lg px-3 py-2.5 sm:px-4 sm:py-3 text-sm sm:text-base text-white focus:outline-none focus:border-[#D4AF37] transition-colors" 
+                className="h-10 w-full rounded-lg border border-[#D4AF37]/30 bg-black/50 px-3 text-sm text-white transition-colors focus:border-[#D4AF37] focus:outline-none sm:h-12 sm:px-4 sm:text-base" 
                 placeholder="山田 太郎"
               />
             </div>
             <div>
-              <label className="block text-[10px] sm:text-sm text-gray-300 mb-1.5 sm:mb-2 tracking-widest font-bold">メールアドレス</label>
+              <label className="block text-[12px] sm:text-sm text-gray-300 mb-1.5 sm:mb-2 tracking-widest font-bold">メールアドレス</label>
               <input 
                 name="email" 
                 type="email" 
                 required 
-                className="w-full bg-black/50 border border-[#D4AF37]/30 rounded-lg px-3 py-2.5 sm:px-4 sm:py-3 text-sm sm:text-base text-white focus:outline-none focus:border-[#D4AF37] transition-colors" 
+                className="h-10 w-full rounded-lg border border-[#D4AF37]/30 bg-black/50 px-3 text-sm text-white transition-colors focus:border-[#D4AF37] focus:outline-none sm:h-12 sm:px-4 sm:text-base" 
                 placeholder="taro@example.com"
               />
             </div>
             <div>
-              <label className="block text-[10px] sm:text-sm text-gray-300 mb-1.5 sm:mb-2 tracking-widest font-bold">ご希望のチケット</label>
+              <label className="block text-[12px] sm:text-sm text-gray-300 mb-1.5 sm:mb-2 tracking-widest font-bold">電話番号</label>
+              <input 
+                name="phone" 
+                type="tel"
+                className="h-10 w-full rounded-lg border border-[#D4AF37]/30 bg-black/50 px-3 text-sm text-white transition-colors focus:border-[#D4AF37] focus:outline-none sm:h-12 sm:px-4 sm:text-base" 
+                placeholder="090-0000-0000"
+              />
+            </div>
+            <div>
+              <label className="block text-[12px] sm:text-sm text-gray-300 mb-1.5 sm:mb-2 tracking-widest font-bold">ご希望のチケット</label>
               <select 
                 name="type" 
                 required 
                 defaultValue={initialType}
-                className="w-full bg-black/50 border border-[#D4AF37]/30 rounded-lg px-3 py-2.5 sm:px-4 sm:py-3 text-sm sm:text-base text-white focus:outline-none focus:border-[#D4AF37] appearance-none transition-colors"
+                className="h-10 w-full appearance-none rounded-lg border border-[#D4AF37]/30 bg-black/50 px-3 text-sm text-white transition-colors focus:border-[#D4AF37] focus:outline-none sm:h-12 sm:px-4 sm:text-base"
               >
                 <option value="general" className="bg-black text-white">一般入場チケット</option>
                 <option value="vip" className="bg-black text-[#D4AF37]">VIPテーブル席</option>
               </select>
             </div>
+            <div>
+              <label className="block text-[12px] sm:text-sm text-gray-300 mb-1.5 sm:mb-2 tracking-widest font-bold">人数</label>
+              <input 
+                name="numberOfPeople" 
+                type="number"
+                min="1"
+                defaultValue="1"
+                className="h-10 w-full rounded-lg border border-[#D4AF37]/30 bg-black/50 px-3 text-sm text-white transition-colors focus:border-[#D4AF37] focus:outline-none sm:h-12 sm:px-4 sm:text-base" 
+              />
+            </div>
+            <div>
+              <label className="block text-[12px] sm:text-sm text-gray-300 mb-1.5 sm:mb-2 tracking-widest font-bold">備考</label>
+              <textarea
+                name="note"
+                rows={3}
+                className="w-full resize-none rounded-lg border border-[#D4AF37]/30 bg-black/50 px-3 py-2 text-sm text-white transition-colors focus:border-[#D4AF37] focus:outline-none sm:px-4 sm:py-3 sm:text-base"
+                placeholder="VIP希望人数、紹介者、問い合わせ内容など"
+              />
+            </div>
             
             <button 
               type="submit" 
               disabled={isSubmitting}
-              className="w-full bg-gradient-to-r from-[#D4AF37] to-[#F9E596] text-black text-sm sm:text-base font-black tracking-widest py-3 sm:py-4 rounded-lg hover:scale-[1.02] transition-transform disabled:opacity-50 disabled:hover:scale-100 mt-2 sm:mt-4 shadow-[0_0_15px_rgba(212,175,55,0.4)]"
+              className="mt-1 h-10 w-full rounded-lg bg-gradient-to-r from-[#D4AF37] to-[#F9E596] text-sm font-black tracking-widest text-black shadow-[0_0_15px_rgba(212,175,55,0.4)] transition-transform hover:scale-[1.02] disabled:opacity-50 disabled:hover:scale-100 sm:mt-4 sm:h-12 sm:text-base"
             >
               {isSubmitting ? "送信中..." : "予約を確定する"}
             </button>

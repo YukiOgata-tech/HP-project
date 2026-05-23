@@ -27,7 +27,7 @@ export default async function AdminLayout({
       </div>
       <div className="relative z-10 flex flex-col min-h-screen">
         <AdminHeader user={user} currentPath={pathname ?? "/admin"} />
-        <main className="mx-auto w-full max-w-6xl px-4 py-6 md:px-6 md:py-8 flex-1">
+        <main className="mx-auto min-w-0 max-w-full flex-1 overflow-hidden px-3 py-4 sm:w-full sm:max-w-6xl sm:px-4 sm:py-6 md:px-6 md:py-8">
           {children}
         </main>
       </div>

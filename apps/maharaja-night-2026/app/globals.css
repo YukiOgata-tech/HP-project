@@ -14,6 +14,13 @@
 @layer base {
   body {
     @apply bg-[#0A0A0A] text-white overflow-x-hidden;
+    font-family: var(--font-body), system-ui, sans-serif;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: "Yu Mincho", "Hiragino Mincho ProN", "YuMincho", "Times New Roman", var(--font-body), serif;
   }
 }
 
@@ -29,5 +36,21 @@
   }
   .text-gradient-gold {
     @apply bg-clip-text text-transparent bg-gradient-to-r from-[#D4AF37] via-[#F9E596] to-[#D4AF37];
+  }
+  .font-display {
+    font-family: var(--font-display), Impact, sans-serif;
+    letter-spacing: 0.04em;
+  }
+  .font-jp-display {
+    font-family: "Yu Mincho", "Hiragino Mincho ProN", "YuMincho", "Times New Roman", var(--font-body), serif;
+  }
+  .font-label {
+    font-family: var(--font-display), var(--font-body), sans-serif;
+    letter-spacing: 0.16em;
+  }
+  .headline-glow {
+    text-shadow:
+      0 0 18px rgba(217, 184, 79, 0.22),
+      0 0 44px rgba(255, 46, 147, 0.14);
   }
 }

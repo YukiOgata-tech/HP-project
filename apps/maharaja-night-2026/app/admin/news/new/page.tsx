@@ -8,7 +8,7 @@ export const metadata = { title: "新規記事作成 | 管理画面" };
 
 export default function NewPostPage() {
   return (
-    <div className="space-y-8">
+    <div className="min-w-0 max-w-full space-y-4 sm:space-y-8">
       <AdminPageHeader
         eyebrow="Create"
         title="新しい記事を作成"

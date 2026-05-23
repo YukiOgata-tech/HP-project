@@ -18,13 +18,13 @@ export default async function EditPostPage({ params }: Props) {
   if (!post) notFound();
 
   return (
-    <div className="space-y-8">
+    <div className="min-w-0 max-w-full space-y-4 sm:space-y-8">
       <AdminPageHeader
         eyebrow="Edit"
         title="記事を編集"
         description="内容の更新、公開状態の切り替え、スラッグ調整をこの画面から行えます。公開中の記事はフロントへの反映も確認しやすくしています。"
         actions={
-          <div className="flex flex-wrap gap-3">
+          <div className="flex min-w-0 flex-wrap gap-2 sm:gap-3">
             <AdminSecondaryLink href="/admin/news">一覧へ戻る</AdminSecondaryLink>
             {post.status === "published" ? (
               <AdminSecondaryLink href={`/news/${post.slug}`}>公開ページを見る</AdminSecondaryLink>

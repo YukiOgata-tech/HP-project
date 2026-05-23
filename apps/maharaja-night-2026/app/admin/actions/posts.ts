@@ -59,7 +59,7 @@ export async function createPostAction(formData: {
       updatedBy: user.uid,
     });
 
-    revalidatePath("/admin/posts");
+    revalidatePath("/admin/news");
     revalidatePath("/news");
     return { ok: true, data: { id: post.id } };
   } catch (e) {
@@ -97,8 +97,8 @@ export async function updatePostAction(
       updatedBy: user.uid,
     });
 
-    revalidatePath("/admin/posts");
-    revalidatePath(`/admin/posts/${postId}/edit`);
+    revalidatePath("/admin/news");
+    revalidatePath(`/admin/news/${postId}/edit`);
     revalidatePath("/news");
     revalidatePath(`/news/${formData.slug}`);
     return { ok: true };
@@ -112,7 +112,7 @@ export async function deletePostAction(postId: string): Promise<ActionResult> {
   try {
     await requireEditor();
     await deletePost(SITE_ID, postId);
-    revalidatePath("/admin/posts");
+    revalidatePath("/admin/news");
     revalidatePath("/news");
     return { ok: true };
   } catch (e) {
@@ -124,7 +124,7 @@ export async function deletePostAction(postId: string): Promise<ActionResult> {
 export async function deletePostAndRedirect(postId: string): Promise<void> {
   await requireEditor();
   await deletePost(SITE_ID, postId);
-  revalidatePath("/admin/posts");
+  revalidatePath("/admin/news");
   revalidatePath("/news");
-  redirect("/admin/posts");
+  redirect("/admin/news");
 }
