@@ -29,9 +29,13 @@ export function AdminHeader({ user, currentPath }: AdminHeaderProps) {
             <div className="min-w-0">
             <Link
               href="/admin"
-              className="block truncate text-base font-black tracking-widest text-[#D4AF37] sm:text-xl"
+              className="block"
             >
-              MAHARAJA NIGHT
+              <img
+                src="/images/maharaja-logo-blackBG.webp"
+                alt="MAHARAJA NIGHT 管理画面"
+                className="h-8 w-auto object-contain sm:h-10"
+              />
             </Link>
             <p className="text-[10px] tracking-widest text-[#FF007F] sm:text-xs">
               ADMIN CONSOLE

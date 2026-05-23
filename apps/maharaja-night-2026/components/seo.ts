@@ -8,7 +8,7 @@ export const siteUrl = (
 export const siteName = "MAHARAJA NIGHT in Niigata 2026";
 export const defaultDescription =
   "2026年10月24日、STUDIO NEXSで開催。マーク・パンサーを迎え、伝説のディスコが一夜限りで新潟に蘇る公式イベントサイト。";
-export const defaultOgImage = "/images/maharaja_logo_whiteBG.jpg";
+export const defaultOgImage = "/images/maharaja-logo-blackBG.webp";
 
 export const seoKeywords = [
   "MAHARAJA NIGHT",
