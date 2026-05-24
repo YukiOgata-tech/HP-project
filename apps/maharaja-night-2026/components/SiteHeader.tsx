@@ -3,10 +3,7 @@
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
-
-interface SiteHeaderProps {
-  onOpenModal: (type: "general" | "vip") => void;
-}
+import { PublicLoadingLink } from "./PublicLoadingLink";
 
 const navItems = [
   { href: "/#about", label: "ABOUT" },
@@ -18,7 +15,7 @@ const navItems = [
   { href: "/news", label: "NEWS" },
 ];
 
-export function SiteHeader({ onOpenModal }: SiteHeaderProps) {
+export function SiteHeader() {
   const [open, setOpen] = useState(false);
 
   return (
@@ -36,13 +33,14 @@ export function SiteHeader({ onOpenModal }: SiteHeaderProps) {
         <nav className="hidden items-center gap-6 lg:flex">
           {navItems.map((item) =>
             item.href.startsWith("/") ? (
-              <Link
+              <PublicLoadingLink
                 key={item.href}
                 href={item.href}
+                loadingLabel={`${item.label}ページへ移動中です`}
                 className="font-label text-sm text-white/68 transition-colors hover:text-[#f3de8a]"
               >
                 {item.label}
-              </Link>
+              </PublicLoadingLink>
             ) : (
               <a
                 key={item.href}
@@ -56,20 +54,18 @@ export function SiteHeader({ onOpenModal }: SiteHeaderProps) {
         </nav>
 
         <div className="hidden items-center gap-2 md:flex">
-          <button
-            type="button"
-            onClick={() => onOpenModal("vip")}
+          <Link
+            href="/#vip"
             className="font-label rounded-full border border-[#d9b84f]/50 px-4 py-2 text-sm text-[#f3de8a] transition-colors hover:bg-[#d9b84f]/10"
           >
             VIP
-          </button>
-          <button
-            type="button"
-            onClick={() => onOpenModal("general")}
+          </Link>
+          <Link
+            href="/pre-ticket"
             className="font-label rounded-full bg-[#d9b84f] px-4 py-2 text-sm text-black transition-transform hover:-translate-y-0.5"
           >
             TICKET
-          </button>
+          </Link>
         </div>
 
         <button
@@ -87,14 +83,15 @@ export function SiteHeader({ onOpenModal }: SiteHeaderProps) {
           <div className="grid grid-cols-2 gap-1.5">
             {navItems.map((item) =>
               item.href.startsWith("/") ? (
-                <Link
+                <PublicLoadingLink
                   key={item.href}
                   href={item.href}
+                  loadingLabel={`${item.label}ページへ移動中です`}
                   onClick={() => setOpen(false)}
                   className="font-label rounded-lg px-3 py-2.5 text-sm text-white/80 hover:bg-white/8"
                 >
                   {item.label}
-                </Link>
+                </PublicLoadingLink>
               ) : (
                 <a
                   key={item.href}
@@ -108,26 +105,20 @@ export function SiteHeader({ onOpenModal }: SiteHeaderProps) {
             )}
           </div>
           <div className="mt-3 grid grid-cols-2 gap-2">
-            <button
-              type="button"
-              onClick={() => {
-                setOpen(false);
-                onOpenModal("vip");
-              }}
-              className="font-label h-9 rounded-full border border-[#d9b84f]/50 px-4 text-sm text-[#f3de8a]"
+            <Link
+              href="/#vip"
+              onClick={() => setOpen(false)}
+              className="font-label inline-flex h-9 items-center justify-center rounded-full border border-[#d9b84f]/50 px-4 text-sm text-[#f3de8a]"
             >
               VIP
-            </button>
-            <button
-              type="button"
-              onClick={() => {
-                setOpen(false);
-                onOpenModal("general");
-              }}
-              className="font-label h-9 rounded-full bg-[#d9b84f] px-4 text-sm text-black"
+            </Link>
+            <Link
+              href="/pre-ticket"
+              onClick={() => setOpen(false)}
+              className="font-label inline-flex h-9 items-center justify-center rounded-full bg-[#d9b84f] px-4 text-sm text-black"
             >
               TICKET
-            </button>
+            </Link>
           </div>
         </div>
       )}

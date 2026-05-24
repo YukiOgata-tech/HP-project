@@ -1,4 +1,5 @@
 import { getAdminDb } from "@client-sites/lib/cms/firebase-admin";
+import { getPublishedPosts } from "@client-sites/lib/cms";
 import { HomePageClient } from "@/components/HomePageClient";
 import { StructuredData } from "@/components/StructuredData";
 import { eventJsonLd, faqJsonLd, pageMetadata } from "@/components/seo";
@@ -29,11 +30,15 @@ async function getSponsors() {
 }
 
 export default async function Home() {
-  const sponsors = await getSponsors();
+  const [sponsors, posts] = await Promise.all([
+    getSponsors(),
+    getPublishedPosts(SITE_ID, 3),
+  ]);
+
   return (
     <>
       <StructuredData data={[eventJsonLd, faqJsonLd]} />
-      <HomePageClient sponsors={sponsors} />
+      <HomePageClient sponsors={sponsors} posts={posts} />
     </>
   );
 }

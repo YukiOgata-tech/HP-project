@@ -115,7 +115,7 @@ export const eventJsonLd = {
       price: "4500",
       priceCurrency: "JPY",
       availability: "https://schema.org/InStock",
-      url: absoluteUrl("/#register"),
+      url: absoluteUrl("/pre-ticket"),
     },
     {
       "@type": "Offer",
@@ -123,7 +123,7 @@ export const eventJsonLd = {
       price: "3500",
       priceCurrency: "JPY",
       availability: "https://schema.org/InStock",
-      url: absoluteUrl("/#register"),
+      url: absoluteUrl("/pre-ticket"),
     },
     {
       "@type": "Offer",

@@ -72,6 +72,7 @@ function GlitterField({ count = 950 }) {
 
 function MirrorBall() {
   const group = useRef<THREE.Group>(null!);
+  const elapsed = useRef(0);
   const tiles = useMemo(() => {
     return Array.from({ length: 80 }, (_, i) => {
       const phi = Math.acos(1 - 2 * ((i + 0.5) / 80));
@@ -87,10 +88,11 @@ function MirrorBall() {
     });
   }, []);
 
-  useFrame((state, delta) => {
+  useFrame((_, delta) => {
     if (!group.current) return;
+    elapsed.current += delta;
     group.current.rotation.y += delta * 0.32;
-    group.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.28) * 0.12;
+    group.current.rotation.x = Math.sin(elapsed.current * 0.28) * 0.12;
   });
 
   return (
@@ -128,9 +130,12 @@ function MirrorBall() {
 
 function LaserRig() {
   const group = useRef<THREE.Group>(null!);
-  useFrame((state) => {
+  const elapsed = useRef(0);
+
+  useFrame((_, delta) => {
     if (!group.current) return;
-    group.current.rotation.z = Math.sin(state.clock.elapsedTime * 0.42) * 0.08;
+    elapsed.current += delta;
+    group.current.rotation.z = Math.sin(elapsed.current * 0.42) * 0.08;
   });
 
   return (
@@ -151,10 +156,13 @@ function LaserRig() {
 
 function NeonRings() {
   const ring = useRef<THREE.Group>(null!);
-  useFrame((state) => {
+  const elapsed = useRef(0);
+
+  useFrame((_, delta) => {
     if (!ring.current) return;
-    ring.current.rotation.z = state.clock.elapsedTime * 0.09;
-    ring.current.rotation.y = Math.sin(state.clock.elapsedTime * 0.3) * 0.16;
+    elapsed.current += delta;
+    ring.current.rotation.z = elapsed.current * 0.09;
+    ring.current.rotation.y = Math.sin(elapsed.current * 0.3) * 0.16;
   });
 
   return (

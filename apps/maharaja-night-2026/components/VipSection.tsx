@@ -1,10 +1,6 @@
 import { eventInfo } from "./eventData";
 
-interface VipSectionProps {
-  onOpenModal: () => void;
-}
-
-export function VipSection({ onOpenModal }: VipSectionProps) {
+export function VipSection() {
   return (
     <section id="vip" className="relative overflow-hidden border-y border-[#d9b84f]/20 bg-black px-3 py-8 sm:px-6 sm:py-24">
       <img
@@ -56,13 +52,12 @@ export function VipSection({ onOpenModal }: VipSectionProps) {
             席数、人数、利用条件、当日の運用詳細は調整中のため、VIP希望の方には運営より個別にご案内します。
           </p>
 
-          <button
-            type="button"
-            onClick={onOpenModal}
-            className="mt-3 h-9 w-full rounded-full bg-gradient-to-r from-[#d9b84f] to-[#f3de8a] px-5 text-sm font-black tracking-[0.16em] text-black transition-transform hover:-translate-y-1 sm:mt-7 sm:h-12 sm:px-8 sm:text-sm sm:tracking-[0.2em]"
+          <a
+            href="mailto:idashun777@gmail.com?subject=VIP TABLE CHARGE%E3%81%AE%E5%95%8F%E3%81%84%E5%90%88%E3%82%8F%E3%81%9B"
+            className="mt-3 inline-flex h-9 w-full items-center justify-center rounded-full bg-gradient-to-r from-[#d9b84f] to-[#f3de8a] px-5 text-sm font-black tracking-[0.16em] text-black transition-transform hover:-translate-y-1 sm:mt-7 sm:h-12 sm:px-8 sm:text-sm sm:tracking-[0.2em]"
           >
             VIP TABLEを問い合わせる
-          </button>
+          </a>
         </div>
       </div>
     </section>

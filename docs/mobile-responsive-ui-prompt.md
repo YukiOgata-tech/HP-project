@@ -62,21 +62,20 @@ LPや訴求セクションでは、文章は説明的にしすぎないでくだ
 - セクション余白: `py-6`〜`py-8` を基準。PCは `sm:py-16`〜`sm:py-24`。
 - コンテナ横余白: `px-3`〜`px-4` を基準。PCは `sm:px-8`。
 - カード余白: `p-2`〜`p-3` を基準。PCは `sm:p-5`〜`sm:p-7`。
-- カード間隔: `gap-1.5`〜`gap-2` を基準。PCは `sm:gap-3`〜`sm:gap-6`。
-- ラベル: `text-[8px]`〜`text-[10px]`。
-- 補足文: `text-[10px]`〜`text-[11px]`。
-- 本文: `text-xs` を基準。
-- 小見出し: `text-sm`〜`text-base`。
+- カード間隔: `gap-1`〜`gap-2` を基準。PCは `sm:gap-3`〜`sm:gap-6`。
+- ラベル: `text-[10px]`～。
+- 補足文: `text-xs`〜`text-sm`。
+- 本文: `text-sm` を基準。
 - 大見出し: `text-2xl`〜`text-4xl`。助詞は `span` で小さくする。
 - CTA高さ: `h-9` を基準。PCは `sm:h-11`〜`sm:h-12`。
 - アイコン: `size-3.5`〜`size-4` を基準。PCのみ `sm:size-5` 以上へ拡大する。
-- 角丸: モバイルは `rounded-xl`〜`rounded-2xl`。PCは `sm:rounded-[2rem]` 以上でもよい。
+- 角丸: モバイルは `rounded-xl`〜`rounded-2xl`。PCは `sm:rounded-4xl` でもよい。
 - 影: モバイルは控えめ。PCで `sm:shadow-2xl` などに拡張する。
 
 ## Layout Rules
 
 - モバイルでカードが1列で長く続く場合は、2列化を検討する。
-- 小型ステータス、料金カード、Before項目、機能チップは `grid-cols-2` を積極的に使う。
+- 小型ステータス、料金カード、Before項目、機能チップは `grid-cols-○○` を積極的に使う。
 - PCの情報量をそのままモバイルに持ち込まない。補足文を短くし、重要語を残す。
 - タップ領域は確保しつつ、ボタンやカードを大きくしすぎない。
 - 背景装飾やグラデーションは残してよいが、モバイルではコンテンツ領域を圧迫しないサイズにする。
@@ -112,14 +111,14 @@ LPや訴求セクションでは、文章は説明的にしすぎないでくだ
   <div className="mx-auto max-w-7xl px-3 sm:px-8">
     <div className="grid gap-2 sm:gap-6 lg:grid-cols-2">
       <article className="rounded-2xl p-3 shadow-xl sm:rounded-[2.5rem] sm:p-7 sm:shadow-2xl">
-        <p className="text-[9px] font-black uppercase tracking-[0.18em] sm:text-xs">
+        <p className="text-[10px] font-black uppercase tracking-[0.18em] sm:text-sm">
           Owner story
         </p>
         <h2 className="mt-1 text-2xl font-black leading-tight sm:text-5xl">
           シフト作成<span className="text-lg sm:text-2xl">の</span>作業<span className="text-lg sm:text-2xl">を、</span>
           <br />人員管理<span className="text-lg sm:text-2xl">の</span>負担<span className="text-lg sm:text-2xl">を、</span>削減。
         </h2>
-        <p className="mt-2 text-xs font-bold leading-5 sm:mt-4 sm:text-base sm:leading-7">
+        <p className="mt-1 text-xs font-bold leading-5 sm:mt-4 sm:text-base sm:leading-7">
           重いのは「希望回収･抜け確認･転記」。店長が調整に時間を割かない環境を提供します。
         </p>
       </article>

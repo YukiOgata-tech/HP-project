@@ -1,10 +1,7 @@
 import { eventInfo, faqs } from "./eventData";
+import Link from "next/link";
 
-interface FaqSectionProps {
-  onOpenModal: (type: "general" | "vip") => void;
-}
-
-export function FaqSection({ onOpenModal }: FaqSectionProps) {
+export function FaqSection() {
   return (
     <section id="faq" className="bg-[#070508] px-3 py-8 sm:px-6 sm:py-24">
       <div className="mx-auto max-w-7xl">
@@ -23,13 +20,12 @@ export function FaqSection({ onOpenModal }: FaqSectionProps) {
                 <p className="text-sm font-black sm:text-xl">{eventInfo.womenPrice}</p>
                 <p className="col-span-2 text-[12px] font-bold leading-4 text-white/62 sm:col-span-1 sm:text-sm sm:leading-7">{eventInfo.vipPrice}</p>
               </div>
-              <button
-                type="button"
-                onClick={() => onOpenModal("general")}
-                className="mt-3 h-9 w-full rounded-full bg-[#d9b84f] px-6 text-sm font-black tracking-[0.18em] text-black sm:mt-6 sm:h-11 sm:text-sm"
+              <Link
+                href="/pre-ticket"
+                className="mt-3 inline-flex h-9 w-full items-center justify-center rounded-full bg-[#d9b84f] px-6 text-sm font-black tracking-[0.18em] text-black sm:mt-6 sm:h-11 sm:text-sm"
               >
                 事前申込へ進む
-              </button>
+              </Link>
             </div>
           </div>
 

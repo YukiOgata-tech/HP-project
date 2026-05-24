@@ -1,6 +1,3 @@
-"use client";
-
-import { useState } from "react";
 import { SiteHeader } from "./SiteHeader";
 import { HeroSection } from "./HeroSection";
 import { EventOverviewSection } from "./EventOverviewSection";
@@ -9,10 +6,11 @@ import { GuestSection } from "./GuestSection";
 import { VipSection } from "./VipSection";
 import { HistorySection } from "./HistorySection";
 import { SponsorsSection } from "./SponsorsSection";
-import { RegisterModal } from "./RegisterModal";
 import { VenueSection } from "./VenueSection";
 import { FaqSection } from "./FaqSection";
 import { SiteFooter } from "./SiteFooter";
+import { FloatingTicketCta } from "./FloatingTicketCta";
+import { LatestNewsSection } from "./LatestNewsSection";
 
 interface Sponsor {
   id: string;
@@ -22,36 +20,32 @@ interface Sponsor {
   isActive?: boolean;
 }
 
-export function HomePageClient({ sponsors }: { sponsors: Sponsor[] }) {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalType, setModalType] = useState<"general" | "vip">("general");
+interface NewsItem {
+  id: string;
+  title: string;
+  slug: string;
+  excerpt?: string;
+  publishedAt?: string | null;
+}
 
-  const openModal = (type: "general" | "vip") => {
-    setModalType(type);
-    setIsModalOpen(true);
-  };
-
+export function HomePageClient({ sponsors, posts }: { sponsors: Sponsor[]; posts: NewsItem[] }) {
   return (
     <>
-      <SiteHeader onOpenModal={openModal} />
+      <SiteHeader />
       <main className="min-h-screen bg-[#070508] text-white selection:bg-[#d9b84f] selection:text-black">
-        <HeroSection onOpenModal={openModal} />
+        <HeroSection />
+        <LatestNewsSection posts={posts} />
         <EventOverviewSection />
         <AboutSection />
         <GuestSection />
-        <VipSection onOpenModal={() => openModal("vip")} />
+        <VipSection />
         <HistorySection />
         <VenueSection />
         <SponsorsSection sponsors={sponsors} />
-        <FaqSection onOpenModal={openModal} />
+        <FaqSection />
       </main>
+      <FloatingTicketCta />
       <SiteFooter />
-
-      <RegisterModal 
-        isOpen={isModalOpen} 
-        onClose={() => setIsModalOpen(false)} 
-        initialType={modalType} 
-      />
     </>
   );
 }

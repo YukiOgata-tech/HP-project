@@ -15,7 +15,7 @@ const navItems = [
   { href: "/admin", label: "Dashboard" },
   { href: "/admin/news", label: "News" },
   { href: "/admin/sponsors", label: "Sponsors" },
-  { href: "/admin/registrations", label: "Registrations" },
+  { href: "/admin/pre-ticket", label: "Pre Ticket" },
 ];
 
 export function AdminHeader({ user, currentPath }: AdminHeaderProps) {

@@ -14,17 +14,17 @@ const SITE_ID = process.env.SITE_ID!;
 
 async function getStats(siteId: string) {
   const db = getAdminDb();
-  const snapshot = await db.collection("sites").doc(siteId).collection("registrations").get();
-  const registrations = snapshot.docs.map(d => d.data());
+  const snapshot = await db.collection("sites").doc(siteId).collection("preTickets").get();
+  const preTickets = snapshot.docs.map(d => d.data());
   
-  const total = registrations.length;
-  const vipCount = registrations.filter(r => r.type === "vip").length;
-  const generalCount = registrations.filter(r => r.type === "general").length;
+  const total = preTickets.length;
+  const people = preTickets.reduce((sum, ticket) => sum + (Number(ticket.numberOfPeople) || 1), 0);
+  const vipInterest = preTickets.filter(ticket => String(ticket.vipTable ?? "").startsWith("必要")).length;
   
   return {
     total,
-    vipCount,
-    generalCount
+    people,
+    vipInterest
   };
 }
 
@@ -49,9 +49,9 @@ export default async function AdminDashboardPage() {
       />
 
       <div className="grid grid-cols-3 gap-2 sm:gap-4">
-        <AdminStatCard label="TOTAL REGISTRATIONS" value={stats.total} hint="申込者総数" />
-        <AdminStatCard label="VIP TABLES RESERVED" value={stats.vipCount} hint="VIPテーブル予約" tone="success" />
-        <AdminStatCard label="GENERAL TICKETS" value={stats.generalCount} hint="一般チケット" tone="warning" />
+        <AdminStatCard label="PRE TICKET ENTRIES" value={stats.total} hint="事前申込件数" />
+        <AdminStatCard label="EXPECTED PEOPLE" value={stats.people} hint="参加予定人数" tone="success" />
+        <AdminStatCard label="VIP INTEREST" value={stats.vipInterest} hint="VIP希望あり" tone="warning" />
       </div>
 
       <div className="grid grid-cols-3 gap-2 sm:gap-4">

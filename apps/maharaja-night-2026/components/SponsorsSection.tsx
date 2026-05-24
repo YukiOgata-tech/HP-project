@@ -1,5 +1,5 @@
 import { eventInfo } from "./eventData";
-import Link from "next/link";
+import { PublicLoadingLink } from "./PublicLoadingLink";
 
 interface Sponsor {
   id: string;
@@ -11,6 +11,8 @@ interface Sponsor {
 
 export function SponsorsSection({ sponsors }: { sponsors: Sponsor[] }) {
   const activeSponsors = sponsors.filter((s) => s.isActive);
+  const displaySponsors = activeSponsors.slice(0, 8);
+  const hiddenSponsorCount = Math.max(activeSponsors.length - displaySponsors.length, 0);
 
   return (
     <section id="sponsors" className="bg-[#050306] px-3 py-8 sm:px-6 sm:py-24">
@@ -29,7 +31,7 @@ export function SponsorsSection({ sponsors }: { sponsors: Sponsor[] }) {
             Sponsors
           </p>
           <div className="mt-3 grid grid-cols-2 items-center justify-center gap-1.5 sm:mt-6 sm:gap-4 md:flex md:flex-wrap md:gap-8">
-            {activeSponsors.map((sponsor) => (
+            {displaySponsors.map((sponsor) => (
               <a
                 key={sponsor.id}
                 href={sponsor.websiteUrl || "#sponsors"}
@@ -44,6 +46,15 @@ export function SponsorsSection({ sponsors }: { sponsors: Sponsor[] }) {
               )}
               </a>
             ))}
+            {hiddenSponsorCount > 0 ? (
+              <PublicLoadingLink
+                href="/sponsors"
+                loadingLabel="協賛企業ページへ移動中です"
+                className="flex min-h-14 items-center justify-center rounded-xl border border-[#d9b84f]/24 bg-[#d9b84f]/8 p-2 text-center text-[12px] font-black text-[#f3de8a] sm:min-h-20 sm:p-4 sm:text-sm"
+              >
+                ほか{hiddenSponsorCount}社を見る
+              </PublicLoadingLink>
+            ) : null}
             {activeSponsors.length === 0 &&
               eventInfo.sponsors.map((name) => (
                 <div key={name} className="flex min-h-14 items-center justify-center rounded-xl border border-white/8 bg-black/32 p-2 text-center text-[13px] font-bold text-white/58 sm:min-h-20 sm:p-4 sm:text-sm md:text-lg">
@@ -67,12 +78,13 @@ export function SponsorsSection({ sponsors }: { sponsors: Sponsor[] }) {
         </div>
 
         <div className="mt-3 flex justify-center sm:mt-6">
-          <Link
+          <PublicLoadingLink
             href="/sponsors"
+            loadingLabel="協賛企業ページへ移動中です"
             className="inline-flex h-9 items-center justify-center rounded-full border border-[#d9b84f]/45 px-5 text-sm font-black tracking-[0.18em] text-[#f3de8a] transition-colors hover:bg-[#d9b84f]/10 sm:h-11 sm:px-7 sm:text-sm"
           >
             協賛企業一覧を見る
-          </Link>
+          </PublicLoadingLink>
         </div>
       </div>
     </section>

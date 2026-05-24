@@ -1,11 +1,8 @@
 import { ParticleBackground } from "./3d/ParticleBackground";
 import { eventInfo, heroHighlights, productionNotes } from "./eventData";
+import Link from "next/link";
 
-interface HeroSectionProps {
-  onOpenModal: (type: "general" | "vip") => void;
-}
-
-export function HeroSection({ onOpenModal }: HeroSectionProps) {
+export function HeroSection() {
   return (
     <section className="relative min-h-screen overflow-hidden px-3 pb-8 pt-18 sm:px-6 sm:pb-20 sm:pt-28">
       <ParticleBackground />
@@ -35,20 +32,18 @@ export function HeroSection({ onOpenModal }: HeroSectionProps) {
           </div>
 
           <div className="mt-4 flex gap-2 sm:mt-8 sm:flex-row sm:gap-3">
-            <button
-              type="button"
-              onClick={() => onOpenModal("general")}
-              className="font-label h-9 flex-1 rounded-full bg-[#d9b84f] px-4 text-[13px] text-black shadow-[0_0_22px_rgba(217,184,79,0.26)] transition-transform hover:-translate-y-1 sm:h-12 sm:flex-none sm:px-7 sm:text-sm"
+            <Link
+              href="/pre-ticket"
+              className="font-label inline-flex h-9 flex-1 items-center justify-center rounded-full bg-[#d9b84f] px-4 text-[13px] text-black shadow-[0_0_22px_rgba(217,184,79,0.26)] transition-transform hover:-translate-y-1 sm:h-12 sm:flex-none sm:px-7 sm:text-sm"
             >
               TICKET
-            </button>
-            <button
-              type="button"
-              onClick={() => onOpenModal("vip")}
-              className="font-label h-9 flex-1 rounded-full border border-[#d9b84f]/45 bg-black/25 px-4 text-[13px] text-[#f3de8a] backdrop-blur transition-colors hover:bg-[#d9b84f]/10 sm:h-12 sm:flex-none sm:px-7 sm:text-sm"
+            </Link>
+            <a
+              href="#vip"
+              className="font-label inline-flex h-9 flex-1 items-center justify-center rounded-full border border-[#d9b84f]/45 bg-black/25 px-4 text-[13px] text-[#f3de8a] backdrop-blur transition-colors hover:bg-[#d9b84f]/10 sm:h-12 sm:flex-none sm:px-7 sm:text-sm"
             >
               VIP
-            </button>
+            </a>
           </div>
         </div>
 

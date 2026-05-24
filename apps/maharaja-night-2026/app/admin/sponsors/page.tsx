@@ -52,7 +52,7 @@ export default async function SponsorsPage() {
       </div>
 
       <AdminSurface className="overflow-hidden bg-black/50 border-white/10">
-        <div className="divide-y divide-white/10 md:hidden">
+        <div className="max-h-[62vh] divide-y divide-white/10 overflow-y-auto [scrollbar-width:thin] md:hidden">
           {sponsors.length === 0 ? (
             <div className="px-3 py-10 text-center text-xs font-bold tracking-widest text-gray-500">
               NO SPONSORS YET
@@ -97,9 +97,9 @@ export default async function SponsorsPage() {
           )}
         </div>
 
-        <div className="hidden overflow-x-auto md:block">
+        <div className="hidden max-h-[62vh] overflow-auto md:block">
           <table className="w-full text-left text-sm text-gray-300">
-            <thead className="border-b border-white/10 bg-white/5 text-xs font-bold tracking-widest text-gray-400">
+            <thead className="sticky top-0 z-10 border-b border-white/10 bg-[#151015] text-xs font-bold tracking-widest text-gray-400">
               <tr>
                 <th className="px-6 py-4">表示順</th>
                 <th className="px-6 py-4">企業名</th>

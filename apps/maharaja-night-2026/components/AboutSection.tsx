@@ -32,12 +32,14 @@ export function AboutSection() {
               key={title}
               className="group rounded-xl border border-white/10 bg-white/5 p-2.5 transition-all duration-300 hover:-translate-y-1 hover:border-[#d9b84f]/45 hover:bg-[#d9b84f]/8 sm:rounded-[1.35rem] sm:p-6"
             >
-              <div className="flex size-8 items-center justify-center rounded-full border border-[#d9b84f]/30 bg-[#d9b84f]/10 text-[#d9b84f] transition-colors group-hover:bg-[#d9b84f] group-hover:text-black sm:size-12">
-                <Icon className="size-4 sm:size-5" />
+              <div className="flex items-center gap-2">
+                <div className="flex size-8 shrink-0 items-center justify-center rounded-full border border-[#d9b84f]/30 bg-[#d9b84f]/10 text-[#d9b84f] transition-colors group-hover:bg-[#d9b84f] group-hover:text-black sm:size-12">
+                  <Icon className="size-4 sm:size-5" />
+                </div>
+                <p className="min-w-0 text-[12px] font-black uppercase tracking-[0.18em] text-[#ff4ca5] sm:text-sm sm:tracking-[0.28em]">
+                  {title}
+                </p>
               </div>
-              <p className="mt-2 text-[12px] font-black uppercase tracking-[0.18em] text-[#ff4ca5] sm:mt-5 sm:text-sm sm:tracking-[0.28em]">
-                {title}
-              </p>
               <h3 className="mt-1 text-sm font-black leading-5 text-white sm:mt-3 sm:text-xl sm:leading-7">{heading}</h3>
               <p className="mt-1.5 line-clamp-4 text-[12px] font-bold leading-4 text-white/58 sm:mt-4 sm:line-clamp-none sm:text-sm sm:leading-7">{text}</p>
             </article>
