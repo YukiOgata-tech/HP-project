@@ -18,11 +18,16 @@ export function FormSubmitButton({
   const { pending } = useFormStatus();
   const [started, setStarted] = useState(false);
   const hasPendingStarted = useRef(false);
+  const fallbackTimer = useRef<number | null>(null);
   const showLoading = started || pending;
 
   useEffect(() => {
     if (pending) {
       hasPendingStarted.current = true;
+      if (fallbackTimer.current) {
+        window.clearTimeout(fallbackTimer.current);
+        fallbackTimer.current = null;
+      }
       return;
     }
 
@@ -35,16 +40,32 @@ export function FormSubmitButton({
     }
   }, [pending]);
 
+  useEffect(() => {
+    return () => {
+      if (fallbackTimer.current) {
+        window.clearTimeout(fallbackTimer.current);
+      }
+    };
+  }, []);
+
   return (
     <>
       <MaharajaLoadingOverlay show={showLoading} label={pendingLabel} />
       <button
         type="submit"
-        disabled={showLoading}
+        disabled={pending}
         onClick={(event) => {
           const form = event.currentTarget.form;
           if (form && !form.checkValidity()) return;
           flushSync(() => setStarted(true));
+          if (fallbackTimer.current) {
+            window.clearTimeout(fallbackTimer.current);
+          }
+          fallbackTimer.current = window.setTimeout(() => {
+            if (!hasPendingStarted.current) {
+              setStarted(false);
+            }
+          }, 1200);
         }}
         className={[
           "inline-flex items-center justify-center disabled:cursor-wait disabled:opacity-70",

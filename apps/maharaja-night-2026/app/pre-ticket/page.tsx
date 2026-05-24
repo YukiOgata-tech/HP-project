@@ -33,6 +33,33 @@ const vipOptions = [
   "その他",
 ];
 
+const errorMessages: Record<string, { title: string; body: string }> = {
+  missing: {
+    title: "入力内容を確認してください",
+    body: "メールアドレス、お名前、性別などの必須項目が不足しています。",
+  },
+  source: {
+    title: "流入経路を選択してください",
+    body: "「このイベントを何で知りましたか？」の項目を選択してから送信してください。",
+  },
+  vip: {
+    title: "VIP TABLE CHARGEの項目を確認してください",
+    body: "VIP TABLE CHARGEの希望項目が正しく選択されていません。",
+  },
+  "rate-limit": {
+    title: "短時間に複数回の送信がありました",
+    body: "しばらく時間をおいてから再度お試しください。すでに送信済みの場合は、受付IDから再表示できます。",
+  },
+  "submit-failed": {
+    title: "送信に失敗しました",
+    body: "通信状況やサーバー状態により保存できませんでした。入力内容を確認し、時間をおいて再度送信してください。",
+  },
+  config: {
+    title: "送信設定に問題があります",
+    body: "現在フォームを受け付けできません。運営側の設定確認が必要です。",
+  },
+};
+
 interface Props {
   searchParams: Promise<{ error?: string; submitted?: string }>;
 }
@@ -40,6 +67,7 @@ interface Props {
 export default async function PreTicketPage({ searchParams }: Props) {
   const { error, submitted } = await searchParams;
   const isSubmitted = submitted === "1";
+  const errorMessage = error ? errorMessages[error] ?? errorMessages["submit-failed"] : null;
 
   return (
     <PublicPageFrame>
@@ -121,9 +149,16 @@ export default async function PreTicketPage({ searchParams }: Props) {
                   </Link>
                 </div>
 
-                {error === "rate-limit" ? (
+                {errorMessage ? (
                   <div className="rounded-xl border border-[#b74b4b] bg-[#fff4f4] p-3 text-sm font-bold leading-6 text-[#7b1f1f]">
-                    短時間に複数回の送信がありました。しばらく時間をおいてから再度お試しください。
+                    <p className="text-base font-black">{errorMessage.title}</p>
+                    <p className="mt-1 text-[13px] leading-5">{errorMessage.body}</p>
+                    <Link
+                      href="/pre-ticket/lookup"
+                      className="mt-3 inline-flex h-9 items-center justify-center rounded-full border border-[#7b1f1f]/25 px-4 text-[12px] font-black text-[#7b1f1f]"
+                    >
+                      申込済みの方は受付画面を再表示
+                    </Link>
                   </div>
                 ) : null}
 

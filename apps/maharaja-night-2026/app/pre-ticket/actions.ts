@@ -76,7 +76,7 @@ async function checkAndRecordRateLimit(kind: "ip" | "email" | "lookup_ip", value
 
 export async function submitPreTicket(formData: FormData) {
   const siteId = process.env.SITE_ID;
-  if (!siteId) throw new Error("SITE_ID is not defined");
+  if (!siteId) redirect("/pre-ticket?error=config");
 
   const website = String(formData.get("website") || "").trim();
   const formStartedAt = Number(formData.get("formStartedAt") || 0);
@@ -97,18 +97,25 @@ export async function submitPreTicket(formData: FormData) {
   const note = String(formData.get("note") || "").trim();
 
   if (!email || !name || !["MEN", "WOMEN"].includes(gender)) {
-    throw new Error("必須項目が不足しています。");
+    redirect("/pre-ticket?error=missing");
   }
   if (!SOURCE_OPTIONS.includes(source)) {
-    throw new Error("イベントを知ったきっかけを選択してください。");
+    redirect("/pre-ticket?error=source");
   }
   if (!VIP_OPTIONS.includes(vipTable)) {
-    throw new Error("VIP TABLE CHARGE の希望を選択してください。");
+    redirect("/pre-ticket?error=vip");
   }
 
   const ip = await getRequestIp();
-  const ipAllowed = await checkAndRecordRateLimit("ip", ip, IP_LIMIT);
-  const emailAllowed = await checkAndRecordRateLimit("email", email, EMAIL_LIMIT);
+  let ipAllowed = false;
+  let emailAllowed = false;
+
+  try {
+    ipAllowed = await checkAndRecordRateLimit("ip", ip, IP_LIMIT);
+    emailAllowed = await checkAndRecordRateLimit("email", email, EMAIL_LIMIT);
+  } catch {
+    redirect("/pre-ticket?error=submit-failed");
+  }
 
   if (!ipAllowed || !emailAllowed) {
     redirect("/pre-ticket?error=rate-limit");
@@ -121,7 +128,8 @@ export async function submitPreTicket(formData: FormData) {
   const receipt = createReceiptToken();
   const docRef = getTicketCollection().doc();
 
-  await docRef.set({
+  try {
+    await docRef.set({
       email,
       name,
       normalizedEmail: normalizeLookupValue(email),
@@ -141,7 +149,10 @@ export async function submitPreTicket(formData: FormData) {
       status: "pending",
       createdAt: new Date(),
       updatedAt: new Date(),
-  });
+    });
+  } catch {
+    redirect("/pre-ticket?error=submit-failed");
+  }
 
   redirect(`/pre-ticket/complete?token=${receipt.token}`);
 }
