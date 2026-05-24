@@ -33,7 +33,7 @@ function GlitterField({ count = 950 }) {
     return [pos, col];
   }, [count]);
 
-  useFrame((state, delta) => {
+  useFrame((_, delta) => {
     if (points.current) {
       points.current.rotation.y += delta * 0.05;
       points.current.rotation.x += delta * 0.015;

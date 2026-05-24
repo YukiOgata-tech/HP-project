@@ -12,9 +12,18 @@
 }
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+  }
+
   body {
     @apply bg-[#0A0A0A] text-white overflow-x-hidden;
     font-family: var(--font-body), system-ui, sans-serif;
+  }
+
+  section[id] {
+    scroll-margin-top: 5rem;
   }
 
   h1,
