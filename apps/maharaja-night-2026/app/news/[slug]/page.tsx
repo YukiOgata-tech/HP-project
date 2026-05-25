@@ -3,9 +3,9 @@ import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import Link from "next/link";
 import { CalendarDays, ChevronLeft } from "lucide-react";
-import { PublicPageFrame } from "@/components/PublicPageFrame";
-import { StructuredData } from "@/components/StructuredData";
-import { absoluteUrl, defaultOgImage, pageMetadata, siteName } from "@/components/seo";
+import { PublicPageFrame } from "@/components/layout/PublicPageFrame";
+import { StructuredData } from "@/components/ui/StructuredData";
+import { absoluteUrl, defaultOgImage, pageMetadata, siteName } from "@/components/data/seo";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -75,7 +75,7 @@ export default async function NewsDetail({ params }: Props) {
   return (
     <PublicPageFrame>
       <StructuredData data={articleJsonLd} />
-      <main className="min-h-screen bg-[#070508] px-3 pb-10 pt-20 text-white sm:px-6 sm:pb-20 sm:pt-36">
+      <main className="min-h-screen bg-[#070508] px-3 pb-10 pt-28 text-white sm:px-6 sm:pb-20 sm:pt-44">
         <article className="mx-auto max-w-4xl">
           <Link
             href="/news"

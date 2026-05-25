@@ -5,7 +5,7 @@ import { flushSync } from "react-dom";
 import { toPng } from "html-to-image";
 import { jsPDF } from "jspdf";
 import { Download, FileDown } from "lucide-react";
-import { MaharajaLoadingOverlay } from "@/components/MaharajaLoadingOverlay";
+import { MaharajaLoadingOverlay } from "@/components/ui/MaharajaLoadingOverlay";
 
 interface ReceiptExportButtonsProps {
   fileName: string;

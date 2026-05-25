@@ -1,8 +1,8 @@
 import { getAdminDb } from "@client-sites/lib/cms/firebase-admin";
 import { getPublishedPosts } from "@client-sites/lib/cms";
-import { HomePageClient } from "@/components/HomePageClient";
-import { StructuredData } from "@/components/StructuredData";
-import { eventJsonLd, faqJsonLd, pageMetadata } from "@/components/seo";
+import { HomePageClient } from "@/components/sections/HomePageClient";
+import { StructuredData } from "@/components/ui/StructuredData";
+import { eventJsonLd, faqJsonLd, pageMetadata } from "@/components/data/seo";
 
 export const metadata = pageMetadata({
   title: "新潟の大人向けディスコイベント公式サイト",

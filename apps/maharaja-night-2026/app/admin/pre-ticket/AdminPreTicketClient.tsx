@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { RefreshCw } from "lucide-react";
-import { MaharajaLoadingOverlay } from "@/components/MaharajaLoadingOverlay";
+import { MaharajaLoadingOverlay } from "@/components/ui/MaharajaLoadingOverlay";
 import { AdminPageHeader, AdminPrimaryLink, AdminStatCard, AdminSurface } from "../components/AdminUi";
 
 interface PreTicket {

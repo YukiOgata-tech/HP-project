@@ -1,5 +1,5 @@
-import { eventInfo } from "./eventData";
-import { PublicLoadingLink } from "./PublicLoadingLink";
+import { eventInfo } from "../data/eventData";
+import { PublicLoadingLink } from "../ui/PublicLoadingLink";
 
 interface Sponsor {
   id: string;

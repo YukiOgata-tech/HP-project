@@ -1,5 +1,5 @@
 import { CalendarDays, ChevronRight, Newspaper } from "lucide-react";
-import { PublicLoadingLink } from "./PublicLoadingLink";
+import { PublicLoadingLink } from "../ui/PublicLoadingLink";
 
 interface NewsItem {
   id: string;

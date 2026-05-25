@@ -1,12 +1,15 @@
-import { eventInfo } from "./eventData";
+import { eventInfo } from "../data/eventData";
+import Image from "next/image";
 
 export function VipSection() {
   return (
     <section id="vip" className="relative overflow-hidden border-y border-[#d9b84f]/20 bg-black px-3 py-8 sm:px-6 sm:py-24">
-      <img
+      <Image
         src="/images/event/venue-studio-nexs-vip.jpg"
         alt="STUDIO NEXSのVIPとフロア"
-        className="absolute inset-0 h-full w-full object-cover opacity-18"
+        fill
+        sizes="100vw"
+        className="object-cover opacity-18"
       />
       <div className="absolute inset-0 bg-[linear-gradient(90deg,#070508_0%,rgba(7,5,8,0.84)_42%,rgba(7,5,8,0.48)_100%)]" />
       <div className="relative mx-auto grid max-w-7xl gap-4 sm:gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">

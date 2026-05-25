@@ -1,5 +1,6 @@
-import { TiltCard } from "./3d/TiltCard";
-import { lineup } from "./eventData";
+import { TiltCard } from "../3d/TiltCard";
+import { lineup } from "../data/eventData";
+import Image from "next/image";
 
 export function GuestSection() {
   return (
@@ -24,10 +25,12 @@ export function GuestSection() {
           {lineup.map((guest) => (
             <TiltCard key={guest.name} className="min-h-[18rem] sm:min-h-[28rem]">
               <article className="relative flex h-full min-h-[18rem] flex-col justify-end overflow-hidden rounded-xl border border-white/8 bg-[#111] p-3 sm:min-h-[28rem] sm:p-7">
-                <img
+                <Image
                   src={guest.image}
                   alt={`${guest.name}のイメージ`}
-                  className="absolute inset-0 h-full w-full object-cover opacity-55 transition-transform duration-700 hover:scale-105"
+                  fill
+                  sizes="(min-width: 768px) 50vw, 100vw"
+                  className="object-cover opacity-55 transition-transform duration-700 hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/55 to-black/10" />
                 <div className="relative z-10">

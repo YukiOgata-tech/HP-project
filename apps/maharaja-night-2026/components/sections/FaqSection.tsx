@@ -1,4 +1,4 @@
-import { eventInfo, faqs } from "./eventData";
+import { eventInfo, faqs } from "../data/eventData";
 import Link from "next/link";
 
 export function FaqSection() {

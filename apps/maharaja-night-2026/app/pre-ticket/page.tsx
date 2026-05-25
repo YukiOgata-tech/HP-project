@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { CheckCircle2, Mail, Ticket, Wine } from "lucide-react";
-import { PublicPageFrame } from "@/components/PublicPageFrame";
-import { pageMetadata } from "@/components/seo";
+import { PublicPageFrame } from "@/components/layout/PublicPageFrame";
+import { pageMetadata } from "@/components/data/seo";
 import { submitPreTicket } from "./actions";
 import { FormSubmitButton } from "./FormSubmitButton";
 import { PreTicketSpamFields } from "./PreTicketSpamFields";
@@ -71,7 +71,7 @@ export default async function PreTicketPage({ searchParams }: Props) {
 
   return (
     <PublicPageFrame>
-      <main className="min-h-screen bg-[#070508] px-3 pb-10 pt-20 text-white sm:px-6 sm:pb-20 sm:pt-36">
+      <main className="min-h-screen bg-[#070508] px-3 pb-10 pt-28 text-white sm:px-6 sm:pb-20 sm:pt-44">
         <section className="mx-auto grid max-w-7xl gap-4 lg:grid-cols-[0.84fr_1.16fr] lg:items-start">
           <aside className="rounded-2xl border border-[#d9b84f]/25 bg-white/5 p-3 sm:rounded-3xl sm:p-7">
             <p className="font-label text-[12px] uppercase text-[#d9b84f]">Pre Ticket</p>

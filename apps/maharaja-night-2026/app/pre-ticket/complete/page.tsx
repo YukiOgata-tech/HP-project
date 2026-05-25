@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { CheckCircle2, ShieldCheck } from "lucide-react";
-import { PublicPageFrame } from "@/components/PublicPageFrame";
-import { pageMetadata } from "@/components/seo";
+import { PublicPageFrame } from "@/components/layout/PublicPageFrame";
+import { pageMetadata } from "@/components/data/seo";
 import { getReceiptTicketByToken } from "../receipt";
 import { ReceiptExportButtons } from "./ReceiptExportButtons";
 
@@ -36,7 +36,7 @@ export default async function PreTicketCompletePage({ searchParams }: Props) {
 
   return (
     <PublicPageFrame>
-      <main className="min-h-screen bg-[#070508] px-3 pb-10 pt-20 text-white sm:px-6 sm:pb-20 sm:pt-36">
+      <main className="min-h-screen bg-[#070508] px-3 pb-10 pt-28 text-white sm:px-6 sm:pb-20 sm:pt-44">
         <section className="mx-auto max-w-3xl">
           {!ticket ? (
             <div className="rounded-2xl border border-white/10 bg-white/95 p-5 text-center text-[#1d1712] shadow-2xl sm:rounded-[1.6rem] sm:p-9">

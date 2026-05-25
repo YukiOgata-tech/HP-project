@@ -1,5 +1,6 @@
-import { ParticleBackground } from "./3d/ParticleBackground";
-import { eventInfo, heroHighlights, productionNotes } from "./eventData";
+import { ParticleBackground } from "../3d/ParticleBackground";
+import { eventInfo, heroHighlights, productionNotes } from "../data/eventData";
+import Image from "next/image";
 import Link from "next/link";
 
 export function HeroSection() {
@@ -50,11 +51,16 @@ export function HeroSection() {
         <div className="relative">
           <div className="absolute -inset-3 rounded-2xl bg-[#d9b84f]/10 blur-2xl sm:-inset-6 sm:rounded-[2rem] sm:blur-3xl" />
           <div className="relative overflow-hidden rounded-2xl border border-white/12 bg-black/45 shadow-black/30 backdrop-blur sm:rounded-[1.6rem] sm:shadow-2xl">
-            <img
-              src="/images/event/hero-disco-floor.jpg"
-              alt="MAHARAJA NIGHT in Niigataの過去開催の熱気"
-              className="h-32 w-full object-cover opacity-80 sm:h-64 md:h-80"
-            />
+            <div className="relative h-32 w-full sm:h-64 md:h-80">
+              <Image
+                src="/images/event/hero-disco-floor.jpg"
+                alt="MAHARAJA NIGHT in Niigataの過去開催の熱気"
+                fill
+                priority
+                sizes="(min-width: 1024px) 45vw, 100vw"
+                className="object-cover opacity-80"
+              />
+            </div>
             <div className="grid grid-cols-2 gap-px bg-white/10">
               {heroHighlights.map(({ icon: Icon, label, value }) => (
                 <div key={label} className="bg-[#0b070c]/88 p-2.5 sm:p-4">

@@ -7,7 +7,7 @@ import {
   seoKeywords,
   siteName,
   siteUrl,
-} from "@/components/seo";
+} from "@/components/data/seo";
 import "./globals.css";
 
 const bodyFont = Noto_Sans_JP({
@@ -82,7 +82,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="ja">
+    <html lang="ja" data-scroll-behavior="smooth">
       <body className={`${bodyFont.variable} ${displayFont.variable}`}>
         {children}
       </body>

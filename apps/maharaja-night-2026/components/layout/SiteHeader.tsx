@@ -3,7 +3,8 @@
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
-import { PublicLoadingLink } from "./PublicLoadingLink";
+import { PublicLoadingLink } from "../ui/PublicLoadingLink";
+import { SiteBreadcrumbs } from "./SiteBreadcrumbs";
 
 const navItems = [
   { href: "/#about", label: "ABOUT" },
@@ -19,8 +20,8 @@ export function SiteHeader() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-[#070508]/85 backdrop-blur-xl">
-      <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-3 sm:h-20 sm:px-6">
+    <header className="fixed inset-x-0 top-0 z-50 bg-[#070508]/85 backdrop-blur-xl">
+      <div className="mx-auto flex h-14 max-w-7xl items-center justify-between border-b border-white/10 px-3 sm:h-20 sm:px-6">
         <Link href="/" className="group min-w-0">
           <p className="hidden sm:block font-label text-[12px] uppercase text-[#d9b84f] sm:text-[12px]">
             Official Site
@@ -77,6 +78,8 @@ export function SiteHeader() {
           {open ? <X size={18} /> : <Menu size={18} />}
         </button>
       </div>
+
+      <SiteBreadcrumbs />
 
       {open && (
         <div className="border-t border-white/10 bg-[#070508] px-3 py-3 md:hidden">

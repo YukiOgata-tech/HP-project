@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { SearchCheck } from "lucide-react";
-import { PublicPageFrame } from "@/components/PublicPageFrame";
-import { pageMetadata } from "@/components/seo";
+import { PublicPageFrame } from "@/components/layout/PublicPageFrame";
+import { pageMetadata } from "@/components/data/seo";
 import { lookupPreTicket } from "../actions";
 import { FormSubmitButton } from "../FormSubmitButton";
 
@@ -32,7 +32,7 @@ export default async function PreTicketLookupPage({ searchParams }: Props) {
 
   return (
     <PublicPageFrame>
-      <main className="min-h-screen bg-[#070508] px-3 pb-10 pt-20 text-white sm:px-6 sm:pb-20 sm:pt-36">
+      <main className="min-h-screen bg-[#070508] px-3 pb-10 pt-28 text-white sm:px-6 sm:pb-20 sm:pt-44">
         <section className="mx-auto grid max-w-5xl gap-4 lg:grid-cols-[0.82fr_1.18fr] lg:items-start">
           <aside className="rounded-2xl border border-[#d9b84f]/25 bg-white/[0.045] p-4 sm:rounded-[1.6rem] sm:p-7">
             <SearchCheck className="size-8 text-[#d9b84f]" />

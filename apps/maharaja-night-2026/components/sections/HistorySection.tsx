@@ -1,4 +1,5 @@
-import { historyItems } from "./eventData";
+import { historyItems } from "../data/eventData";
+import Image from "next/image";
 
 export function HistorySection() {
   return (
@@ -29,11 +30,13 @@ export function HistorySection() {
               key={item.year}
             >
               <div className="bg-black/35 p-2 sm:p-3">
-                <div className="flex aspect-[4/3] items-center justify-center overflow-hidden rounded-lg bg-[#0e0a10] sm:rounded-2xl">
-                  <img
+                <div className="relative flex aspect-[4/3] items-center justify-center overflow-hidden rounded-lg bg-[#0e0a10] sm:rounded-2xl">
+                  <Image
                     src={item.image}
                     alt={item.title}
-                    className="h-full w-full object-contain"
+                    fill
+                    sizes="(min-width: 1024px) 420px, (min-width: 640px) 52vw, 82vw"
+                    className="object-contain"
                   />
                 </div>
               </div>

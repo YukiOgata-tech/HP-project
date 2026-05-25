@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { getPublishedPosts } from "@client-sites/lib/cms";
-import { absoluteUrl } from "@/components/seo";
+import { absoluteUrl } from "@/components/data/seo";
 
 const SITE_ID = process.env.SITE_ID!;
 

@@ -1,10 +1,10 @@
 import { getPublishedPosts } from "@client-sites/lib/cms";
 import Link from "next/link";
 import { CalendarDays, ChevronRight, Newspaper } from "lucide-react";
-import { PublicPageFrame } from "@/components/PublicPageFrame";
-import { eventInfo } from "@/components/eventData";
-import { StructuredData } from "@/components/StructuredData";
-import { absoluteUrl, pageMetadata, siteName } from "@/components/seo";
+import { PublicPageFrame } from "@/components/layout/PublicPageFrame";
+import { eventInfo } from "@/components/data/eventData";
+import { StructuredData } from "@/components/ui/StructuredData";
+import { absoluteUrl, pageMetadata, siteName } from "@/components/data/seo";
 
 export const dynamic = "force-dynamic";
 
@@ -40,7 +40,7 @@ export default async function NewsList() {
   return (
     <PublicPageFrame>
       <StructuredData data={collectionJsonLd} />
-      <main className="min-h-screen bg-[#070508] px-3 pb-10 pt-20 text-white sm:px-6 sm:pb-20 sm:pt-36">
+      <main className="min-h-screen bg-[#070508] px-3 pb-10 pt-28 text-white sm:px-6 sm:pb-20 sm:pt-44">
         <section className="mx-auto max-w-7xl">
           <div className="grid gap-2 border-b border-white/10 pb-4 sm:gap-8 sm:pb-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
             <div>

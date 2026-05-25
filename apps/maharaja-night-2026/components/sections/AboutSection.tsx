@@ -1,4 +1,4 @@
-import { conceptPillars, eventInfo } from "./eventData";
+import { conceptPillars, eventInfo } from "../data/eventData";
 
 export function AboutSection() {
   return (
@@ -41,7 +41,7 @@ export function AboutSection() {
                 </p>
               </div>
               <h3 className="mt-1 text-sm font-black leading-5 text-white sm:mt-3 sm:text-xl sm:leading-7">{heading}</h3>
-              <p className="mt-1.5 line-clamp-4 text-[12px] font-bold leading-4 text-white/58 sm:mt-4 sm:line-clamp-none sm:text-sm sm:leading-7">{text}</p>
+              <p className="mt-1.5 line-clamp-4 text-[10px] font-bold leading-4 text-white/58 sm:mt-4 sm:line-clamp-none sm:text-sm sm:leading-7">{text}</p>
             </article>
           ))}
         </div>

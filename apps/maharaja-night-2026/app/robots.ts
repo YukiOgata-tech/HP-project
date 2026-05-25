@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { siteUrl } from "@/components/seo";
+import { siteUrl } from "@/components/data/seo";
 
 export default function robots(): MetadataRoute.Robots {
   return {

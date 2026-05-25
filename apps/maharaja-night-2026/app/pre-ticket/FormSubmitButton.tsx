@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { flushSync, useFormStatus } from "react-dom";
-import { MaharajaLoadingOverlay } from "@/components/MaharajaLoadingOverlay";
+import { MaharajaLoadingOverlay } from "@/components/ui/MaharajaLoadingOverlay";
 
 interface FormSubmitButtonProps {
   label: string;

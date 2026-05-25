@@ -1,5 +1,6 @@
 import { Car, MapPin, Train } from "lucide-react";
-import { eventInfo, venueFeatures } from "./eventData";
+import { eventInfo, venueFeatures } from "../data/eventData";
+import Image from "next/image";
 
 export function VenueSection() {
   return (
@@ -35,11 +36,15 @@ export function VenueSection() {
         </div>
 
         <div className="overflow-hidden rounded-2xl border border-white/10 bg-black/40 shadow-black/30 sm:rounded-[1.6rem] sm:shadow-2xl">
-          <img
-            src="/images/event/venue-studio-nexs-vip.jpg"
-            alt="STUDIO NEXSの会場イメージ"
-            className="h-40 w-full object-cover sm:h-64 md:h-80"
-          />
+          <div className="relative h-40 w-full sm:h-64 md:h-80">
+            <Image
+              src="/images/event/venue-studio-nexs-vip.jpg"
+              alt="STUDIO NEXSの会場イメージ"
+              fill
+              sizes="(min-width: 1024px) 50vw, 100vw"
+              className="object-cover"
+            />
+          </div>
           <div className="space-y-3 p-3 sm:space-y-5 sm:p-7">
             <div className="flex gap-2 sm:gap-3">
               <MapPin className="mt-1 size-4 shrink-0 text-[#d9b84f] sm:size-5" />

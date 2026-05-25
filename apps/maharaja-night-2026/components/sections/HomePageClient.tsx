@@ -1,4 +1,4 @@
-import { SiteHeader } from "./SiteHeader";
+import { SiteHeader } from "../layout/SiteHeader";
 import { HeroSection } from "./HeroSection";
 import { EventOverviewSection } from "./EventOverviewSection";
 import { AboutSection } from "./AboutSection";
@@ -8,8 +8,8 @@ import { HistorySection } from "./HistorySection";
 import { SponsorsSection } from "./SponsorsSection";
 import { VenueSection } from "./VenueSection";
 import { FaqSection } from "./FaqSection";
-import { SiteFooter } from "./SiteFooter";
-import { FloatingTicketCta } from "./FloatingTicketCta";
+import { SiteFooter } from "../layout/SiteFooter";
+import { FloatingTicketCta } from "../ui/FloatingTicketCta";
 import { LatestNewsSection } from "./LatestNewsSection";
 
 interface Sponsor {

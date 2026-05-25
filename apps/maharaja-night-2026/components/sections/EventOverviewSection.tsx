@@ -1,5 +1,5 @@
 import { CalendarDays, Clock, MapPin, Shirt, Ticket, Users } from "lucide-react";
-import { eventInfo } from "./eventData";
+import { eventInfo } from "../data/eventData";
 
 const overviewItems = [
   { icon: CalendarDays, label: "日程", value: eventInfo.date },

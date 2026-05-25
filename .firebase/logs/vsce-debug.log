@@ -3821,3 +3821,4 @@ E0524 03:24:34.746443    8172 watch.go:40] Failed to load config from "c:\\proje
  {"metadata":{"emulator":{"name":"dataconnect"},"message":"E0524 03:25:04.746021    8172 watch.go:40] Failed to load config from \"c:\\\\projects\\\\client-sites\\\\dataconnect\": could not find dataconnect.yaml in `c:\\projects\\client-sites\\dataconnect`\n"}}
 [debug] [2026-05-23T18:25:14.746Z] E0524 03:25:14.746136    8172 watch.go:40] Failed to load config from "c:\\projects\\client-sites\\dataconnect": could not find dataconnect.yaml in `c:\projects\client-sites\dataconnect`
  {"metadata":{"emulator":{"name":"dataconnect"},"message":"E0524 03:25:14.746136    8172 watch.go:40] Failed to load config from \"c:\\\\projects\\\\client-sites\\\\dataconnect\": could not find dataconnect.yaml in `c:\\projects\\client-sites\\dataconnect`\n"}}
+[debug] [2026-05-25T19:09:30.224Z] [Firebase Plugin] Activating Firebase extension.

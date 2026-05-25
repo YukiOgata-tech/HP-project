@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { eventInfo } from "./eventData";
+import { eventInfo } from "../data/eventData";
 
 export function SiteFooter() {
   return (

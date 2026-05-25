@@ -1,11 +1,11 @@
 import Link from "next/link";
 import { Home, SearchX, Ticket } from "lucide-react";
-import { PublicPageFrame } from "@/components/PublicPageFrame";
+import { PublicPageFrame } from "@/components/layout/PublicPageFrame";
 
 export default function NotFound() {
   return (
     <PublicPageFrame>
-      <main className="min-h-screen bg-[#070508] px-3 pb-10 pt-20 text-white sm:px-6 sm:pb-20 sm:pt-36">
+      <main className="min-h-screen bg-[#070508] px-3 pb-10 pt-28 text-white sm:px-6 sm:pb-20 sm:pt-44">
         <section className="mx-auto grid max-w-5xl gap-4 lg:grid-cols-[0.86fr_1.14fr] lg:items-center">
           <div className="relative overflow-hidden rounded-2xl border border-[#d9b84f]/25 bg-white/5 p-4 sm:rounded-[1.6rem] sm:p-8">
             <div className="absolute -right-12 -top-16 size-40 rounded-full bg-[#d9b84f]/10 blur-3xl" />
