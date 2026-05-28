@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import { getPostBySlug, getPublishedPosts } from "@client-sites/lib/cms";
 import Link from "next/link";
 import type { Metadata } from "next";
-import { ChevronLeft, Sparkles } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 
 const SITE_ID = process.env.SITE_ID!;
 
@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = await getPostBySlug(SITE_ID, slug);
   if (!post) return {};
   return {
-    title: post.title,
+    title: `${post.title} | RISPLENDERE BROLETTO`,
     description: post.excerpt || undefined,
     openGraph: {
       title: post.title,
@@ -38,87 +38,95 @@ export default async function NewsPostPage({ params }: Props) {
   if (!post) notFound();
 
   return (
-    <main className="px-5 pb-16 pt-24 md:px-6 md:pb-20 md:pt-32">
-      <article className="mx-auto max-w-5xl">
-        <Link
-          href="/news"
-          className="mb-6 inline-flex items-center gap-2 text-sm font-bold text-[var(--fg-subtle)] transition-colors hover:text-[var(--fg)]"
-        >
-          <ChevronLeft size={16} />
-          お知らせ一覧へ戻る
-        </Link>
+    <main className="bg-[var(--bg)]">
 
-        <div className="overflow-hidden rounded-[2.2rem] border border-[var(--border)] bg-[linear-gradient(135deg,rgba(255,255,255,0.92),rgba(245,236,227,0.88))] shadow-[0_26px_65px_-42px_rgba(44,36,31,0.45)]">
-          <header className="px-6 py-8 md:px-10 md:py-10">
-            <div className="flex flex-wrap items-center gap-2">
-              {post.tags.length > 0 ? (
-                post.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="rounded-full bg-[var(--bg)] px-3 py-1 text-[10px] font-black uppercase tracking-[0.22em] text-[var(--accent)]"
-                  >
-                    {tag}
-                  </span>
-                ))
-              ) : (
-                <span className="inline-flex items-center gap-2 rounded-full bg-[var(--bg)] px-3 py-1 text-[10px] font-black uppercase tracking-[0.22em] text-[var(--accent)]">
-                  <Sparkles size={12} />
-                  Journal
+      {/* ── ページヘッダー ── */}
+      <section className="border-b border-[var(--border)] bg-[var(--bg)] px-6 pb-14 pt-28 md:pb-16 md:pt-36">
+        <div className="mx-auto max-w-3xl">
+          <Link
+            href="/news"
+            className="label-en mb-3 sm:mb-6 inline-flex items-center gap-2 text-[var(--fg-subtle)] transition-colors hover:text-[var(--fg)]"
+          >
+            <ArrowLeft size={12} />
+            お知らせ一覧
+          </Link>
+
+          {post.tags.length > 0 && (
+            <div className="mt-4 flex flex-wrap gap-2">
+              {post.tags.map((tag) => (
+                <span key={tag} className="label-en text-[var(--fg-subtle)]">
+                  {tag}
                 </span>
-              )}
+              ))}
             </div>
+          )}
 
-            <h1 className="mt-5 font-serif text-3xl font-bold leading-tight text-[var(--fg)] md:text-5xl">
-              {post.title}
-            </h1>
+          <h1 className="mt-4 font-serif text-3xl font-bold leading-tight text-[var(--fg)] md:text-4xl lg:text-5xl">
+            {post.title}
+          </h1>
 
-            {post.publishedAt && (
-              <time className="mt-4 block text-sm text-[var(--fg-subtle)]">
-                {new Date(post.publishedAt).toLocaleDateString("ja-JP", {
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                })}
-              </time>
-            )}
+          {post.publishedAt && (
+            <time className="mt-4 block text-xs text-[var(--fg-subtle)]">
+              {new Date(post.publishedAt).toLocaleDateString("ja-JP", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })}
+            </time>
+          )}
+        </div>
+      </section>
 
-            {post.excerpt && (
-              <p className="mt-5 max-w-3xl text-sm leading-7 text-[var(--fg-subtle)] md:text-base md:leading-8">
-                {post.excerpt}
-              </p>
-            )}
-          </header>
+      {/* ── 記事本体 ── */}
+      <article className="px-6 py-14 md:py-20">
+        <div className="mx-auto max-w-3xl">
 
           {post.coverImageUrl && (
-            <div className="px-6 pb-2 md:px-10">
+            <div className="mb-10 overflow-hidden">
               <img
                 src={post.coverImageUrl}
                 alt={post.title}
-                className="h-72 w-full rounded-[1.8rem] object-cover md:h-[28rem]"
+                className="h-64 w-full object-cover md:h-[28rem]"
               />
             </div>
           )}
 
-          <div className="px-6 pb-10 pt-8 md:px-10">
-            <div
-              className="prose prose-lg max-w-none
-                prose-headings:font-serif prose-headings:text-[var(--fg)]
-                prose-h2:text-3xl prose-h2:font-bold
-                prose-h3:text-2xl prose-h3:font-bold
-                prose-p:text-[var(--fg-muted)] prose-p:leading-8
-                prose-li:text-[var(--fg-muted)] prose-li:leading-8
-                prose-a:text-[var(--accent)] prose-a:no-underline hover:prose-a:underline
-                prose-blockquote:rounded-r-2xl prose-blockquote:border-[var(--accent-border)] prose-blockquote:bg-[rgba(255,255,255,0.52)] prose-blockquote:px-5 prose-blockquote:py-2 prose-blockquote:text-[var(--fg-subtle)]
-                prose-img:rounded-[1.4rem]
-                prose-hr:border-[var(--border)]
-                prose-table:overflow-hidden prose-table:rounded-2xl prose-table:border prose-table:border-[var(--border)]
-                prose-th:bg-[var(--bg)] prose-th:text-[var(--fg)]
-                prose-td:text-[var(--fg-muted)]"
-              dangerouslySetInnerHTML={{ __html: post.contentHtml }}
-            />
+          {post.excerpt && (
+            <p className="mb-10 border-l-2 border-[var(--border)] pl-5 text-sm leading-8 text-[var(--fg-muted)] md:text-base md:leading-9">
+              {post.excerpt}
+            </p>
+          )}
+
+          <div
+            className="prose max-w-none
+              prose-headings:font-serif prose-headings:text-[var(--fg)] prose-headings:font-bold
+              prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-4
+              prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3
+              prose-p:text-[var(--fg-muted)] prose-p:leading-8
+              prose-li:text-[var(--fg-muted)] prose-li:leading-8
+              prose-a:text-[var(--fg)] prose-a:underline prose-a:underline-offset-2 hover:prose-a:opacity-60
+              prose-blockquote:border-l-2 prose-blockquote:border-[var(--border)] prose-blockquote:not-italic prose-blockquote:text-[var(--fg-subtle)]
+              prose-img:w-full
+              prose-hr:border-[var(--border)]
+              prose-strong:text-[var(--fg)]
+              prose-table:border prose-table:border-[var(--border)]
+              prose-th:bg-[var(--bg-off)] prose-th:text-[var(--fg)] prose-th:border prose-th:border-[var(--border)]
+              prose-td:text-[var(--fg-muted)] prose-td:border prose-td:border-[var(--border)]"
+            dangerouslySetInnerHTML={{ __html: post.contentHtml }}
+          />
+
+          <div className="mt-14 border-t border-[var(--border)] pt-8">
+            <Link
+              href="/news"
+              className="label-en inline-flex items-center gap-2 text-[var(--fg-subtle)] transition-colors hover:text-[var(--fg)]"
+            >
+              <ArrowLeft size={11} />
+              お知らせ一覧へ戻る
+            </Link>
           </div>
         </div>
       </article>
+
     </main>
   );
 }

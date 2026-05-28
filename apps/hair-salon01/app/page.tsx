@@ -2,567 +2,738 @@ import Link from "next/link";
 import Image from "next/image";
 import { getPublishedPosts } from "@client-sites/lib/cms";
 import {
+  ArrowRight,
   CalendarDays,
   Car,
   ChevronRight,
   Clock,
   CreditCard,
-  Droplets,
-  Leaf,
   MapPin,
-  MessageCircle,
-  Palette,
   Phone,
-  Scissors,
-  Sofa,
-  Sparkles,
 } from "lucide-react";
-import { HeroBg } from "./components/hero-bg";
 import { FadeUp, FadeIn, StaggerList, StaggerItem } from "./components/animated";
+import { HeroSlider } from "./components/hero-slider";
 
+const SITE_ID        = process.env.SITE_ID!;
 const reservationUrl = "https://beauty.hotpepper.jp/slnH000142482/";
-const tel = "025-278-7274";
-const mapUrl =
+const tel            = "025-278-7274";
+const instagramUrl   = "https://www.instagram.com/risplendere_broletto/";
+const mapUrl         =
   "https://www.google.com/maps?q=%E6%96%B0%E6%BD%9F%E7%9C%8C%E6%96%B0%E6%BD%9F%E5%B8%82%E4%B8%AD%E5%A4%AE%E5%8C%BA%E6%9C%AC%E9%A6%AC%E8%B6%8A2%E4%B8%81%E7%9B%AE8%E7%95%AA17%E5%8F%B7&output=embed";
-const mapLink =
+const mapLink        =
   "https://www.google.com/maps/search/?api=1&query=%E6%96%B0%E6%BD%9F%E7%9C%8C%E6%96%B0%E6%BD%9F%E5%B8%82%E4%B8%AD%E5%A4%AE%E5%8C%BA%E6%9C%AC%E9%A6%AC%E8%B6%8A2%E4%B8%81%E7%9B%AE8%E7%95%AA17%E5%8F%B7";
 
-const stylists = [
+/* ── データ ──────────────────────────────────── */
+
+const promises = [
   {
-    name: "Stylist 01",
-    role: "Hair Designer",
-    image: "/images/stylist-01.jpg",
-    text: "髪質・骨格・ライフスタイルに合わせて、毎日扱いやすいスタイルをご提案します。",
+    number: "01",
+    title: "ホームケアを、一緒に育てる。",
+    text: "サロンから帰った後、毎日の髪を作るのはお客様自身のデイリーホームケアです。正しいケア方法をお伝えすることも、美容師の大切な仕事と考えています。",
   },
   {
-    name: "Stylist 02",
-    role: "Care Specialist",
-    image: "/images/stylist-02.jpg",
-    text: "カラーやトリートメント、ヘッドスパまで、髪と頭皮にやさしい施術を大切にしています。",
+    number: "02",
+    title: "髪と頭皮に、優しく。",
+    text: "頭皮をプロテクトしながら施術し、必要な施術後はシャンプー時に化学成分を徹底的に除去。髪と頭皮と体に優しい施術を心がけています。",
+  },
+  {
+    number: "03",
+    title: "来店後も、寄り添い続ける。",
+    text: "来店時だけでなく、その後のヘアスタイル維持までサポート。ヘアドクターとして次回来店までしっかりフォロー・アドバイスを行います。",
   },
 ];
 
-const menus = [
-  { icon: <Scissors size={18} />, en: "Cut", jp: "カット", price: "¥5,400〜" },
-  { icon: <Palette size={18} />, en: "Color", jp: "カラー", price: "要確認" },
-  { icon: <Sparkles size={18} />, en: "Treatment", jp: "トリートメント", price: "要確認" },
-  { icon: <Droplets size={18} />, en: "Head Spa", jp: "ヘッドスパ", price: "要確認" },
+const menuCategories = [
+  { en: "Cut",      jp: "カット",       from: "¥2,000",  note: "+tax" },
+  { en: "Head Spa", jp: "ヘッドスパ",   from: "¥2,500",  note: "+tax" },
+  { en: "Color",    jp: "カラー",       from: "¥4,500",  note: "+tax" },
+  { en: "Perm",     jp: "パーマ",       from: "¥12,000", note: "+tax〜" },
+  { en: "Straight", jp: "ストレート",   from: "¥12,500", note: "+tax" },
+  { en: "Styling",  jp: "スタイリング", from: "¥2,500",  note: "+tax" },
 ];
 
-const features = [
-  {
-    icon: <MessageCircle />,
-    title: "丁寧なカウンセリング",
-    text: "髪質・悩み・普段のスタイリングまで確認し、無理のない提案を行います。",
-  },
-  {
-    icon: <Leaf />,
-    title: "髪にやさしい施術",
-    text: "カラーやケアメニューでは、ダメージに配慮した施術を重視します。",
-  },
-  {
-    icon: <Sofa />,
-    title: "通いやすい空間",
-    text: "セット面4席の落ち着いた規模感で、リラックスして過ごせる雰囲気です。",
-  },
+const specials = [
+  { label: "お直し",         text: "10日以内無料" },
+  { label: "ご紹介割",       text: "本人様・ご友人様 お互いに¥1,000オフ" },
+  { label: "お誕生日割",     text: "誕生日月の技術料 ¥1,000オフ" },
+  { label: "親子カット割",   text: "未就学児のカット 半額" },
+  { label: "個室ルーム",     text: "貸切個室ルーム 無料（要予約）" },
+  { label: "キッズスペース", text: "DVDが見れるキッズスペース完備" },
+  { label: "サイクル割",     text: "前回¥5,000以上の方に適用" },
+  { label: "前髪無料",       text: "来店5週間以内の前髪メンテナンス無料" },
+  { label: "アフターケア",   text: "新規様 2週間以内のカウンセリング無料" },
 ];
 
-const styles = [
-  "/images/style-01.jpg",
-  "/images/style-02.jpg",
-  "/images/style-03.jpg",
-  "/images/style-04.jpg",
+const galleryImages = [
+  { src: "/images/style-01.jpg", alt: "ヘアスタイル例 1" },
+  { src: "/images/style-02.jpg", alt: "ヘアスタイル例 2" },
+  { src: "/images/style-03.jpg", alt: "ヘアスタイル例 3" },
+  { src: "/images/style-04.jpg", alt: "ヘアスタイル例 4" },
 ];
 
-const SITE_ID = process.env.SITE_ID!;
+/* ══════════════════════════════════════════════
+   PAGE
+══════════════════════════════════════════════ */
 
 export default async function Home() {
   const latestPosts = await getPublishedPosts(SITE_ID, 3);
 
   return (
-    <main className="min-h-screen">
+    <main>
 
-      {/* ── Hero ── */}
-      <section className="relative overflow-hidden px-5 pb-10 pt-20 md:pb-16 md:pt-28">
-        <HeroBg />
+      {/* ════════════════════════════════════════
+          HERO — スライダー + ブランドパネル
+          モバイル: 全画面スライダー + ブランド上部オーバーレイ + テキスト下部
+          デスクトップ: 左スライダー(62%) + 右ブランドパネル(38%)
+      ════════════════════════════════════════ */}
+      <section className="flex flex-col md:min-h-[67svh] md:flex-row mt-10">
 
-        <div className="relative mx-auto max-w-7xl">
-          <div className="md:grid md:grid-cols-[0.95fr_1.05fr] md:items-center md:gap-10">
+        {/* ─ 左: スライダーエリア ─ */}
+        {/*
+          モバイル: min-h-svh で全画面確保 → ヘッダー上部・テキスト下部が重ならない
+          デスクトップ: md:min-h-0 で flex-row の高さに従う
+        */}
+        <div className="relative min-h-[67svh] flex-1 overflow-hidden md:min-h-0">
+
+          {/* スライダー背景 */}
+          <HeroSlider />
+
+          {/* テキストエリア
+              上部: pt-[57px] でヘッダー分を確保し flex で縦中央〜下寄せ
+              下部: pb-24 でスライダーUIとの重なりを防ぐ */}
+          <div className="absolute inset-0 z-10 flex flex-col justify-end px-6 pb-24 pt-12 md:justify-end md:px-10 md:pb-20">
             <FadeUp>
-              <p className="mb-3 inline-flex items-center gap-2 rounded-full border border-[var(--accent-border)] bg-[var(--card)] px-3 py-1.5 text-xs font-bold text-[var(--accent)]">
-                <Sparkles size={13} />
-                新潟市中央区本馬越の美容室
+              {/* ラベル */}
+              <p className="label-en">
+                <span className="text-hl--sm">Risplendere Broletto — 新潟市中央区</span>
               </p>
 
-              <h1 className="text-3xl font-black leading-tight tracking-tight sm:text-4xl md:text-6xl lg:text-7xl">
-                髪が整う。
+              {/* メインコピー */}
+              <h1 className="mt-1 sm:mt-3 text-3xl font-bold leading-[1.75] tracking-tight sm:text-4xl md:text-5xl lg:text-6xl">
+                <span className="text-hl">キラキラ輝く、</span>
                 <br />
-                <span className="text-2xl sm:text-3xl md:text-5xl">気分まで、軽くなる。</span>
+                <span className="text-hl">小さな場所。</span>
               </h1>
 
-              <p className="mt-3 text-sm leading-7 text-[var(--fg-hero)] md:mt-5 md:max-w-xl md:text-base md:leading-8">
-                RISPLENDERE BROLETTOは、髪にやさしく、一人ひとりの雰囲気に寄り添う小さな美容室。
-                カット・カラー・ケアを通して、自然に輝くヘアスタイルへ導きます。
+              {/* サブコピー */}
+              <p className="mt-4 max-w-md text-sm leading-loose md:text-base">
+                <span className="text-hl--sm">
+                  新潟市中央区本馬越の、女性スタッフだけの小さなサロン。
+                  丁寧なカウンセリングで、あなたの髪と日常に寄り添います。
+                </span>
               </p>
 
-              <div className="mt-5 flex flex-col gap-2.5 sm:flex-row md:mt-7">
+              {/* CTAボタン */}
+              <div className="mt-6 flex flex-col gap-3 sm:flex-row">
                 <a
                   href={reservationUrl}
-                  className="inline-flex items-center justify-center gap-2 rounded-full bg-[var(--cta)] px-6 py-3 text-sm font-bold text-white shadow-xl shadow-black/10 transition-all duration-200 hover:-translate-y-0.5 hover:brightness-110 hover:shadow-2xl active:scale-95"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 bg-white px-7 py-3.5 text-sm font-black text-black transition-opacity hover:opacity-80 active:scale-95"
                 >
                   Hot Pepperで予約
-                  <ChevronRight size={16} />
+                  <ArrowRight size={14} />
                 </a>
                 <a
                   href={`tel:${tel}`}
-                  className="inline-flex items-center justify-center gap-2 rounded-full border border-[var(--border)] bg-[var(--card)] px-6 py-3 text-sm font-bold transition-all duration-200 hover:-translate-y-0.5 hover:border-[var(--accent)] hover:bg-[var(--card-solid)]"
+                  className="inline-flex items-center justify-center gap-2 border border-white/30 bg-black/30 px-7 py-3.5 text-sm font-bold text-white backdrop-blur-sm transition-all hover:border-white/60 hover:bg-black/50 active:scale-95"
                 >
-                  <Phone size={15} />
-                  電話する
+                  <Phone size={14} />
+                  {tel}
                 </a>
               </div>
+
+              {/* 営業時間 */}
+              <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-1.5">
+                {[
+                  "平日 9:15〜18:00",
+                  "日祝 10:00〜17:00",
+                  "月曜・第3日曜 定休",
+                ].map((t) => (
+                  <span key={t} className="text-hl--sm text-[11px] font-bold">{t}</span>
+                ))}
+              </div>
             </FadeUp>
+          </div>
+        </div>
 
-            {/* モバイル: 1枚 */}
-            <FadeIn delay={0.15} className="mt-6 overflow-hidden rounded-3xl shadow-xl shadow-black/15 md:hidden">
-              <Image
-                src="/images/hero-01.jpg"
-                alt="RISPLENDERE BROLETTOのサロンイメージ"
-                width={720}
-                height={480}
-                className="h-56 w-full object-cover sm:h-72"
-                priority
-              />
-            </FadeIn>
+        {/* ─ 右: ブランドパネル (デスクトップのみ) ─ */}
+        <div className="hidden flex-col justify-between border-l border-[var(--border)] bg-[var(--bg)] px-10 py-14 md:flex md:w-[45%] lg:px-14">
 
-            {/* デスクトップ: 5カラムグリッド */}
-            <FadeIn delay={0.15} className="hidden grid-cols-5 gap-3 md:grid">
-              <div className="col-span-3 overflow-hidden rounded-[2.5rem] shadow-2xl shadow-black/20">
+          {/* 上部: カテゴリラベル */}
+          <div>
+            <p className="label-en text-[var(--fg-subtle)]">Hair Salon</p>
+            <div className="mt-4 h-px w-10 bg-[var(--border)]" />
+          </div>
+
+          {/* 中部: ブランド名 */}
+          <div>
+            <p className="label-en mb-5 text-(--fg-subtle)">Risplendere</p>
+
+            {/* 大文字 "B" */}
+            <p className="font-serif text-[6rem] font-bold leading-none text-(--fg) lg:text-[8rem]">
+              B
+            </p>
+
+            {/* "ROLETTO" */}
+            <p className="-mt-1 font-serif text-2xl font-bold uppercase tracking-[0.5em] text-[var(--fg-muted)] lg:text-[1.75rem]">
+              ROLETTO
+            </p>
+
+            {/* デコレーションライン */}
+            <div className="mt-8 space-y-1.5">
+              <div className="h-px w-full bg-[var(--border)]" />
+              <div className="h-px w-2/3 bg-[var(--border-light)]" />
+            </div>
+
+            {/* キャッチコピー */}
+            <p className="mt-6 text-xs leading-7 text-[var(--fg-subtle)]">
+              女性スタッフだけの<br />
+              小さくて大切な場所
+            </p>
+          </div>
+
+          {/* 下部: 場所情報 */}
+          <div>
+            <div className="mb-5 h-px w-full bg-[var(--border)]" />
+            <p className="label-en text-[var(--fg-subtle)]">Niigata / Japan</p>
+            <p className="mt-2.5 text-xs leading-6 text-[var(--fg-muted)]">
+              新潟市中央区本馬越<br />
+              2丁目8番17号
+            </p>
+          </div>
+        </div>
+
+      </section>
+
+      {/* ════════════════════════════════════════
+          NEWS STRIP — 最新お知らせ
+      ════════════════════════════════════════ */}
+      {latestPosts.length > 0 && (
+        <section className="border-b border-[var(--border)] bg-[var(--bg)]">
+          <div className="mx-auto max-w-350">
+
+            {/* ヘッダー行 */}
+            <div className="flex items-center justify-between border-b border-[var(--border-light)] px-6 py-3">
+              <p className="label-en text-[var(--fg-subtle)]">最新のお知らせ</p>
+              <Link
+                href="/news"
+                className="label-en inline-flex items-center gap-1.5 text-[var(--fg-subtle)] transition-colors hover:text-[var(--fg)]"
+              >
+                すべて見る
+                <ArrowRight size={10} />
+              </Link>
+            </div>
+
+            {/* 記事リスト */}
+            <ul className="divide-y divide-[var(--border-light)]">
+              {latestPosts.map((post) => (
+                <li key={post.id}>
+                  <Link
+                    href={`/news/${post.slug}`}
+                    className="group flex items-center gap-4 px-6 py-3.5 transition-colors hover:bg-neutral-200 dark:hover:bg-neutral-800"
+                  >
+                    {post.publishedAt && (
+                      <time className="label-en w-20 shrink-0 text-[var(--fg-subtle)]">
+                        {new Date(post.publishedAt).toLocaleDateString("ja-JP", {
+                          month: "2-digit",
+                          day:   "2-digit",
+                        }).replace("/", ".")}
+                      </time>
+                    )}
+                    <p className="min-w-0 flex-1 truncate text-sm sm:text-lg font-bold text-[var(--fg)]">
+                      {post.title}
+                    </p>
+                    <ArrowRight
+                      size={12}
+                      className="shrink-0 text-[var(--fg-subtle)] transition-transform group-hover:translate-x-1"
+                    />
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      )}
+
+      {/* ════════════════════════════════════════
+          CONCEPT — salon-01 / salon-02 使用
+          モバイル: salon-01フル幅 → テキスト
+          デスクトップ: 左:2枚非対称グリッド / 右:テキスト
+      ════════════════════════════════════════ */}
+      <section id="concept" className="bg-[var(--bg-off)]">
+
+        {/* ─ モバイル: salon-01 フル幅ヘッダー画像 ─ */}
+        <div className="relative h-56 overflow-hidden sm:h-72 md:hidden">
+          <Image
+            src="/images/salon-01.jpg"
+            alt="RISPLENDERE BROLETTOの店内"
+            fill
+            sizes="100vw"
+            className="object-cover object-center"
+            priority
+          />
+          {/* 下からのグラデーション */}
+          <div className="absolute inset-0 bg-linear-to-t from-[var(--bg-off)] via-transparent to-transparent" />
+        </div>
+
+        {/* ─ コンテンツ本体 ─ */}
+        <div className="mx-auto max-w-350 px-6 pb-16 pt-8 md:grid md:grid-cols-[1fr_1.1fr] md:items-center md:gap-12 md:px-14 md:py-24 lg:gap-20 lg:py-32">
+
+          {/* 左: 画像グリッド (デスクトップのみ) */}
+          <FadeIn className="hidden md:block">
+            <div className="grid grid-cols-[1.15fr_0.85fr] grid-rows-[auto_auto] gap-3">
+
+              {/* salon-01: 左全高 */}
+              <div className="row-span-2 overflow-hidden">
                 <Image
-                  src="/images/hero-01.jpg"
-                  alt="RISPLENDERE BROLETTOのサロンイメージ"
+                  src="/images/salon-01.jpg"
+                  alt="RISPLENDERE BROLETTOの店内"
                   width={720}
-                  height={920}
-                  className="h-115 w-full object-cover"
+                  height={960}
+                  sizes="(min-width: 1024px) 30vw, 40vw"
+                  className="h-full w-full object-cover"
+                  style={{ maxHeight: "520px" }}
                   priority
                 />
               </div>
-              <div className="col-span-2 flex flex-col gap-3 pt-8">
-                <div className="overflow-hidden rounded-4rem shadow-xl shadow-black/10">
-                  <Image
-                    src="/images/hero-02.jpg"
-                    alt="ヘアスタイルイメージ"
-                    width={420}
-                    height={420}
-                    className="h-48 w-full object-cover"
-                  />
-                </div>
-                <div className="rounded-4xl bg-[var(--card-solid)] p-4 shadow-xl shadow-black/10">
-                  <p className="text-xs font-bold text-[var(--accent-light)]">Cut price</p>
-                  <p className="mt-0.5 text-2xl font-black">¥5,400</p>
-                  <p className="mt-2 text-xs leading-5 text-[var(--fg-muted)]">
-                    セット面4席。落ち着いた雰囲気のプライベートサロン。
-                  </p>
+
+              {/* salon-02: 右上、下にオフセット */}
+              <div className="mt-12 overflow-hidden">
+                <Image
+                  src="/images/salon-02.jpg"
+                  alt="RISPLENDERE BROLETTOの施術スペース"
+                  width={480}
+                  height={360}
+                  sizes="(min-width: 1024px) 18vw, 25vw"
+                  className="h-48 w-full object-cover lg:h-56"
+                />
+              </div>
+
+              {/* CSSラインアクセント */}
+              <div className="flex items-end pb-3 pl-3">
+                <div className="flex flex-col gap-1.5">
+                  <div className="h-px w-10 bg-[var(--border)]" />
+                  <div className="h-px w-6 bg-[var(--border-light)]" />
                 </div>
               </div>
-            </FadeIn>
-          </div>
-        </div>
-      </section>
-
-      {/* ── Concept ── */}
-      <section id="concept" className="bg-[var(--bg-section)] px-5 py-10 md:py-16">
-        <div className="mx-auto max-w-7xl">
-          <FadeIn className="mb-6 overflow-hidden rounded-3xl md:hidden">
-            <Image
-              src="/images/salon-01.jpg"
-              alt="店内写真"
-              width={800}
-              height={480}
-              className="h-48 w-full object-cover sm:h-56"
-              priority
-            />
+            </div>
           </FadeIn>
 
-          <div className="md:grid md:grid-cols-[0.8fr_1.2fr] md:items-center md:gap-10">
-            <FadeIn className="hidden grid-cols-2 gap-3 md:grid">
-              <Image
-                src="/images/salon-01.jpg"
-                alt="店内写真"
-                width={520}
-                height={680}
-                className="h-80 rounded-4xl object-cover"
-                priority
-              />
-              <Image
-                src="/images/salon-02.jpg"
-                alt="施術スペース"
-                width={520}
-                height={680}
-                className="mt-12 h-80 rounded-4xl object-cover"
-              />
-            </FadeIn>
+          {/* 右: テキスト */}
+          <FadeUp delay={0.1}>
+            <span className="section-rule" />
+            <p className="label-section">Concept</p>
 
-            <FadeUp delay={0.1}>
-              <p className="text-xs font-black uppercase tracking-[0.35em] text-[var(--accent)]">
-                Concept
-              </p>
-              <h2 className="mt-2 text-2xl font-black leading-tight md:text-4xl lg:text-5xl">
-                キラキラ輝く、
-                <br className="hidden sm:block" />
-                小さな場所。
-              </h2>
-              <p className="mt-4 text-sm leading-6 text-[var(--fg-subtle)] md:text-base md:leading-8">
-                RISPLENDERE BROLETTOは、イタリア語で「キラキラ輝く小さな場所」という意味。
-                髪を綺麗にするだけでなく、来店後の気分まで明るくなるような時間を大切にしています。
-              </p>
-              <p className="mt-3 text-sm leading-7 text-[var(--fg-subtle)] md:text-base md:leading-8">
-                大型店の慌ただしさではなく、丁寧なカウンセリングと落ち着いた空間で、
-                一人ひとりに似合うスタイルを一緒に考えます。
-              </p>
-            </FadeUp>
-          </div>
+            <h2 className="mt-5 text-3xl font-black leading-tight text-[var(--fg)] md:text-4xl lg:text-5xl">
+              ブロレットに来ると、<br />
+              キラキラ輝いて<br />
+              帰れる場所。
+            </h2>
+
+            <p className="mt-6 text-sm leading-8 text-[var(--fg-subtle)] md:text-base md:leading-9">
+              サロン名「RISPLENDERE BROLETTO」はイタリア語で
+              「キラキラ輝く小さな場所」という意味。ブロレットに訪れた方が
+              輝いて帰れるよう、願いを込めてつけられた名前です。
+            </p>
+            <p className="mt-4 text-sm leading-8 text-[var(--fg-subtle)] md:text-base md:leading-9">
+              女性スタッフだけの小さなサロン。細やかな気配りで、
+              すべてのお客様のご要望に応えられるサロンを目指しています。
+            </p>
+
+            {/* 言葉の意味ブロック */}
+            <div className="mt-8 grid grid-cols-2 gap-3">
+              <div className="border border-[var(--border)] bg-[var(--card)] p-4">
+                <p className="label-en text-[var(--fg-subtle)]">Risplendere</p>
+                <p className="mt-2 text-xl font-black text-[var(--fg)]">輝く</p>
+                <p className="mt-1 text-xs text-[var(--fg-subtle)]">キラキラ輝く</p>
+              </div>
+              <div className="border border-[var(--border)] bg-[var(--card)] p-4">
+                <p className="label-en text-[var(--fg-subtle)]">Broletto</p>
+                <p className="mt-2 text-xl font-black text-[var(--fg)]">場所</p>
+                <p className="mt-1 text-xs text-[var(--fg-subtle)]">小さな場所</p>
+              </div>
+            </div>
+          </FadeUp>
         </div>
       </section>
 
-      {/* ── Feature ── */}
-      <section className="px-5 py-10 md:py-16">
-        <div className="mx-auto max-w-7xl">
+      {/* ════════════════════════════════════════
+          PROMISE
+      ════════════════════════════════════════ */}
+      <section className="bg-[var(--bg-dark)] px-6 py-16 text-white md:py-24 lg:py-32">
+        <div className="mx-auto max-w-[1400px]">
           <FadeUp>
-            <p className="text-xs font-black uppercase tracking-[0.35em] text-[var(--accent)]">
-              Feature
-            </p>
-            <h2 className="mt-2 text-2xl font-black md:text-4xl">
-              BROLETTOが大切にしていること
+            <span className="section-rule section-rule--white" />
+            <p className="label-en text-white/35">Promise</p>
+            <h2 className="mt-5 text-2xl font-black text-white md:text-3xl lg:text-4xl">
+              ブロレットからの、3つのお約束。
             </h2>
           </FadeUp>
 
-          <StaggerList className="mt-6 grid gap-3 md:grid-cols-3">
-            {features.map(({ icon, title, text }) => (
-              <StaggerItem key={title}>
-                <article className="h-full rounded-2xl border border-[var(--border)] bg-[var(--card)] p-5 shadow-sm transition-all duration-200 hover:-translate-y-1.5 hover:border-[var(--accent-border)] hover:shadow-md md:p-6">
-                  <div className="mb-3 flex items-center gap-3">
-                    <div className="text-[var(--accent)] [&_svg]:size-5">{icon}</div>
-                    <h3 className="text-base font-black md:text-lg">{title}</h3>
+          <StaggerList className="mt-10 grid gap-4 md:grid-cols-3 md:gap-5 lg:mt-14">
+            {promises.map(({ number, title, text }) => (
+              <StaggerItem key={number}>
+                <article
+                  className="promise-card relative h-full"
+                  data-number={number}
+                >
+                  <div className="relative z-10 flex h-full flex-col">
+                    <div className="flex items-center justify-between">
+                      <p className="label-en text-white/30">{number}</p>
+                      <p className="label-en text-white/20">Promise</p>
+                    </div>
+                    <h3 className="mt-4 text-lg font-black text-white md:text-xl">
+                      {title}
+                    </h3>
+                    <p className="mt-3 flex-1 text-sm leading-7 text-white/55">
+                      {text}
+                    </p>
                   </div>
-                  <p className="mt-2 text-xs leading-6 text-[var(--fg-muted)] md:text-sm md:leading-7">{text}</p>
                 </article>
               </StaggerItem>
             ))}
           </StaggerList>
+
+          <FadeUp className="mt-10 flex justify-center">
+            <Link
+              href="/salon"
+              className="label-en inline-flex items-center gap-2 border border-white/20 px-7 py-3.5 text-white/55 transition-all hover:border-white/50 hover:text-white"
+            >
+              サロン・会社情報を見る
+              <ArrowRight size={12} />
+            </Link>
+          </FadeUp>
         </div>
       </section>
 
-      {/* ── Stylists ── */}
-      <section id="stylists" className="bg-[var(--bg-dark)] px-5 py-10 text-white md:py-16">
-        <div className="mx-auto max-w-7xl">
-          <FadeUp>
-            <div className="mb-6 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
-              <div>
-                <p className="text-xs font-black uppercase tracking-[0.35em] text-[var(--accent-warm)]">
-                  Stylists
-                </p>
-                <h2 className="mt-2 text-3xl font-black md:text-4xl">美容師紹介</h2>
-              </div>
-              <p className="text-sm leading-6 text-white/70 md:max-w-md">
-                お客様の雰囲気や日常に合うヘアを、丁寧な対話から提案します。
-              </p>
+      {/* ════════════════════════════════════════
+          MENU OVERVIEW
+      ════════════════════════════════════════ */}
+      <section id="menu" className="bg-[var(--bg)] px-6 py-16 md:py-24 lg:py-32">
+        <div className="mx-auto max-w-[1400px]">
+
+          <FadeUp className="flex items-end justify-between gap-4">
+            <div>
+              <span className="section-rule" />
+              <p className="label-section">Menu</p>
+              <h2 className="mt-5 text-2xl font-black text-[var(--fg)] md:text-3xl lg:text-4xl">
+                メニュー
+              </h2>
             </div>
+            <Link
+              href="/menu"
+              className="label-en hidden shrink-0 items-center gap-2 border border-[var(--border)] px-5 py-2.5 text-[var(--fg-subtle)] transition-all hover:border-[var(--fg)] hover:text-[var(--fg)] sm:inline-flex"
+            >
+              全メニューを見る
+              <ArrowRight size={12} />
+            </Link>
           </FadeUp>
 
-          <StaggerList className="grid gap-4 md:grid-cols-2">
-            {stylists.map((stylist) => (
-              <StaggerItem key={stylist.name}>
-                <article className="flex overflow-hidden rounded-2xl bg-[var(--bg-section)] text-[var(--fg)] transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/20 md:grid md:grid-cols-[0.9fr_1.1fr] md:rounded-[2rem]">
-                  <Image
-                    src={stylist.image}
-                    alt={`${stylist.name}の写真`}
-                    width={520}
-                    height={640}
-                    className="h-32 w-28 shrink-0 object-cover sm:h-40 sm:w-36 md:h-full md:w-full"
-                  />
-                  <div className="flex flex-col justify-center p-4 md:p-6">
-                    <p className="text-xs font-bold uppercase tracking-[0.25em] text-[var(--accent)]">
-                      {stylist.role}
-                    </p>
-                    <h3 className="mt-1.5 text-lg font-black md:text-2xl">{stylist.name}</h3>
-                    <p className="mt-2 text-xs leading-6 text-[var(--fg-muted)] md:text-sm md:leading-7">
-                      {stylist.text}
-                    </p>
-                    <a
-                      href={reservationUrl}
-                      className="mt-3 inline-flex items-center gap-1.5 self-start rounded-full bg-[var(--cta)] px-4 py-2 text-xs font-bold text-white transition-all duration-200 hover:-translate-y-0.5 hover:brightness-110 active:scale-95 md:mt-5 md:px-5 md:py-2.5 md:text-sm"
-                    >
-                      指名予約を見る
-                      <ChevronRight size={13} />
-                    </a>
+          <StaggerList className="mt-8 grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4 lg:mt-12">
+            {menuCategories.map(({ en, jp, from, note }) => (
+              <StaggerItem key={en}>
+                <Link
+                  href="/menu"
+                  className="group block border border-[var(--border)] bg-[var(--card)] p-5 transition-all hover:border-[var(--fg)] md:p-7"
+                >
+                  <p className="label-en text-[var(--fg-subtle)] transition-colors group-hover:text-[var(--fg)]">
+                    {en}
+                  </p>
+                  <p className="mt-2 text-base font-black text-[var(--fg)] md:text-xl">
+                    {jp}
+                  </p>
+                  <div className="mt-4 h-px w-full bg-[var(--border-light)]" />
+                  <div className="mt-4 flex items-baseline gap-1">
+                    <span className="text-xs text-[var(--fg-subtle)]">from</span>
+                    <span className="text-lg font-black text-[var(--fg)] md:text-2xl">
+                      {from}
+                    </span>
+                    <span className="text-[10px] text-[var(--fg-subtle)]">{note}</span>
                   </div>
-                </article>
+                </Link>
+              </StaggerItem>
+            ))}
+          </StaggerList>
+
+          <FadeUp className="mt-6 sm:hidden">
+            <Link
+              href="/menu"
+              className="label-en flex w-full items-center justify-center gap-2 border border-[var(--border)] py-3.5 text-[var(--fg-subtle)] transition-all hover:border-[var(--fg)] hover:text-[var(--fg)]"
+            >
+              全メニューを見る
+              <ArrowRight size={12} />
+            </Link>
+          </FadeUp>
+        </div>
+      </section>
+
+      {/* ════════════════════════════════════════
+          SPECIAL SERVICES
+      ════════════════════════════════════════ */}
+      <section className="bg-[var(--bg-off)] px-6 py-16 md:py-24 lg:py-32">
+        <div className="mx-auto max-w-[1400px]">
+          <FadeUp>
+            <span className="section-rule" />
+            <p className="label-section">Special Service</p>
+            <h2 className="mt-5 text-2xl font-black text-[var(--fg)] md:text-3xl lg:text-4xl">
+              ブロレットだからできる、<br className="sm:hidden" />
+              特別なこと。
+            </h2>
+          </FadeUp>
+
+          <StaggerList className="mt-8 grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3 md:gap-4 lg:mt-12">
+            {specials.map(({ label, text }) => (
+              <StaggerItem key={label}>
+                <div className="border border-[var(--border)] bg-[var(--card)] p-5 md:p-6">
+                  <p className="label-en text-[var(--fg-subtle)]">{label}</p>
+                  <p className="mt-3 text-sm font-bold text-[var(--fg)] leading-6">
+                    {text}
+                  </p>
+                </div>
               </StaggerItem>
             ))}
           </StaggerList>
         </div>
       </section>
 
-      {/* ── Style Gallery ── */}
-      <section className="bg-[var(--bg-section)] px-5 py-10 md:py-16">
-        <div className="mx-auto max-w-7xl">
+      {/* ════════════════════════════════════════
+          GALLERY
+      ════════════════════════════════════════ */}
+      <section className="bg-[var(--bg-dark)] px-6 py-16 md:py-24 lg:py-32">
+        <div className="mx-auto max-w-[1400px]">
           <FadeUp>
-            <p className="text-xs font-black uppercase tracking-[0.35em] text-[var(--accent)]">
-              Hair Style
-            </p>
-            <h2 className="mt-2 text-3xl font-black md:text-4xl">スタイルギャラリー</h2>
+            <span className="section-rule section-rule--white" />
+            <p className="label-en text-white/35">Gallery</p>
+            <h2 className="mt-5 text-2xl font-black text-white md:text-3xl lg:text-4xl">
+              スタイルギャラリー
+            </h2>
           </FadeUp>
 
-          <StaggerList className="mt-5 grid grid-cols-2 gap-2.5 md:grid-cols-4 md:gap-3">
-            {styles.map((src, index) => (
-              <StaggerItem key={src} className="overflow-hidden rounded-xl md:rounded-2xl">
-                <Image
-                  src={src}
-                  alt={`ヘアスタイル例 ${index + 1}`}
-                  width={420}
-                  height={560}
-                  className="h-36 w-full object-cover transition-transform duration-500 hover:scale-105 sm:h-48 md:h-64"
-                />
+          <StaggerList className="mt-8 grid grid-cols-2 gap-2 md:grid-cols-4 md:gap-3 lg:mt-12">
+            {galleryImages.map(({ src, alt }) => (
+              <StaggerItem key={src}>
+                <div className="overflow-hidden">
+                  <Image
+                    src={src}
+                    alt={alt}
+                    width={480}
+                    height={640}
+                    sizes="(min-width: 768px) 25vw, 50vw"
+                    className="h-48 w-full object-cover transition-transform duration-700 hover:scale-105 sm:h-60 md:h-72"
+                  />
+                </div>
               </StaggerItem>
             ))}
           </StaggerList>
+
+          <FadeUp delay={0.2} className="mt-8 text-center">
+            <a
+              href={reservationUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="label-en inline-flex items-center gap-2 border border-white/20 px-7 py-3.5 text-white/55 transition-all hover:border-white/50 hover:text-white"
+            >
+              Hot Pepperで施術事例を見る
+              <ArrowRight size={12} />
+            </a>
+          </FadeUp>
         </div>
       </section>
 
-      {/* ── Menu ── */}
-      <section id="menu" className="px-5 py-10 md:py-16">
-        <div className="mx-auto max-w-3xl">
-          <FadeUp>
-            <p className="text-center text-xs font-black uppercase tracking-[0.35em] text-[var(--accent)]">
-              Menu
-            </p>
-            <h2 className="mt-2 text-center text-3xl font-black md:text-4xl">メニュー</h2>
+      {/* ════════════════════════════════════════
+          JOURNAL
+      ════════════════════════════════════════ */}
+      <section className="bg-[var(--bg)] px-6 py-16 md:py-24 lg:py-32">
+        <div className="mx-auto max-w-[1400px]">
+          <FadeUp className="flex items-end justify-between gap-4">
+            <div>
+              <span className="section-rule" />
+              <p className="label-section">Journal</p>
+              <h2 className="mt-5 text-2xl font-black text-[var(--fg)] md:text-3xl">
+                サロンからのお知らせ
+              </h2>
+            </div>
+            <Link
+              href="/news"
+              className="label-en hidden shrink-0 items-center gap-2 border border-[var(--border)] px-5 py-2.5 text-[var(--fg-subtle)] transition-all hover:border-[var(--fg)] hover:text-[var(--fg)] sm:inline-flex"
+            >
+              一覧を見る
+              <ArrowRight size={12} />
+            </Link>
           </FadeUp>
 
-          <FadeUp delay={0.1} className="mt-6 overflow-hidden rounded-2xl bg-[var(--bg-section)] shadow-xl shadow-black/5">
-            {menus.map(({ icon, en, jp, price }) => (
-              <div
-                key={en}
-                className="flex items-center gap-3 border-b border-[var(--border-light)] px-4 py-3.5 transition-colors duration-150 last:border-b-0 hover:bg-[var(--card)] md:px-5 md:py-4"
-              >
-                <div className="text-[var(--accent)]">{icon}</div>
-                <p className="w-20 text-base font-black md:w-28 md:text-xl">{en}</p>
-                <p className="flex-1 text-xs text-[var(--fg-muted)] md:text-sm">{jp}</p>
-                <p className="text-xs font-black text-[var(--accent-light)] md:text-sm">{price}</p>
-              </div>
-            ))}
-          </FadeUp>
-
-          <p className="mt-3 text-center text-xs text-[var(--fg-muted)]">
-            詳細料金・クーポン・空席状況はHot Pepper Beautyをご確認ください。
-          </p>
-        </div>
-      </section>
-
-      {/* ── News Guide ── */}
-      <section className="bg-[var(--bg-section)] px-5 py-10 md:py-16">
-        <div className="mx-auto max-w-7xl">
-          <div className="overflow-hidden rounded-4xl border border-[var(--border)] bg-[linear-gradient(135deg,rgba(255,255,255,0.92),rgba(245,236,227,0.92))] shadow-[0_24px_60px_-40px_rgba(44,36,31,0.45)]">
-            <div className="grid gap-8 px-6 py-7 md:grid-cols-[0.85fr_1.15fr] md:px-8 md:py-9">
-              <FadeUp>
-                <p className="text-xs font-black uppercase tracking-[0.35em] text-[var(--accent)]">
-                  Journal
-                </p>
-                <h2 className="mt-2 text-3xl font-black leading-tight md:text-4xl">
-                  サロンのお知らせや
-                  <br />
-                  日々のことをまとめています。
-                </h2>
-                <p className="mt-4 max-w-md text-sm leading-7 text-[var(--fg-subtle)] md:text-base md:leading-8">
-                  営業日のお知らせ、ヘアケアの話題、新しいスタイル提案など、
-                  BROLETTOからの発信を一覧でご覧いただけます。
-                </p>
-                <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+          {latestPosts.length === 0 ? (
+            <FadeIn className="mt-10 border border-dashed border-[var(--border)] px-6 py-14 text-center">
+              <p className="text-sm text-[var(--fg-subtle)]">
+                現在、公開中の記事はありません。
+              </p>
+            </FadeIn>
+          ) : (
+            <StaggerList className="mt-8 divide-y divide-[var(--border-light)] lg:mt-12">
+              {latestPosts.map((post, index) => (
+                <StaggerItem key={post.id}>
                   <Link
-                    href="/news"
-                    className="inline-flex items-center justify-center gap-2 rounded-full bg-[var(--cta)] px-6 py-3 text-sm font-bold text-white transition-all duration-200 hover:-translate-y-0.5 hover:brightness-110"
+                    href={`/news/${post.slug}`}
+                    className="group flex flex-col gap-4 py-6 transition-opacity hover:opacity-60 sm:flex-row sm:items-start"
                   >
-                    ブログ一覧を見る
-                    <ChevronRight size={16} />
+                    {/* サムネイル */}
+                    <div className="h-24 w-full shrink-0 overflow-hidden sm:h-20 sm:w-32">
+                      {post.coverImageUrl ? (
+                        <img
+                          src={post.coverImageUrl}
+                          alt={post.title}
+                          className="h-full w-full object-cover"
+                        />
+                      ) : (
+                        <div className="h-full w-full bg-[var(--bg-off)]" />
+                      )}
+                    </div>
+
+                    {/* テキスト */}
+                    <div className="min-w-0 flex-1">
+                      <div className="flex flex-wrap items-center gap-3">
+                        {index === 0 && (
+                          <span className="label-en text-[var(--fg-subtle)]">Latest</span>
+                        )}
+                        {post.publishedAt && (
+                          <time className="text-xs text-[var(--fg-subtle)]">
+                            {new Date(post.publishedAt).toLocaleDateString("ja-JP", {
+                              year: "numeric",
+                              month: "long",
+                              day: "numeric",
+                            })}
+                          </time>
+                        )}
+                      </div>
+                      <h3 className="mt-2 text-base font-black text-[var(--fg)] md:text-lg">
+                        {post.title}
+                      </h3>
+                      <p className="mt-1.5 line-clamp-2 text-sm leading-6 text-[var(--fg-subtle)]">
+                        {post.excerpt ?? "詳細は記事ページでご覧ください。"}
+                      </p>
+                    </div>
+
+                    <ChevronRight
+                      size={16}
+                      className="hidden shrink-0 self-center text-[var(--fg-subtle)] transition-transform group-hover:translate-x-1 sm:block"
+                    />
                   </Link>
+                </StaggerItem>
+              ))}
+            </StaggerList>
+          )}
+
+          <FadeUp className="mt-6 sm:hidden">
+            <Link
+              href="/news"
+              className="label-en flex w-full items-center justify-center gap-2 border border-[var(--border)] py-3.5 text-[var(--fg-subtle)] transition-all hover:border-[var(--fg)] hover:text-[var(--fg)]"
+            >
+              一覧を見る
+              <ArrowRight size={12} />
+            </Link>
+          </FadeUp>
+        </div>
+      </section>
+
+      {/* ════════════════════════════════════════
+          ACCESS
+      ════════════════════════════════════════ */}
+      <section id="access" className="bg-[var(--bg-dark)] px-6 py-16 text-white md:py-24 lg:py-32">
+        <div className="mx-auto max-w-[1400px]">
+          <FadeUp>
+            <span className="section-rule section-rule--white" />
+            <p className="label-en text-white/35">Access</p>
+            <h2 className="mt-5 text-2xl font-black text-white md:text-3xl lg:text-4xl">
+              店舗情報
+            </h2>
+          </FadeUp>
+
+          <div className="mt-10 grid gap-10 md:grid-cols-2 lg:mt-14 lg:gap-16">
+
+            {/* 情報 */}
+            <FadeIn>
+              <dl className="divide-y divide-white/8">
+                {[
+                  { icon: <MapPin size={14} />,      label: "住所",     value: "新潟県新潟市中央区本馬越2丁目8番17号" },
+                  { icon: <Phone size={14} />,        label: "電話",     value: tel },
+                  { icon: <Clock size={14} />,        label: "営業時間", value: "平日 9:15〜18:00\n日曜・祝日 10:00〜17:00" },
+                  { icon: <CalendarDays size={14} />, label: "定休日",   value: "毎週月曜日・第3日曜日" },
+                  { icon: <Car size={14} />,          label: "駐車場",   value: "店舗前3台 / 第二駐車場 8・10・11番" },
+                  { icon: <CreditCard size={14} />,   label: "お支払い", value: "各種クレジットカード対応" },
+                ].map(({ icon, label, value }) => (
+                  <div key={label} className="flex gap-4 py-4">
+                    <div className="mt-0.5 shrink-0 text-white/30">{icon}</div>
+                    <div className="grid flex-1 grid-cols-[4rem_1fr] gap-2">
+                      <dt className="text-xs font-bold text-white/35">{label}</dt>
+                      <dd className="whitespace-pre-line text-xs leading-6 text-white/65">
+                        {value}
+                      </dd>
+                    </div>
+                  </div>
+                ))}
+              </dl>
+
+              <div className="mt-5 border border-white/8 p-4 text-xs leading-6 text-white/35">
+                セブンイレブン本馬越店様向かい。ウオロク本馬越店の斜め前です。
+              </div>
+
+              {/* CTA */}
+              <div className="mt-7 grid grid-cols-1 gap-3 sm:grid-cols-3">
+                <a
+                  href={reservationUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="label-en bg-white py-3.5 text-center text-black transition-opacity hover:opacity-75"
+                >
+                  Web予約
+                </a>
+                <a
+                  href={`tel:${tel}`}
+                  className="label-en border border-white/20 py-3.5 text-center text-white/55 transition-all hover:border-white/50 hover:text-white"
+                >
+                  {tel}
+                </a>
+                <a
+                  href={instagramUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="label-en border border-white/20 py-3.5 text-center text-white/55 transition-all hover:border-white/50 hover:text-white"
+                >
+                  Instagram
+                </a>
+              </div>
+            </FadeIn>
+
+            {/* 地図 */}
+            <FadeIn delay={0.1}>
+              <div className="overflow-hidden border border-white/10">
+                <div className="flex items-center justify-between border-b border-white/8 px-4 py-3">
+                  <p className="text-xs font-bold text-white/50">周辺マップ</p>
                   <a
-                    href={reservationUrl}
-                    className="inline-flex items-center justify-center rounded-full border border-[var(--border)] px-6 py-3 text-sm font-bold transition-all duration-200 hover:-translate-y-0.5 hover:border-[var(--accent)]"
+                    href={mapLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[10px] text-white/30 transition-colors hover:text-white/60"
                   >
-                    ご予約はこちら
+                    Google Mapで開く ↗
                   </a>
                 </div>
-              </FadeUp>
-
-              <div className="grid gap-3">
-                {latestPosts.length === 0 ? (
-                  <div className="rounded-[1.6rem] border border-dashed border-[var(--accent-border)] bg-[var(--card)] px-5 py-8 text-sm text-[var(--fg-subtle)]">
-                    現在、公開中の記事はありません。更新後にこちらへ表示されます。
-                  </div>
-                ) : (
-                  latestPosts.map((post, index) => (
-                    <Link
-                      key={post.id}
-                      href={`/news/${post.slug}`}
-                      className="group rounded-[1.6rem] border border-[var(--border)] bg-white/75 p-4 transition-all duration-200 hover:-translate-y-1 hover:border-[var(--accent-border)] hover:shadow-lg hover:shadow-black/5 md:p-5"
-                    >
-                      <div className="flex flex-col gap-4 sm:flex-row sm:items-start">
-                        {post.coverImageUrl ? (
-                          <img
-                            src={post.coverImageUrl}
-                            alt={post.title}
-                            className="h-24 w-full rounded-2xl object-cover sm:w-36"
-                          />
-                        ) : (
-                          <div className="flex h-24 w-full items-center justify-center rounded-2xl bg-[var(--card)] text-[var(--accent)] sm:w-36">
-                            <Sparkles size={18} />
-                          </div>
-                        )}
-                        <div className="min-w-0 flex-1">
-                          <div className="flex flex-wrap items-center gap-2">
-                            <span className="rounded-full bg-[var(--bg)] px-2.5 py-1 text-[10px] font-black uppercase tracking-[0.22em] text-[var(--accent)]">
-                              {index === 0 ? "Latest" : "News"}
-                            </span>
-                            <time className="text-xs text-[var(--fg-subtle)]">
-                              {post.publishedAt
-                                ? new Date(post.publishedAt).toLocaleDateString("ja-JP", {
-                                    year: "numeric",
-                                    month: "long",
-                                    day: "numeric",
-                                  })
-                                : ""}
-                            </time>
-                          </div>
-                          <h3 className="mt-3 text-base font-black text-[var(--fg)] transition-colors group-hover:text-[var(--accent)] md:text-lg">
-                            {post.title}
-                          </h3>
-                          <p className="mt-2 line-clamp-2 text-sm leading-6 text-[var(--fg-subtle)]">
-                            {post.excerpt || "詳細は記事ページでご覧ください。"}
-                          </p>
-                        </div>
-                      </div>
-                    </Link>
-                  ))
-                )}
+                <iframe
+                  title="RISPLENDERE BROLETTO の地図"
+                  src={mapUrl}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  className="h-72 w-full md:h-[340px]"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                />
               </div>
-            </div>
+            </FadeIn>
           </div>
         </div>
       </section>
 
-      {/* ── Access ── */}
-      <section id="access" className="bg-[var(--bg-dark)] px-5 py-10 text-white md:py-16">
-        <div className="mx-auto max-w-7xl md:grid md:grid-cols-[1fr_1fr] md:gap-10">
-          <FadeIn>
-            <p className="text-xs font-black uppercase tracking-[0.35em] text-[var(--accent-warm)]">
-              Access
-            </p>
-            <h2 className="mt-2 text-3xl font-black md:text-4xl">店舗情報</h2>
-
-            <dl className="mt-5 grid gap-2 md:mt-7">
-              {[
-                ["住所", "新潟県新潟市中央区本馬越2丁目8番17号"],
-                ["営業時間", "火〜土 9:15〜17:00 / 日・祝 10:00〜17:00"],
-                ["定休日", "毎週月曜日・第3日曜日"],
-                ["席数", "セット面4席"],
-                ["駐車場", "店舗前3台 / 第二駐車場 8・10・11番"],
-              ].map(([label, value]) => (
-                <div
-                  key={label}
-                  className="grid gap-0.5 border-b border-white/10 pb-2 md:grid-cols-[8rem_1fr] md:gap-2 md:pb-3"
-                >
-                  <dt className="text-xs font-bold text-[var(--accent-warm)] md:text-sm">{label}</dt>
-                  <dd className="text-xs leading-6 text-white/80 md:text-sm">{value}</dd>
-                </div>
-              ))}
-            </dl>
-          </FadeIn>
-
-          <FadeIn delay={0.1} className="mt-7 rounded-2xl bg-[var(--bg-section)] p-5 text-[var(--fg)] md:mt-0 md:p-6">
-            <div className="space-y-4 md:space-y-5">
-              <Info icon={<MapPin />} title="アクセス">
-                セブンイレブン本馬越店様向かい。ウオロク本馬越店の斜め前です。
-              </Info>
-              <Info icon={<Car />} title="駐車場">
-                店舗前に3台分。第二駐車場は8・10・11番をご利用ください。
-              </Info>
-              <Info icon={<Clock />} title="営業時間">
-                火〜土 9:15〜17:00、日・祝 10:00〜17:00。
-              </Info>
-              <Info icon={<CalendarDays />} title="定休日">
-                毎週月曜日・第3日曜日。
-              </Info>
-              <Info icon={<CreditCard />} title="お支払い">
-                各種クレジットカード対応。
-              </Info>
-            </div>
-
-            <div className="mt-5 overflow-hidden rounded-[1.6rem] border border-[var(--border)] bg-[var(--card)] shadow-lg shadow-black/5">
-              <div className="flex items-center justify-between border-b border-[var(--border-light)] px-4 py-3">
-                <div>
-                  <p className="text-xs font-black uppercase tracking-[0.25em] text-[var(--accent)]">
-                    Map
-                  </p>
-                  <p className="mt-1 text-sm font-bold">周辺マップ</p>
-                </div>
-                <a
-                  href={mapLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-xs font-bold text-[var(--accent)] transition-colors hover:text-[var(--accent-light)]"
-                >
-                  Googleマップで開く ↗
-                </a>
-              </div>
-              <iframe
-                title="RISPLENDERE BROLETTO の地図"
-                src={mapUrl}
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                className="h-64 w-full md:h-72"
-                style={{ border: 0 }}
-                allowFullScreen
-              />
-            </div>
-
-            <div className="mt-5 grid gap-2.5 sm:grid-cols-2">
-              <a
-                href={reservationUrl}
-                className="rounded-full bg-[var(--cta)] px-5 py-3 text-center text-sm font-bold text-white transition-all duration-200 hover:-translate-y-0.5 hover:brightness-110"
-              >
-                Web予約
-              </a>
-              <a
-                href={`tel:${tel}`}
-                className="rounded-full border border-[var(--border)] px-5 py-3 text-center text-sm font-bold transition-all duration-200 hover:-translate-y-0.5 hover:border-[var(--accent)]"
-              >
-                {tel}
-              </a>
-            </div>
-          </FadeIn>
-        </div>
-      </section>
     </main>
-  );
-}
-
-function Info({
-  icon,
-  title,
-  children,
-}: {
-  icon: React.ReactNode;
-  title: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <div className="flex gap-3">
-      <div className="mt-0.5 text-[var(--accent)] [&_svg]:size-4">{icon}</div>
-      <div>
-        <h3 className="text-xs font-black md:text-sm">{title}</h3>
-        <p className="mt-0.5 text-xs leading-5 text-[var(--fg-muted)] md:leading-6">{children}</p>
-      </div>
-    </div>
   );
 }

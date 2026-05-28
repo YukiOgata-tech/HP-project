@@ -10,7 +10,21 @@
       "Bash(pnpm *)",
       "Read(//c/Users/81801/AppData/Local/Temp/claude/C--projects-client-sites/a253a6c4-9569-4dd3-a234-732319921687/tasks/**)",
       "Bash(npx tsc *)",
-      "Bash(git -C /c/projects/client-sites status)"
+      "Bash(git -C /c/projects/client-sites status)",
+      "PowerShell(firebase *)",
+      "PowerShell(Get-Command *)",
+      "PowerShell(firebase.cmd mcp --help 2>&1)",
+      "PowerShell(firebase.cmd projects:list 2>&1 | Select-Object -First 20)",
+      "PowerShell(firebase.cmd projects:list 2>&1 | Select-Object -First 30)",
+      "Bash(Get-ChildItem -Path \"C:\\\\projects\\\\client-sites\" -Depth 2)",
+      "Bash(Select-Object FullName, PSIsContainer)",
+      "Bash(Format-Table -AutoSize)",
+      "PowerShell(New-Item *)",
+      "PowerShell(Invoke-WebRequest -Uri \"http://localhost:3000\" -UseBasicParsing -TimeoutSec 3 2>&1 | Select-Object -First 5)",
+      "mcp__firebase__firestore_list_documents"
     ]
-  }
+  },
+  "enabledMcpjsonServers": [
+    "firebase"
+  ]
 }

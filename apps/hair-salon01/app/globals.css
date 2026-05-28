@@ -2,91 +2,89 @@
 @plugin "@tailwindcss/typography";
 @source "../../../packages/components/src";
 
-/* クラスベースのダークモード */
 @variant dark (&:where(.dark, .dark *));
 
-/* ── カラートークン（ライトモード） ── */
+/* ═══════════════════════════════════════════════
+   COLOR TOKENS — LIGHT
+═══════════════════════════════════════════════ */
+
 :root {
-  --bg:             #f8f3ed;
-  --bg-section:     #ffffff;
-  --bg-dark:        #2c241f;
-  --bg-darkest:     #17110e;
-  --fg:             #2c241f;
-  --fg-muted:       #232323;
-  --fg-subtle:      #5c5149;
-  --fg-hero:        #65564c;
-  --accent:         #9a7253;
-  --accent-warm:    #d7b899;
-  --accent-light:   #8d654c;
-  --accent-border:  #d1b59b;
-  --border:         #e4d4c5;
-  --border-light:   #eee2d6;
-  --cta:            #32241d;
-  --card:           rgba(255 255 255 / 0.7);
-  --card-solid:     rgba(255 255 255 / 0.8);
-  --blob-1:         #d6ad8d;
-  --blob-2:         #b68469;
-  --header-border:  rgba(0 0 0 / 0.08);
-  --header-line:    rgb(69 26 3); /* amber-950 */
+  --bg:            #ffffff;
+  --bg-off:        #f4f4f4;
+  --bg-dark:       #0a0a0a;
+  --bg-darkest:    #000000;
+
+  --fg:            #0a0a0a;
+  --fg-muted:      #3a3a3a;
+  --fg-subtle:     #555555;
+
+  --border:        #888888;
+  --border-light:  #b8b8b8;
+
+  --cta:           #0a0a0a;
+  --cta-text:      #ffffff;
+
+  --card:          #ffffff;
+  --card-off:      #f4f4f4;
+
+  --header-bg:     rgba(255, 255, 255, 0.95);
+  --header-border: rgba(0, 0, 0, 0.07);
 }
 
-/* ── カラートークン（ダークモード・クラス指定） ── */
+/* ═══════════════════════════════════════════════
+   COLOR TOKENS — DARK
+═══════════════════════════════════════════════ */
+
 .dark {
-  --bg:             #1a1410;
-  --bg-section:     #231916;
-  --bg-dark:        #120d0a;
-  --bg-darkest:     #0d0906;
-  --fg:             #ede4da;
-  --fg-muted:       #e7e7df;
-  --fg-subtle:      #9b9694;
-  --fg-hero:        #9a8880;
-  --accent:         #bdb3ab;
-  --accent-warm:    #dfc4a0;
-  --accent-light:   #b8896a;
-  --accent-border:  #6a4e38;
-  --border:         #3a2c22;
-  --border-light:   #2e2018;
-  --cta:            #6b3e28;
-  --card:           rgba(50 36 29 / 0.6);
-  --card-solid:     rgba(50 36 29 / 0.8);
-  --blob-1:         #5a3a25;
-  --blob-2:         #3d2418;
-  --header-border:  rgba(255 255 255 / 0.08);
-  --header-line:    white;
+  --bg:            #0a0a0a;
+  --bg-off:        #141414;
+  --bg-dark:       #000000;
+  --bg-darkest:    #000000;
+
+  --fg:            #efefef;
+  --fg-muted:      #bbbbbb;
+  --fg-subtle:     #999999;
+
+  --border:        #606060;
+  --border-light:  #484848;
+
+  --cta:           #efefef;
+  --cta-text:      #0a0a0a;
+
+  --card:          #141414;
+  --card-off:      #1a1a1a;
+
+  --header-bg:     rgba(10, 10, 10, 0.95);
+  --header-border: rgba(255, 255, 255, 0.18);
 }
 
-/* ── カラートークン（ダークモード・システム設定フォールバック） ── */
-/* .dark/.light クラスが未設定の初回訪問時にシステム設定を反映 */
 @media (prefers-color-scheme: dark) {
   html:not(.light) {
-    --bg:             #1a1410;
-    --bg-section:     #231916;
-    --bg-dark:        #120d0a;
-    --bg-darkest:     #0d0906;
-    --fg:             #ede4da;
-    --fg-muted:       #e7e7df;
-    --fg-subtle:      #9b9694;
-    --fg-hero:        #9a8880;
-    --accent:         #bdb3ab;
-    --accent-warm:    #dfc4a0;
-    --accent-light:   #b8896a;
-    --accent-border:  #6a4e38;
-    --border:         #3a2c22;
-    --border-light:   #2e2018;
-    --cta:            #6b3e28;
-    --card:           rgba(50 36 29 / 0.6);
-    --card-solid:     rgba(50 36 29 / 0.8);
-    --blob-1:         #5a3a25;
-    --blob-2:         #3d2418;
-    --header-border:  rgba(255 255 255 / 0.08);
-    --header-line:    white;
-    color-scheme:     dark;
+    --bg:            #0a0a0a;
+    --bg-off:        #141414;
+    --bg-dark:       #000000;
+    --bg-darkest:    #000000;
+    --fg:            #efefef;
+    --fg-muted:      #bbbbbb;
+    --fg-subtle:     #999999;
+    --border:        #606060;
+    --border-light:  #484848;
+    --cta:           #efefef;
+    --cta-text:      #0a0a0a;
+    --card:          #141414;
+    --card-off:      #1a1a1a;
+    --header-bg:     rgba(10, 10, 10, 0.95);
+    --header-border: rgba(255, 255, 255, 0.18);
+    color-scheme:    dark;
   }
 }
 
-/* ── ベーススタイル ── */
+/* ═══════════════════════════════════════════════
+   BASE
+═══════════════════════════════════════════════ */
+
 @theme {
-  --font-sans: var(--font-noto), sans-serif;
+  --font-sans:  var(--font-noto), sans-serif;
   --font-serif: var(--font-playfair), serif;
 }
 
@@ -107,6 +105,320 @@ body {
 }
 
 ::selection {
-  background: #3d2d25;
-  color: white;
+  background: var(--fg);
+  color: var(--bg);
 }
+
+/* ═══════════════════════════════════════════════
+   GRAIN OVERLAY — フィルムグレイン質感 (CSS SVGフィルター)
+═══════════════════════════════════════════════ */
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  pointer-events: none;
+  opacity: 0.028;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 200px 200px;
+}
+
+/* ═══════════════════════════════════════════════
+   HERO VISUAL PANEL — 黒パネルにグリッドオーバーレイ
+═══════════════════════════════════════════════ */
+
+.hero-panel {
+  position: relative;
+  background-color: var(--bg-dark);
+  overflow: hidden;
+}
+
+/* サブタイルグリッド */
+.hero-panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 25% 25%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* 対角スラッシュ装飾 */
+.hero-panel::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  right: -1px;
+  width: 60%;
+  height: 60%;
+  background: linear-gradient(
+    135deg,
+    transparent 50%,
+    rgba(255, 255, 255, 0.02) 50%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ═══════════════════════════════════════════════
+   CONCEPT VISUAL — CSS装飾ライン
+═══════════════════════════════════════════════ */
+
+.concept-visual {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  gap: 12px;
+}
+
+.concept-bar {
+  width: 1px;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    var(--border) 15%,
+    var(--border) 85%,
+    transparent 100%
+  );
+  flex-shrink: 0;
+}
+
+.concept-bar--thick {
+  width: 3px;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    var(--fg) 15%,
+    var(--fg) 85%,
+    transparent 100%
+  );
+}
+
+/* ═══════════════════════════════════════════════
+   PROMISE SECTION — 大数字バックグラウンド
+═══════════════════════════════════════════════ */
+
+.promise-card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 2rem;
+}
+
+.promise-card::before {
+  content: attr(data-number);
+  position: absolute;
+  top: -0.2em;
+  right: -0.05em;
+  font-family: var(--font-playfair), serif;
+  font-size: 8rem;
+  font-weight: 700;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.04);
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+}
+
+/* ═══════════════════════════════════════════════
+   SECTION ACCENT LINES
+═══════════════════════════════════════════════ */
+
+/* セクション区切り短いライン */
+.section-rule {
+  display: block;
+  width: 40px;
+  height: 1px;
+  background-color: var(--fg);
+  margin-bottom: 1.25rem;
+}
+
+.section-rule--white {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+/* ═══════════════════════════════════════════════
+   MENU PAGE — カテゴリナビ
+═══════════════════════════════════════════════ */
+
+.menu-nav-link {
+  display: inline-block;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.45em;
+  text-transform: uppercase;
+  color: var(--fg-subtle);
+  border-bottom: 1px solid transparent;
+  padding-bottom: 2px;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.menu-nav-link:hover {
+  color: var(--fg);
+  border-bottom-color: var(--fg);
+}
+
+/* ═══════════════════════════════════════════════
+   TYPOGRAPHY UTILITIES
+═══════════════════════════════════════════════ */
+
+.label-en {
+  font-size: 0.625rem;
+  font-weight: 900;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+}
+
+@media (min-width: 768px) {
+  .label-en {
+    font-size: 0.95rem;
+  }
+}
+
+.label-section {
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.5em;
+  text-transform: uppercase;
+  color: var(--fg-subtle);
+}
+
+/* ═══════════════════════════════════════════════
+   HERO SLIDER ANIMATIONS
+═══════════════════════════════════════════════ */
+
+/* Ken Burns A: 左上へゆっくり拡大 */
+@keyframes kenburns-a {
+  0%   { transform: scale(1)    translate(0,      0);    }
+  100% { transform: scale(1.08) translate(-1.5%, -1.2%); }
+}
+
+/* Ken Burns B: 右下へゆっくり縮小 */
+@keyframes kenburns-b {
+  0%   { transform: scale(1.08) translate(1.5%,  1.2%);  }
+  100% { transform: scale(1)    translate(0,      0);    }
+}
+
+.kenburns-a {
+  animation: kenburns-a 8s ease-in-out forwards;
+  transform-origin: center center;
+}
+
+.kenburns-b {
+  animation: kenburns-b 8s ease-in-out forwards;
+  transform-origin: center center;
+}
+
+/* スライダープログレスバー */
+@keyframes slider-progress {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+.slider-progress-bar {
+  transform-origin: left center;
+  animation: slider-progress var(--slide-duration, 6000ms) linear forwards;
+}
+
+/* ═══════════════════════════════════════════════
+   CONCEPT SECTION IMAGES
+═══════════════════════════════════════════════ */
+
+/* デスクトップ: 2枚の画像を非対称グリッドで配置 */
+.concept-images {
+  display: grid;
+  grid-template-rows: 1fr auto;
+  gap: 0.75rem;
+}
+
+/* ═══════════════════════════════════════════════
+   HERO TEXT HIGHLIGHT — 蛍光ペン効果
+   画像背景に重なっても可読性を確保する
+═══════════════════════════════════════════════ */
+
+.text-hl {
+  background-color: rgba(255, 255, 255, 0.60);
+  color: #0a0a0a;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  padding: 0.1em 0.4em;
+}
+
+.text-hl--sm {
+  background-color: rgba(255, 255, 255, 0.45);
+  color: #0a0a0a;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  padding: 0.08em 0.3em;
+}
+
+/* ═══════════════════════════════════════════════
+   NEWS HERO — グラフグリッド背景
+═══════════════════════════════════════════════ */
+
+.news-hero {
+  position: relative;
+  overflow: hidden;
+}
+
+/* グラフ用グリッドライン */
+.news-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--fg) 1px, transparent 1px),
+    linear-gradient(90deg, var(--fg) 1px, transparent 1px);
+  background-size: 44px 44px;
+  opacity: 0.055;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* 右上コーナーの強調グリッド (大きめピッチ) */
+.news-hero::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50%;
+  height: 100%;
+  background-image:
+    linear-gradient(var(--fg) 1px, transparent 1px),
+    linear-gradient(90deg, var(--fg) 1px, transparent 1px);
+  background-size: 44px 44px;
+  opacity: 0.045;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* 背景デコレーション文字 — 実際に見える大きさ */
+.news-deco-word {
+  position: absolute;
+  bottom: -0.12em;
+  right: -0.02em;
+  font-family: var(--font-playfair), serif;
+  font-size: clamp(8rem, 24vw, 22rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--fg);
+  opacity: 0.07;
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+}
+
+/* ═══════════════════════════════════════════════
+   SCROLLBAR
+═══════════════════════════════════════════════ */
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border); }
+::-webkit-scrollbar-thumb:hover { background: var(--fg-subtle); }

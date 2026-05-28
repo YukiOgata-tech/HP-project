@@ -1,174 +1,232 @@
 import { getPublishedPosts } from "@client-sites/lib/cms";
+import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
-import { ChevronRight, Sparkles } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
+import { FadeUp, FadeIn, StaggerList, StaggerItem } from "../components/animated";
 
 const SITE_ID = process.env.SITE_ID!;
 
 export const metadata: Metadata = {
-  title: "お知らせ",
+  title: "お知らせ | RISPLENDERE BROLETTO",
+  description: "RISPLENDERE BROLETTO からのお知らせ、スタイル情報、サロンのご案内。",
 };
 
 export const revalidate = 60;
 
+/* ── 日付フォーマット ─────────────────────────── */
+const fmtLong  = (d: string) => new Date(d).toLocaleDateString("ja-JP", { year: "numeric", month: "long",    day: "numeric" });
+const fmtShort = (d: string) => new Date(d).toLocaleDateString("ja-JP", { month: "numeric", day: "numeric" });
+
+/* ── 画像なし時のプレースホルダー ─────────────── */
+function ImgPlaceholder({ index }: { index: number }) {
+  return (
+    <div className="flex h-full w-full flex-col items-center justify-center gap-2 bg-[var(--bg-dark)]">
+      <p className="font-serif text-4xl font-bold text-white/15 select-none">
+        {String(index + 1).padStart(2, "0")}
+      </p>
+      <p className="label-en text-white/10">No Image</p>
+    </div>
+  );
+}
+
+/* ══════════════════════════════════════════════
+   PAGE
+══════════════════════════════════════════════ */
+
 export default async function NewsPage() {
   const posts = await getPublishedPosts(SITE_ID);
-  const featuredPost = posts[0];
-  const remainingPosts = posts.slice(1);
+  const [featured, ...rest] = posts;
 
   return (
-    <main className="px-5 pb-16 pt-24 md:px-6 md:pb-20 md:pt-32">
-      <div className="mx-auto max-w-7xl space-y-8">
-        <section className="overflow-hidden rounded-[2.2rem] border border-[var(--border)] bg-[linear-gradient(135deg,rgba(255,255,255,0.92),rgba(245,236,227,0.88))] shadow-[0_24px_60px_-40px_rgba(44,36,31,0.45)]">
-          <div className="grid gap-8 px-6 py-8 md:grid-cols-[0.9fr_1.1fr] md:px-9 md:py-10">
-            <div className="space-y-4">
-              <p className="inline-flex items-center gap-2 rounded-full border border-[var(--accent-border)] bg-white/60 px-3 py-1.5 text-xs font-black uppercase tracking-[0.28em] text-[var(--accent)]">
-                <Sparkles size={13} />
-                News
-              </p>
+    <main className="bg-[var(--bg)]">
+
+      {/* ════════════════════════════════════════
+          TOP — 背景画像 (ライト/ダーク切替)
+      ════════════════════════════════════════ */}
+      <section className="relative overflow-hidden border-b border-[var(--border)] px-6 pb-10 pt-24 md:pt-28 md:pb-12">
+
+        {/* ライトモード背景 */}
+        <Image
+          src="/images/news-top-bg-light.png"
+          alt=""
+          fill
+          sizes="100vw"
+          className="object-cover object-center dark:hidden"
+          priority
+        />
+        {/* ダークモード背景 */}
+        <Image
+          src="/images/news-top-bg-dark.png"
+          alt=""
+          fill
+          sizes="100vw"
+          className="object-cover object-center hidden dark:block"
+          priority
+        />
+
+        {/* 装飾文字オーバーレイ */}
+        <p aria-hidden className="news-deco-word">J</p>
+
+        <div className="relative z-10 mx-auto max-w-[1400px]">
+          <FadeUp>
+            <div className="flex items-end justify-between gap-6">
               <div>
-                <h1 className="font-serif text-4xl font-bold leading-tight text-[var(--fg)] md:text-5xl">
-                  お知らせ一覧
+                <Link
+                  href="/"
+                  className="label-en mb-3 sm:mb-6 inline-flex items-center gap-2 text-[var(--fg-subtle)] transition-colors hover:text-[var(--fg)]"
+                >
+                  <ArrowLeft size={11} />
+                  Home
+                </Link>
+                <span className="section-rule block" />
+                <p className="label-section">Journal</p>
+                <h1 className="mt-3 font-serif text-5xl font-bold text-[var(--fg)] md:text-6xl lg:text-7xl">
+                  お知らせ
                 </h1>
-                <p className="mt-4 max-w-xl text-sm leading-7 text-[var(--fg-subtle)] md:text-base md:leading-8">
-                  営業日のお知らせや、スタイル提案、サロンからのご案内をまとめています。
-                  気になる内容からそのまま詳細ページへ進めます。
+              </div>
+
+              {/* 記事数インジケーター */}
+              <div className="hidden shrink-0 text-right md:block">
+                <p className="label-en text-[var(--fg-subtle)]">Articles</p>
+                <p className="mt-1 font-serif text-5xl font-bold tabular-nums text-[var(--fg)]">
+                  {String(posts.length).padStart(2, "0")}
                 </p>
               </div>
             </div>
 
-            <div className="grid gap-3 sm:grid-cols-3">
-              {[
-                { label: "公開記事", value: posts.length },
-                { label: "最新更新", value: featuredPost?.publishedAt ? new Date(featuredPost.publishedAt).toLocaleDateString("ja-JP", { month: "numeric", day: "numeric" }) : "-" },
-                { label: "カテゴリ", value: posts.flatMap((post) => post.tags).filter((tag, index, list) => list.indexOf(tag) === index).length || 0 },
-              ].map((item) => (
-                <div key={item.label} className="rounded-[1.6rem] border border-[var(--border)] bg-white/70 px-5 py-5">
-                  <p className="text-xs font-black uppercase tracking-[0.22em] text-[var(--accent)]">
-                    {item.label}
-                  </p>
-                  <p className="mt-3 text-2xl font-black text-[var(--fg)]">{item.value}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {posts.length === 0 ? (
-          <section className="rounded-[2rem] border border-dashed border-[var(--accent-border)] bg-[var(--card)] px-6 py-16 text-center">
-            <p className="text-lg font-bold text-[var(--fg)]">現在、公開中の記事はありません。</p>
-            <p className="mt-2 text-sm text-[var(--fg-subtle)]">
-              新しいお知らせが公開されると、こちらに一覧表示されます。
+            <p className="mt-4 max-w-lg text-sm leading-7 text-[var(--fg-subtle)]">
+              サロンからのお知らせや、スタイル情報、ご案内をまとめています。
             </p>
-          </section>
-        ) : (
-          <div className="grid gap-6 xl:grid-cols-[1.15fr_0.85fr]">
-            <Link
-              href={`/news/${featuredPost.slug}`}
-              className="group overflow-hidden rounded-[2rem] border border-[var(--border)] bg-[var(--bg-section)] shadow-[0_24px_60px_-42px_rgba(44,36,31,0.45)] transition-transform duration-300 hover:-translate-y-1"
-            >
-              {featuredPost.coverImageUrl ? (
-                <img
-                  src={featuredPost.coverImageUrl}
-                  alt={featuredPost.title}
-                  className="h-72 w-full object-cover md:h-[22rem]"
-                />
-              ) : (
-                <div className="flex h-72 items-center justify-center bg-[radial-gradient(circle_at_top,rgba(182,132,105,0.24),transparent_58%),linear-gradient(135deg,rgba(248,243,237,1),rgba(238,226,214,1))] md:h-[22rem]">
-                  <Sparkles className="text-[var(--accent)]" size={22} />
-                </div>
-              )}
+          </FadeUp>
+        </div>
+      </section>
 
-              <div className="space-y-4 px-6 py-6 md:px-8 md:py-8">
-                <div className="flex flex-wrap items-center gap-2">
-                  <span className="rounded-full bg-[var(--bg)] px-3 py-1 text-[10px] font-black uppercase tracking-[0.25em] text-[var(--accent)]">
-                    Featured
-                  </span>
-                  <time className="text-xs text-[var(--fg-subtle)]">
-                    {featuredPost.publishedAt
-                      ? new Date(featuredPost.publishedAt).toLocaleDateString("ja-JP", {
-                          year: "numeric",
-                          month: "long",
-                          day: "numeric",
-                        })
-                      : ""}
-                  </time>
-                </div>
+      {/* ════════════════════════════════════════
+          POSTS
+      ════════════════════════════════════════ */}
+      <section className="px-6 py-12 md:py-16">
+        <div className="mx-auto max-w-[1400px]">
 
-                <h2 className="text-2xl font-black leading-tight text-[var(--fg)] transition-colors group-hover:text-[var(--accent)] md:text-3xl">
-                  {featuredPost.title}
-                </h2>
-
-                <p className="max-w-2xl text-sm leading-7 text-[var(--fg-subtle)] md:text-base md:leading-8">
-                  {featuredPost.excerpt || "詳細は記事ページからご覧ください。"}
-                </p>
-
-                <div className="flex flex-wrap gap-2">
-                  {featuredPost.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="rounded-full border border-[var(--border)] bg-[var(--card)] px-3 py-1 text-xs font-bold text-[var(--fg-subtle)]"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-
-                <span className="inline-flex items-center gap-2 text-sm font-bold text-[var(--accent)]">
-                  記事を読む
-                  <ChevronRight size={16} />
-                </span>
+          {posts.length === 0 ? (
+            <FadeUp>
+              <div className="border border-dashed border-[var(--border)] px-6 py-20 text-center">
+                <p className="font-serif text-3xl font-bold text-[var(--fg-subtle)]">—</p>
+                <p className="mt-3 text-sm text-[var(--fg-subtle)]">現在、公開中の記事はありません。</p>
               </div>
-            </Link>
+            </FadeUp>
+          ) : (
+            <div className="grid gap-6 md:grid-cols-[1.3fr_1fr] md:items-start lg:gap-8">
 
-            <div className="space-y-4">
-              {remainingPosts.length === 0 ? (
-                <div className="rounded-[1.8rem] border border-[var(--border)] bg-[var(--card-solid)] px-5 py-8 text-sm text-[var(--fg-subtle)]">
-                  さらに表示できる記事はまだありません。
-                </div>
-              ) : (
-                remainingPosts.map((post) => (
+              {/* ── フィーチャード記事 ── */}
+              {featured && (
+                <FadeIn>
                   <Link
-                    key={post.id}
-                    href={`/news/${post.slug}`}
-                    className="group block rounded-[1.8rem] border border-[var(--border)] bg-[var(--card-solid)] p-5 shadow-[0_20px_50px_-42px_rgba(44,36,31,0.5)] transition-all duration-200 hover:-translate-y-1 hover:border-[var(--accent-border)]"
+                    href={`/news/${featured.slug}`}
+                    className="group block"
                   >
-                    <div className="flex flex-wrap items-center gap-2">
-                      <time className="text-xs text-[var(--fg-subtle)]">
-                        {post.publishedAt
-                          ? new Date(post.publishedAt).toLocaleDateString("ja-JP", {
-                              year: "numeric",
-                              month: "long",
-                              day: "numeric",
-                            })
-                          : ""}
-                      </time>
-                      {post.tags.slice(0, 2).map((tag) => (
-                        <span
-                          key={tag}
-                          className="rounded-full bg-[var(--bg)] px-2.5 py-1 text-[10px] font-black uppercase tracking-[0.22em] text-[var(--accent)]"
-                        >
-                          {tag}
-                        </span>
-                      ))}
+                    {/* サムネイル */}
+                    <div className="relative h-64 overflow-hidden sm:h-80 md:h-[22rem]">
+                      {featured.coverImageUrl ? (
+                        <img
+                          src={featured.coverImageUrl}
+                          alt={featured.title}
+                          className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                        />
+                      ) : (
+                        <ImgPlaceholder index={0} />
+                      )}
+
+                      {/* Latest バッジ (画像に重ねて) */}
+                      <div className="absolute left-0 top-0 bg-[var(--fg)] px-4 py-2">
+                        <p className="label-en text-[var(--bg)]">Latest</p>
+                      </div>
                     </div>
-                    <h3 className="mt-3 text-lg font-black text-[var(--fg)] transition-colors group-hover:text-[var(--accent)]">
-                      {post.title}
-                    </h3>
-                    <p className="mt-2 line-clamp-3 text-sm leading-7 text-[var(--fg-subtle)]">
-                      {post.excerpt || "詳細は記事ページからご覧ください。"}
-                    </p>
-                    <span className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-[var(--accent)]">
-                      続きを読む
-                      <ChevronRight size={15} />
-                    </span>
+
+                    {/* テキスト */}
+                    <div className="border border-t-0 border-[var(--border)] bg-[var(--card)] p-5 md:p-7">
+                      {featured.publishedAt && (
+                        <time className="text-xs text-[var(--fg-subtle)]">
+                          {fmtLong(featured.publishedAt)}
+                        </time>
+                      )}
+                      <h2 className="mt-2 text-xl font-black leading-snug text-[var(--fg)] md:text-2xl">
+                        {featured.title}
+                      </h2>
+                      <p className="mt-3 line-clamp-3 text-sm leading-7 text-[var(--fg-subtle)]">
+                        {featured.excerpt ?? "詳細は記事ページでご覧ください。"}
+                      </p>
+                      <span className="mt-5 inline-flex items-center gap-2 text-xs font-bold text-[var(--fg)] transition-opacity group-hover:opacity-50">
+                        続きを読む
+                        <ArrowRight size={11} />
+                      </span>
+                    </div>
                   </Link>
-                ))
+                </FadeIn>
               )}
+
+              {/* ── 残り記事リスト ── */}
+              <div>
+                {rest.length === 0 ? (
+                  <FadeIn>
+                    <div className="border border-[var(--border)] bg-[var(--card)] px-6 py-10 text-center">
+                      <p className="text-sm text-[var(--fg-subtle)]">他の記事はまだありません。</p>
+                    </div>
+                  </FadeIn>
+                ) : (
+                  <StaggerList className="flex flex-col gap-px border border-[var(--border)]">
+                    {rest.map((post, i) => (
+                      <StaggerItem key={post.id}>
+                        <Link
+                          href={`/news/${post.slug}`}
+                          className="group flex items-stretch bg-[var(--card)] transition-opacity hover:opacity-60"
+                        >
+                          {/* サムネイル */}
+                          <div className="relative h-28 w-28 shrink-0 overflow-hidden md:h-32 md:w-32">
+                            {post.coverImageUrl ? (
+                              <img
+                                src={post.coverImageUrl}
+                                alt={post.title}
+                                className="h-full w-full object-cover"
+                              />
+                            ) : (
+                              <ImgPlaceholder index={i + 1} />
+                            )}
+                          </div>
+
+                          {/* テキスト */}
+                          <div className="flex min-w-0 flex-1 flex-col justify-center border-l border-[var(--border)] px-4 py-4">
+                            {post.publishedAt && (
+                              <time className="text-xs text-[var(--fg-subtle)]">
+                                {fmtShort(post.publishedAt)}
+                              </time>
+                            )}
+                            <h3 className="mt-1 line-clamp-2 text-sm font-black leading-snug text-[var(--fg)] md:text-base">
+                              {post.title}
+                            </h3>
+                            <span className="mt-2 inline-flex items-center gap-1 text-xs text-[var(--fg-subtle)]">
+                              読む <ArrowRight size={9} />
+                            </span>
+                          </div>
+
+                          {/* 番号 */}
+                          <div className="flex w-10 shrink-0 items-center justify-center border-l border-[var(--border)]">
+                            <p className="label-en text-[var(--fg-subtle)]">
+                              {String(i + 2).padStart(2, "0")}
+                            </p>
+                          </div>
+                        </Link>
+                      </StaggerItem>
+                    ))}
+                  </StaggerList>
+                )}
+              </div>
+
             </div>
-          </div>
-        )}
-      </div>
+          )}
+        </div>
+      </section>
+
     </main>
   );
 }

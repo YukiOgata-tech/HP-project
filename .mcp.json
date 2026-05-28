@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "firebase": {
+      "command": "firebase.cmd",
+      "args": ["mcp", "--dir", "C:\\projects\\client-sites"]
+    }
+  }
+}

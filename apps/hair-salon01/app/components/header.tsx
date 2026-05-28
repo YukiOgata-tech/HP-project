@@ -10,45 +10,64 @@ import { useTheme } from "../lib/theme";
 const reservationUrl = "https://beauty.hotpepper.jp/slnH000142482/";
 
 const navLinks = [
-  { href: "/#concept", label: "Concept", match: "/" },
-  { href: "/#stylists", label: "Stylists", match: "/" },
-  { href: "/#menu", label: "Menu", match: "/" },
-  { href: "/#access", label: "Access", match: "/" },
-  { href: "/news", label: "Journal", match: "/news" },
+  { href: "/#concept", label: "Concept" },
+  { href: "/menu",     label: "Menu"    },
+  { href: "/news",     label: "Journal" },
+  { href: "/#access",  label: "Access"  },
 ];
 
 export function Header() {
   const pathname = usePathname();
-  const [isOpen, setIsOpen] = useState(false);
-  const [mounted, setMounted] = useState(false);
+  const [isOpen, setIsOpen]     = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [mounted, setMounted]   = useState(false);
   const { resolvedTheme, setTheme } = useTheme();
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  useEffect(() => { setMounted(true); }, []);
+  useEffect(() => { setIsOpen(false); }, [pathname]);
 
   useEffect(() => {
-    setIsOpen(false);
-  }, [pathname]);
+    const handleScroll = () => setScrolled(window.scrollY > 24);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const isActive = (href: string) => {
+    if (href === "/news") return pathname.startsWith("/news");
+    if (href === "/menu") return pathname.startsWith("/menu");
+    return false;
+  };
 
   return (
     <>
-      <header className="fixed inset-x-0 top-0 z-50 border-b border-[var(--header-line)] bg-[var(--bg)]/90 backdrop-blur-xl">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 md:py-3">
-          <Link href="/" className="font-serif text-lg font-bold tracking-[0.2em] md:text-xl">
-            BROLETTO
+      {/* ── Header ── */}
+      <header
+        className={[
+          "fixed inset-x-0 top-0 z-50 bg-[var(--header-bg)] backdrop-blur-md transition-all duration-300",
+          scrolled ? "border-b border-[var(--header-border)]" : "",
+        ].join(" ")}
+      >
+        <div className="mx-auto flex max-w-[1400px] items-center justify-between px-6 py-3">
+
+          {/* Logo */}
+          <Link
+            href="/"
+            className="font-serif text-lg font-bold tracking-[0.32em] uppercase text-[var(--fg)]"
+          >
+            Broletto
           </Link>
 
-          <nav className="hidden gap-8 text-sm font-bold md:flex">
-            {navLinks.map(({ href, label, match }) => (
+          {/* Desktop Nav */}
+          <nav className="hidden items-center md:gap-5 lg:gap-9 md:flex">
+            {navLinks.map(({ href, label }) => (
               <Link
                 key={href}
                 href={href}
                 className={[
-                  "transition-colors hover:text-[var(--accent)]",
-                  pathname === match || (match !== "/" && pathname.startsWith(match))
-                    ? "text-[var(--accent)]"
-                    : "",
+                  "label-en transition-colors hover:underline",
+                  isActive(href)
+                    ? "text-[var(--fg)]"
+                    : "text-[var(--fg-subtle)] hover:text-[var(--fg)]",
                 ].join(" ")}
               >
                 {label}
@@ -56,27 +75,64 @@ export function Header() {
             ))}
           </nav>
 
-          <div className="flex items-center gap-2">
+          {/* Desktop Actions */}
+          <div className="hidden items-center gap-2.5 md:flex">
+            {mounted && (
+              <button
+                onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
+                className="flex h-8 w-8 items-center justify-center border border-[var(--border)] text-[var(--fg-subtle)] transition-all hover:border-[var(--fg)] hover:text-[var(--fg)]"
+                aria-label="テーマ切り替え"
+              >
+                <AnimatePresence mode="wait" initial={false}>
+                  <motion.span
+                    key={resolvedTheme}
+                    initial={{ opacity: 0, scale: 0.7 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.7 }}
+                    transition={{ duration: 0.15 }}
+                    className="flex items-center justify-center"
+                  >
+                    {resolvedTheme === "dark" ? <Sun size={13} /> : <Moon size={13} />}
+                  </motion.span>
+                </AnimatePresence>
+              </button>
+            )}
             <a
               href={reservationUrl}
-              className="rounded-full bg-[var(--cta)] px-4 py-2 text-xs font-bold text-white shadow-lg transition-all duration-200 hover:-translate-y-0.5 hover:brightness-110 active:scale-95 md:px-5 md:text-sm"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="label-en bg-[var(--cta)] text-[var(--cta-text)] px-5 py-2 transition-opacity hover:opacity-70"
             >
-              Web予約
+              Reserve
             </a>
+          </div>
+
+          {/* Mobile Actions */}
+          <div className="flex items-center gap-2 md:hidden">
+            {mounted && (
+              <button
+                onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
+                className="flex h-8 w-8 items-center justify-center border border-[var(--border)] text-[var(--fg-subtle)]"
+                aria-label="テーマ切り替え"
+              >
+                {resolvedTheme === "dark" ? <Sun size={13} /> : <Moon size={13} />}
+              </button>
+            )}
             <button
               onClick={() => setIsOpen((v) => !v)}
-              className="flex h-8 w-8 items-center justify-center rounded-full border border-[var(--border)] transition-colors hover:border-[var(--accent)] md:hidden"
+              className="flex h-8 w-8 items-center justify-center border border-[var(--border)] text-[var(--fg)]"
               aria-label={isOpen ? "メニューを閉じる" : "メニューを開く"}
             >
               <AnimatePresence mode="wait" initial={false}>
                 <motion.span
                   key={isOpen ? "close" : "open"}
-                  initial={{ rotate: -90, opacity: 0 }}
-                  animate={{ rotate: 0, opacity: 1 }}
-                  exit={{ rotate: 90, opacity: 0 }}
+                  initial={{ opacity: 0, rotate: -45 }}
+                  animate={{ opacity: 1, rotate: 0 }}
+                  exit={{ opacity: 0, rotate: 45 }}
                   transition={{ duration: 0.15 }}
+                  className="flex items-center justify-center"
                 >
-                  {isOpen ? <X size={16} /> : <Menu size={16} />}
+                  {isOpen ? <X size={15} /> : <Menu size={15} />}
                 </motion.span>
               </AnimatePresence>
             </button>
@@ -84,28 +140,7 @@ export function Header() {
         </div>
       </header>
 
-      {/* テーマ切り替えボタン — ヘッダー直下に固定 */}
-      {mounted && (
-        <button
-          onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
-          className="fixed right-4 top-18 z-40 flex h-7 w-7 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--bg-section)] text-[var(--fg-muted)] shadow-md transition-all duration-200 hover:text-[var(--accent)] md:right-6 md:top-18"
-          aria-label="テーマ切り替え"
-        >
-          <AnimatePresence mode="wait" initial={false}>
-            <motion.span
-              key={resolvedTheme}
-              initial={{ scale: 0.6, opacity: 0, rotate: -30 }}
-              animate={{ scale: 1, opacity: 1, rotate: 0 }}
-              exit={{ scale: 0.6, opacity: 0, rotate: 30 }}
-              transition={{ duration: 0.2 }}
-            >
-              {resolvedTheme === "dark" ? <Sun size={13} /> : <Moon size={13} />}
-            </motion.span>
-          </AnimatePresence>
-        </button>
-      )}
-
-      {/* モバイルメニュー */}
+      {/* ── Mobile Drawer ── */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -113,32 +148,26 @@ export function Header() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -6 }}
             transition={{ duration: 0.18, ease: "easeOut" }}
-            className="fixed inset-x-0 top-14 z-40 border-b border-[var(--header-border)] bg-[var(--bg)]/95 backdrop-blur-xl md:hidden"
+            className="fixed inset-x-0 top-14.25 z-40 border-b border-[var(--border)] bg-[var(--bg)] md:hidden"
           >
-            <nav className="mx-auto flex max-w-7xl flex-col px-5">
-              {navLinks.map(({ href, label, match }) => (
+            <nav className="mx-auto max-w-[1400px] flex flex-col px-6">
+              {navLinks.map(({ href, label }) => (
                 <Link
                   key={href}
                   href={href}
-                  className="border-b border-[var(--border-light)] py-3.5 text-sm font-bold transition-colors last:border-b-0 hover:text-[var(--accent)]"
+                  className="label-en border-b border-[var(--border-light)] py-4 text-[var(--fg-subtle)] transition-colors last:border-b-0 hover:text-[var(--fg)]"
                 >
-                  <span
-                    className={
-                      pathname === match || (match !== "/" && pathname.startsWith(match))
-                        ? "text-[var(--accent)]"
-                        : ""
-                    }
-                  >
-                    {label}
-                  </span>
+                  {label}
                 </Link>
               ))}
               <a
                 href={reservationUrl}
+                target="_blank"
+                rel="noopener noreferrer"
                 onClick={() => setIsOpen(false)}
-                className="my-3 flex items-center justify-center rounded-full bg-[var(--cta)] py-3 text-sm font-bold text-white"
+                className="label-en my-4 bg-[var(--cta)] text-[var(--cta-text)] py-3.5 text-center"
               >
-                Hot Pepperで予約
+                Reserve
               </a>
             </nav>
           </motion.div>
