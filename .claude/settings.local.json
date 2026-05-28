@@ -21,7 +21,13 @@
       "Bash(Format-Table -AutoSize)",
       "PowerShell(New-Item *)",
       "PowerShell(Invoke-WebRequest -Uri \"http://localhost:3000\" -UseBasicParsing -TimeoutSec 3 2>&1 | Select-Object -First 5)",
-      "mcp__firebase__firestore_list_documents"
+      "mcp__firebase__firestore_list_documents",
+      "mcp__firebase__firestore_delete_document",
+      "WebSearch",
+      "WebFetch(domain:unsplash.com)",
+      "WebFetch(domain:www.pexels.com)",
+      "mcp__firebase__firestore_add_document",
+      "mcp__firebase__firestore_update_document"
     ]
   },
   "enabledMcpjsonServers": [

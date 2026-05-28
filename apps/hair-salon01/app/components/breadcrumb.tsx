@@ -25,12 +25,12 @@ export function Breadcrumb() {
   return (
     <nav
       aria-label="パンくずナビゲーション"
-      className="fixed inset-x-0 top-[57px] z-30 border-b border-[var(--header-border)] bg-[var(--header-bg)] backdrop-blur-md"
+      className="fixed inset-x-0 top-14.25 z-30 border-b border-[var(--header-border)] bg-[var(--header-bg)] backdrop-blur-md"
     >
-      <ol className="mx-auto flex max-w-[1400px] items-center gap-0.5 px-6 py-2">
+      <ol className="mx-auto flex max-w-350 items-center gap-0.5 px-6 py-2">
 
         {/* Home */}
-        <li>
+        <li className="flex items-center">
           <Link
             href="/"
             className="label-en text-[var(--fg-subtle)] transition-colors hover:text-[var(--fg)]"
@@ -40,13 +40,13 @@ export function Breadcrumb() {
         </li>
 
         {segments.map((seg, i) => {
-          const href    = "/" + segments.slice(0, i + 1).join("/");
-          const label   = toLabel(seg);
-          const isLast  = i === segments.length - 1;
+          const href   = "/" + segments.slice(0, i + 1).join("/");
+          const label  = toLabel(seg);
+          const isLast = i === segments.length - 1;
 
           return (
             <li key={href} className="flex items-center gap-0.5">
-              <ChevronRight size={9} className="mx-0.5 shrink-0 text-[var(--fg-subtle)] opacity-40" />
+              <ChevronRight size={11} className="mx-0.5 shrink-0 text-[var(--fg-subtle)]" />
               {isLast ? (
                 <span className="label-en text-[var(--fg)]" aria-current="page">
                   {label}
