@@ -40,12 +40,12 @@ export default function AdminLoginPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[var(--bg-off)]">
+    <div className="min-h-screen bg-(--bg-off)">
       <div className="mx-auto flex min-h-screen max-w-6xl items-center px-4 py-10 md:px-6">
-        <div className="grid w-full gap-px border border-[var(--border)] lg:grid-cols-[1fr_1fr]">
+        <div className="grid w-full gap-px border border-(--border) lg:grid-cols-[1fr_1fr]">
 
           {/* 左: ブランドパネル */}
-          <section className="bg-[var(--bg-dark)] p-8 text-white md:p-12">
+          <section className="bg-(--bg-dark) p-8 text-white md:p-12">
             <div className="flex h-full flex-col justify-between gap-12">
 
               <div className="space-y-1">
@@ -88,16 +88,16 @@ export default function AdminLoginPage() {
           </section>
 
           {/* 右: ログインフォーム */}
-          <section className="bg-[var(--bg)] p-8 md:p-12">
+          <section className="bg-(--bg) p-8 md:p-12">
             <div className="mx-auto max-w-sm space-y-8">
 
               <div className="space-y-2">
                 <span className="section-rule block" />
-                <p className="label-en text-[var(--fg-subtle)]">Sign In</p>
-                <h2 className="font-serif text-2xl font-bold text-[var(--fg)]">
+                <p className="label-en text-(--fg-subtle)">Sign In</p>
+                <h2 className="font-serif text-2xl font-bold text-(--fg)">
                   管理画面ログイン
                 </h2>
-                <p className="text-sm leading-7 text-[var(--fg-subtle)]">
+                <p className="text-sm leading-7 text-(--fg-subtle)">
                   登録済みの管理者アカウントでログインしてください。
                 </p>
               </div>
@@ -105,34 +105,34 @@ export default function AdminLoginPage() {
               <form onSubmit={handleSubmit} className="space-y-5">
 
                 <div className="space-y-2">
-                  <label className="block text-xs font-bold uppercase tracking-widest text-[var(--fg-subtle)]">
+                  <label className="block text-xs font-bold uppercase tracking-widest text-(--fg-subtle)">
                     メールアドレス
                   </label>
-                  <div className="flex items-center gap-3 border border-[var(--border)] bg-[var(--bg)] px-4 py-3 focus-within:border-[var(--fg)]">
-                    <Mail size={14} className="shrink-0 text-[var(--fg-subtle)]" />
+                  <div className="flex items-center gap-3 border border-(--border) bg-(--bg) px-4 py-3 focus-within:border-(--fg)">
+                    <Mail size={14} className="shrink-0 text-(--fg-subtle)" />
                     <input
                       type="email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       required
-                      className="w-full bg-transparent text-sm text-[var(--fg)] outline-none placeholder:text-[var(--fg-subtle)]"
+                      className="w-full bg-transparent text-sm text-(--fg) outline-none placeholder:text-(--fg-subtle)"
                       placeholder="admin@example.com"
                     />
                   </div>
                 </div>
 
                 <div className="space-y-2">
-                  <label className="block text-xs font-bold uppercase tracking-widest text-[var(--fg-subtle)]">
+                  <label className="block text-xs font-bold uppercase tracking-widest text-(--fg-subtle)">
                     パスワード
                   </label>
-                  <div className="flex items-center gap-3 border border-[var(--border)] bg-[var(--bg)] px-4 py-3 focus-within:border-[var(--fg)]">
-                    <LockKeyhole size={14} className="shrink-0 text-[var(--fg-subtle)]" />
+                  <div className="flex items-center gap-3 border border-(--border) bg-(--bg) px-4 py-3 focus-within:border-(--fg)">
+                    <LockKeyhole size={14} className="shrink-0 text-(--fg-subtle)" />
                     <input
                       type="password"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       required
-                      className="w-full bg-transparent text-sm text-[var(--fg)] outline-none placeholder:text-[var(--fg-subtle)]"
+                      className="w-full bg-transparent text-sm text-(--fg) outline-none placeholder:text-(--fg-subtle)"
                       placeholder="••••••••"
                     />
                   </div>
@@ -147,7 +147,7 @@ export default function AdminLoginPage() {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full bg-[var(--cta)] px-5 py-3.5 text-xs font-bold uppercase tracking-widest text-[var(--cta-text)] transition-opacity hover:opacity-75 disabled:cursor-not-allowed disabled:opacity-40"
+                  className="w-full bg-(--cta) px-5 py-3.5 text-xs font-bold uppercase tracking-widest text-(--cta-text) transition-opacity hover:opacity-75 disabled:cursor-not-allowed disabled:opacity-40"
                 >
                   {loading ? "ログイン中..." : "ログインして管理画面へ"}
                 </button>

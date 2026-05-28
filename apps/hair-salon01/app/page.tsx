@@ -16,6 +16,15 @@ import { HeroSlider } from "./components/hero-slider";
 import { FloatingRecruitButton } from "./components/FloatingRecruitButton";
 
 const SITE_ID        = process.env.SITE_ID!;
+
+/** 今年なら "MM.DD"、年を跨いでいれば "YYYY.MM.DD" */
+function fmtNewsStripDate(dateStr: string): string {
+  const d = new Date(dateStr);
+  const sameYear = d.getFullYear() === new Date().getFullYear();
+  return sameYear
+    ? d.toLocaleDateString("ja-JP", { month: "2-digit", day: "2-digit" }).replace("/", ".")
+    : d.toLocaleDateString("ja-JP", { year: "numeric", month: "2-digit", day: "2-digit" }).replace(/\//g, ".");
+}
 const reservationUrl = "https://beauty.hotpepper.jp/slnH000142482/";
 const tel            = "025-278-7274";
 const instagramUrl   = "https://www.instagram.com/risplendere_broletto/";
@@ -159,12 +168,12 @@ export default async function Home() {
         </div>
 
         {/* ─ 右: ブランドパネル (デスクトップのみ) ─ */}
-        <div className="hidden flex-col justify-between border-l border-[var(--border)] bg-[var(--bg)] px-10 py-14 md:flex md:w-[45%] lg:px-14">
+        <div className="hidden flex-col justify-between border-l border-(--border) bg-(--bg) px-10 py-14 md:flex md:w-[45%] lg:px-14">
 
           {/* 上部: カテゴリラベル */}
           <div>
-            <p className="label-en text-[var(--fg-subtle)]">Hair Salon</p>
-            <div className="mt-4 h-px w-10 bg-[var(--border)]" />
+            <p className="label-en text-(--fg-subtle)">Hair Salon</p>
+            <div className="mt-4 h-px w-10 bg-(--border)" />
           </div>
 
           {/* 中部: ブランド名 */}
@@ -177,18 +186,18 @@ export default async function Home() {
             </p>
 
             {/* "ROLETTO" */}
-            <p className="-mt-1 font-serif text-2xl font-bold uppercase tracking-[0.5em] text-[var(--fg-muted)] lg:text-[1.75rem]">
+            <p className="-mt-1 font-serif text-2xl font-bold uppercase tracking-[0.5em] text-(--fg-muted) lg:text-[1.75rem]">
               ROLETTO
             </p>
 
             {/* デコレーションライン */}
             <div className="mt-8 space-y-1.5">
-              <div className="h-px w-full bg-[var(--border)]" />
-              <div className="h-px w-2/3 bg-[var(--border-light)]" />
+              <div className="h-px w-full bg-(--border)" />
+              <div className="h-px w-2/3 bg-(--border-light)" />
             </div>
 
             {/* キャッチコピー */}
-            <p className="mt-6 text-xs leading-7 text-[var(--fg-subtle)]">
+            <p className="mt-6 text-xs leading-7 text-(--fg-subtle)">
               女性スタッフだけの<br />
               小さくて大切な場所
             </p>
@@ -196,9 +205,9 @@ export default async function Home() {
 
           {/* 下部: 場所情報 */}
           <div>
-            <div className="mb-5 h-px w-full bg-[var(--border)]" />
-            <p className="label-en text-[var(--fg-subtle)]">Niigata / Japan</p>
-            <p className="mt-2.5 text-xs leading-6 text-[var(--fg-muted)]">
+            <div className="mb-5 h-px w-full bg-(--border)" />
+            <p className="label-en text-(--fg-subtle)">Niigata / Japan</p>
+            <p className="mt-2.5 text-xs leading-6 text-(--fg-muted)">
               新潟市中央区本馬越<br />
               2丁目8番17号
             </p>
@@ -211,15 +220,15 @@ export default async function Home() {
           NEWS STRIP — 最新お知らせ
       ════════════════════════════════════════ */}
       {latestPosts.length > 0 && (
-        <section className="border-b border-[var(--border)] bg-[var(--bg)]">
+        <section className="border-b border-(--border) bg-(--bg)">
           <div className="mx-auto max-w-350">
 
             {/* ヘッダー行 */}
-            <div className="flex items-center justify-between border-b border-[var(--border-light)] px-6 py-3">
-              <p className="label-en text-[var(--fg-subtle)]">最新のお知らせ</p>
+            <div className="flex items-center justify-between border-b border-(--border-light) px-6 py-3">
+              <p className="label-en text-(--fg-subtle)">最新のお知らせ</p>
               <Link
                 href="/news"
-                className="label-en inline-flex items-center gap-1.5 text-[var(--fg-subtle)] transition-colors hover:text-[var(--fg)]"
+                className="label-en inline-flex items-center gap-1.5 text-(--fg-subtle) transition-colors hover:text-(--fg) hover:underline"
               >
                 すべて見る
                 <ArrowRight size={10} />
@@ -227,7 +236,7 @@ export default async function Home() {
             </div>
 
             {/* 記事リスト */}
-            <ul className="divide-y divide-[var(--border-light)]">
+            <ul className="divide-y divide-(--border-light)">
               {latestPosts.map((post) => (
                 <li key={post.id}>
                   <Link
@@ -235,19 +244,16 @@ export default async function Home() {
                     className="group flex items-center gap-4 px-6 py-3.5 transition-colors hover:bg-neutral-200 dark:hover:bg-neutral-800"
                   >
                     {post.publishedAt && (
-                      <time className="label-en w-20 shrink-0 text-[var(--fg-subtle)]">
-                        {new Date(post.publishedAt).toLocaleDateString("ja-JP", {
-                          month: "2-digit",
-                          day:   "2-digit",
-                        }).replace("/", ".")}
+                      <time className="shrink-0 text-sm sm:text-base font-medium tracking-none sm:tracking-wide text-(--fg-subtle)">
+                        {fmtNewsStripDate(post.publishedAt)}
                       </time>
                     )}
-                    <p className="min-w-0 flex-1 truncate text-sm sm:text-lg font-bold text-[var(--fg)]">
+                    <p className="min-w-0 flex-1 truncate text-sm sm:text-lg font-bold text-(--fg)">
                       {post.title}
                     </p>
                     <ArrowRight
                       size={12}
-                      className="shrink-0 text-[var(--fg-subtle)] transition-transform group-hover:translate-x-1"
+                      className="shrink-0 text-(--fg-subtle) transition-transform group-hover:translate-x-1"
                     />
                   </Link>
                 </li>
@@ -262,7 +268,7 @@ export default async function Home() {
           モバイル: salon-01フル幅 → テキスト
           デスクトップ: 左:2枚非対称グリッド / 右:テキスト
       ════════════════════════════════════════ */}
-      <section id="concept" className="bg-[var(--bg-off)]">
+      <section id="concept" className="bg-(--bg-off)">
 
         {/* ─ モバイル: salon-01 フル幅ヘッダー画像 ─ */}
         <div className="relative h-56 overflow-hidden sm:h-72 md:hidden">
@@ -270,12 +276,12 @@ export default async function Home() {
             src="/images/salon-01.jpg"
             alt="RISPLENDERE BROLETTOの店内"
             fill
-            sizes="100vw"
+            sizes="(min-width: 768px) 0px, 100vw"
             className="object-cover object-center"
             priority
           />
           {/* 下からのグラデーション */}
-          <div className="absolute inset-0 bg-linear-to-t from-[var(--bg-off)] via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-linear-to-t from-(--bg-off) via-transparent to-transparent" />
         </div>
 
         {/* ─ コンテンツ本体 ─ */}
@@ -314,8 +320,8 @@ export default async function Home() {
               {/* CSSラインアクセント */}
               <div className="flex items-end pb-3 pl-3">
                 <div className="flex flex-col gap-1.5">
-                  <div className="h-px w-10 bg-[var(--border)]" />
-                  <div className="h-px w-6 bg-[var(--border-light)]" />
+                  <div className="h-px w-10 bg-(--border)" />
+                  <div className="h-px w-6 bg-(--border-light)" />
                 </div>
               </div>
             </div>
@@ -326,33 +332,33 @@ export default async function Home() {
             <span className="section-rule" />
             <p className="label-section">Concept</p>
 
-            <h2 className="mt-5 text-3xl font-black leading-tight text-[var(--fg)] md:text-4xl lg:text-5xl">
+            <h2 className="mt-5 text-3xl font-black leading-tight text-(--fg) md:text-4xl lg:text-5xl">
               ブロレットに来ると、<br />
               キラキラ輝いて<br />
               帰れる場所。
             </h2>
 
-            <p className="mt-6 text-sm leading-8 text-[var(--fg-subtle)] md:text-base md:leading-9">
+            <p className="mt-6 text-sm leading-8 text-(--fg-subtle) md:text-base md:leading-9">
               サロン名「RISPLENDERE BROLETTO」はイタリア語で
               「キラキラ輝く小さな場所」という意味。ブロレットに訪れた方が
               輝いて帰れるよう、願いを込めてつけられた名前です。
             </p>
-            <p className="mt-4 text-sm leading-8 text-[var(--fg-subtle)] md:text-base md:leading-9">
+            <p className="mt-4 text-sm leading-8 text-(--fg-subtle) md:text-base md:leading-9">
               女性スタッフだけの小さなサロン。細やかな気配りで、
               すべてのお客様のご要望に応えられるサロンを目指しています。
             </p>
 
             {/* 言葉の意味ブロック */}
             <div className="mt-8 grid grid-cols-2 gap-3">
-              <div className="border border-[var(--border)] bg-[var(--card)] p-4">
-                <p className="label-en text-[var(--fg-subtle)]">Risplendere</p>
-                <p className="mt-2 text-xl font-black text-[var(--fg)]">輝く</p>
-                <p className="mt-1 text-xs text-[var(--fg-subtle)]">キラキラ輝く</p>
+              <div className="border border-(--border) bg-(--card) p-4">
+                <p className="label-en text-(--fg-subtle)">Risplendere</p>
+                <p className="mt-2 text-xl font-black text-(--fg)">輝く</p>
+                <p className="mt-1 text-xs text-(--fg-subtle)">キラキラ輝く</p>
               </div>
-              <div className="border border-[var(--border)] bg-[var(--card)] p-4">
-                <p className="label-en text-[var(--fg-subtle)]">Broletto</p>
-                <p className="mt-2 text-xl font-black text-[var(--fg)]">場所</p>
-                <p className="mt-1 text-xs text-[var(--fg-subtle)]">小さな場所</p>
+              <div className="border border-(--border) bg-(--card) p-4">
+                <p className="label-en text-(--fg-subtle)">Broletto</p>
+                <p className="mt-2 text-xl font-black text-(--fg)">場所</p>
+                <p className="mt-1 text-xs text-(--fg-subtle)">小さな場所</p>
               </div>
             </div>
           </FadeUp>
@@ -362,8 +368,8 @@ export default async function Home() {
       {/* ════════════════════════════════════════
           PROMISE
       ════════════════════════════════════════ */}
-      <section className="bg-[var(--bg-dark)] px-6 py-16 text-white md:py-24 lg:py-32">
-        <div className="mx-auto max-w-[1400px]">
+      <section className="bg-(--bg-dark) px-6 py-16 text-white md:py-24 lg:py-32">
+        <div className="mx-auto max-w-350">
           <FadeUp>
             <span className="section-rule section-rule--white" />
             <p className="label-en text-white/35">Promise</p>
@@ -411,20 +417,20 @@ export default async function Home() {
       {/* ════════════════════════════════════════
           MENU OVERVIEW
       ════════════════════════════════════════ */}
-      <section id="menu" className="bg-[var(--bg)] px-6 py-16 md:py-24 lg:py-32">
-        <div className="mx-auto max-w-[1400px]">
+      <section id="menu" className="bg-(--bg) px-6 py-16 md:py-24 lg:py-32">
+        <div className="mx-auto max-w-350">
 
           <FadeUp className="flex items-end justify-between gap-4">
             <div>
               <span className="section-rule" />
               <p className="label-section">Menu</p>
-              <h2 className="mt-5 text-2xl font-black text-[var(--fg)] md:text-3xl lg:text-4xl">
+              <h2 className="mt-5 text-2xl font-black text-(--fg) md:text-3xl lg:text-4xl">
                 メニュー
               </h2>
             </div>
             <Link
               href="/menu"
-              className="label-en hidden shrink-0 items-center gap-2 border border-[var(--border)] px-5 py-2.5 text-[var(--fg-subtle)] transition-all hover:border-[var(--fg)] hover:text-[var(--fg)] sm:inline-flex"
+              className="label-en hidden shrink-0 items-center gap-2 border border-(--border) px-5 py-2.5 text-(--fg-subtle) transition-all hover:border-(--fg) hover:text-(--fg) sm:inline-flex"
             >
               全メニューを見る
               <ArrowRight size={12} />
@@ -436,21 +442,21 @@ export default async function Home() {
               <StaggerItem key={en}>
                 <Link
                   href="/menu"
-                  className="group block border border-[var(--border)] bg-[var(--card)] p-5 transition-all hover:border-[var(--fg)] md:p-7"
+                  className="group block border border-(--border) bg-(--card) p-5 transition-all hover:border-(--fg) md:p-7"
                 >
-                  <p className="label-en text-[var(--fg-subtle)] transition-colors group-hover:text-[var(--fg)]">
+                  <p className="label-en text-(--fg-subtle) transition-colors group-hover:text-(--fg)">
                     {en}
                   </p>
-                  <p className="mt-2 text-base font-black text-[var(--fg)] md:text-xl">
+                  <p className="mt-2 text-base font-black text-(--fg) md:text-xl">
                     {jp}
                   </p>
-                  <div className="mt-4 h-px w-full bg-[var(--border-light)]" />
+                  <div className="mt-4 h-px w-full bg-(--border-light)" />
                   <div className="mt-4 flex items-baseline gap-1">
-                    <span className="text-xs text-[var(--fg-subtle)]">from</span>
-                    <span className="text-lg font-black text-[var(--fg)] md:text-2xl">
+                    <span className="text-xs text-(--fg-subtle)">from</span>
+                    <span className="text-lg font-black text-(--fg) md:text-2xl">
                       {from}
                     </span>
-                    <span className="text-[10px] text-[var(--fg-subtle)]">{note}</span>
+                    <span className="text-[10px] text-(--fg-subtle)">{note}</span>
                   </div>
                 </Link>
               </StaggerItem>
@@ -460,7 +466,7 @@ export default async function Home() {
           <FadeUp className="mt-6 sm:hidden">
             <Link
               href="/menu"
-              className="label-en flex w-full items-center justify-center gap-2 border border-[var(--border)] py-3.5 text-[var(--fg-subtle)] transition-all hover:border-[var(--fg)] hover:text-[var(--fg)]"
+              className="label-en flex w-full items-center justify-center gap-2 border border-(--border) py-3.5 text-(--fg-subtle) transition-all hover:border-(--fg) hover:text-(--fg)"
             >
               全メニューを見る
               <ArrowRight size={12} />
@@ -472,12 +478,12 @@ export default async function Home() {
       {/* ════════════════════════════════════════
           SPECIAL SERVICES
       ════════════════════════════════════════ */}
-      <section className="bg-[var(--bg-off)] px-6 py-16 md:py-24 lg:py-32">
-        <div className="mx-auto max-w-[1400px]">
+      <section className="bg-(--bg-off) px-6 py-16 md:py-24 lg:py-32">
+        <div className="mx-auto max-w-350">
           <FadeUp>
             <span className="section-rule" />
             <p className="label-section">Special Service</p>
-            <h2 className="mt-5 text-2xl font-black text-[var(--fg)] md:text-3xl lg:text-4xl">
+            <h2 className="mt-5 text-2xl font-black text-(--fg) md:text-3xl lg:text-4xl">
               ブロレットだからできる、<br className="sm:hidden" />
               特別なこと。
             </h2>
@@ -486,9 +492,9 @@ export default async function Home() {
           <StaggerList className="mt-8 grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3 md:gap-4 lg:mt-12">
             {specials.map(({ label, text }) => (
               <StaggerItem key={label}>
-                <div className="border border-[var(--border)] bg-[var(--card)] p-5 md:p-6">
-                  <p className="label-en text-[var(--fg-subtle)]">{label}</p>
-                  <p className="mt-3 text-sm font-bold text-[var(--fg)] leading-6">
+                <div className="border border-(--border) bg-(--card) p-5 md:p-6">
+                  <p className="label-en text-(--fg-subtle)">{label}</p>
+                  <p className="mt-3 text-sm font-bold text-(--fg) leading-6">
                     {text}
                   </p>
                 </div>
@@ -501,8 +507,8 @@ export default async function Home() {
       {/* ════════════════════════════════════════
           GALLERY
       ════════════════════════════════════════ */}
-      <section className="bg-[var(--bg-dark)] px-6 py-16 md:py-24 lg:py-32">
-        <div className="mx-auto max-w-[1400px]">
+      <section className="bg-(--bg-dark) px-6 py-16 md:py-24 lg:py-32">
+        <div className="mx-auto max-w-350">
           <FadeUp>
             <span className="section-rule section-rule--white" />
             <p className="label-en text-white/35">Gallery</p>
@@ -514,28 +520,35 @@ export default async function Home() {
           <StaggerList className="mt-8 grid grid-cols-2 gap-2 md:grid-cols-4 md:gap-3 lg:mt-12">
             {galleryImages.map(({ src, alt }) => (
               <StaggerItem key={src}>
-                <div className="overflow-hidden">
+                <Link href="/gallery" className="group block overflow-hidden">
                   <Image
                     src={src}
                     alt={alt}
                     width={480}
                     height={640}
                     sizes="(min-width: 768px) 25vw, 50vw"
-                    className="h-48 w-full object-cover transition-transform duration-700 hover:scale-105 sm:h-60 md:h-72"
+                    className="h-48 w-full object-cover transition-transform duration-700 group-hover:scale-105 sm:h-60 md:h-72"
                   />
-                </div>
+                </Link>
               </StaggerItem>
             ))}
           </StaggerList>
 
-          <FadeUp delay={0.2} className="mt-8 text-center">
+          <FadeUp delay={0.2} className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
+            <Link
+              href="/gallery"
+              className="label-en inline-flex items-center gap-2 bg-white px-7 py-3.5 text-black transition-opacity hover:opacity-80"
+            >
+              ギャラリーをすべて見る
+              <ArrowRight size={12} />
+            </Link>
             <a
               href={reservationUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="label-en inline-flex items-center gap-2 border border-white/20 px-7 py-3.5 text-white/55 transition-all hover:border-white/50 hover:text-white"
             >
-              Hot Pepperで施術事例を見る
+              Hot Pepperで予約
               <ArrowRight size={12} />
             </a>
           </FadeUp>
@@ -545,19 +558,19 @@ export default async function Home() {
       {/* ════════════════════════════════════════
           JOURNAL
       ════════════════════════════════════════ */}
-      <section className="bg-[var(--bg)] px-6 py-16 md:py-24 lg:py-32">
-        <div className="mx-auto max-w-[1400px]">
+      <section className="bg-(--bg) px-6 py-16 md:py-24 lg:py-32">
+        <div className="mx-auto max-w-350">
           <FadeUp className="flex items-end justify-between gap-4">
             <div>
               <span className="section-rule" />
               <p className="label-section">Journal</p>
-              <h2 className="mt-5 text-2xl font-black text-[var(--fg)] md:text-3xl">
+              <h2 className="mt-5 text-2xl font-black text-(--fg) md:text-3xl">
                 サロンからのお知らせ
               </h2>
             </div>
             <Link
               href="/news"
-              className="label-en hidden shrink-0 items-center gap-2 border border-[var(--border)] px-5 py-2.5 text-[var(--fg-subtle)] transition-all hover:border-[var(--fg)] hover:text-[var(--fg)] sm:inline-flex"
+              className="label-en hidden shrink-0 items-center gap-2 border border-(--border) px-5 py-2.5 text-(--fg-subtle) transition-all hover:border-(--fg) hover:text-(--fg) sm:inline-flex"
             >
               一覧を見る
               <ArrowRight size={12} />
@@ -565,13 +578,13 @@ export default async function Home() {
           </FadeUp>
 
           {latestPosts.length === 0 ? (
-            <FadeIn className="mt-10 border border-dashed border-[var(--border)] px-6 py-14 text-center">
-              <p className="text-sm text-[var(--fg-subtle)]">
+            <FadeIn className="mt-10 border border-dashed border-(--border) px-6 py-14 text-center">
+              <p className="text-sm text-(--fg-subtle)">
                 現在、公開中の記事はありません。
               </p>
             </FadeIn>
           ) : (
-            <StaggerList className="mt-8 divide-y divide-[var(--border-light)] lg:mt-12">
+            <StaggerList className="mt-8 divide-y divide-(--border-light) lg:mt-12">
               {latestPosts.map((post, index) => (
                 <StaggerItem key={post.id}>
                   <Link
@@ -587,7 +600,7 @@ export default async function Home() {
                           className="h-full w-full object-cover"
                         />
                       ) : (
-                        <div className="h-full w-full bg-[var(--bg-off)]" />
+                        <div className="h-full w-full bg-(--bg-off)" />
                       )}
                     </div>
 
@@ -595,10 +608,10 @@ export default async function Home() {
                     <div className="min-w-0 flex-1">
                       <div className="flex flex-wrap items-center gap-3">
                         {index === 0 && (
-                          <span className="label-en text-[var(--fg-subtle)]">Latest</span>
+                          <span className="label-en text-(--fg-subtle)">Latest</span>
                         )}
                         {post.publishedAt && (
-                          <time className="text-xs text-[var(--fg-subtle)]">
+                          <time className="text-xs text-(--fg-subtle)">
                             {new Date(post.publishedAt).toLocaleDateString("ja-JP", {
                               year: "numeric",
                               month: "long",
@@ -607,17 +620,17 @@ export default async function Home() {
                           </time>
                         )}
                       </div>
-                      <h3 className="mt-2 text-base font-black text-[var(--fg)] md:text-lg">
+                      <h3 className="mt-2 text-base font-black text-(--fg) md:text-lg">
                         {post.title}
                       </h3>
-                      <p className="mt-1.5 line-clamp-2 text-sm leading-6 text-[var(--fg-subtle)]">
+                      <p className="mt-1.5 line-clamp-2 text-sm leading-6 text-(--fg-subtle)">
                         {post.excerpt ?? "詳細は記事ページでご覧ください。"}
                       </p>
                     </div>
 
                     <ChevronRight
                       size={16}
-                      className="hidden shrink-0 self-center text-[var(--fg-subtle)] transition-transform group-hover:translate-x-1 sm:block"
+                      className="hidden shrink-0 self-center text-(--fg-subtle) transition-transform group-hover:translate-x-1 sm:block"
                     />
                   </Link>
                 </StaggerItem>
@@ -628,7 +641,7 @@ export default async function Home() {
           <FadeUp className="mt-6 sm:hidden">
             <Link
               href="/news"
-              className="label-en flex w-full items-center justify-center gap-2 border border-[var(--border)] py-3.5 text-[var(--fg-subtle)] transition-all hover:border-[var(--fg)] hover:text-[var(--fg)]"
+              className="label-en flex w-full items-center justify-center gap-2 border border-(--border) py-3.5 text-(--fg-subtle) transition-all hover:border-(--fg) hover:text-(--fg)"
             >
               一覧を見る
               <ArrowRight size={12} />
@@ -640,25 +653,25 @@ export default async function Home() {
       {/* ════════════════════════════════════════
           JOIN US — 採用
       ════════════════════════════════════════ */}
-      <section className="bg-[var(--bg-off)] px-6 py-16 md:py-24 lg:py-32">
-        <div className="mx-auto max-w-[1400px]">
+      <section className="bg-(--bg-off) px-6 py-16 md:py-24 lg:py-32">
+        <div className="mx-auto max-w-350">
           <div className="grid gap-10 md:grid-cols-[1.2fr_1fr] md:items-center md:gap-16 lg:gap-24">
 
             <FadeUp>
               <span className="section-rule" />
               <p className="label-section">Join Us</p>
-              <h2 className="mt-5 text-2xl font-black text-[var(--fg)] md:text-3xl lg:text-4xl">
+              <h2 className="mt-5 text-2xl font-black text-(--fg) md:text-3xl lg:text-4xl">
                 ブロレットで、<br />
                 一緒に輝く場所を作りませんか。
               </h2>
-              <p className="mt-5 text-sm leading-8 text-[var(--fg-subtle)]">
+              <p className="mt-5 text-sm leading-8 text-(--fg-subtle)">
                 「髪に優しい。人に優しい。」を大切に、1人サロンから16年。
                 女性スタッフだけのチームで、お客様と向き合い続けています。
                 チームを支えてくれる仲間を募集中です。
               </p>
               <Link
                 href="/recruit"
-                className="label-en mt-8 inline-flex items-center gap-2 border border-[var(--border)] px-7 py-3.5 text-[var(--fg-subtle)] transition-all hover:border-[var(--fg)] hover:text-[var(--fg)]"
+                className="label-en mt-8 inline-flex items-center gap-2 border border-(--border) px-7 py-3.5 text-(--fg-subtle) transition-all hover:border-(--fg) hover:text-(--fg)"
               >
                 採用情報を詳しく見る
                 <ArrowRight size={12} />
@@ -673,9 +686,9 @@ export default async function Home() {
                   { label: "勤務",     value: "9:00〜17:00 / 完全週休2日制" },
                   { label: "サポート", value: "資格取得費用全額補助・残業手当1分単位" },
                 ].map(({ label, value }) => (
-                  <li key={label} className="grid grid-cols-[5.5rem_1fr] gap-3 border border-[var(--border)] bg-[var(--card)] px-5 py-4">
-                    <span className="label-en text-[var(--fg-subtle)]">{label}</span>
-                    <span className="text-sm text-[var(--fg)]">{value}</span>
+                  <li key={label} className="grid grid-cols-[5.5rem_1fr] gap-3 border border-(--border) bg-(--card) px-5 py-4">
+                    <span className="label-en text-(--fg-subtle)">{label}</span>
+                    <span className="text-sm text-(--fg)">{value}</span>
                   </li>
                 ))}
               </ul>
@@ -688,8 +701,8 @@ export default async function Home() {
       {/* ════════════════════════════════════════
           ACCESS
       ════════════════════════════════════════ */}
-      <section id="access" className="bg-[var(--bg-dark)] px-6 py-16 text-white md:py-24 lg:py-32">
-        <div className="mx-auto max-w-[1400px]">
+      <section id="access" className="bg-(--bg-dark) px-6 py-16 text-white md:py-24 lg:py-32">
+        <div className="mx-auto max-w-350">
           <FadeUp>
             <span className="section-rule section-rule--white" />
             <p className="label-en text-white/35">Access</p>
@@ -773,7 +786,7 @@ export default async function Home() {
                   src={mapUrl}
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
-                  className="h-72 w-full md:h-[340px]"
+                  className="h-72 w-full md:h-85"
                   style={{ border: 0 }}
                   allowFullScreen
                 />

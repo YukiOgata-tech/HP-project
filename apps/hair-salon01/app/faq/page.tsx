@@ -124,17 +124,17 @@ const faqSchema = {
 
 function FaqItem({ q, a }: { q: string; a: string }) {
   return (
-    <details className="group border-b border-[var(--border-light)]">
+    <details className="group border-b border-(--border-light)">
       <summary className="flex cursor-pointer list-none items-start justify-between gap-4 py-5 [&::-webkit-details-marker]:hidden">
-        <span className="text-sm font-bold leading-6 text-[var(--fg)]">{q}</span>
+        <span className="text-sm font-bold leading-6 text-(--fg)">{q}</span>
         <span
           aria-hidden
-          className="mt-0.5 shrink-0 text-base font-bold text-[var(--fg-subtle)] transition-transform duration-200 group-open:rotate-45"
+          className="mt-0.5 shrink-0 text-base font-bold text-(--fg-subtle) transition-transform duration-200 group-open:rotate-45"
         >
           ＋
         </span>
       </summary>
-      <p className="pb-6 text-sm leading-8 text-[var(--fg-subtle)]">{a}</p>
+      <p className="pb-6 text-sm leading-8 text-(--fg-subtle)">{a}</p>
     </details>
   );
 }
@@ -145,29 +145,29 @@ function FaqItem({ q, a }: { q: string; a: string }) {
 
 export default function FaqPage() {
   return (
-    <main className="bg-[var(--bg)]">
+    <main className="bg-(--bg)">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
 
       {/* ── ページヘッダー ── */}
-      <section className="border-b border-[var(--border)] bg-[var(--bg)] px-6 pt-24 pb-12 md:pt-32 md:pb-16">
-        <div className="mx-auto max-w-[1400px]">
+      <section className="border-b border-(--border) bg-(--bg) px-6 pt-24 pb-12 md:pt-32 md:pb-16">
+        <div className="mx-auto max-w-350">
           <FadeUp>
             <Link
               href="/"
-              className="label-en mb-3 sm:mb-6 inline-flex items-center gap-2 text-[var(--fg-subtle)] transition-colors hover:text-[var(--fg)]"
+              className="label-en mb-3 sm:mb-6 inline-flex items-center gap-2 text-(--fg-subtle) transition-colors hover:text-(--fg)"
             >
               <ArrowLeft size={12} />
               Back to Home
             </Link>
             <span className="section-rule block" />
             <p className="label-section">FAQ</p>
-            <h1 className="mt-5 font-serif text-4xl font-bold text-[var(--fg)] md:text-5xl lg:text-6xl">
+            <h1 className="mt-5 font-serif text-4xl font-bold text-(--fg) md:text-5xl lg:text-6xl">
               よくあるご質問
             </h1>
-            <p className="mt-5 max-w-2xl text-sm leading-7 text-[var(--fg-subtle)]">
+            <p className="mt-5 max-w-2xl text-sm leading-7 text-(--fg-subtle)">
               初めてご来店のお客様や、ご予約前に気になることをまとめました。
               こちらに掲載のない内容はお電話またはHot Pepper Beautyのメッセージでお気軽にお問い合わせください。
             </p>
@@ -176,15 +176,15 @@ export default function FaqPage() {
       </section>
 
       {/* ── FAQ 本体 ── */}
-      <div className="mx-auto max-w-[1400px] px-6 py-14 md:py-20">
+      <div className="mx-auto max-w-350 px-6 py-14 md:py-20">
         <StaggerList className="mx-auto max-w-3xl space-y-14">
           {faqs.map(({ id, en, category, items }) => (
             <StaggerItem key={id}>
               <section>
                 {/* カテゴリヘッダー */}
-                <div className="mb-2 border-b border-[var(--border)] pb-4">
-                  <p className="label-en text-[var(--fg-subtle)]">{en}</p>
-                  <h2 className="mt-1 text-2xl font-black text-[var(--fg)]">{category}</h2>
+                <div className="mb-2 border-b border-(--border) pb-4">
+                  <p className="label-en text-(--fg-subtle)">{en}</p>
+                  <h2 className="mt-1 text-2xl font-black text-(--fg)">{category}</h2>
                 </div>
 
                 {/* Q&A リスト */}
@@ -199,18 +199,18 @@ export default function FaqPage() {
         </StaggerList>
 
         {/* ── CTA ── */}
-        <div className="mx-auto mt-16 max-w-3xl border border-[var(--border)] p-8 md:p-10">
-          <p className="label-en text-[var(--fg-subtle)]">Contact</p>
-          <h2 className="mt-2 font-serif text-2xl font-bold text-[var(--fg)]">
+        <div className="mx-auto mt-16 max-w-3xl border border-(--border) p-8 md:p-10">
+          <p className="label-en text-(--fg-subtle)">Contact</p>
+          <h2 className="mt-2 font-serif text-2xl font-bold text-(--fg)">
             お気軽にご連絡ください
           </h2>
-          <p className="mt-3 text-sm leading-7 text-[var(--fg-subtle)]">
+          <p className="mt-3 text-sm leading-7 text-(--fg-subtle)">
             こちらに掲載のない内容については、お電話またはHot Pepper Beautyのメッセージ機能からご相談いただけます。
           </p>
           <div className="mt-6 flex flex-col gap-3 sm:flex-row">
             <a
               href="tel:025-278-7274"
-              className="label-en flex-1 border border-[var(--border)] py-3.5 text-center text-[var(--fg-subtle)] transition-all hover:border-[var(--fg)] hover:text-[var(--fg)]"
+              className="label-en flex-1 border border-(--border) py-3.5 text-center text-(--fg-subtle) transition-all hover:border-(--fg) hover:text-(--fg)"
             >
               025-278-7274
             </a>
@@ -218,7 +218,7 @@ export default function FaqPage() {
               href="https://beauty.hotpepper.jp/slnH000142482/"
               target="_blank"
               rel="noopener noreferrer"
-              className="label-en flex-1 bg-[var(--cta)] py-3.5 text-center text-[var(--cta-text)] transition-opacity hover:opacity-70"
+              className="label-en flex-1 bg-(--cta) py-3.5 text-center text-(--cta-text) transition-opacity hover:opacity-70"
             >
               Hot Pepperで予約・問い合わせ
             </a>

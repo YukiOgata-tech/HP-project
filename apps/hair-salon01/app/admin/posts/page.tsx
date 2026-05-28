@@ -34,8 +34,8 @@ export default async function AdminPostsPage() {
 
       {posts.length === 0 ? (
         <AdminSurface className="px-6 py-18 text-center">
-          <p className="text-lg font-bold text-[var(--fg)]">まだ記事がありません</p>
-          <p className="mt-2 text-sm text-[var(--fg-subtle)]">最初の記事を作成すると、ここに一覧表示されます。</p>
+          <p className="text-lg font-bold text-(--fg)">まだ記事がありません</p>
+          <p className="mt-2 text-sm text-(--fg-subtle)">最初の記事を作成すると、ここに一覧表示されます。</p>
           <div className="mt-6">
             <AdminPrimaryLink href="/admin/posts/new">最初の記事を作成する</AdminPrimaryLink>
           </div>
@@ -48,14 +48,14 @@ export default async function AdminPostsPage() {
                 <div className="min-w-0 space-y-3">
                   <div className="flex flex-wrap items-center gap-3">
                     <StatusBadge status={post.status} />
-                    <span className="text-xs uppercase tracking-widest text-[var(--fg-subtle)]">
+                    <span className="text-xs uppercase tracking-widest text-(--fg-subtle)">
                       {new Date(post.updatedAt).toLocaleDateString("ja-JP")}
                     </span>
                   </div>
                   <div className="space-y-2">
-                    <h2 className="font-serif text-xl font-bold text-[var(--fg)]">{post.title}</h2>
-                    <p className="font-mono text-xs text-[var(--fg-subtle)]">{post.slug}</p>
-                    <p className="max-w-3xl text-sm leading-7 text-[var(--fg-subtle)]">
+                    <h2 className="font-serif text-xl font-bold text-(--fg)">{post.title}</h2>
+                    <p className="font-mono text-xs text-(--fg-subtle)">{post.slug}</p>
+                    <p className="max-w-3xl text-sm leading-7 text-(--fg-subtle)">
                       {post.excerpt || "本文中心の記事です。編集画面から内容を確認・更新してください。"}
                     </p>
                   </div>
@@ -64,7 +64,7 @@ export default async function AdminPostsPage() {
                       {post.tags.map((tag) => (
                         <span
                           key={tag}
-                          className="border border-[var(--border)] px-3 py-1 text-xs font-bold uppercase tracking-wider text-[var(--fg-subtle)]"
+                          className="border border-(--border) px-3 py-1 text-xs font-bold uppercase tracking-wider text-(--fg-subtle)"
                         >
                           {tag}
                         </span>
@@ -78,14 +78,14 @@ export default async function AdminPostsPage() {
                     <Link
                       href={`/news/${post.slug}`}
                       target="_blank"
-                      className="inline-flex items-center border border-[var(--border)] px-4 py-2 text-xs font-bold uppercase tracking-widest text-[var(--fg-subtle)] transition-colors hover:border-[var(--fg)] hover:text-[var(--fg)]"
+                      className="inline-flex items-center border border-(--border) px-4 py-2 text-xs font-bold uppercase tracking-widest text-(--fg-subtle) transition-colors hover:border-(--fg) hover:text-(--fg)"
                     >
                       公開ページを見る ↗
                     </Link>
                   )}
                   <Link
                     href={`/admin/posts/${post.id}/edit`}
-                    className="inline-flex items-center bg-[var(--cta)] px-4 py-2 text-xs font-bold uppercase tracking-widest text-[var(--cta-text)] transition-opacity hover:opacity-75"
+                    className="inline-flex items-center bg-(--cta) px-4 py-2 text-xs font-bold uppercase tracking-widest text-(--cta-text) transition-opacity hover:opacity-75"
                   >
                     編集する
                   </Link>

@@ -38,14 +38,14 @@ export default async function NewsPostPage({ params }: Props) {
   if (!post) notFound();
 
   return (
-    <main className="bg-[var(--bg)]">
+    <main className="bg-(--bg)">
 
       {/* ── ページヘッダー ── */}
-      <section className="border-b border-[var(--border)] bg-[var(--bg)] px-6 pb-14 pt-28 md:pb-16 md:pt-36">
+      <section className="border-b border-(--border) bg-(--bg) px-6 pb-14 pt-28 md:pb-16 md:pt-36">
         <div className="mx-auto max-w-3xl">
           <Link
             href="/news"
-            className="label-en mb-3 sm:mb-6 inline-flex items-center gap-2 text-[var(--fg-subtle)] transition-colors hover:text-[var(--fg)]"
+            className="label-en mb-3 sm:mb-6 inline-flex items-center gap-2 text-(--fg-subtle) transition-colors hover:text-(--fg)"
           >
             <ArrowLeft size={12} />
             お知らせ一覧
@@ -54,19 +54,19 @@ export default async function NewsPostPage({ params }: Props) {
           {post.tags.length > 0 && (
             <div className="mt-4 flex flex-wrap gap-2">
               {post.tags.map((tag) => (
-                <span key={tag} className="label-en text-[var(--fg-subtle)]">
+                <span key={tag} className="label-en text-(--fg-subtle)">
                   {tag}
                 </span>
               ))}
             </div>
           )}
 
-          <h1 className="mt-4 font-serif text-3xl font-bold leading-tight text-[var(--fg)] md:text-4xl lg:text-5xl">
+          <h1 className="mt-4 font-serif text-3xl font-bold leading-tight text-(--fg) md:text-4xl lg:text-5xl">
             {post.title}
           </h1>
 
           {post.publishedAt && (
-            <time className="mt-4 block text-xs text-[var(--fg-subtle)]">
+            <time className="mt-4 block text-xs text-(--fg-subtle)">
               {new Date(post.publishedAt).toLocaleDateString("ja-JP", {
                 year: "numeric",
                 month: "long",
@@ -86,39 +86,39 @@ export default async function NewsPostPage({ params }: Props) {
               <img
                 src={post.coverImageUrl}
                 alt={post.title}
-                className="h-64 w-full object-cover md:h-[28rem]"
+                className="h-64 w-full object-cover md:h-112"
               />
             </div>
           )}
 
           {post.excerpt && (
-            <p className="mb-10 border-l-2 border-[var(--border)] pl-5 text-sm leading-8 text-[var(--fg-muted)] md:text-base md:leading-9">
+            <p className="mb-10 border-l-2 border-(--border) pl-5 text-sm leading-8 text-(--fg-muted) md:text-base md:leading-9">
               {post.excerpt}
             </p>
           )}
 
           <div
             className="prose max-w-none
-              prose-headings:font-serif prose-headings:text-[var(--fg)] prose-headings:font-bold
+              prose-headings:font-serif prose-headings:text-(--fg) prose-headings:font-bold
               prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-4
               prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3
-              prose-p:text-[var(--fg-muted)] prose-p:leading-8
-              prose-li:text-[var(--fg-muted)] prose-li:leading-8
-              prose-a:text-[var(--fg)] prose-a:underline prose-a:underline-offset-2 hover:prose-a:opacity-60
-              prose-blockquote:border-l-2 prose-blockquote:border-[var(--border)] prose-blockquote:not-italic prose-blockquote:text-[var(--fg-subtle)]
+              prose-p:text-(--fg-muted) prose-p:leading-8
+              prose-li:text-(--fg-muted) prose-li:leading-8
+              prose-a:text-(--fg) prose-a:underline prose-a:underline-offset-2 hover:prose-a:opacity-60
+              prose-blockquote:border-l-2 prose-blockquote:border-(--border) prose-blockquote:not-italic prose-blockquote:text-(--fg-subtle)
               prose-img:w-full
-              prose-hr:border-[var(--border)]
-              prose-strong:text-[var(--fg)]
-              prose-table:border prose-table:border-[var(--border)]
-              prose-th:bg-[var(--bg-off)] prose-th:text-[var(--fg)] prose-th:border prose-th:border-[var(--border)]
-              prose-td:text-[var(--fg-muted)] prose-td:border prose-td:border-[var(--border)]"
+              prose-hr:border-(--border)
+              prose-strong:text-(--fg)
+              prose-table:border prose-table:border-(--border)
+              prose-th:bg-(--bg-off) prose-th:text-(--fg) prose-th:border prose-th:border-(--border)
+              prose-td:text-(--fg-muted) prose-td:border prose-td:border-(--border)"
             dangerouslySetInnerHTML={{ __html: post.contentHtml }}
           />
 
-          <div className="mt-14 border-t border-[var(--border)] pt-8">
+          <div className="mt-14 border-t border-(--border) pt-8">
             <Link
               href="/news"
-              className="label-en inline-flex items-center gap-2 text-[var(--fg-subtle)] transition-colors hover:text-[var(--fg)]"
+              className="label-en inline-flex items-center gap-2 text-(--fg-subtle) transition-colors hover:text-(--fg)"
             >
               <ArrowLeft size={11} />
               お知らせ一覧へ戻る

@@ -53,40 +53,40 @@ export default async function AdminDashboardPage() {
 
       <div className="grid gap-6 xl:grid-cols-[1.35fr_0.9fr]">
         <AdminSurface className="overflow-hidden">
-          <div className="flex items-center justify-between border-b border-[var(--border)] px-6 py-5">
+          <div className="flex items-center justify-between border-b border-(--border) px-6 py-5">
             <div>
-              <h2 className="text-lg font-bold text-[var(--fg)]">最近の記事</h2>
-              <p className="text-sm text-[var(--fg-subtle)]">更新の新しい順に 5 件表示しています。</p>
+              <h2 className="text-lg font-bold text-(--fg)">最近の記事</h2>
+              <p className="text-sm text-(--fg-subtle)">更新の新しい順に 5 件表示しています。</p>
             </div>
             <AdminSecondaryLink href="/admin/posts">すべて見る</AdminSecondaryLink>
           </div>
 
           {posts.length === 0 ? (
             <div className="px-6 py-16 text-center">
-              <p className="text-base font-bold text-[var(--fg)]">まだ記事がありません</p>
-              <p className="mt-2 text-sm text-[var(--fg-subtle)]">最初の記事を作成して、ニュース一覧を育てていきましょう。</p>
+              <p className="text-base font-bold text-(--fg)">まだ記事がありません</p>
+              <p className="mt-2 text-sm text-(--fg-subtle)">最初の記事を作成して、ニュース一覧を育てていきましょう。</p>
               <div className="mt-6">
                 <AdminPrimaryLink href="/admin/posts/new">最初の記事を作成</AdminPrimaryLink>
               </div>
             </div>
           ) : (
-            <ul className="divide-y divide-[var(--border)]">
+            <ul className="divide-y divide-(--border)">
               {posts.slice(0, 5).map((post) => (
-                <li key={post.id} className="px-6 py-5 transition-colors hover:bg-[var(--card-off)]">
+                <li key={post.id} className="px-6 py-5 transition-colors hover:bg-(--card-off)">
                   <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
                     <div className="space-y-2">
                       <div className="flex flex-wrap items-center gap-3">
-                        <h3 className="text-base font-bold text-[var(--fg)]">{post.title}</h3>
+                        <h3 className="text-base font-bold text-(--fg)">{post.title}</h3>
                         <StatusBadge status={post.status} />
                       </div>
-                      <p className="font-mono text-xs text-[var(--fg-subtle)]">{post.slug}</p>
-                      <p className="text-sm text-[var(--fg-subtle)]">
+                      <p className="font-mono text-xs text-(--fg-subtle)">{post.slug}</p>
+                      <p className="text-sm text-(--fg-subtle)">
                         更新日 {new Date(post.updatedAt).toLocaleDateString("ja-JP")}
                       </p>
                     </div>
                     <Link
                       href={`/admin/posts/${post.id}/edit`}
-                      className="inline-flex items-center border border-[var(--border)] px-4 py-2 text-xs font-bold uppercase tracking-widest text-[var(--fg-subtle)] transition-colors hover:border-[var(--fg)] hover:text-[var(--fg)]"
+                      className="inline-flex items-center border border-(--border) px-4 py-2 text-xs font-bold uppercase tracking-widest text-(--fg-subtle) transition-colors hover:border-(--fg) hover:text-(--fg)"
                     >
                       編集する
                     </Link>
@@ -101,16 +101,16 @@ export default async function AdminDashboardPage() {
           <AdminSurface className="p-6">
             <div className="space-y-4">
               <div>
-                <p className="label-en text-[var(--fg-subtle)]">Site</p>
-                <h2 className="mt-2 font-serif text-xl font-bold text-[var(--fg)]">{SITE_ID}</h2>
+                <p className="label-en text-(--fg-subtle)">Site</p>
+                <h2 className="mt-2 font-serif text-xl font-bold text-(--fg)">{SITE_ID}</h2>
               </div>
-              <p className="text-sm leading-7 text-[var(--fg-subtle)]">
+              <p className="text-sm leading-7 text-(--fg-subtle)">
                 管理画面は公開中記事と下書きの両方を横断して管理できます。更新後はニュース一覧も自動で再検証されます。
               </p>
               <Link
                 href="/"
                 target="_blank"
-                className="inline-flex items-center text-xs font-bold uppercase tracking-widest text-[var(--fg-subtle)] transition-colors hover:text-[var(--fg)]"
+                className="inline-flex items-center text-xs font-bold uppercase tracking-widest text-(--fg-subtle) transition-colors hover:text-(--fg)"
               >
                 公開サイトを確認する ↗
               </Link>
@@ -120,24 +120,24 @@ export default async function AdminDashboardPage() {
           <AdminSurface className="p-4 md:p-6">
             <div className="space-y-4">
               <div>
-                <p className="label-en text-[var(--fg-subtle)]">Latest Activity</p>
-                <h2 className="mt-2 font-serif text-xl font-bold text-[var(--fg)]">最近の更新</h2>
+                <p className="label-en text-(--fg-subtle)">Latest Activity</p>
+                <h2 className="mt-2 font-serif text-xl font-bold text-(--fg)">最近の更新</h2>
               </div>
               {latestPost ? (
-                <div className="border border-[var(--border)] bg-[var(--card-off)] p-5">
+                <div className="border border-(--border) bg-(--card-off) p-5">
                   <div className="flex flex-wrap items-center gap-3">
                     <StatusBadge status={latestPost.status} />
-                    <span className="text-xs uppercase tracking-widest text-[var(--fg-subtle)]">
+                    <span className="text-xs uppercase tracking-widest text-(--fg-subtle)">
                       {new Date(latestPost.updatedAt).toLocaleDateString("ja-JP")}
                     </span>
                   </div>
-                  <h3 className="mt-4 font-serif text-lg font-bold text-[var(--fg)]">{latestPost.title}</h3>
-                  <p className="mt-2 text-sm text-[var(--fg-subtle)] line-clamp-3">
+                  <h3 className="mt-4 font-serif text-lg font-bold text-(--fg)">{latestPost.title}</h3>
+                  <p className="mt-2 text-sm text-(--fg-subtle) line-clamp-3">
                     {latestPost.excerpt || "本文を中心に構成された記事です。編集画面から内容を確認してください。"}
                   </p>
                 </div>
               ) : (
-                <p className="text-sm text-[var(--fg-subtle)]">まだ更新履歴はありません。</p>
+                <p className="text-sm text-(--fg-subtle)">まだ更新履歴はありません。</p>
               )}
             </div>
           </AdminSurface>

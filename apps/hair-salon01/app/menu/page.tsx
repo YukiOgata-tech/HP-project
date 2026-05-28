@@ -124,14 +124,14 @@ const stylingMenu: MenuItem[] = [
 /** シンプル行 */
 function MenuRow({ name, detail, time, price, note }: MenuItem) {
   return (
-    <div className="group flex items-start justify-between gap-4 border-b border-[var(--border-light)] py-4 last:border-b-0">
+    <div className="group flex items-start justify-between gap-4 border-b border-(--border-light) py-4 last:border-b-0">
       <div className="min-w-0 flex-1">
-        <p className="text-sm font-bold text-[var(--fg)]">{name}</p>
-        {detail && <p className="mt-0.5 text-xs text-[var(--fg-subtle)]">{detail}</p>}
-        {time   && <p className="mt-0.5 text-xs text-[var(--fg-subtle)]">所要時間目安 {time}</p>}
-        {note   && <p className="mt-1 text-[11px] text-[var(--fg-subtle)] leading-5">※ {note}</p>}
+        <p className="text-sm font-bold text-(--fg)">{name}</p>
+        {detail && <p className="mt-0.5 text-xs text-(--fg-subtle)">{detail}</p>}
+        {time   && <p className="mt-0.5 text-xs text-(--fg-subtle)">所要時間目安 {time}</p>}
+        {note   && <p className="mt-1 text-[11px] text-(--fg-subtle) leading-5">※ {note}</p>}
       </div>
-      <p className="shrink-0 text-sm font-black text-[var(--fg)] tabular-nums">{price}</p>
+      <p className="shrink-0 text-sm font-black text-(--fg) tabular-nums">{price}</p>
     </div>
   );
 }
@@ -139,19 +139,19 @@ function MenuRow({ name, detail, time, price, note }: MenuItem) {
 /** S/M/L サイズ行 */
 function SizedRow({ name, detail, s, m, l, note }: SizedItem) {
   return (
-    <div className="border-b border-[var(--border-light)] py-4 last:border-b-0">
+    <div className="border-b border-(--border-light) py-4 last:border-b-0">
       <div className="flex items-start justify-between gap-4">
         <div className="min-w-0 flex-1">
-          <p className="text-sm font-bold text-[var(--fg)]">{name}</p>
-          {detail && <p className="mt-0.5 text-xs text-[var(--fg-subtle)]">{detail}</p>}
+          <p className="text-sm font-bold text-(--fg)">{name}</p>
+          {detail && <p className="mt-0.5 text-xs text-(--fg-subtle)">{detail}</p>}
         </div>
-        <div className="flex shrink-0 gap-4 text-right text-xs tabular-nums text-[var(--fg-subtle)]">
-          {s && <span><span className="block text-[10px] font-bold text-[var(--fg-subtle)]">S</span>{s}</span>}
-          {m && <span><span className="block text-[10px] font-bold text-[var(--fg-subtle)]">M</span>{m}</span>}
-          {l && <span><span className="block text-[10px] font-bold text-[var(--fg-subtle)]">L</span>{l}</span>}
+        <div className="flex shrink-0 gap-4 text-right text-xs tabular-nums text-(--fg-subtle)">
+          {s && <span><span className="block text-[10px] font-bold text-(--fg-subtle)">S</span>{s}</span>}
+          {m && <span><span className="block text-[10px] font-bold text-(--fg-subtle)">M</span>{m}</span>}
+          {l && <span><span className="block text-[10px] font-bold text-(--fg-subtle)">L</span>{l}</span>}
         </div>
       </div>
-      {note && <p className="mt-1 text-[11px] text-[var(--fg-subtle)] leading-5">※ {note}</p>}
+      {note && <p className="mt-1 text-[11px] text-(--fg-subtle) leading-5">※ {note}</p>}
     </div>
   );
 }
@@ -159,9 +159,9 @@ function SizedRow({ name, detail, s, m, l, note }: SizedItem) {
 /** セクションヘッダー */
 function SectionHead({ id, en, jp }: { id: string; en: string; jp: string }) {
   return (
-    <div id={id} className="border-b border-[var(--border)] pb-4 pt-2">
-      <p className="label-en text-[var(--fg-subtle)]">{en}</p>
-      <h2 className="mt-1 text-2xl font-black text-[var(--fg)] md:text-3xl">{jp}</h2>
+    <div id={id} className="border-b border-(--border) pb-4 pt-2">
+      <p className="label-en text-(--fg-subtle)">{en}</p>
+      <h2 className="mt-1 text-2xl font-black text-(--fg) md:text-3xl">{jp}</h2>
     </div>
   );
 }
@@ -169,7 +169,7 @@ function SectionHead({ id, en, jp }: { id: string; en: string; jp: string }) {
 /** サブグループラベル */
 function SubLabel({ label }: { label: string }) {
   return (
-    <p className="mt-7 mb-2 label-en text-[var(--fg-subtle)] border-b border-[var(--border-light)] pb-2">
+    <p className="mt-7 mb-2 label-en text-(--fg-subtle) border-b border-(--border-light) pb-2">
       {label}
     </p>
   );
@@ -181,18 +181,18 @@ function SubLabel({ label }: { label: string }) {
 
 export default function MenuPage() {
   return (
-    <main className="bg-[var(--bg)]">
+    <main className="bg-(--bg)">
 
       {/* ── ページヘッダー ── */}
-      <section className="border-b border-[var(--border)] bg-[var(--bg)]">
-        <div className="mx-auto max-w-[1400px] flex flex-col md:flex-row">
+      <section className="border-b border-(--border) bg-(--bg)">
+        <div className="mx-auto max-w-350 flex flex-col md:flex-row">
 
           {/* 左: テキスト */}
           <div className="flex-1 px-6 pb-12 pt-24 md:px-14 md:pb-16 md:pt-36">
             <FadeUp>
               <Link
                 href="/"
-                className="label-en mb-3 sm:mb-6 inline-flex items-center gap-2 text-[var(--fg-subtle)] transition-colors hover:text-[var(--fg)]"
+                className="label-en mb-3 sm:mb-6 inline-flex items-center gap-2 text-(--fg-subtle) transition-colors hover:text-(--fg)"
               >
                 <ArrowLeft size={12} />
                 Back to Home
@@ -200,10 +200,10 @@ export default function MenuPage() {
 
               <span className="section-rule" />
               <p className="label-section">Menu & Price</p>
-              <h1 className="mt-5 font-serif text-4xl font-bold text-[var(--fg)] md:text-5xl lg:text-6xl">
+              <h1 className="mt-5 font-serif text-4xl font-bold text-(--fg) md:text-5xl lg:text-6xl">
                 メニュー・料金表
               </h1>
-              <p className="mt-5 text-sm leading-7 text-[var(--fg-subtle)]">
+              <p className="mt-5 text-sm leading-7 text-(--fg-subtle)">
                 すべての料金は税別表示です。ロング料金・オプション料金が別途かかる場合があります。<br />
                 詳細はカウンセリング時にご確認ください。
               </p>
@@ -215,7 +215,7 @@ export default function MenuPage() {
                 <a
                   key={id}
                   href={`#${id}`}
-                  className="menu-nav-link border border-[var(--border)] px-4 py-2"
+                  className="menu-nav-link border border-(--border) px-4 py-2"
                 >
                   {label}
                 </a>
@@ -224,7 +224,7 @@ export default function MenuPage() {
           </div>
 
           {/* 右: 画像 (モバイルは上部に短く表示、デスクトップは右半分) */}
-          <FadeIn className="relative h-52 md:h-auto md:w-[45%] md:flex-shrink-0 overflow-hidden bg-[var(--bg-off)]">
+          <FadeIn className="relative h-52 md:h-auto md:w-[45%] md:shrink-0 overflow-hidden bg-(--bg-off)">
             {/* 後ほど実際の画像に差し替え予定 */}
             <Image
               src="/images/salon-01.jpg"
@@ -237,14 +237,14 @@ export default function MenuPage() {
             {/* 左側グラデーション (デスクトップのみ、テキストとの境界を自然に) */}
             <div
               aria-hidden
-              className="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-[var(--bg)] to-transparent md:block hidden"
+              className="absolute inset-y-0 left-0 w-16 bg-linear-to-r from-(--bg) to-transparent md:block hidden"
             />
           </FadeIn>
         </div>
       </section>
 
       {/* ── メニュー本体 ── */}
-      <div className="mx-auto max-w-[1400px] px-7 py-14 md:py-20">
+      <div className="mx-auto max-w-350 px-7 py-14 md:py-20">
         <div className="mx-auto max-w-3xl space-y-16">
 
           {/* ════ CUT ════ */}
@@ -277,18 +277,18 @@ export default function MenuPage() {
           <section>
             <SectionHead id="color" en="Color" jp="カラー" />
 
-            <div className="mt-3 border border-[var(--border-light)] bg-[var(--bg-off)] p-4 text-xs text-[var(--fg-subtle)] leading-6">
-              <p className="font-bold text-[var(--fg)]">ブロレットこだわりカラー</p>
+            <div className="mt-3 border border-(--border-light) bg-(--bg-off) p-4 text-xs text-(--fg-subtle) leading-6">
+              <p className="font-bold text-(--fg)">ブロレットこだわりカラー</p>
               <p className="mt-1">頭皮保護オイルで肌を守りながら施術 / カラー剤除去を徹底 / 髪質に合わせた栄養補給</p>
             </div>
 
             {/* S/M/L 注記 */}
-            <div className="mt-4 flex justify-end gap-6 pr-1 text-[10px] font-bold text-[var(--fg-subtle)]">
+            <div className="mt-4 flex justify-end gap-6 pr-1 text-[10px] font-bold text-(--fg-subtle)">
               <span>S</span>
               <span>M</span>
               <span>L</span>
             </div>
-            <p className="mt-1 text-right text-[10px] text-[var(--fg-subtle)]">すべて +tax</p>
+            <p className="mt-1 text-right text-[10px] text-(--fg-subtle)">すべて +tax</p>
 
             <div className="mt-2">
               {colorSized.map((item) => <SizedRow key={item.name} {...item} />)}
@@ -312,12 +312,12 @@ export default function MenuPage() {
           <section>
             <SectionHead id="perm" en="Perm" jp="パーマ" />
 
-            <div className="mt-4 flex justify-end gap-6 pr-1 text-[10px] font-bold text-[var(--fg-subtle)]">
+            <div className="mt-4 flex justify-end gap-6 pr-1 text-[10px] font-bold text-(--fg-subtle)">
               <span>S</span>
               <span>M</span>
               <span>L</span>
             </div>
-            <p className="mt-1 text-right text-[10px] text-[var(--fg-subtle)]">すべて +tax〜</p>
+            <p className="mt-1 text-right text-[10px] text-(--fg-subtle)">すべて +tax〜</p>
 
             <div className="mt-2">
               {permSized.map((item) => <SizedRow key={item.name} {...item} />)}
@@ -328,12 +328,12 @@ export default function MenuPage() {
           <section>
             <SectionHead id="straight" en="Straight" jp="ストレート" />
 
-            <div className="mt-4 flex justify-end gap-6 pr-1 text-[10px] font-bold text-[var(--fg-subtle)]">
+            <div className="mt-4 flex justify-end gap-6 pr-1 text-[10px] font-bold text-(--fg-subtle)">
               <span>S</span>
               <span>M</span>
               <span>L</span>
             </div>
-            <p className="mt-1 text-right text-[10px] text-[var(--fg-subtle)]">すべて +tax</p>
+            <p className="mt-1 text-right text-[10px] text-(--fg-subtle)">すべて +tax</p>
 
             <div className="mt-2">
               {straightSized.map((item) => <SizedRow key={item.name} {...item} />)}
@@ -349,8 +349,8 @@ export default function MenuPage() {
           </section>
 
           {/* ── 注意事項 ── */}
-          <section className="border border-[var(--border)] p-6 text-xs leading-7 text-[var(--fg-subtle)]">
-            <p className="font-bold text-[var(--fg)] mb-2">ご注意・ご案内</p>
+          <section className="border border-(--border) p-6 text-xs leading-7 text-(--fg-subtle)">
+            <p className="font-bold text-(--fg) mb-2">ご注意・ご案内</p>
             <ul className="space-y-1 list-disc list-inside">
               <li>料金はすべて税別表示です。</li>
               <li>髪の長さ（S/M/L）や状態により料金が異なります。</li>
@@ -365,13 +365,13 @@ export default function MenuPage() {
               href={reservationUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="label-en flex-1 bg-[var(--cta)] py-4 text-center text-[var(--cta-text)] transition-opacity hover:opacity-70"
+              className="label-en flex-1 bg-(--cta) py-4 text-center text-(--cta-text) transition-opacity hover:opacity-70"
             >
               Hot Pepperで予約する
             </a>
             <Link
               href="/#access"
-              className="label-en flex-1 border border-[var(--border)] py-4 text-center text-[var(--fg-subtle)] transition-all hover:border-[var(--fg)] hover:text-[var(--fg)]"
+              className="label-en flex-1 border border-(--border) py-4 text-center text-(--fg-subtle) transition-all hover:border-(--fg) hover:text-(--fg)"
             >
               店舗情報を見る
             </Link>

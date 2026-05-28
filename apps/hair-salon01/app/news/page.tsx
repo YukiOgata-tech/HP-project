@@ -21,7 +21,7 @@ const fmtShort = (d: string) => new Date(d).toLocaleDateString("ja-JP", { month:
 /* ── 画像なし時のプレースホルダー ─────────────── */
 function ImgPlaceholder({ index }: { index: number }) {
   return (
-    <div className="flex h-full w-full flex-col items-center justify-center gap-2 bg-[var(--bg-dark)]">
+    <div className="flex h-full w-full flex-col items-center justify-center gap-2 bg-(--bg-dark)">
       <p className="font-serif text-4xl font-bold text-white/15 select-none">
         {String(index + 1).padStart(2, "0")}
       </p>
@@ -39,12 +39,12 @@ export default async function NewsPage() {
   const [featured, ...rest] = posts;
 
   return (
-    <main className="bg-[var(--bg)]">
+    <main className="bg-(--bg)">
 
       {/* ════════════════════════════════════════
           TOP — 背景画像 (ライト/ダーク切替)
       ════════════════════════════════════════ */}
-      <section className="relative overflow-hidden border-b border-[var(--border)] px-6 pb-10 pt-24 md:pt-28 md:pb-12">
+      <section className="relative overflow-hidden border-b border-(--border) px-6 pb-10 pt-24 md:pt-28 md:pb-12">
 
         {/* ライトモード背景 */}
         <Image
@@ -68,34 +68,34 @@ export default async function NewsPage() {
         {/* 装飾文字オーバーレイ */}
         <p aria-hidden className="news-deco-word">J</p>
 
-        <div className="relative z-10 mx-auto max-w-[1400px]">
+        <div className="relative z-10 mx-auto max-w-350">
           <FadeUp>
             <div className="flex items-end justify-between gap-6">
               <div>
                 <Link
                   href="/"
-                  className="label-en mb-3 sm:mb-6 inline-flex items-center gap-2 text-[var(--fg-subtle)] transition-colors hover:text-[var(--fg)]"
+                  className="label-en mb-3 sm:mb-6 inline-flex items-center gap-2 text-(--fg-subtle) transition-colors hover:text-(--fg)"
                 >
                   <ArrowLeft size={11} />
                   Home
                 </Link>
                 <span className="section-rule block" />
                 <p className="label-section">Journal</p>
-                <h1 className="mt-3 font-serif text-5xl font-bold text-[var(--fg)] md:text-6xl lg:text-7xl">
+                <h1 className="mt-3 font-serif text-5xl font-bold text-(--fg) md:text-6xl lg:text-7xl">
                   お知らせ
                 </h1>
               </div>
 
               {/* 記事数インジケーター */}
               <div className="hidden shrink-0 text-right md:block">
-                <p className="label-en text-[var(--fg-subtle)]">Articles</p>
-                <p className="mt-1 font-serif text-5xl font-bold tabular-nums text-[var(--fg)]">
+                <p className="label-en text-(--fg-subtle)">Articles</p>
+                <p className="mt-1 font-serif text-5xl font-bold tabular-nums text-(--fg)">
                   {String(posts.length).padStart(2, "0")}
                 </p>
               </div>
             </div>
 
-            <p className="mt-4 max-w-lg text-sm leading-7 text-[var(--fg-subtle)]">
+            <p className="mt-4 max-w-lg text-sm leading-7 text-(--fg-subtle)">
               サロンからのお知らせや、スタイル情報、ご案内をまとめています。
             </p>
           </FadeUp>
@@ -106,13 +106,13 @@ export default async function NewsPage() {
           POSTS
       ════════════════════════════════════════ */}
       <section className="px-6 py-12 md:py-16">
-        <div className="mx-auto max-w-[1400px]">
+        <div className="mx-auto max-w-350">
 
           {posts.length === 0 ? (
             <FadeUp>
-              <div className="border border-dashed border-[var(--border)] px-6 py-20 text-center">
-                <p className="font-serif text-3xl font-bold text-[var(--fg-subtle)]">—</p>
-                <p className="mt-3 text-sm text-[var(--fg-subtle)]">現在、公開中の記事はありません。</p>
+              <div className="border border-dashed border-(--border) px-6 py-20 text-center">
+                <p className="font-serif text-3xl font-bold text-(--fg-subtle)">—</p>
+                <p className="mt-3 text-sm text-(--fg-subtle)">現在、公開中の記事はありません。</p>
               </div>
             </FadeUp>
           ) : (
@@ -126,7 +126,7 @@ export default async function NewsPage() {
                     className="group block"
                   >
                     {/* サムネイル */}
-                    <div className="relative h-64 overflow-hidden sm:h-80 md:h-[22rem]">
+                    <div className="relative h-64 overflow-hidden sm:h-80 md:h-88">
                       {featured.coverImageUrl ? (
                         <img
                           src={featured.coverImageUrl}
@@ -138,25 +138,25 @@ export default async function NewsPage() {
                       )}
 
                       {/* Latest バッジ (画像に重ねて) */}
-                      <div className="absolute left-0 top-0 bg-[var(--fg)] px-4 py-2">
-                        <p className="label-en text-[var(--bg)]">Latest</p>
+                      <div className="absolute left-0 top-0 bg-(--fg) px-4 py-2">
+                        <p className="label-en text-(--bg)">Latest</p>
                       </div>
                     </div>
 
                     {/* テキスト */}
-                    <div className="border border-t-0 border-[var(--border)] bg-[var(--card)] p-5 md:p-7">
+                    <div className="border border-t-0 border-(--border) bg-(--card) p-5 md:p-7">
                       {featured.publishedAt && (
-                        <time className="text-xs text-[var(--fg-subtle)]">
+                        <time className="text-xs text-(--fg-subtle)">
                           {fmtLong(featured.publishedAt)}
                         </time>
                       )}
-                      <h2 className="mt-2 text-xl font-black leading-snug text-[var(--fg)] md:text-2xl">
+                      <h2 className="mt-2 text-xl font-black leading-snug text-(--fg) md:text-2xl">
                         {featured.title}
                       </h2>
-                      <p className="mt-3 line-clamp-3 text-sm leading-7 text-[var(--fg-subtle)]">
+                      <p className="mt-3 line-clamp-3 text-sm leading-7 text-(--fg-subtle)">
                         {featured.excerpt ?? "詳細は記事ページでご覧ください。"}
                       </p>
-                      <span className="mt-5 inline-flex items-center gap-2 text-xs font-bold text-[var(--fg)] transition-opacity group-hover:opacity-50">
+                      <span className="mt-5 inline-flex items-center gap-2 text-xs font-bold text-(--fg) transition-opacity group-hover:opacity-50">
                         続きを読む
                         <ArrowRight size={11} />
                       </span>
@@ -169,17 +169,17 @@ export default async function NewsPage() {
               <div>
                 {rest.length === 0 ? (
                   <FadeIn>
-                    <div className="border border-[var(--border)] bg-[var(--card)] px-6 py-10 text-center">
-                      <p className="text-sm text-[var(--fg-subtle)]">他の記事はまだありません。</p>
+                    <div className="border border-(--border) bg-(--card) px-6 py-10 text-center">
+                      <p className="text-sm text-(--fg-subtle)">他の記事はまだありません。</p>
                     </div>
                   </FadeIn>
                 ) : (
-                  <StaggerList className="flex flex-col gap-px border border-[var(--border)]">
+                  <StaggerList className="flex flex-col gap-px border border-(--border)">
                     {rest.map((post, i) => (
                       <StaggerItem key={post.id}>
                         <Link
                           href={`/news/${post.slug}`}
-                          className="group flex items-stretch bg-[var(--card)] transition-opacity hover:opacity-60"
+                          className="group flex items-stretch bg-(--card) transition-opacity hover:opacity-60"
                         >
                           {/* サムネイル */}
                           <div className="relative h-28 w-28 shrink-0 overflow-hidden md:h-32 md:w-32">
@@ -195,23 +195,23 @@ export default async function NewsPage() {
                           </div>
 
                           {/* テキスト */}
-                          <div className="flex min-w-0 flex-1 flex-col justify-center border-l border-[var(--border)] px-4 py-4">
+                          <div className="flex min-w-0 flex-1 flex-col justify-center border-l border-(--border) px-4 py-4">
                             {post.publishedAt && (
-                              <time className="text-xs text-[var(--fg-subtle)]">
+                              <time className="text-xs text-(--fg-subtle)">
                                 {fmtShort(post.publishedAt)}
                               </time>
                             )}
-                            <h3 className="mt-1 line-clamp-2 text-sm font-black leading-snug text-[var(--fg)] md:text-base">
+                            <h3 className="mt-1 line-clamp-2 text-sm font-black leading-snug text-(--fg) md:text-base">
                               {post.title}
                             </h3>
-                            <span className="mt-2 inline-flex items-center gap-1 text-xs text-[var(--fg-subtle)]">
+                            <span className="mt-2 inline-flex items-center gap-1 text-xs text-(--fg-subtle)">
                               読む <ArrowRight size={9} />
                             </span>
                           </div>
 
                           {/* 番号 */}
-                          <div className="flex w-10 shrink-0 items-center justify-center border-l border-[var(--border)]">
-                            <p className="label-en text-[var(--fg-subtle)]">
+                          <div className="flex w-10 shrink-0 items-center justify-center border-l border-(--border)">
+                            <p className="label-en text-(--fg-subtle)">
                               {String(i + 2).padStart(2, "0")}
                             </p>
                           </div>

@@ -81,11 +81,11 @@ export function ApplicationForm() {
 
   function inputCls(field: keyof FieldErrors) {
     return [
-      "w-full border bg-[var(--bg)] px-4 py-3 text-sm text-[var(--fg)] outline-none transition-colors",
-      "placeholder:text-[var(--fg-subtle)]",
+      "w-full border bg-(--bg) px-2 sm:px-4 py-1.5 sm:py-3 text-sm text-(--fg) outline-none transition-colors",
+      "placeholder:text-(--fg-subtle)",
       fieldErrors[field]
         ? "border-red-400 focus:border-red-500"
-        : "border-[var(--border)] focus:border-[var(--fg)]",
+        : "border-(--border) focus:border-(--fg)",
     ].join(" ");
   }
 
@@ -142,20 +142,20 @@ export function ApplicationForm() {
   /* ── 送信完了 ── */
   if (success) {
     return (
-      <div className="border border-[var(--border)] bg-[var(--card)] p-8 md:p-10">
-        <p className="label-en text-[var(--fg-subtle)]">Thank you</p>
-        <h3 className="mt-2 font-serif text-2xl font-bold text-[var(--fg)]">
+      <div className="border border-(--border) bg-(--card) p-4 sm:p-8 md:p-10">
+        <p className="label-en text-(--fg-subtle)">Thank you</p>
+        <h3 className="mt-2 font-serif text-2xl font-bold text-(--fg)">
           送信が完了しました
         </h3>
-        <p className="mt-4 text-sm leading-7 text-[var(--fg-subtle)]">
+        <p className="mt-4 text-sm leading-7 text-(--fg-subtle)">
           応募内容を受け付けました。内容を確認のうえ、担当者より2〜3営業日以内にご連絡いたします。
         </p>
-        <p className="mt-2 text-xs text-[var(--fg-subtle)]">
+        <p className="mt-2 text-xs text-(--fg-subtle)">
           万が一、連絡がない場合はお電話（025-278-7274）でお問い合わせください。
         </p>
         <button
           onClick={() => { setSuccess(false); mountedAt.current = Date.now(); }}
-          className="mt-6 text-xs font-bold uppercase tracking-widest text-[var(--fg-subtle)] underline transition-colors hover:text-[var(--fg)]"
+          className="mt-6 text-xs font-bold uppercase tracking-widest text-(--fg-subtle) underline transition-colors hover:text-(--fg)"
         >
           別の内容で応募する
         </button>
@@ -165,7 +165,7 @@ export function ApplicationForm() {
 
   /* ── フォーム ── */
   return (
-    <form ref={formRef} onSubmit={handleSubmit} className="space-y-5" noValidate>
+    <form ref={formRef} onSubmit={handleSubmit} className="space-y-1 sm:space-y-3 md:space-y-5" noValidate>
 
       {/* ハニーポット（ボット対策：人間には非表示） */}
       <input
@@ -180,14 +180,14 @@ export function ApplicationForm() {
       {/* 氏名 + 電話 */}
       <div className="grid gap-4 sm:grid-cols-2">
         <div className="space-y-1.5">
-          <label className="block text-xs font-bold uppercase tracking-widest text-[var(--fg-subtle)]">
+          <label className="block text-xs font-bold uppercase tracking-widest text-(--fg-subtle)">
             お名前 <span className="text-red-500">*</span>
           </label>
           <input name="name" type="text" required placeholder="山田 花子" className={inputCls("name")} />
           {fieldErrors.name && <FieldError msg={fieldErrors.name} />}
         </div>
         <div className="space-y-1.5">
-          <label className="block text-xs font-bold uppercase tracking-widest text-[var(--fg-subtle)]">
+          <label className="block text-xs font-bold uppercase tracking-widest text-(--fg-subtle)">
             電話番号 <span className="text-red-500">*</span>
           </label>
           <input name="phone" type="tel" required placeholder="090-0000-0000" className={inputCls("phone")} />
@@ -197,7 +197,7 @@ export function ApplicationForm() {
 
       {/* メール */}
       <div className="space-y-1.5">
-        <label className="block text-xs font-bold uppercase tracking-widest text-[var(--fg-subtle)]">
+        <label className="block text-xs font-bold uppercase tracking-widest text-(--fg-subtle)">
           メールアドレス <span className="text-red-500">*</span>
         </label>
         <input name="email" type="email" required placeholder="hanako@example.com" className={inputCls("email")} />
@@ -207,7 +207,7 @@ export function ApplicationForm() {
       {/* 希望職種 + 経験 */}
       <div className="grid gap-4 sm:grid-cols-2">
         <div className="space-y-1.5">
-          <label className="block text-xs font-bold uppercase tracking-widest text-[var(--fg-subtle)]">
+          <label className="block text-xs font-bold uppercase tracking-widest text-(--fg-subtle)">
             希望職種 <span className="text-red-500">*</span>
           </label>
           <select
@@ -222,10 +222,10 @@ export function ApplicationForm() {
           {fieldErrors.position && <FieldError msg={fieldErrors.position} />}
         </div>
         <div className="space-y-1.5">
-          <label className="block text-xs font-bold uppercase tracking-widest text-[var(--fg-subtle)]">
+          <label className="block text-xs font-bold uppercase tracking-widest text-(--fg-subtle)">
             経験年数
           </label>
-          <select name="experience" defaultValue="" className="w-full border border-[var(--border)] bg-[var(--bg)] px-4 py-3 text-sm text-[var(--fg)] outline-none transition-colors focus:border-[var(--fg)]">
+          <select name="experience" defaultValue="" className="w-full border border-(--border) bg-(--bg) px-4 py-1.5 sm:py-3 text-sm text-(--fg) outline-none transition-colors focus:border-(--fg)">
             <option value="">選択してください（任意）</option>
             {EXPERIENCE_OPTIONS.map((o) => <option key={o} value={o}>{o}</option>)}
           </select>
@@ -234,34 +234,34 @@ export function ApplicationForm() {
 
       {/* メッセージ */}
       <div className="space-y-1.5">
-        <label className="block text-xs font-bold uppercase tracking-widest text-[var(--fg-subtle)]">
+        <label className="block text-xs font-bold uppercase tracking-widest text-(--fg-subtle)">
           ひとこと・ご質問など
         </label>
         <textarea
           name="message"
-          rows={6}
+          rows={5}
           placeholder="はじめまして。ご自身のこと、美容師を志したきっかけ、ブロレットへの興味など、どんなことでも気軽に書いてください。見学のご希望があればその旨もどうぞ。"
-          className="w-full resize-none border border-[var(--border)] bg-[var(--bg)] px-4 py-3 text-sm text-[var(--fg)] outline-none transition-colors placeholder:text-[var(--fg-subtle)] focus:border-[var(--fg)]"
+          className="w-full resize-none border border-(--border) bg-(--bg) px-4 py-1.5 sm:py-3 text-sm text-(--fg) outline-none transition-colors placeholder:text-(--fg-subtle) focus:border-(--fg)"
         />
       </div>
 
       {/* 履歴書添付 */}
       <div className="space-y-1.5">
-        <label className="block text-xs font-bold uppercase tracking-widest text-[var(--fg-subtle)]">
+        <label className="block text-xs font-bold uppercase tracking-widest text-(--fg-subtle)">
           履歴書（任意）
         </label>
         {file ? (
-          <div className="flex items-center gap-3 border border-[var(--border)] bg-[var(--card-off)] px-4 py-3">
-            <Paperclip size={14} className="shrink-0 text-[var(--fg-subtle)]" />
-            <span className="min-w-0 flex-1 truncate text-sm text-[var(--fg)]">{file.name}</span>
-            <button type="button" onClick={removeFile} className="shrink-0 text-[var(--fg-subtle)] transition-colors hover:text-[var(--fg)]" aria-label="ファイルを削除">
+          <div className="flex items-center gap-3 border border-(--border) bg-(--card-off) px-4 py-3">
+            <Paperclip size={14} className="shrink-0 text-(--fg-subtle)" />
+            <span className="min-w-0 flex-1 truncate text-sm text-(--fg)">{file.name}</span>
+            <button type="button" onClick={removeFile} className="shrink-0 text-(--fg-subtle) transition-colors hover:text-(--fg)" aria-label="ファイルを削除">
               <X size={14} />
             </button>
           </div>
         ) : (
-          <label className="flex cursor-pointer items-center gap-3 border border-dashed border-[var(--border)] px-4 py-4 transition-colors hover:border-[var(--fg)]">
-            <Paperclip size={14} className="shrink-0 text-[var(--fg-subtle)]" />
-            <span className="text-sm text-[var(--fg-subtle)]">クリックしてファイルを選択（PDF・Word・画像、10MB以内）</span>
+          <label className="flex cursor-pointer items-center gap-3 border border-dashed border-(--border) px-4 py-4 transition-colors hover:border-(--fg)">
+            <Paperclip size={14} className="shrink-0 text-(--fg-subtle)" />
+            <span className="text-sm text-(--fg-subtle)">クリックしてファイルを選択（PDF・Word・画像、10MB以内）</span>
             <input name="resume" type="file" accept={ACCEPT_TYPES} onChange={handleFileChange} className="sr-only" />
           </label>
         )}
@@ -273,12 +273,12 @@ export function ApplicationForm() {
       <button
         type="submit"
         disabled={loading}
-        className="w-full bg-[var(--cta)] px-5 py-4 text-xs font-bold uppercase tracking-widest text-[var(--cta-text)] transition-opacity hover:opacity-75 disabled:cursor-not-allowed disabled:opacity-40"
+        className="w-full bg-(--cta) px-5 py-4 text-xs font-bold uppercase tracking-widest text-(--cta-text) transition-opacity hover:opacity-75 disabled:cursor-not-allowed disabled:opacity-40"
       >
         {loading ? "送信中..." : "応募・見学を申し込む"}
       </button>
 
-      <p className="text-xs leading-6 text-[var(--fg-subtle)]">
+      <p className="text-xs leading-6 text-(--fg-muted)">
         ご入力いただいた情報は採用選考のみに使用します。まずは見学・お問い合わせだけでも歓迎です。
       </p>
     </form>

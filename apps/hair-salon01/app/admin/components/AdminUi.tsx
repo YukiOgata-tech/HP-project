@@ -19,18 +19,18 @@ export function AdminPageHeader({
   actions,
 }: AdminPageHeaderProps) {
   return (
-    <section className="border border-[var(--border)] bg-[var(--bg)] p-6 md:p-8">
+    <section className="border border-(--border) bg-(--bg) p-6 md:p-8">
       <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
         <div className="max-w-3xl space-y-3">
           {eyebrow && (
-            <p className="label-en text-[var(--fg-subtle)]">{eyebrow}</p>
+            <p className="label-en text-(--fg-subtle)">{eyebrow}</p>
           )}
           <span className="section-rule block" />
-          <h1 className="font-serif text-2xl font-bold text-[var(--fg)] md:text-3xl">
+          <h1 className="font-serif text-2xl font-bold text-(--fg) md:text-3xl">
             {title}
           </h1>
           {description && (
-            <p className="max-w-2xl text-sm leading-7 text-[var(--fg-subtle)]">
+            <p className="max-w-2xl text-sm leading-7 text-(--fg-subtle)">
               {description}
             </p>
           )}
@@ -56,7 +56,7 @@ export function AdminSurface({
 }) {
   return (
     <section
-      className={["border border-[var(--border)] bg-[var(--card)]", className].join(" ")}
+      className={["border border-(--border) bg-(--card)", className].join(" ")}
     >
       {children}
     </section>
@@ -81,16 +81,16 @@ export function AdminStatCard({
   const valueColor =
     tone === "success" ? "text-emerald-700"
     : tone === "warning" ? "text-amber-700"
-    : "text-[var(--fg)]";
+    : "text-(--fg)";
 
   return (
-    <div className="border border-[var(--border)] bg-[var(--card)] p-6">
-      <p className="label-en text-[var(--fg-subtle)]">{label}</p>
+    <div className="border border-(--border) bg-(--card) p-6">
+      <p className="label-en text-(--fg-subtle)">{label}</p>
       <p className={["mt-3 text-4xl font-black tabular-nums", valueColor].join(" ")}>
         {value}
       </p>
       {hint && (
-        <p className="mt-1.5 text-xs text-[var(--fg-subtle)]">{hint}</p>
+        <p className="mt-1.5 text-xs text-(--fg-subtle)">{hint}</p>
       )}
     </div>
   );
@@ -160,7 +160,7 @@ export function AdminPrimaryLink({
   return (
     <Link
       href={href}
-      className="inline-flex items-center justify-center bg-[var(--cta)] px-5 py-2.5 text-xs font-bold uppercase tracking-widest text-[var(--cta-text)] transition-opacity hover:opacity-70"
+      className="inline-flex items-center justify-center bg-(--cta) px-5 py-2.5 text-xs font-bold uppercase tracking-widest text-(--cta-text) transition-opacity hover:opacity-70"
     >
       {children}
     </Link>
@@ -181,7 +181,7 @@ export function AdminSecondaryLink({
   return (
     <Link
       href={href}
-      className="inline-flex items-center justify-center border border-[var(--border)] px-5 py-2.5 text-xs font-bold uppercase tracking-widest text-[var(--fg-subtle)] transition-colors hover:border-[var(--fg)] hover:text-[var(--fg)]"
+      className="inline-flex items-center justify-center border border-(--border) px-5 py-2.5 text-xs font-bold uppercase tracking-widest text-(--fg-subtle) transition-colors hover:border-(--fg) hover:text-(--fg)"
     >
       {children}
     </Link>

@@ -47,16 +47,16 @@ export function Header() {
       {/* ── Header ── */}
       <header
         className={[
-          "fixed inset-x-0 top-0 z-50 bg-[var(--header-bg)] backdrop-blur-md transition-all duration-300",
-          scrolled ? "border-b border-[var(--header-border)]" : "",
+          "fixed inset-x-0 top-0 z-50 bg-(--header-bg) backdrop-blur-md transition-all duration-300",
+          scrolled ? "border-b border-(--header-border)" : "",
         ].join(" ")}
       >
-        <div className="mx-auto flex max-w-[1400px] items-center justify-between px-6 py-3">
+        <div className="mx-auto flex max-w-350 items-center justify-between px-6 py-3">
 
           {/* Logo */}
           <Link
             href="/"
-            className="font-serif text-lg font-bold tracking-[0.32em] uppercase text-[var(--fg)]"
+            className="font-serif text-lg font-bold tracking-[0.32em] uppercase text-(--fg)"
           >
             Broletto
           </Link>
@@ -70,8 +70,8 @@ export function Header() {
                 className={[
                   "label-en transition-colors hover:underline",
                   isActive(href)
-                    ? "text-[var(--fg)]"
-                    : "text-[var(--fg-subtle)] hover:text-[var(--fg)]",
+                    ? "text-(--fg)"
+                    : "text-(--fg-subtle) hover:text-(--fg)",
                 ].join(" ")}
               >
                 {label}
@@ -84,7 +84,7 @@ export function Header() {
             {mounted && (
               <button
                 onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
-                className="flex h-8 w-8 items-center justify-center border border-[var(--border)] text-[var(--fg-subtle)] transition-all hover:border-[var(--fg)] hover:text-[var(--fg)]"
+                className="flex h-8 w-8 items-center justify-center border border-(--border) text-(--fg-subtle) transition-all hover:border-(--fg) hover:text-(--fg)"
                 aria-label="テーマ切り替え"
               >
                 <AnimatePresence mode="wait" initial={false}>
@@ -105,7 +105,7 @@ export function Header() {
               href={reservationUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="label-en bg-[var(--cta)] text-[var(--cta-text)] px-5 py-2 transition-opacity hover:opacity-70"
+              className="label-en bg-(--cta) text-(--cta-text) px-5 py-2 transition-opacity hover:opacity-70"
             >
               Reserve
             </a>
@@ -116,7 +116,7 @@ export function Header() {
             {mounted && (
               <button
                 onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
-                className="flex h-8 w-8 items-center justify-center border border-[var(--border)] text-[var(--fg-subtle)]"
+                className="flex h-8 w-8 items-center justify-center border border-(--border) text-(--fg-subtle)"
                 aria-label="テーマ切り替え"
               >
                 {resolvedTheme === "dark" ? <Sun size={13} /> : <Moon size={13} />}
@@ -124,7 +124,7 @@ export function Header() {
             )}
             <button
               onClick={() => setIsOpen((v) => !v)}
-              className="flex h-8 w-8 items-center justify-center border border-[var(--border)] text-[var(--fg)]"
+              className="flex h-8 w-8 items-center justify-center border border-(--border) text-(--fg)"
               aria-label={isOpen ? "メニューを閉じる" : "メニューを開く"}
             >
               <AnimatePresence mode="wait" initial={false}>
@@ -152,14 +152,14 @@ export function Header() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -6 }}
             transition={{ duration: 0.18, ease: "easeOut" }}
-            className="fixed inset-x-0 top-14.25 z-40 border-b border-[var(--border)] bg-[var(--bg)] md:hidden"
+            className="fixed inset-x-0 top-14.25 z-40 border-b border-(--border) bg-(--bg) md:hidden"
           >
-            <nav className="mx-auto max-w-[1400px] flex flex-col px-6">
+            <nav className="mx-auto max-w-350 flex flex-col px-6">
               {navLinks.map(({ href, label }) => (
                 <Link
                   key={href}
                   href={href}
-                  className="label-en border-b border-[var(--border-light)] py-4 text-[var(--fg-subtle)] transition-colors last:border-b-0 hover:text-[var(--fg)]"
+                  className="label-en border-b border-(--border-light) py-4 text-(--fg-subtle) transition-colors last:border-b-0 hover:text-(--fg)"
                 >
                   {label}
                 </Link>
@@ -169,7 +169,7 @@ export function Header() {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setIsOpen(false)}
-                className="label-en my-4 bg-[var(--cta)] text-[var(--cta-text)] py-3.5 text-center"
+                className="label-en my-4 bg-(--cta) text-(--cta-text) py-3.5 text-center"
               >
                 Reserve
               </a>

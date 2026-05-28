@@ -35,37 +35,37 @@ export default async function AdminApplicationsPage() {
       </div>
 
       <AdminSurface className="overflow-hidden">
-        <div className="border-b border-[var(--border)] px-6 py-5">
-          <h2 className="text-lg font-bold text-[var(--fg)]">応募一覧</h2>
-          <p className="text-sm text-[var(--fg-subtle)]">新着順に表示しています</p>
+        <div className="border-b border-(--border) px-6 py-5">
+          <h2 className="text-lg font-bold text-(--fg)">応募一覧</h2>
+          <p className="text-sm text-(--fg-subtle)">新着順に表示しています</p>
         </div>
 
         {applications.length === 0 ? (
           <div className="px-6 py-16 text-center">
-            <p className="text-base font-bold text-[var(--fg)]">まだ応募はありません</p>
-            <p className="mt-2 text-sm text-[var(--fg-subtle)]">
+            <p className="text-base font-bold text-(--fg)">まだ応募はありません</p>
+            <p className="mt-2 text-sm text-(--fg-subtle)">
               採用ページのフォームから応募が届くとここに表示されます。
             </p>
           </div>
         ) : (
-          <ul className="divide-y divide-[var(--border)]">
+          <ul className="divide-y divide-(--border)">
             {applications.map((app) => (
               <li key={app.id}>
                 <Link
                   href={`/admin/applications/${app.id}`}
-                  className="flex flex-col gap-3 px-6 py-5 transition-colors hover:bg-[var(--card-off)] md:flex-row md:items-center md:justify-between"
+                  className="flex flex-col gap-3 px-6 py-5 transition-colors hover:bg-(--card-off) md:flex-row md:items-center md:justify-between"
                 >
                   <div className="space-y-1.5">
                     <div className="flex flex-wrap items-center gap-3">
                       <AppStatusBadge status={app.status} />
-                      <span className="text-xs uppercase tracking-widest text-[var(--fg-subtle)]">
+                      <span className="text-xs uppercase tracking-widest text-(--fg-subtle)">
                         {new Date(app.createdAt).toLocaleDateString("ja-JP")}
                       </span>
                     </div>
-                    <p className="font-bold text-[var(--fg)]">{app.name}</p>
-                    <p className="text-sm text-[var(--fg-subtle)]">{app.position}</p>
+                    <p className="font-bold text-(--fg)">{app.name}</p>
+                    <p className="text-sm text-(--fg-subtle)">{app.position}</p>
                   </div>
-                  <span className="inline-flex items-center border border-[var(--border)] px-4 py-2 text-xs font-bold uppercase tracking-widest text-[var(--fg-subtle)] transition-colors hover:border-[var(--fg)] hover:text-[var(--fg)]">
+                  <span className="inline-flex items-center border border-(--border) px-4 py-2 text-xs font-bold uppercase tracking-widest text-(--fg-subtle) transition-colors hover:border-(--fg) hover:text-(--fg)">
                     詳細を見る
                   </span>
                 </Link>

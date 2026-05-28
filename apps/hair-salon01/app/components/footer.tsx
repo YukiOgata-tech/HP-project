@@ -17,8 +17,8 @@ const navLinks = [
 
 export function Footer() {
   return (
-    <footer className="bg-[var(--bg-darkest)] text-white">
-      <div className="mx-auto max-w-[1400px] px-6 py-14 md:py-20">
+    <footer className="bg-(--bg-darkest) text-white">
+      <div className="mx-auto max-w-350 px-6 py-14 md:py-20">
 
         {/* Top grid */}
         <div className="grid gap-10 md:grid-cols-[1.4fr_1fr_1fr]">

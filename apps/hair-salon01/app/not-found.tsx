@@ -3,7 +3,7 @@ import { ArrowLeft } from "lucide-react";
 
 export default function NotFound() {
   return (
-    <main className="relative flex min-h-[80svh] items-center justify-center overflow-hidden bg-[var(--bg-dark)]">
+    <main className="relative flex min-h-[80svh] items-center justify-center overflow-hidden bg-(--bg-dark)">
 
       {/* 背景装飾 */}
       <span

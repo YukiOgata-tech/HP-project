@@ -165,7 +165,7 @@ const jobPostingSchema = {
 
 export default function RecruitPage() {
   return (
-    <main className="bg-[var(--bg)]">
+    <main className="bg-(--bg)">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jobPostingSchema) }}
@@ -174,8 +174,8 @@ export default function RecruitPage() {
       {/* ════════════════════════════════════════
           ページヘッダー
       ════════════════════════════════════════ */}
-      <section className="border-b border-[var(--border)] bg-[var(--bg-dark)]">
-        <div className="mx-auto max-w-[1400px] px-6 pb-14 pt-24 md:pb-20 md:pt-36">
+      <section className="border-b border-(--border) bg-(--bg-dark)">
+        <div className="mx-auto max-w-350 px-6 pb-14 pt-24 md:pb-20 md:pt-36">
           <FadeUp>
             <Link
               href="/"
@@ -212,28 +212,28 @@ export default function RecruitPage() {
       {/* ════════════════════════════════════════
           オーナーストーリー
       ════════════════════════════════════════ */}
-      <section className="bg-[var(--bg)] px-6 py-16 md:py-24">
-        <div className="mx-auto max-w-[1400px]">
+      <section className="bg-(--bg) px-6 py-16 md:py-24">
+        <div className="mx-auto max-w-350">
           <div className="grid gap-10 md:grid-cols-2 md:gap-16 lg:gap-24">
             <FadeUp>
               <span className="section-rule block" />
               <p className="label-section">Owner's Story</p>
-              <h2 className="mt-5 text-2xl font-black leading-tight text-[var(--fg)] md:text-3xl lg:text-4xl">
+              <h2 className="mt-5 text-2xl font-black leading-tight text-(--fg) md:text-3xl lg:text-4xl">
                 1人サロンから、<br />16年が経ち。
               </h2>
-              <div className="mt-6 space-y-4 text-sm leading-8 text-[var(--fg-subtle)]">
+              <div className="mt-6 space-y-4 text-sm leading-8 text-(--fg-subtle)">
                 <p>美容学校卒業後、とにかく美容師の仕事が大好きで美容室という空間が大好きで、1人でサロンをスタート。やがて予約が数ヶ月待ちになり、「自分のエゴでお客様の綺麗になりたい時期を遅らせてしまっている」と気づいたことが、チームを作るきっかけになりました。</p>
                 <p>結婚・出産を経て、ライフステージが変わってもスタッフが働きやすい環境づくりを続け、現在は女性5名のチームサロンへ。</p>
               </div>
             </FadeUp>
             <FadeIn delay={0.1}>
-              <div className="border border-[var(--border)] bg-[var(--card)] p-8 md:p-10">
+              <div className="border border-(--border) bg-(--card) p-8 md:p-10">
                 <span className="section-rule block" />
                 <p className="label-section">Philosophy</p>
-                <blockquote className="mt-5 font-serif text-2xl font-bold leading-snug text-[var(--fg)] md:text-3xl">
+                <blockquote className="mt-5 font-serif text-2xl font-bold leading-snug text-(--fg) md:text-3xl">
                   「スタッフが幸せだから、<br />お客様も幸せになれる」
                 </blockquote>
-                <p className="mt-6 text-sm leading-8 text-[var(--fg-subtle)]">
+                <p className="mt-6 text-sm leading-8 text-(--fg-subtle)">
                   オンオフの実現は、スタッフ同士とお客様との強い信頼関係があってこそ。身体と心にゆとりがあるから、もっと優しくなれる。そんな居心地の良い空間を、一緒に守れる方を求めています。
                 </p>
               </div>
@@ -245,12 +245,12 @@ export default function RecruitPage() {
       {/* ════════════════════════════════════════
           5つのポイント
       ════════════════════════════════════════ */}
-      <section className="bg-[var(--bg-off)] px-6 py-16 md:py-24 lg:py-32">
-        <div className="mx-auto max-w-[1400px]">
+      <section className="bg-(--bg-off) px-6 py-16 md:py-24 lg:py-32">
+        <div className="mx-auto max-w-350">
           <FadeUp>
             <span className="section-rule block" />
             <p className="label-section">Why Broletto</p>
-            <h2 className="mt-5 text-2xl font-black text-[var(--fg)] md:text-3xl lg:text-4xl">
+            <h2 className="mt-5 text-2xl font-black text-(--fg) md:text-3xl lg:text-4xl">
               ブロレットで働く、<br className="sm:hidden" />5つの理由。
             </h2>
           </FadeUp>
@@ -258,14 +258,14 @@ export default function RecruitPage() {
           <StaggerList className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3 lg:mt-14">
             {points.map(({ number, title, body }) => (
               <StaggerItem key={number}>
-                <article className="promise-card relative h-full border border-[var(--border)] bg-[var(--card)] p-7" data-number={number}>
+                <article className="promise-card relative h-full border border-(--border) bg-(--card) p-7" data-number={number}>
                   <div className="relative z-10 flex h-full flex-col">
-                    <p className="label-en text-[var(--fg-subtle)]">{number}</p>
-                    <div className="mt-3 h-px w-full bg-[var(--border)]" />
-                    <h3 className="mt-5 text-lg font-black leading-snug text-[var(--fg)]">
+                    <p className="label-en text-(--fg-subtle)">{number}</p>
+                    <div className="mt-3 h-px w-full bg-(--border)" />
+                    <h3 className="mt-5 text-lg font-black leading-snug text-(--fg)">
                       {title}
                     </h3>
-                    <p className="mt-3 flex-1 text-sm leading-7 text-[var(--fg-subtle)]">
+                    <p className="mt-3 flex-1 text-sm leading-7 text-(--fg-subtle)">
                       {body}
                     </p>
                   </div>
@@ -279,15 +279,15 @@ export default function RecruitPage() {
       {/* ════════════════════════════════════════
           スタッフ紹介
       ════════════════════════════════════════ */}
-      <section className="bg-[var(--bg)] px-6 py-16 md:py-24 lg:py-32">
-        <div className="mx-auto max-w-[1400px]">
+      <section className="bg-(--bg) px-6 py-16 md:py-24 lg:py-32">
+        <div className="mx-auto max-w-350">
           <FadeUp>
             <span className="section-rule block" />
             <p className="label-section">Our Team</p>
-            <h2 className="mt-5 text-2xl font-black text-[var(--fg)] md:text-3xl lg:text-4xl">
+            <h2 className="mt-5 text-2xl font-black text-(--fg) md:text-3xl lg:text-4xl">
               一緒に働く仲間たち。
             </h2>
-            <p className="mt-4 max-w-2xl text-sm leading-7 text-[var(--fg-subtle)]">
+            <p className="mt-4 max-w-2xl text-sm leading-7 text-(--fg-subtle)">
               それぞれの得意を持ち寄り、チームとしてお客様に向き合っています。
             </p>
           </FadeUp>
@@ -297,10 +297,10 @@ export default function RecruitPage() {
             <StaggerList className="flex gap-4 md:grid md:grid-cols-3 xl:grid-cols-5">
               {staff.map(({ name, role, tenure, image, comment, skills }) => (
                 <StaggerItem key={name}>
-                  <div className="flex h-full w-56 shrink-0 flex-col overflow-hidden border border-[var(--border)] bg-[var(--card)] md:w-auto">
+                  <div className="flex h-full w-56 shrink-0 flex-col overflow-hidden border border-(--border) bg-(--card) md:w-auto">
 
                     {/* 写真 */}
-                    <div className="relative aspect-square overflow-hidden bg-[var(--bg-off)]">
+                    <div className="relative aspect-square overflow-hidden bg-(--bg-off)">
                       {image ? (
                         <Image
                           src={image}
@@ -311,28 +311,28 @@ export default function RecruitPage() {
                         />
                       ) : (
                         <div className="flex h-full items-center justify-center">
-                          <p className="label-en text-[var(--fg-subtle)]">Photo</p>
+                          <p className="label-en text-(--fg-subtle)">Photo</p>
                         </div>
                       )}
                     </div>
 
                     {/* 情報 */}
                     <div className="flex flex-1 flex-col p-5">
-                      <p className="label-en text-[var(--fg-subtle)]">
+                      <p className="label-en text-(--fg-subtle)">
                         {role}{tenure && ` — ${tenure}`}
                       </p>
-                      <h3 className="mt-1 font-serif text-xl font-bold text-[var(--fg)]">{name}</h3>
+                      <h3 className="mt-1 font-serif text-xl font-bold text-(--fg)">{name}</h3>
 
-                      <div className="my-3 h-px w-full bg-[var(--border)]" />
+                      <div className="my-3 h-px w-full bg-(--border)" />
 
-                      <p className="flex-1 text-xs leading-6 text-[var(--fg-subtle)]">{comment}</p>
+                      <p className="flex-1 text-xs leading-6 text-(--fg-subtle)">{comment}</p>
 
                       {skills.length > 0 && (
                         <div className="mt-4 flex flex-wrap gap-1.5">
                           {skills.map((s) => (
                             <span
                               key={s}
-                              className="border border-[var(--border)] px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-[var(--fg-subtle)]"
+                              className="border border-(--border) px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-(--fg-subtle)"
                             >
                               {s}
                             </span>
@@ -386,8 +386,8 @@ export default function RecruitPage() {
       {/* ════════════════════════════════════════
           こんな方を求めています
       ════════════════════════════════════════ */}
-      <section className="bg-[var(--bg-dark)] px-6 py-16 text-white md:py-24 lg:py-32">
-        <div className="mx-auto max-w-[1400px]">
+      <section className="bg-(--bg-dark) px-6 py-16 text-white md:py-24 lg:py-32">
+        <div className="mx-auto max-w-350">
           <FadeUp>
             <span className="section-rule section-rule--white block" />
             <p className="label-en text-white/35">Looking For</p>
@@ -412,31 +412,31 @@ export default function RecruitPage() {
       {/* ════════════════════════════════════════
           勤務条件
       ════════════════════════════════════════ */}
-      <section className="bg-[var(--bg-off)] px-6 py-16 md:py-24">
-        <div className="mx-auto max-w-[1400px]">
+      <section className="bg-(--bg-off) px-6 py-16 md:py-24">
+        <div className="mx-auto max-w-350">
           <FadeUp>
             <span className="section-rule block" />
             <p className="label-section">Conditions</p>
-            <h2 className="mt-5 text-2xl font-black text-[var(--fg)] md:text-3xl">
+            <h2 className="mt-5 text-2xl font-black text-(--fg) md:text-3xl">
               勤務条件
             </h2>
           </FadeUp>
 
-          <FadeIn className="mt-10 max-w-3xl">
-            <dl className="border border-[var(--border)] divide-y divide-[var(--border-light)]">
+          <FadeIn className="mt-4 sm:mt-10 max-w-4xl">
+            <dl className="border border-(--border) divide-y divide-(--border-light)">
               {conditions.map(({ label, value }) => (
                 <div
                   key={label}
                   className="grid grid-cols-[6rem_1fr] items-baseline gap-4 px-6 py-4 md:grid-cols-[10rem_1fr]"
                 >
-                  <dt className="text-xs font-bold text-[var(--fg-subtle)]">{label}</dt>
-                  <dd className="text-sm leading-7 text-[var(--fg)]">{value}</dd>
+                  <dt className="text-xs font-bold text-(--fg-subtle)">{label}</dt>
+                  <dd className="text-sm leading-none sm:leading-7 text-(--fg)">{value}</dd>
                 </div>
               ))}
             </dl>
 
-            <div className="mt-4 border border-[var(--border)] bg-[var(--card)] px-6 py-4">
-              <p className="text-xs leading-6 text-[var(--fg-subtle)]">
+            <div className="mt-4 border border-(--border) bg-(--card) px-6 py-4">
+              <p className="text-xs leading-6 text-(--fg-subtle)">
                 ※ 希望者は1日アルバイト体験入社も可能です。まずはお気軽にご見学ください。
               </p>
             </div>
@@ -447,26 +447,26 @@ export default function RecruitPage() {
       {/* ════════════════════════════════════════
           採用フロー
       ════════════════════════════════════════ */}
-      <section className="bg-[var(--bg)] px-6 py-16 md:py-24">
-        <div className="mx-auto max-w-[1400px]">
+      <section className="bg-(--bg) px-6 py-16 md:py-24">
+        <div className="mx-auto max-w-350">
           <FadeUp>
             <span className="section-rule block" />
             <p className="label-section">Flow</p>
-            <h2 className="mt-5 text-2xl font-black text-[var(--fg)] md:text-3xl">
+            <h2 className="mt-5 text-2xl font-black text-(--fg) md:text-3xl">
               採用の流れ
             </h2>
           </FadeUp>
 
-          <StaggerList className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-6 lg:mt-12">
+          <StaggerList className="mt-4 sm:mt-10 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-6 lg:mt-12">
             {flow.map(({ step, label }, i) => (
               <StaggerItem key={step}>
-                <div className="relative flex flex-col items-center border border-[var(--border)] bg-[var(--card)] px-4 py-6 text-center">
-                  <p className="label-en text-[var(--fg-subtle)]">{step}</p>
-                  <p className="mt-3 whitespace-pre-line text-sm font-bold text-[var(--fg)]">{label}</p>
+                <div className="relative flex flex-col items-center border border-(--border) bg-(--card) px-4 py-6 text-center">
+                  <p className="label-en text-(--fg-subtle)">{step}</p>
+                  <p className="mt-3 whitespace-pre-line text-sm font-bold text-(--fg)">{label}</p>
                   {i < flow.length - 1 && (
                     <ArrowRight
                       size={12}
-                      className="absolute -right-2 top-1/2 hidden -translate-y-1/2 text-[var(--fg-subtle)] md:block"
+                      className="absolute -right-2 top-1/2 hidden -translate-y-1/2 text-(--fg-subtle) md:block"
                     />
                   )}
                 </div>
@@ -474,11 +474,11 @@ export default function RecruitPage() {
             ))}
           </StaggerList>
 
-          <FadeUp className="mt-6 max-w-3xl border border-[var(--border)] bg-[var(--card)] px-6 py-5 space-y-2">
-            <p className="text-sm leading-7 text-[var(--fg)]">
+          <FadeUp className="mt-6 max-w-5xl border border-(--border) bg-(--card) px-6 py-5 space-y-2">
+            <p className="text-sm leading-7 text-(--fg)">
               じっくりお店のことをわかっていただいてから、もう一度入社の意思があることを確認してからの面接となります。
             </p>
-            <p className="text-xs leading-6 text-[var(--fg-subtle)]">
+            <p className="text-xs leading-6 text-(--fg-subtle)">
               働いてから「やっぱり違った」というお互いの意思のすれ違いをなくすよう、念入りに入社までの流れを設けています。希望者は1日アルバイトとして体験入社も可能です。
             </p>
           </FadeUp>
@@ -488,27 +488,27 @@ export default function RecruitPage() {
       {/* ════════════════════════════════════════
           応募フォーム
       ════════════════════════════════════════ */}
-      <section id="apply" className="bg-[var(--bg-off)] px-6 py-16 md:py-24">
-        <div className="mx-auto max-w-[1400px]">
+      <section id="apply" className="bg-(--bg-off) px-6 py-16 md:py-24">
+        <div className="mx-auto max-w-350">
           <div className="grid gap-12 md:grid-cols-[1fr_1.2fr] md:gap-16 lg:gap-24">
 
             <FadeUp>
               <span className="section-rule block" />
               <p className="label-section">Apply</p>
-              <h2 className="mt-5 text-2xl font-black leading-tight text-[var(--fg)] md:text-3xl lg:text-4xl">
+              <h2 className="mt-5 text-2xl font-black leading-tight text-(--fg) md:text-3xl lg:text-4xl">
                 応募・見学の<br />ご連絡はこちら。
               </h2>
-              <p className="mt-5 text-sm leading-8 text-[var(--fg-subtle)]">
+              <p className="mt-5 text-sm sm:leading-8 text-(--fg-subtle)">
                 まずは見学だけでも歓迎です。フォームからお気軽にご連絡ください。
               </p>
-              <div className="mt-8 space-y-3 border border-[var(--border)] bg-[var(--card)] p-6">
-                <p className="label-en text-[var(--fg-subtle)]">Other Contact</p>
-                <p className="text-xs leading-7 text-[var(--fg-subtle)]">
+              <div className="mt-2 sm:mt-8 space-y-1 sm:space-y-3 border border-(--border) bg-(--card) px-4 py-2 sm:p-6">
+                <p className="label-en text-(--fg-subtle)">Other Contact</p>
+                <p className="text-xs leading-7 text-(--fg-subtle)">
                   お電話や Instagram DM でのご連絡も歓迎しています。
                 </p>
                 <a
                   href="tel:025-278-7274"
-                  className="block text-sm font-bold text-[var(--fg)] transition-opacity hover:opacity-60"
+                  className="block text-sm font-bold text-(--fg) transition-opacity hover:opacity-60"
                 >
                   025-278-7274
                 </a>
@@ -516,7 +516,7 @@ export default function RecruitPage() {
                   href="https://www.instagram.com/risplendere_broletto/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block text-sm font-bold text-[var(--fg)] transition-opacity hover:opacity-60"
+                  className="block text-sm font-bold text-(--fg) transition-opacity hover:opacity-60"
                 >
                   @risplendere_broletto
                 </a>
@@ -534,8 +534,8 @@ export default function RecruitPage() {
       {/* ════════════════════════════════════════
           CTA
       ════════════════════════════════════════ */}
-      <section className="bg-[var(--bg-dark)] px-6 py-16 text-white md:py-24">
-        <div className="mx-auto max-w-[1400px]">
+      <section className="bg-(--bg-dark) px-6 py-16 text-white md:py-24">
+        <div className="mx-auto max-w-350">
           <FadeUp className="flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
             <div>
               <span className="section-rule section-rule--white block" />

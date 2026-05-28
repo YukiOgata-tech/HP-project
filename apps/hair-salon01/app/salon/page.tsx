@@ -63,29 +63,29 @@ function IgIcon() {
 
 export default function SalonPage() {
   return (
-    <main className="bg-[var(--bg)]">
+    <main className="bg-(--bg)">
 
       {/* ════════════════════════════════════════
           TOP
       ════════════════════════════════════════ */}
-      <section className="border-b border-[var(--border)] bg-[var(--bg)] px-6 pt-24 md:pt-32">
-        <div className="mx-auto flex max-w-[1400px] items-end justify-between gap-10">
+      <section className="border-b border-(--border) bg-(--bg) px-6 pt-24 md:pt-32">
+        <div className="mx-auto flex max-w-350 items-end justify-between gap-10">
 
           {/* テキスト */}
           <FadeUp className="flex-1 pb-12 md:pb-16">
             <Link
               href="/"
-              className="label-en mb-3 sm:mb-6 inline-flex items-center gap-2 text-[var(--fg-subtle)] transition-colors hover:text-[var(--fg)]"
+              className="label-en mb-3 sm:mb-6 inline-flex items-center gap-2 text-(--fg-subtle) transition-colors hover:text-(--fg)"
             >
               <ArrowLeft size={11} />
               Back to Home
             </Link>
             <span className="section-rule" />
             <p className="label-section">About</p>
-            <h1 className="mt-4 font-serif text-4xl font-bold text-[var(--fg)] md:text-5xl lg:text-6xl">
+            <h1 className="mt-4 font-serif text-4xl font-bold text-(--fg) md:text-5xl lg:text-6xl">
               サロン・会社情報
             </h1>
-            <p className="mt-5 max-w-3xl text-sm leading-7 text-[var(--fg-subtle)]">
+            <p className="mt-5 max-w-3xl text-sm leading-7 text-(--fg-subtle)">
               <span className="font-bold underline">RISPLENDERE BROLETTO</span> のブランドストーリー、3つのお約束、代表・会社情報をご紹介します。
             </p>
           </FadeUp>
@@ -118,19 +118,19 @@ export default function SalonPage() {
       {/* ════════════════════════════════════════
           BRAND STORY + REPRESENTATIVE
       ════════════════════════════════════════ */}
-      <section className="bg-[var(--bg)] px-6 py-16 md:py-24">
-        <div className="mx-auto max-w-[1400px]">
+      <section className="bg-(--bg) px-6 py-16 md:py-24">
+        <div className="mx-auto max-w-350">
           <div className="grid gap-12 md:grid-cols-2 md:gap-16 lg:gap-24">
 
             {/* ブランドストーリー */}
             <FadeUp>
               <span className="section-rule" />
               <p className="label-section">Brand Story</p>
-              <h2 className="mt-4 text-3xl font-black leading-tight text-[var(--fg)] md:text-4xl">
+              <h2 className="mt-4 text-3xl font-black leading-tight text-(--fg) md:text-4xl">
                 ブロレットという名前に、<br />
                 込めた想い。
               </h2>
-              <div className="mt-6 space-y-4 text-sm leading-8 text-[var(--fg-subtle)] md:text-base md:leading-9">
+              <div className="mt-6 space-y-4 text-sm leading-8 text-(--fg-subtle) md:text-base md:leading-9">
                 <p>
                   サロン名「RISPLENDERE BROLETTO」はイタリア語で
                   「キラキラ輝く小さな場所」という意味。ブロレットに訪れた方が
@@ -145,25 +145,25 @@ export default function SalonPage() {
 
               {/* 言葉の意味カード */}
               <div className="mt-8 grid grid-cols-2 gap-3">
-                <div className="border border-[var(--border)] bg-[var(--card)] p-5">
-                  <p className="label-en text-[var(--fg-subtle)]">Risplendere</p>
-                  <p className="mt-2 text-xl font-black text-[var(--fg)]">輝く</p>
-                  <p className="mt-1 text-xs text-[var(--fg-subtle)]">キラキラ輝く</p>
+                <div className="border border-(--border) bg-(--card) p-5">
+                  <p className="label-en text-(--fg-subtle)">Risplendere</p>
+                  <p className="mt-2 text-xl font-black text-(--fg)">輝く</p>
+                  <p className="mt-1 text-xs text-(--fg-subtle)">キラキラ輝く</p>
                 </div>
-                <div className="border border-[var(--border)] bg-[var(--card)] p-5">
-                  <p className="label-en text-[var(--fg-subtle)]">Broletto</p>
-                  <p className="mt-2 text-xl font-black text-[var(--fg)]">場所</p>
-                  <p className="mt-1 text-xs text-[var(--fg-subtle)]">小さな場所</p>
+                <div className="border border-(--border) bg-(--card) p-5">
+                  <p className="label-en text-(--fg-subtle)">Broletto</p>
+                  <p className="mt-2 text-xl font-black text-(--fg)">場所</p>
+                  <p className="mt-1 text-xs text-(--fg-subtle)">小さな場所</p>
                 </div>
               </div>
             </FadeUp>
 
             {/* 代表者カード */}
             <FadeIn delay={0.1}>
-              <div className="overflow-hidden border border-[var(--border)] bg-[var(--card)]">
+              <div className="overflow-hidden border border-(--border) bg-(--card)">
 
                 {/* オーナー写真 */}
-                <div className="relative aspect-[3/4] overflow-hidden">
+                <div className="relative aspect-3/4 overflow-hidden">
                   <Image
                     src="/images/recruit/staff-tsurumaki.jpg"
                     alt="代表取締役 渡辺麗奈"
@@ -180,18 +180,18 @@ export default function SalonPage() {
                   <p className="label-section">Representative</p>
 
                   <div className="mt-6">
-                    <h3 className="font-serif text-3xl font-bold text-[var(--fg)]">
+                    <h3 className="font-serif text-3xl font-bold text-(--fg)">
                       渡辺 麗奈
                     </h3>
-                    <p className="mt-1 label-en text-[var(--fg-subtle)]">Rena Watanabe</p>
-                    <p className="mt-2 text-xs text-[var(--fg-subtle)]">
+                    <p className="mt-1 label-en text-(--fg-subtle)">Rena Watanabe</p>
+                    <p className="mt-2 text-xs text-(--fg-subtle)">
                       代表取締役 / Hair Stylist
                     </p>
                   </div>
 
-                  <div className="my-7 h-px w-full bg-[var(--border)]" />
+                  <div className="my-7 h-px w-full bg-(--border)" />
 
-                  <p className="text-sm leading-8 text-[var(--fg-subtle)]">
+                  <p className="text-sm leading-8 text-(--fg-subtle)">
                     株式会社リスプレンデレブロレット 代表取締役。<br />
                     新潟市中央区を拠点に、お客様一人ひとりの髪と向き合うサロンを運営しています。
                   </p>
@@ -201,7 +201,7 @@ export default function SalonPage() {
                     href={instagramUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="mt-7 inline-flex items-center gap-2.5 border border-[var(--border)] px-5 py-3 text-xs font-bold text-[var(--fg-subtle)] transition-all hover:border-[var(--fg)] hover:text-[var(--fg)]"
+                    className="mt-7 inline-flex items-center gap-2.5 border border-(--border) px-5 py-3 text-xs font-bold text-(--fg-subtle) transition-all hover:border-(--fg) hover:text-(--fg)"
                   >
                     <IgIcon />
                     @risplendere_broletto
@@ -218,12 +218,12 @@ export default function SalonPage() {
       {/* ════════════════════════════════════════
           3 PROMISES — 詳細版
       ════════════════════════════════════════ */}
-      <section className="bg-[var(--bg-off)] px-6 py-16 md:py-24">
-        <div className="mx-auto max-w-[1400px]">
+      <section className="bg-(--bg-off) px-6 py-16 md:py-24">
+        <div className="mx-auto max-w-350">
           <FadeUp>
             <span className="section-rule" />
             <p className="label-section">Promise</p>
-            <h2 className="mt-4 text-3xl font-black text-[var(--fg)] md:text-4xl">
+            <h2 className="mt-4 text-3xl font-black text-(--fg) md:text-4xl">
               ブロレットからの、<br className="sm:hidden" />3つのお約束。
             </h2>
           </FadeUp>
@@ -231,16 +231,16 @@ export default function SalonPage() {
           <StaggerList className="mt-10 grid gap-5 md:grid-cols-3 lg:mt-14">
             {promises.map(({ number, title, body }) => (
               <StaggerItem key={number}>
-                <article className="flex h-full flex-col border border-[var(--border)] bg-[var(--card)] p-7">
+                <article className="flex h-full flex-col border border-(--border) bg-(--card) p-7">
                   <div className="flex items-center justify-between">
-                    <p className="label-en text-[var(--fg-subtle)]">{number}</p>
-                    <p className="label-en text-[var(--fg-subtle)]">Promise</p>
+                    <p className="label-en text-(--fg-subtle)">{number}</p>
+                    <p className="label-en text-(--fg-subtle)">Promise</p>
                   </div>
-                  <div className="mt-4 h-px w-full bg-[var(--border)]" />
-                  <h3 className="mt-5 text-lg font-black leading-snug text-[var(--fg)]">
+                  <div className="mt-4 h-px w-full bg-(--border)" />
+                  <h3 className="mt-5 text-lg font-black leading-snug text-(--fg)">
                     {title}
                   </h3>
-                  <p className="mt-4 flex-1 text-sm leading-7 text-[var(--fg-subtle)]">
+                  <p className="mt-4 flex-1 text-sm leading-7 text-(--fg-subtle)">
                     {body}
                   </p>
                 </article>
@@ -253,37 +253,37 @@ export default function SalonPage() {
       {/* ════════════════════════════════════════
           COMPANY INFO
       ════════════════════════════════════════ */}
-      <section className="bg-[var(--bg)] px-6 py-16 md:py-24">
-        <div className="mx-auto max-w-[1400px]">
+      <section className="bg-(--bg) px-6 py-16 md:py-24">
+        <div className="mx-auto max-w-350">
           <FadeUp>
             <span className="section-rule" />
             <p className="label-section">Company</p>
-            <h2 className="mt-4 text-3xl font-black text-[var(--fg)] md:text-4xl">
+            <h2 className="mt-4 text-3xl font-black text-(--fg) md:text-4xl">
               会社概要
             </h2>
           </FadeUp>
 
           <FadeIn className="mt-10 max-w-2xl">
-            <dl className="border border-[var(--border)] divide-y divide-[var(--border-light)]">
+            <dl className="border border-(--border) divide-y divide-(--border-light)">
               {companyRows.map(({ label, value }) => (
                 <div
                   key={label}
                   className="grid grid-cols-[5.5rem_1fr] items-baseline gap-4 px-6 py-4 md:grid-cols-[8rem_1fr]"
                 >
-                  <dt className="text-xs font-bold text-[var(--fg-subtle)]">{label}</dt>
-                  <dd className="whitespace-pre-line text-sm text-[var(--fg)]">{value}</dd>
+                  <dt className="text-xs font-bold text-(--fg-subtle)">{label}</dt>
+                  <dd className="whitespace-pre-line text-sm text-(--fg)">{value}</dd>
                 </div>
               ))}
 
               {/* Instagram 行 */}
               <div className="grid grid-cols-[5.5rem_1fr] items-baseline gap-4 px-6 py-4 md:grid-cols-[8rem_1fr]">
-                <dt className="text-xs font-bold text-[var(--fg-subtle)]">Instagram</dt>
+                <dt className="text-xs font-bold text-(--fg-subtle)">Instagram</dt>
                 <dd>
                   <a
                     href={instagramUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-sm text-[var(--fg)] transition-opacity hover:opacity-60"
+                    className="inline-flex items-center gap-1.5 text-sm text-(--fg) transition-opacity hover:opacity-60"
                   >
                     @risplendere_broletto
                     <ExternalLink size={11} />
@@ -298,8 +298,8 @@ export default function SalonPage() {
       {/* ════════════════════════════════════════
           CTA
       ════════════════════════════════════════ */}
-      <section className="bg-[var(--bg-dark)] px-6 py-14 text-white md:py-20">
-        <div className="mx-auto max-w-[1400px]">
+      <section className="bg-(--bg-dark) px-6 py-14 text-white md:py-20">
+        <div className="mx-auto max-w-350">
           <FadeUp className="flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
             <div>
               <span className="section-rule section-rule--white" />

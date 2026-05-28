@@ -29,7 +29,7 @@ export function Breadcrumb() {
   return (
     <nav
       aria-label="パンくずナビゲーション"
-      className="fixed inset-x-0 top-14.25 z-30 border-b border-[var(--header-border)] bg-[var(--header-bg)] backdrop-blur-md"
+      className="fixed inset-x-0 top-14.25 z-30 border-b border-(--header-border) bg-(--header-bg) backdrop-blur-md"
     >
       <ol className="mx-auto flex max-w-350 items-center gap-0.5 px-6 py-2">
 
@@ -37,7 +37,7 @@ export function Breadcrumb() {
         <li className="flex items-center">
           <Link
             href="/"
-            className="label-en text-[var(--fg-subtle)] transition-colors hover:text-[var(--fg)]"
+            className="label-en text-(--fg-subtle) transition-colors hover:text-(--fg)"
           >
             Home
           </Link>
@@ -50,15 +50,15 @@ export function Breadcrumb() {
 
           return (
             <li key={href} className="flex items-center gap-0.5">
-              <ChevronRight size={11} className="mx-0.5 shrink-0 text-[var(--fg-subtle)]" />
+              <ChevronRight size={11} className="mx-0.5 shrink-0 text-(--fg-subtle)" />
               {isLast ? (
-                <span className="label-en text-[var(--fg)]" aria-current="page">
+                <span className="label-en text-(--fg)" aria-current="page">
                   {label}
                 </span>
               ) : (
                 <Link
                   href={href}
-                  className="label-en text-[var(--fg-subtle)] transition-colors hover:text-[var(--fg)]"
+                  className="label-en text-(--fg-subtle) transition-colors hover:text-(--fg)"
                 >
                   {label}
                 </Link>
