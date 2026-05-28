@@ -20,6 +20,13 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
+  icons: {
+    icon: [
+      { url: "/images/RB-logo-light-trans.png", media: "(prefers-color-scheme: light)" },
+      { url: "/images/RB-logo-dark-trans.png",  media: "(prefers-color-scheme: dark)"  },
+    ],
+    apple: "/images/RB-logo-dark-trans.png",
+  },
   title: "RISPLENDERE BROLETTO｜新潟市中央区本馬越の美容室",
   description:
     "新潟市中央区本馬越の女性スタッフ中心の小さな美容室。カット、カラー、トリートメント、ヘッドスパまで、髪にやさしく一人ひとりに寄り添うサロンです。",
