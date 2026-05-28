@@ -18,21 +18,18 @@ const navLinks = [
 export function Footer() {
   return (
     <footer className="bg-(--bg-darkest) text-white">
-      <div className="mx-auto max-w-350 px-6 py-14 md:py-20">
+      <div className="mx-auto max-w-350 px-6 py-8 md:py-20">
 
         {/* Top grid */}
-        <div className="grid gap-10 md:grid-cols-[1.4fr_1fr_1fr]">
+        <div className="grid gap-5 sm:gap-10 md:grid-cols-[1.4fr_1fr_1fr]">
 
           {/* Brand block */}
           <div>
-            <p className="font-serif text-xl font-bold tracking-[0.28em] uppercase">
-              Broletto
-            </p>
-            <p className="mt-1 label-en text-white/30">
+            <p className="font-serif text-xl font-bold tracking-wide sm:tracking-[0.28em] uppercase">
               Risplendere Broletto
             </p>
 
-            <div className="mt-6 space-y-1.5 text-xs leading-6 text-white/40">
+            <div className="mt-6 space-y-1 text-xs leading-6 text-white/50">
               <p>〒950-0865</p>
               <p>新潟市中央区本馬越2丁目8番17号</p>
               <p className="mt-3">
@@ -42,7 +39,7 @@ export function Footer() {
               </p>
             </div>
 
-            <div className="mt-5 space-y-2 text-xs text-white/35">
+            <div className="mt-2 sm:mt-5 space-y-2 text-xs sm:text-sm text-white/50 font-semibold">
               <p>平日 9:15〜18:00</p>
               <p>日曜・祝日 10:00〜17:00</p>
               <p>定休日：毎週月曜・第3日曜</p>
@@ -52,7 +49,7 @@ export function Footer() {
               href={instagramUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-6 inline-flex items-center gap-2 text-xs text-white/35 transition-colors hover:text-white/70"
+              className="mt-6 inline-flex items-center gap-2 text-xs text-pink-500 transition-colors hover:text-white/70"
             >
               {/* Instagram icon (inline SVG) */}
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -66,8 +63,8 @@ export function Footer() {
 
           {/* Nav block */}
           <div>
-            <p className="label-en text-white/25 mb-5">Navigation</p>
-            <nav className="flex flex-col gap-3">
+            <p className="label-en text-white/50 mb-2 sm:mb-5">- Navigation</p>
+            <nav className="flex flex-col gap-1.5 sm:gap-3">
               {navLinks.map(({ href, label }) => (
                 <Link
                   key={href}
@@ -82,7 +79,7 @@ export function Footer() {
 
           {/* Reserve block */}
           <div>
-            <p className="label-en text-white/25 mb-5">Reserve</p>
+            <p className="label-en text-white/50 mb-2 sm:mb-5">- Reserve</p>
             <a
               href={reservationUrl}
               target="_blank"

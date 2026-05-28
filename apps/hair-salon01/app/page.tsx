@@ -333,7 +333,7 @@ export default async function Home() {
             <p className="label-section">Concept</p>
 
             <h2 className="mt-5 text-3xl font-black leading-tight text-(--fg) md:text-4xl lg:text-5xl">
-              ブロレットに来ると、<br />
+              ブロレット<span className="text-xl md:text-2xl lg:text-3xl">は、</span><br />
               キラキラ輝いて<br />
               帰れる場所。
             </h2>
@@ -368,17 +368,18 @@ export default async function Home() {
       {/* ════════════════════════════════════════
           PROMISE
       ════════════════════════════════════════ */}
-      <section className="bg-(--bg-dark) px-6 py-16 text-white md:py-24 lg:py-32">
+      <section className="bg-(--bg-dark) px-6 py-8 text-white md:py-20 lg:py-32">
         <div className="mx-auto max-w-350">
           <FadeUp>
             <span className="section-rule section-rule--white" />
             <p className="label-en text-white/35">Promise</p>
             <h2 className="mt-5 text-2xl font-black text-white md:text-3xl lg:text-4xl">
-              ブロレットからの、3つのお約束。
+              ブロレット<span className="text-lg md:text-xl lg:text-2xl">からの、</span>
+              3つ<span className="text-lg md:text-xl lg:text-2xl">の</span>お約束
             </h2>
           </FadeUp>
 
-          <StaggerList className="mt-10 grid gap-4 md:grid-cols-3 md:gap-5 lg:mt-14">
+          <StaggerList className="mt-6 grid gap-4 md:grid-cols-3 md:gap-5 lg:mt-14">
             {promises.map(({ number, title, text }) => (
               <StaggerItem key={number}>
                 <article
@@ -417,7 +418,7 @@ export default async function Home() {
       {/* ════════════════════════════════════════
           MENU OVERVIEW
       ════════════════════════════════════════ */}
-      <section id="menu" className="bg-(--bg) px-6 py-16 md:py-24 lg:py-32">
+      <section id="menu" className="bg-(--bg) px-6 py-8 md:py-20 lg:py-32">
         <div className="mx-auto max-w-350">
 
           <FadeUp className="flex items-end justify-between gap-4">
@@ -478,14 +479,14 @@ export default async function Home() {
       {/* ════════════════════════════════════════
           SPECIAL SERVICES
       ════════════════════════════════════════ */}
-      <section className="bg-(--bg-off) px-6 py-16 md:py-24 lg:py-32">
+      <section className="bg-(--bg-off) px-6 py-8 md:py-20 lg:py-32">
         <div className="mx-auto max-w-350">
           <FadeUp>
             <span className="section-rule" />
             <p className="label-section">Special Service</p>
             <h2 className="mt-5 text-2xl font-black text-(--fg) md:text-3xl lg:text-4xl">
               ブロレットだからできる、<br className="sm:hidden" />
-              特別なこと。
+              特別<span className="text-lg md:text-xl lg:text-2xl">な</span>こと。
             </h2>
           </FadeUp>
 
@@ -494,7 +495,7 @@ export default async function Home() {
               <StaggerItem key={label}>
                 <div className="border border-(--border) bg-(--card) p-5 md:p-6">
                   <p className="label-en text-(--fg-subtle)">{label}</p>
-                  <p className="mt-3 text-sm font-bold text-(--fg) leading-6">
+                  <p className="mt-1 sm:mt-3 text-sm font-bold text-(--fg) leading-6">
                     {text}
                   </p>
                 </div>
@@ -507,7 +508,7 @@ export default async function Home() {
       {/* ════════════════════════════════════════
           GALLERY
       ════════════════════════════════════════ */}
-      <section className="bg-(--bg-dark) px-6 py-16 md:py-24 lg:py-32">
+      <section className="bg-(--bg-dark) px-6 py-8 md:py-20 lg:py-32">
         <div className="mx-auto max-w-350">
           <FadeUp>
             <span className="section-rule section-rule--white" />
@@ -558,7 +559,7 @@ export default async function Home() {
       {/* ════════════════════════════════════════
           JOURNAL
       ════════════════════════════════════════ */}
-      <section className="bg-(--bg) px-6 py-16 md:py-24 lg:py-32">
+      <section className="bg-(--bg) px-6 py-8 md:py-20 lg:py-32">
         <div className="mx-auto max-w-350">
           <FadeUp className="flex items-end justify-between gap-4">
             <div>
@@ -653,7 +654,7 @@ export default async function Home() {
       {/* ════════════════════════════════════════
           JOIN US — 採用
       ════════════════════════════════════════ */}
-      <section className="bg-(--bg-off) px-6 py-16 md:py-24 lg:py-32">
+      <section className="bg-(--bg-off) px-6 py-8 md:py-20 lg:py-32">
         <div className="mx-auto max-w-350">
           <div className="grid gap-10 md:grid-cols-[1.2fr_1fr] md:items-center md:gap-16 lg:gap-24">
 
@@ -661,17 +662,18 @@ export default async function Home() {
               <span className="section-rule" />
               <p className="label-section">Join Us</p>
               <h2 className="mt-5 text-2xl font-black text-(--fg) md:text-3xl lg:text-4xl">
-                ブロレットで、<br />
-                一緒に輝く場所を作りませんか。
+                Broletto<span className="text-lg md:text-xl lg:text-2xl">で、</span><br />
+                一緒<span className="text-lg md:text-xl lg:text-2xl">に</span>
+                輝く場所<span className="text-lg md:text-xl lg:text-2xl">を作りませんか。</span>
               </h2>
-              <p className="mt-5 text-sm leading-8 text-(--fg-subtle)">
+              <p className="mt-5 text-sm leading-5 sm:leading-8 text-(--fg-subtle)">
                 「髪に優しい。人に優しい。」を大切に、1人サロンから16年。
                 女性スタッフだけのチームで、お客様と向き合い続けています。
                 チームを支えてくれる仲間を募集中です。
               </p>
               <Link
                 href="/recruit"
-                className="label-en mt-8 inline-flex items-center gap-2 border border-(--border) px-7 py-3.5 text-(--fg-subtle) transition-all hover:border-(--fg) hover:text-(--fg)"
+                className="label-en mt-8 inline-flex items-center gap-2 border border-(--border) px-3 sm:px-7 py-1.5 sm:py-3.5 text-(--fg-subtle) transition-all hover:border-(--fg) hover:text-(--fg)"
               >
                 採用情報を詳しく見る
                 <ArrowRight size={12} />
@@ -686,7 +688,7 @@ export default async function Home() {
                   { label: "勤務",     value: "9:00〜17:00 / 完全週休2日制" },
                   { label: "サポート", value: "資格取得費用全額補助・残業手当1分単位" },
                 ].map(({ label, value }) => (
-                  <li key={label} className="grid grid-cols-[5.5rem_1fr] gap-3 border border-(--border) bg-(--card) px-5 py-4">
+                  <li key={label} className="grid grid-cols-[5.5rem_1fr] gap-3 border border-(--border) bg-(--card) px-5 py-2 sm:py-4">
                     <span className="label-en text-(--fg-subtle)">{label}</span>
                     <span className="text-sm text-(--fg)">{value}</span>
                   </li>
@@ -701,7 +703,7 @@ export default async function Home() {
       {/* ════════════════════════════════════════
           ACCESS
       ════════════════════════════════════════ */}
-      <section id="access" className="bg-(--bg-dark) px-6 py-16 text-white md:py-24 lg:py-32">
+      <section id="access" className="bg-(--bg-dark) px-6 py-8 text-white md:py-20 lg:py-32">
         <div className="mx-auto max-w-350">
           <FadeUp>
             <span className="section-rule section-rule--white" />
@@ -711,11 +713,11 @@ export default async function Home() {
             </h2>
           </FadeUp>
 
-          <div className="mt-10 grid gap-10 md:grid-cols-2 lg:mt-14 lg:gap-16">
+          <div className="mt-6 grid gap-10 md:grid-cols-2 lg:mt-10 lg:gap-16">
 
             {/* 情報 */}
             <FadeIn>
-              <dl className="divide-y divide-white/8">
+              <dl className="divide-y divide-white/50">
                 {[
                   { icon: <MapPin size={14} />,      label: "住所",     value: "新潟県新潟市中央区本馬越2丁目8番17号" },
                   { icon: <Phone size={14} />,        label: "電話",     value: tel },
@@ -724,7 +726,7 @@ export default async function Home() {
                   { icon: <Car size={14} />,          label: "駐車場",   value: "店舗前3台 / 第二駐車場 8・10・11番" },
                   { icon: <CreditCard size={14} />,   label: "お支払い", value: "各種クレジットカード対応" },
                 ].map(({ icon, label, value }) => (
-                  <div key={label} className="flex gap-4 py-4">
+                  <div key={label} className="flex gap-4 py-2 sm:py-4">
                     <div className="mt-0.5 shrink-0 text-white/30">{icon}</div>
                     <div className="grid flex-1 grid-cols-[4rem_1fr] gap-2">
                       <dt className="text-xs font-bold text-white/35">{label}</dt>
@@ -736,7 +738,7 @@ export default async function Home() {
                 ))}
               </dl>
 
-              <div className="mt-5 border border-white/8 p-4 text-xs leading-6 text-white/35">
+              <div className="mt-2 sm:mt-5 border border-white/40 p-4 text-xs leading-4 text-white">
                 セブンイレブン本馬越店様向かい。ウオロク本馬越店の斜め前です。
               </div>
 
@@ -746,13 +748,13 @@ export default async function Home() {
                   href={reservationUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="label-en bg-white py-3.5 text-center text-black transition-opacity hover:opacity-75"
+                  className="label-en bg-white py-2 sm:py-3.5 text-center text-black transition-opacity hover:opacity-75"
                 >
                   Web予約
                 </a>
                 <a
                   href={`tel:${tel}`}
-                  className="label-en border border-white/20 py-3.5 text-center text-white/55 transition-all hover:border-white/50 hover:text-white"
+                  className="label-en border border-white/20 py-2 sm:py-3.5 text-center text-white/55 transition-all hover:border-white/50 hover:text-white"
                 >
                   {tel}
                 </a>
@@ -760,7 +762,7 @@ export default async function Home() {
                   href={instagramUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="label-en border border-white/20 py-3.5 text-center text-white/55 transition-all hover:border-white/50 hover:text-white"
+                  className="label-en border border-white/20 py-2 sm:py-3.5 text-center text-white/55 transition-all hover:border-white/50 hover:text-white"
                 >
                   Instagram
                 </a>
