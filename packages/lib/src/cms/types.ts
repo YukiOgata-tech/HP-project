@@ -57,6 +57,35 @@ export type PostUpdateInput = Partial<{
   updatedBy: string;
 }>;
 
+export type ApplicationStatus = "new" | "reviewing" | "contacted" | "rejected" | "hired";
+
+export interface Application {
+  id: string;
+  siteId: string;
+  name: string;
+  phone: string;
+  email: string;
+  position: string;
+  experience: string;
+  message: string;
+  resumeUrl: string | null;
+  resumeFileName: string | null;
+  status: ApplicationStatus;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export type ApplicationCreateInput = {
+  name: string;
+  phone: string;
+  email: string;
+  position: string;
+  experience: string;
+  message: string;
+  resumeUrl: string | null;
+  resumeFileName: string | null;
+};
+
 export interface CmsUser {
   uid: string;
   email: string;

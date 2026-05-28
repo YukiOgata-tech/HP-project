@@ -29,7 +29,10 @@
       "mcp__firebase__firestore_add_document",
       "mcp__firebase__firestore_update_document",
       "PowerShell(Get-ChildItem -Path \"C:\\\\projects\\\\client-sites\\\\apps\\\\hair-salon01\\\\app\\\\admin\" -Recurse -Force | Select-Object FullName | ForEach-Object { $_.FullName })",
-      "Bash(grep \"\\\\.tsx$\")"
+      "Bash(grep \"\\\\.tsx$\")",
+      "WebFetch(domain:bibe.work)",
+      "PowerShell(Get-ChildItem \"C:\\\\projects\\\\client-sites\\\\docs\\\\sites_details-01\\\\images-bibe\" | Select-Object Name, @{N=\"Size\\(KB\\)\";E={[math]::Round\\($_.Length/1KB,1\\)}})",
+      "PowerShell(Get-ChildItem \"C:\\\\projects\\\\client-sites\\\\apps\\\\hair-salon01\\\\public\\\\images\\\\recruit\" | Select-Object Name, @{N=\"Size\\(KB\\)\";E={[math]::Round\\($_.Length/1KB,1\\)}})"
     ]
   },
   "enabledMcpjsonServers": [

@@ -160,38 +160,54 @@ export default function SalonPage() {
 
             {/* 代表者カード */}
             <FadeIn delay={0.1}>
-              <div className="border border-[var(--border)] bg-[var(--card)] p-8 md:p-10">
-                <span className="section-rule" />
-                <p className="label-section">Representative</p>
+              <div className="overflow-hidden border border-[var(--border)] bg-[var(--card)]">
 
-                <div className="mt-6">
-                  <h3 className="font-serif text-3xl font-bold text-[var(--fg)]">
-                    渡辺 麗奈
-                  </h3>
-                  <p className="mt-1 label-en text-[var(--fg-subtle)]">Rena Watanabe</p>
-                  <p className="mt-2 text-xs text-[var(--fg-subtle)]">
-                    代表取締役 / Hair Stylist
-                  </p>
+                {/* オーナー写真 */}
+                <div className="relative aspect-[3/4] overflow-hidden">
+                  <Image
+                    src="/images/recruit/staff-tsurumaki.jpg"
+                    alt="代表取締役 渡辺麗奈"
+                    fill
+                    className="object-cover object-top"
+                    sizes="(min-width: 768px) 50vw, 100vw"
+                    priority
+                  />
                 </div>
 
-                <div className="my-7 h-px w-full bg-[var(--border)]" />
+                {/* 情報 */}
+                <div className="p-8 md:p-10">
+                  <span className="section-rule" />
+                  <p className="label-section">Representative</p>
 
-                <p className="text-sm leading-8 text-[var(--fg-subtle)]">
-                  株式会社リスプレンデレブロレット 代表取締役。<br />
-                  新潟市中央区を拠点に、お客様一人ひとりの髪と向き合うサロンを運営しています。
-                </p>
+                  <div className="mt-6">
+                    <h3 className="font-serif text-3xl font-bold text-[var(--fg)]">
+                      渡辺 麗奈
+                    </h3>
+                    <p className="mt-1 label-en text-[var(--fg-subtle)]">Rena Watanabe</p>
+                    <p className="mt-2 text-xs text-[var(--fg-subtle)]">
+                      代表取締役 / Hair Stylist
+                    </p>
+                  </div>
 
-                {/* Instagram リンク */}
-                <a
-                  href={instagramUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-7 inline-flex items-center gap-2.5 border border-[var(--border)] px-5 py-3 text-xs font-bold text-[var(--fg-subtle)] transition-all hover:border-[var(--fg)] hover:text-[var(--fg)]"
-                >
-                  <IgIcon />
-                  @risplendere_broletto
-                  <ExternalLink size={10} />
-                </a>
+                  <div className="my-7 h-px w-full bg-[var(--border)]" />
+
+                  <p className="text-sm leading-8 text-[var(--fg-subtle)]">
+                    株式会社リスプレンデレブロレット 代表取締役。<br />
+                    新潟市中央区を拠点に、お客様一人ひとりの髪と向き合うサロンを運営しています。
+                  </p>
+
+                  {/* Instagram リンク */}
+                  <a
+                    href={instagramUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-7 inline-flex items-center gap-2.5 border border-[var(--border)] px-5 py-3 text-xs font-bold text-[var(--fg-subtle)] transition-all hover:border-[var(--fg)] hover:text-[var(--fg)]"
+                  >
+                    <IgIcon />
+                    @risplendere_broletto
+                    <ExternalLink size={10} />
+                  </a>
+                </div>
               </div>
             </FadeIn>
 

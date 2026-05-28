@@ -23,3 +23,9 @@ export function getAdminAuth() {
   getAdminApp();
   return getAuth();
 }
+
+export function getAdminStorage() {
+  getAdminApp();
+  const { getStorage } = require("firebase-admin/storage");
+  return getStorage();
+}

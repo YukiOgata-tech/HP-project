@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ShareButton } from "./ShareButton";
 
 const tel            = "025-278-7274";
 const reservationUrl = "https://beauty.hotpepper.jp/slnH000142482/";
@@ -9,6 +10,8 @@ const navLinks = [
   { href: "/menu",     label: "Menu"    },
   { href: "/news",     label: "Journal" },
   { href: "/salon",    label: "About"   },
+  { href: "/faq",      label: "FAQ"     },
+  { href: "/recruit",  label: "Recruit" },
   { href: "/#access",  label: "Access"  },
 ];
 
@@ -103,13 +106,16 @@ export function Footer() {
         </div>
 
         {/* Bottom rule */}
-        <div className="mt-14 border-t border-white/8 pt-6 flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
+        <div className="mt-14 border-t border-white/8 pt-6 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
           <p className="text-[10px] tracking-[0.2em] text-white/20">
             © RISPLENDERE BROLETTO. All Rights Reserved.
           </p>
-          <p className="text-[10px] text-white/15 tracking-widest">
-            NIIGATA / HAIR SALON
-          </p>
+          <div className="flex items-center gap-5">
+            <ShareButton />
+            <p className="text-[10px] text-white/15 tracking-widest">
+              NIIGATA / HAIR SALON
+            </p>
+          </div>
         </div>
       </div>
     </footer>

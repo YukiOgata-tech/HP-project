@@ -5,13 +5,17 @@ import { usePathname } from "next/navigation";
 import { ChevronRight } from "lucide-react";
 
 const segmentLabels: Record<string, string> = {
-  menu:   "Menu",
-  news:   "Journal",
-  salon:  "About",
+  menu:    "Menu",
+  news:    "Journal",
+  salon:   "About",
+  faq:     "FAQ",
+  recruit: "Recruit",
 };
 
 function toLabel(seg: string): string {
-  return segmentLabels[seg] ?? "記事";
+  if (segmentLabels[seg]) return segmentLabels[seg];
+  const raw = seg.charAt(0).toUpperCase() + seg.slice(1);
+  return raw.length > 16 ? raw.slice(0, 14) + "…" : raw;
 }
 
 export function Breadcrumb() {

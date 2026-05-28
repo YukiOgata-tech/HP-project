@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { FadeUp, FadeIn, StaggerList, StaggerItem } from "./components/animated";
 import { HeroSlider } from "./components/hero-slider";
+import { FloatingRecruitButton } from "./components/FloatingRecruitButton";
 
 const SITE_ID        = process.env.SITE_ID!;
 const reservationUrl = "https://beauty.hotpepper.jp/slnH000142482/";
@@ -637,6 +638,54 @@ export default async function Home() {
       </section>
 
       {/* ════════════════════════════════════════
+          JOIN US — 採用
+      ════════════════════════════════════════ */}
+      <section className="bg-[var(--bg-off)] px-6 py-16 md:py-24 lg:py-32">
+        <div className="mx-auto max-w-[1400px]">
+          <div className="grid gap-10 md:grid-cols-[1.2fr_1fr] md:items-center md:gap-16 lg:gap-24">
+
+            <FadeUp>
+              <span className="section-rule" />
+              <p className="label-section">Join Us</p>
+              <h2 className="mt-5 text-2xl font-black text-[var(--fg)] md:text-3xl lg:text-4xl">
+                ブロレットで、<br />
+                一緒に輝く場所を作りませんか。
+              </h2>
+              <p className="mt-5 text-sm leading-8 text-[var(--fg-subtle)]">
+                「髪に優しい。人に優しい。」を大切に、1人サロンから16年。
+                女性スタッフだけのチームで、お客様と向き合い続けています。
+                チームを支えてくれる仲間を募集中です。
+              </p>
+              <Link
+                href="/recruit"
+                className="label-en mt-8 inline-flex items-center gap-2 border border-[var(--border)] px-7 py-3.5 text-[var(--fg-subtle)] transition-all hover:border-[var(--fg)] hover:text-[var(--fg)]"
+              >
+                採用情報を詳しく見る
+                <ArrowRight size={12} />
+              </Link>
+            </FadeUp>
+
+            <FadeIn delay={0.1}>
+              <ul className="space-y-3">
+                {[
+                  { label: "募集職種", value: "スタイリスト・アシスタント（ブランク・新卒歓迎）" },
+                  { label: "給与",     value: "月給 182,000〜295,000円 + 各種手当" },
+                  { label: "勤務",     value: "9:00〜17:00 / 完全週休2日制" },
+                  { label: "サポート", value: "資格取得費用全額補助・残業手当1分単位" },
+                ].map(({ label, value }) => (
+                  <li key={label} className="grid grid-cols-[5.5rem_1fr] gap-3 border border-[var(--border)] bg-[var(--card)] px-5 py-4">
+                    <span className="label-en text-[var(--fg-subtle)]">{label}</span>
+                    <span className="text-sm text-[var(--fg)]">{value}</span>
+                  </li>
+                ))}
+              </ul>
+            </FadeIn>
+
+          </div>
+        </div>
+      </section>
+
+      {/* ════════════════════════════════════════
           ACCESS
       ════════════════════════════════════════ */}
       <section id="access" className="bg-[var(--bg-dark)] px-6 py-16 text-white md:py-24 lg:py-32">
@@ -734,6 +783,7 @@ export default async function Home() {
         </div>
       </section>
 
+      <FloatingRecruitButton />
     </main>
   );
 }

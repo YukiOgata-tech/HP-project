@@ -8,8 +8,9 @@ interface AdminHeaderProps {
 }
 
 const navItems = [
-  { href: "/admin",       label: "ダッシュボード" },
-  { href: "/admin/posts", label: "記事管理"       },
+  { href: "/admin",              label: "ダッシュボード" },
+  { href: "/admin/posts",        label: "記事管理"       },
+  { href: "/admin/applications", label: "応募管理"       },
 ];
 
 export function AdminHeader({ user, currentPath }: AdminHeaderProps) {

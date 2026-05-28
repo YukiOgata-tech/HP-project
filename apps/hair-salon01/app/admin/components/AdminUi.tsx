@@ -120,6 +120,33 @@ export function StatusBadge({ status }: { status: "draft" | "published" }) {
 }
 
 /* ═══════════════════════════════════════════════
+   AppStatusBadge
+═══════════════════════════════════════════════ */
+
+import type { ApplicationStatus } from "@client-sites/lib/cms/types";
+
+const APP_STATUS_MAP: Record<
+  ApplicationStatus,
+  { label: string; cls: string }
+> = {
+  new:       { label: "新着",  cls: "border-sky-200 bg-sky-50 text-sky-700" },
+  reviewing: { label: "選考中", cls: "border-amber-200 bg-amber-50 text-amber-700" },
+  contacted: { label: "連絡済", cls: "border-violet-200 bg-violet-50 text-violet-700" },
+  rejected:  { label: "不採用", cls: "border-neutral-200 bg-neutral-50 text-neutral-500" },
+  hired:     { label: "採用",  cls: "border-emerald-200 bg-emerald-50 text-emerald-700" },
+};
+
+export function AppStatusBadge({ status }: { status: ApplicationStatus }) {
+  const { label, cls } = APP_STATUS_MAP[status];
+  return (
+    <span className={`inline-flex items-center gap-1.5 border px-2.5 py-1 text-xs font-bold uppercase tracking-wider ${cls}`}>
+      <span className="h-1.5 w-1.5 rounded-full bg-current" />
+      {label}
+    </span>
+  );
+}
+
+/* ═══════════════════════════════════════════════
    AdminPrimaryLink
 ═══════════════════════════════════════════════ */
 

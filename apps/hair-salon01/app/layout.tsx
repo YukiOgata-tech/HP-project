@@ -20,6 +20,7 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
   icons: {
     icon: [
       { url: "/images/RB-logo-light-trans.png", media: "(prefers-color-scheme: light)" },
@@ -48,6 +49,45 @@ export const metadata: Metadata = {
   },
 };
 
+const localBusinessSchema = {
+  "@context": "https://schema.org",
+  "@type": "HairSalon",
+  "name": "RISPLENDERE BROLETTO",
+  "alternateName": "リスプレンデレ ブロレット",
+  "description": "新潟市中央区本馬越の女性スタッフ中心の小さな美容室。カット、カラー、トリートメント、ヘッドスパまで、髪にやさしく一人ひとりに寄り添うサロンです。",
+  "url": process.env.NEXT_PUBLIC_SITE_URL ?? "",
+  "telephone": "+81-25-278-7274",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "本馬越2丁目8番17号",
+    "addressLocality": "新潟市中央区",
+    "addressRegion": "新潟県",
+    "postalCode": "950-0865",
+    "addressCountry": "JP",
+  },
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+      "opens": "09:15",
+      "closes": "18:00",
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Sunday"],
+      "opens": "10:00",
+      "closes": "17:00",
+    },
+  ],
+  "priceRange": "¥¥",
+  "currenciesAccepted": "JPY",
+  "paymentAccepted": "Cash, Credit Card",
+  "sameAs": [
+    "https://www.instagram.com/risplendere_broletto/",
+    "https://beauty.hotpepper.jp/slnH000142482/",
+  ],
+};
+
 export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
@@ -64,6 +104,12 @@ export default async function RootLayout({
       className={[noto.variable, playfair.variable, savedTheme ?? ""].join(" ").trim()}
     >
       <body>
+        {!isAdminRoute && (
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
+          />
+        )}
         <Providers initialTheme={savedTheme}>
           {!isAdminRoute && <Header />}
           {!isAdminRoute && <Breadcrumb />}
