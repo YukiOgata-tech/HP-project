@@ -13,6 +13,7 @@ const navLinks = [
   { href: "/#concept", label: "Concept" },
   { href: "/menu",     label: "Menu"    },
   { href: "/news",     label: "Journal" },
+  { href: "/blog",     label: "Blog"    },
   { href: "/faq",      label: "FAQ"     },
   { href: "/recruit",  label: "Recruit" },
   { href: "/#access",  label: "Access"  },
@@ -35,8 +36,9 @@ export function Header() {
   }, []);
 
   const isActive = (href: string) => {
-    if (href === "/news") return pathname.startsWith("/news");
-    if (href === "/menu") return pathname.startsWith("/menu");
+    if (href === "/news")    return pathname.startsWith("/news");
+    if (href === "/menu")    return pathname.startsWith("/menu");
+    if (href === "/blog")    return pathname.startsWith("/blog");
     if (href === "/faq")     return pathname.startsWith("/faq");
     if (href === "/recruit") return pathname.startsWith("/recruit");
     return false;

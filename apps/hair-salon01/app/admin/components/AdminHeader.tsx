@@ -9,7 +9,8 @@ interface AdminHeaderProps {
 
 const navItems = [
   { href: "/admin",              label: "ダッシュボード" },
-  { href: "/admin/posts",        label: "記事管理"       },
+  { href: "/admin/posts",        label: "お知らせ"       },
+  { href: "/admin/blogs",        label: "ブログ"         },
   { href: "/admin/applications", label: "応募管理"       },
 ];
 

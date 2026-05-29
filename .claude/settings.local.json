@@ -32,7 +32,16 @@
       "Bash(grep \"\\\\.tsx$\")",
       "WebFetch(domain:bibe.work)",
       "PowerShell(Get-ChildItem \"C:\\\\projects\\\\client-sites\\\\docs\\\\sites_details-01\\\\images-bibe\" | Select-Object Name, @{N=\"Size\\(KB\\)\";E={[math]::Round\\($_.Length/1KB,1\\)}})",
-      "PowerShell(Get-ChildItem \"C:\\\\projects\\\\client-sites\\\\apps\\\\hair-salon01\\\\public\\\\images\\\\recruit\" | Select-Object Name, @{N=\"Size\\(KB\\)\";E={[math]::Round\\($_.Length/1KB,1\\)}})"
+      "PowerShell(Get-ChildItem \"C:\\\\projects\\\\client-sites\\\\apps\\\\hair-salon01\\\\public\\\\images\\\\recruit\" | Select-Object Name, @{N=\"Size\\(KB\\)\";E={[math]::Round\\($_.Length/1KB,1\\)}})",
+      "Bash(Get-ChildItem -Path \"C:\\\\projects\\\\client-sites\\\\apps\\\\hair-salon01\\\\app\\\\admin\\\\posts\\\\[id]\\\\edit\" -Recurse -File)",
+      "Bash(Select-Object FullName)",
+      "mcp__plugin_firebase_firebase__firebase_deploy",
+      "mcp__plugin_firebase_firebase__firebase_deploy_status",
+      "mcp__plugin_firebase_firebase__firestore_list_indexes",
+      "Bash(Get-ChildItem -Path \"C:\\\\projects\\\\client-sites\\\\apps\\\\hair-salon01\" -Recurse -Directory)",
+      "Bash(Select-Object -First 20)",
+      "mcp__plugin_firebase_firebase__firestore_list_documents",
+      "mcp__plugin_firebase_firebase__firestore_delete_document"
     ]
   },
   "enabledMcpjsonServers": [

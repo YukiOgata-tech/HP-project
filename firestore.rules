@@ -76,6 +76,24 @@ service cloud.firestore {
         // 削除: siteAdmin 以上
         allow delete: if canDeleteSite(siteId);
       }
+
+      // ── blogs サブコレクション ────────────────────────────────
+      match /blogs/{blogId} {
+        // 公開記事は誰でも読み取り可。下書きはアクセス権ユーザーのみ
+        allow read: if resource.data.status == 'published' ||
+                       hasSiteAccess(siteId);
+
+        // 作成: editor 以上かつ createdBy が自分の uid
+        allow create: if canEditSite(siteId) &&
+                         request.resource.data.createdBy == request.auth.uid;
+
+        // 更新: editor 以上かつ updatedBy が自分の uid
+        allow update: if canEditSite(siteId) &&
+                         request.resource.data.updatedBy == request.auth.uid;
+
+        // 削除: siteAdmin 以上
+        allow delete: if canDeleteSite(siteId);
+      }
     }
   }
 }

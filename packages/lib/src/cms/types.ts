@@ -57,6 +57,54 @@ export type PostUpdateInput = Partial<{
   updatedBy: string;
 }>;
 
+export type BlogStatus = "draft" | "published";
+
+export interface Blog {
+  id: string;
+  siteId: string;
+  title: string;
+  slug: string;
+  excerpt: string;
+  content: JSONContent;
+  contentHtml: string;
+  status: BlogStatus;
+  coverImageUrl: string;
+  category: string;
+  tags: string[];
+  publishedAt: string | null;
+  createdAt: string;
+  updatedAt: string;
+  createdBy: string;
+  updatedBy: string;
+}
+
+export type BlogCreateInput = {
+  title: string;
+  slug: string;
+  excerpt: string;
+  content: JSONContent;
+  status: BlogStatus;
+  coverImageUrl: string;
+  category: string;
+  tags: string[];
+  publishedAt: string | null;
+  createdBy: string;
+  updatedBy: string;
+};
+
+export type BlogUpdateInput = Partial<{
+  title: string;
+  slug: string;
+  excerpt: string;
+  content: JSONContent;
+  status: BlogStatus;
+  coverImageUrl: string;
+  category: string;
+  tags: string[];
+  publishedAt: string | null;
+  updatedBy: string;
+}>;
+
 export type ApplicationStatus = "new" | "reviewing" | "contacted" | "rejected" | "hired";
 
 export interface Application {
