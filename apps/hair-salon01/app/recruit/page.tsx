@@ -175,7 +175,7 @@ export default function RecruitPage() {
           ページヘッダー
       ════════════════════════════════════════ */}
       <section className="border-b border-(--border) bg-(--bg-dark)">
-        <div className="mx-auto max-w-350 px-6 pb-14 pt-24 md:pb-20 md:pt-36">
+        <div className="mx-auto max-w-350 px-6 pb-10 pt-24 md:pb-20 md:pt-36">
           <FadeUp>
             <Link
               href="/"
@@ -191,17 +191,17 @@ export default function RecruitPage() {
             </h1>
             <p className="mt-4 label-en text-white/30">髪に優しい。人に優しい。</p>
 
-            <p className="mt-5 max-w-2xl text-sm leading-8 text-white/55">
+            <p className="mt-5 max-w-2xl text-sm leading-5 sm:leading-8 text-white/55">
               1人サロンから16年。女性が働きやすい、スタッフで助け合う5人サロンへ。<br />
               お客様もスタッフも、信頼と思いやりで居心地よく。心も体もストレスフリー。
             </p>
 
-            <div className="mt-10 inline-block border border-white/15 bg-white/5 px-6 py-4">
+            <div className="mt-4 sm:mt-10 inline-block border border-white/15 bg-white/5 px-6 py-4">
               <p className="label-en text-white/35">Now Hiring</p>
               <p className="mt-1 text-sm font-bold text-white">
-                スタイリスト・アシスタント 募集中
+                スタイリスト・アシスタント 募集!
               </p>
-              <p className="mt-1 text-xs text-white/45">
+              <p className="mt-1 text-xs text-white/65">
                 スタッフ退社に伴う欠員補充 / 正社員・パート・アルバイト対応
               </p>
             </div>
@@ -212,26 +212,26 @@ export default function RecruitPage() {
       {/* ════════════════════════════════════════
           オーナーストーリー
       ════════════════════════════════════════ */}
-      <section className="bg-(--bg) px-6 py-16 md:py-24">
+      <section className="bg-(--bg) px-6 py-8 md:py-20">
         <div className="mx-auto max-w-350">
           <div className="grid gap-10 md:grid-cols-2 md:gap-16 lg:gap-24">
             <FadeUp>
               <span className="section-rule block" />
               <p className="label-section">Owner's Story</p>
               <h2 className="mt-5 text-2xl font-black leading-tight text-(--fg) md:text-3xl lg:text-4xl">
-                1人サロンから、<br />16年が経ち。
+                1人サロンから、16年が経ち。
               </h2>
-              <div className="mt-6 space-y-4 text-sm leading-8 text-(--fg-subtle)">
+              <div className="mt-6 space-y-4 text-sm leading-6 sm:leading-8 text-(--fg-subtle) font-medium">
                 <p>美容学校卒業後、とにかく美容師の仕事が大好きで美容室という空間が大好きで、1人でサロンをスタート。やがて予約が数ヶ月待ちになり、「自分のエゴでお客様の綺麗になりたい時期を遅らせてしまっている」と気づいたことが、チームを作るきっかけになりました。</p>
                 <p>結婚・出産を経て、ライフステージが変わってもスタッフが働きやすい環境づくりを続け、現在は女性5名のチームサロンへ。</p>
               </div>
             </FadeUp>
             <FadeIn delay={0.1}>
-              <div className="border border-(--border) bg-(--card) p-8 md:p-10">
+              <div className="border border-(--border) bg-(--card) p-6 md:p-10">
                 <span className="section-rule block" />
                 <p className="label-section">Philosophy</p>
                 <blockquote className="mt-5 font-serif text-2xl font-bold leading-snug text-(--fg) md:text-3xl">
-                  「スタッフが幸せだから、<br />お客様も幸せになれる」
+                  「スタッフ<span className="text-lg md:text-xl">が</span>幸せだから、<br />お客様も幸せ<span className="text-lg md:text-xl">に</span>なれる」
                 </blockquote>
                 <p className="mt-6 text-sm leading-8 text-(--fg-subtle)">
                   オンオフの実現は、スタッフ同士とお客様との強い信頼関係があってこそ。身体と心にゆとりがあるから、もっと優しくなれる。そんな居心地の良い空間を、一緒に守れる方を求めています。
@@ -245,7 +245,7 @@ export default function RecruitPage() {
       {/* ════════════════════════════════════════
           5つのポイント
       ════════════════════════════════════════ */}
-      <section className="bg-(--bg-off) px-6 py-16 md:py-24 lg:py-32">
+      <section className="bg-(--bg-off) px-6 py-8 md:py-20 lg:py-32">
         <div className="mx-auto max-w-350">
           <FadeUp>
             <span className="section-rule block" />
@@ -255,17 +255,17 @@ export default function RecruitPage() {
             </h2>
           </FadeUp>
 
-          <StaggerList className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3 lg:mt-14">
+          <StaggerList className="mt-4 sm:mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3 lg:mt-14">
             {points.map(({ number, title, body }) => (
               <StaggerItem key={number}>
                 <article className="promise-card relative h-full border border-(--border) bg-(--card) p-7" data-number={number}>
                   <div className="relative z-10 flex h-full flex-col">
-                    <p className="label-en text-(--fg-subtle)">{number}</p>
+                    <div className="flex items-baseline gap-3">
+                      <p className="label-en shrink-0 text-(--fg-subtle)">{number}</p>
+                      <h3 className="text-lg font-black leading-snug text-(--fg)">{title}</h3>
+                    </div>
                     <div className="mt-3 h-px w-full bg-(--border)" />
-                    <h3 className="mt-5 text-lg font-black leading-snug text-(--fg)">
-                      {title}
-                    </h3>
-                    <p className="mt-3 flex-1 text-sm leading-7 text-(--fg-subtle)">
+                    <p className="mt-2 sm:mt-4 flex-1 text-sm leading-7 text-(--fg-subtle) font-medium">
                       {body}
                     </p>
                   </div>
@@ -279,7 +279,7 @@ export default function RecruitPage() {
       {/* ════════════════════════════════════════
           スタッフ紹介
       ════════════════════════════════════════ */}
-      <section className="bg-(--bg) px-6 py-16 md:py-24 lg:py-32">
+      <section className="bg-(--bg) px-6 py-8 md:py-20 lg:py-32">
         <div className="mx-auto max-w-350">
           <FadeUp>
             <span className="section-rule block" />
@@ -293,7 +293,7 @@ export default function RecruitPage() {
           </FadeUp>
 
           {/* モバイル: 横スクロール / md以上: グリッド */}
-          <div className="-mx-6 mt-10 overflow-x-auto px-6 pb-4 md:mx-0 md:overflow-visible md:px-0 md:pb-0 lg:mt-12">
+          <div className="-mx-6 mt-6 sm:mt-10 overflow-x-auto px-6 pb-4 md:mx-0 md:overflow-visible md:px-0 md:pb-0 lg:mt-12">
             <StaggerList className="flex gap-4 md:grid md:grid-cols-3 xl:grid-cols-5">
               {staff.map(({ name, role, tenure, image, comment, skills }) => (
                 <StaggerItem key={name}>
@@ -325,7 +325,7 @@ export default function RecruitPage() {
 
                       <div className="my-3 h-px w-full bg-(--border)" />
 
-                      <p className="flex-1 text-xs leading-6 text-(--fg-subtle)">{comment}</p>
+                      <p className="flex-1 text-xs leading-6 text-(--fg-subtle) font-medium">{comment}</p>
 
                       {skills.length > 0 && (
                         <div className="mt-4 flex flex-wrap gap-1.5">
@@ -386,7 +386,7 @@ export default function RecruitPage() {
       {/* ════════════════════════════════════════
           こんな方を求めています
       ════════════════════════════════════════ */}
-      <section className="bg-(--bg-dark) px-6 py-16 text-white md:py-24 lg:py-32">
+      <section className="bg-(--bg-dark) px-6 py-8 text-white md:py-20 lg:py-32">
         <div className="mx-auto max-w-350">
           <FadeUp>
             <span className="section-rule section-rule--white block" />
@@ -396,11 +396,11 @@ export default function RecruitPage() {
             </h2>
           </FadeUp>
 
-          <StaggerList className="mt-10 grid gap-3 sm:grid-cols-2 lg:mt-12 lg:grid-cols-3">
+          <StaggerList className="mt-4 sm:mt-6 grid gap-3 sm:grid-cols-2 lg:mt-12 lg:grid-cols-3">
             {wants.map((text) => (
               <StaggerItem key={text}>
-                <div className="flex items-start gap-3 border border-white/10 bg-white/5 p-5">
-                  <CheckCircle2 size={14} className="mt-0.5 shrink-0 text-white/30" />
+                <div className="flex items-start gap-3 border border-white/10 bg-white/5 px-3 py-2 sm:p-5">
+                  <CheckCircle2 size={14} className="mt-1.5 sm:mt-0.5 shrink-0 text-white/30" />
                   <p className="text-sm leading-6 text-white/70">{text}</p>
                 </div>
               </StaggerItem>
@@ -412,7 +412,7 @@ export default function RecruitPage() {
       {/* ════════════════════════════════════════
           勤務条件
       ════════════════════════════════════════ */}
-      <section className="bg-(--bg-off) px-6 py-16 md:py-24">
+      <section className="bg-(--bg-off) px-6 py-8 md:py-20">
         <div className="mx-auto max-w-350">
           <FadeUp>
             <span className="section-rule block" />
@@ -436,7 +436,7 @@ export default function RecruitPage() {
             </dl>
 
             <div className="mt-4 border border-(--border) bg-(--card) px-6 py-4">
-              <p className="text-xs leading-6 text-(--fg-subtle)">
+              <p className="text-xs leading-6 text-(--fg-subtle) font-medium">
                 ※ 希望者は1日アルバイト体験入社も可能です。まずはお気軽にご見学ください。
               </p>
             </div>
@@ -447,7 +447,7 @@ export default function RecruitPage() {
       {/* ════════════════════════════════════════
           採用フロー
       ════════════════════════════════════════ */}
-      <section className="bg-(--bg) px-6 py-16 md:py-24">
+      <section className="bg-(--bg) px-6 py-8 md:py-20">
         <div className="mx-auto max-w-350">
           <FadeUp>
             <span className="section-rule block" />
@@ -460,10 +460,10 @@ export default function RecruitPage() {
           <StaggerList className="mt-4 sm:mt-10 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-6 lg:mt-12">
             {flow.map(({ step, label }, i) => (
               <StaggerItem key={step}>
-                <div className="relative flex flex-col items-center border border-(--border) bg-(--card) px-4 py-6 text-center">
+                <div className="relative flex flex-col items-center border border-(--border) bg-(--card) px-4 py-3 sm:py-6 text-center">
                   <p className="label-en text-(--fg-subtle)">{step}</p>
                   <p className="mt-3 whitespace-pre-line text-sm font-bold text-(--fg)">{label}</p>
-                  {i < flow.length - 1 && (
+                  {i < flow.length - 1 && ( 
                     <ArrowRight
                       size={12}
                       className="absolute -right-2 top-1/2 hidden -translate-y-1/2 text-(--fg-subtle) md:block"
@@ -475,7 +475,7 @@ export default function RecruitPage() {
           </StaggerList>
 
           <FadeUp className="mt-6 max-w-5xl border border-(--border) bg-(--card) px-6 py-5 space-y-2">
-            <p className="text-sm leading-7 text-(--fg)">
+            <p className="text-sm leading-7 text-(--fg) font-semibold">
               じっくりお店のことをわかっていただいてから、もう一度入社の意思があることを確認してからの面接となります。
             </p>
             <p className="text-xs leading-6 text-(--fg-subtle)">
@@ -488,9 +488,9 @@ export default function RecruitPage() {
       {/* ════════════════════════════════════════
           応募フォーム
       ════════════════════════════════════════ */}
-      <section id="apply" className="bg-(--bg-off) px-6 py-16 md:py-24">
+      <section id="apply" className="bg-(--bg-off) px-6 py-8 md:py-20">
         <div className="mx-auto max-w-350">
-          <div className="grid gap-12 md:grid-cols-[1fr_1.2fr] md:gap-16 lg:gap-24">
+          <div className="grid gap-6 sm:gap-10 md:grid-cols-[1fr_1.2fr] md:gap-16 lg:gap-24">
 
             <FadeUp>
               <span className="section-rule block" />
@@ -534,7 +534,7 @@ export default function RecruitPage() {
       {/* ════════════════════════════════════════
           CTA
       ════════════════════════════════════════ */}
-      <section className="bg-(--bg-dark) px-6 py-16 text-white md:py-24">
+      <section className="bg-(--bg-dark) px-6 py-8 text-white md:py-20">
         <div className="mx-auto max-w-350">
           <FadeUp className="flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
             <div>

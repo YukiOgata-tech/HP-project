@@ -48,7 +48,7 @@ export default async function NewsPage() {
 
         {/* ライトモード背景 */}
         <Image
-          src="/images/news-top-bg-light.png"
+          src="/images/news/bg-light.png"
           alt=""
           fill
           sizes="100vw"
@@ -57,7 +57,7 @@ export default async function NewsPage() {
         />
         {/* ダークモード背景 */}
         <Image
-          src="/images/news-top-bg-dark.png"
+          src="/images/news/bg-dark.png"
           alt=""
           fill
           sizes="100vw"

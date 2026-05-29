@@ -75,10 +75,10 @@ const specials = [
 ];
 
 const galleryImages = [
-  { src: "/images/style-01.jpg", alt: "ヘアスタイル例 1" },
-  { src: "/images/style-02.jpg", alt: "ヘアスタイル例 2" },
-  { src: "/images/style-03.jpg", alt: "ヘアスタイル例 3" },
-  { src: "/images/style-04.jpg", alt: "ヘアスタイル例 4" },
+  { src: "/images/style/style-01.jpg", alt: "ヘアスタイル例 1" },
+  { src: "/images/style/style-02.jpg", alt: "ヘアスタイル例 2" },
+  { src: "/images/style/style-03.jpg", alt: "ヘアスタイル例 3" },
+  { src: "/images/style/style-04.jpg", alt: "ヘアスタイル例 4" },
 ];
 
 /* ══════════════════════════════════════════════
@@ -273,7 +273,7 @@ export default async function Home() {
         {/* ─ モバイル: salon-01 フル幅ヘッダー画像 ─ */}
         <div className="relative h-56 overflow-hidden sm:h-72 md:hidden">
           <Image
-            src="/images/salon-01.jpg"
+            src="/images/salon/salon-01.jpg"
             alt="RISPLENDERE BROLETTOの店内"
             fill
             sizes="(min-width: 768px) 0px, 100vw"
@@ -294,7 +294,7 @@ export default async function Home() {
               {/* salon-01: 左全高 */}
               <div className="row-span-2 overflow-hidden">
                 <Image
-                  src="/images/salon-01.jpg"
+                  src="/images/salon/salon-01.jpg"
                   alt="RISPLENDERE BROLETTOの店内"
                   width={720}
                   height={960}
@@ -308,7 +308,7 @@ export default async function Home() {
               {/* salon-02: 右上、下にオフセット */}
               <div className="mt-12 overflow-hidden">
                 <Image
-                  src="/images/salon-02.jpg"
+                  src="/images/salon/salon-02.jpg"
                   alt="RISPLENDERE BROLETTOの施術スペース"
                   width={480}
                   height={360}

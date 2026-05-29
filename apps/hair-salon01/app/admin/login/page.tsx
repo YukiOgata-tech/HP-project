@@ -6,11 +6,13 @@ import { LockKeyhole, Mail, ShieldCheck } from "lucide-react";
 import { getClientAuth } from "@client-sites/lib/cms/client";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { createSession } from "../actions/session";
+import { useLoading } from "../../lib/loading-context";
 
 export default function AdminLoginPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const redirect = searchParams.get("redirect") ?? "/admin";
+  const { setLoading: setGlobalLoading } = useLoading();
 
   const [email, setEmail]       = useState("");
   const [password, setPassword] = useState("");
@@ -26,6 +28,7 @@ export default function AdminLoginPage() {
       const credential = await signInWithEmailAndPassword(auth, email, password);
       const idToken = await credential.user.getIdToken();
       await createSession(idToken);
+      setGlobalLoading(true);
       router.push(redirect);
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : "ログインに失敗しました";

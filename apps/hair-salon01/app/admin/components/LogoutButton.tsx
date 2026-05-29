@@ -3,9 +3,17 @@
 import { useState } from "react";
 import { deleteSession } from "../actions/session";
 import { ConfirmModal } from "./ConfirmModal";
+import { useLoading } from "../../lib/loading-context";
 
 export function LogoutButton() {
   const [open, setOpen] = useState(false);
+  const { setLoading } = useLoading();
+
+  const handleLogout = () => {
+    setOpen(false);
+    setLoading(true);
+    deleteSession();
+  };
 
   return (
     <>
@@ -20,7 +28,7 @@ export function LogoutButton() {
       <ConfirmModal
         open={open}
         onClose={() => setOpen(false)}
-        onConfirm={() => { deleteSession(); }}
+        onConfirm={handleLogout}
         title="ログアウトしますか？"
         description="ログアウトするとこの画面を離れ、再度ログインが必要になります。"
         confirmLabel="ログアウト"

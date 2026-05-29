@@ -65,7 +65,7 @@ export default async function BlogPage() {
       <section className="relative overflow-hidden border-b border-(--border) px-6 pb-10 pt-24 md:pt-28 md:pb-12">
 
         <Image
-          src="/images/news-top-bg-light.png"
+          src="/images/news/bg-light.png"
           alt=""
           fill
           sizes="100vw"
@@ -73,7 +73,7 @@ export default async function BlogPage() {
           priority
         />
         <Image
-          src="/images/news-top-bg-dark.png"
+          src="/images/news/bg-dark.png"
           alt=""
           fill
           sizes="100vw"

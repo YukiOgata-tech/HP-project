@@ -24,10 +24,10 @@ export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"),
   icons: {
     icon: [
-      { url: "/images/RB-logo-light-trans.png", media: "(prefers-color-scheme: light)" },
-      { url: "/images/RB-logo-dark-trans.png",  media: "(prefers-color-scheme: dark)"  },
+      { url: "/images/logo/RB-logo-light-trans.png", media: "(prefers-color-scheme: light)" },
+      { url: "/images/logo/RB-logo-dark-trans.png",  media: "(prefers-color-scheme: dark)"  },
     ],
-    apple: "/images/RB-logo-dark-trans.png",
+    apple: "/images/logo/RB-logo-dark-trans.png",
   },
   title: "RISPLENDERE BROLETTO｜新潟市中央区本馬越の美容室",
   description:

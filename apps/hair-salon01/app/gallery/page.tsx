@@ -18,10 +18,10 @@ export const metadata: Metadata = {
      使用できる値: "cut" | "color" | "perm" | "headspa" | "styling"
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 const galleryImages: GalleryImage[] = [
-  { src: "/images/style-01.jpg", alt: "ヘアスタイル 01", category: "cut"   },
-  { src: "/images/style-02.jpg", alt: "ヘアスタイル 02", category: "color" },
-  { src: "/images/style-03.jpg", alt: "ヘアスタイル 03", category: "perm"  },
-  { src: "/images/style-04.jpg", alt: "ヘアスタイル 04", category: "cut"   },
+  { src: "/images/style/style-01.jpg", alt: "ヘアスタイル 01", category: "cut"   },
+  { src: "/images/style/style-02.jpg", alt: "ヘアスタイル 02", category: "color" },
+  { src: "/images/style/style-03.jpg", alt: "ヘアスタイル 03", category: "perm"  },
+  { src: "/images/style/style-04.jpg", alt: "ヘアスタイル 04", category: "cut"   },
   // ↓ ここに追加していく
 ];
 

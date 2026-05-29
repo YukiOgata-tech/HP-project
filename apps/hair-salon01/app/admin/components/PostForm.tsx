@@ -9,6 +9,7 @@ import type { JSONContent } from "@client-sites/lib/cms/types";
 import { uploadImageToStorage } from "@client-sites/lib/cms/client";
 import { createPostAction, updatePostAction } from "../actions/posts";
 import { ConfirmModal } from "./ConfirmModal";
+import { useLoading } from "../../lib/loading-context";
 
 const SITE_ID = process.env.NEXT_PUBLIC_SITE_ID ?? "hair-salon01";
 
@@ -29,6 +30,7 @@ interface PostFormProps {
 export function PostForm({ post }: PostFormProps) {
   const router = useRouter();
   const isEdit = !!post;
+  const { setLoading } = useLoading();
 
   const [title, setTitle] = useState(post?.title ?? "");
   const [slug, setSlug] = useState(post?.slug ?? "");
@@ -89,6 +91,7 @@ export function PostForm({ post }: PostFormProps) {
         return;
       }
 
+      setLoading(true);
       router.push("/admin/posts");
       router.refresh();
     } finally {

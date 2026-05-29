@@ -8,9 +8,9 @@ import { motion, AnimatePresence } from "framer-motion";
    画像追加時はここにオブジェクトを追加するだけ
 ─────────────────────────────────────────────── */
 const slides = [
-  { src: "/images/hero-01.jpg", alt: "RISPLENDERE BROLETTOのサロン" },
-  { src: "/images/hero-02.jpg", alt: "ヘアスタイルイメージ" },
-  { src: "/images/hero-03.jpg", alt: "建物正面画像" },
+  { src: "/images/hero/hero-01.jpg", alt: "RISPLENDERE BROLETTOのサロン" },
+  { src: "/images/hero/hero-02.jpg", alt: "ヘアスタイルイメージ" },
+  { src: "/images/hero/hero-03.jpg", alt: "建物正面画像" },
 ];
 
 const SLIDE_DURATION = 6000; // ms

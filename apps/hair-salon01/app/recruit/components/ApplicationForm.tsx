@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import { Paperclip, X, AlertCircle } from "lucide-react";
 import { submitApplicationAction } from "../../admin/applications/actions";
+import { useLoading } from "../../lib/loading-context";
 
 const POSITIONS = [
   "スタイリスト",
@@ -62,6 +63,7 @@ function validateFields(data: {
 export function ApplicationForm() {
   const formRef    = useRef<HTMLFormElement>(null);
   const mountedAt  = useRef(Date.now());
+  const { setLoading: setGlobalLoading } = useLoading();
 
   const [file, setFile]             = useState<File | null>(null);
   const [loading, setLoading]       = useState(false);
@@ -122,6 +124,7 @@ export function ApplicationForm() {
     }
 
     setLoading(true);
+    setGlobalLoading(true);
     try {
       const formData = new FormData(form);
       const result   = await submitApplicationAction(formData);
@@ -136,6 +139,7 @@ export function ApplicationForm() {
       setServerError("__network__");
     } finally {
       setLoading(false);
+      setGlobalLoading(false);
     }
   }
 

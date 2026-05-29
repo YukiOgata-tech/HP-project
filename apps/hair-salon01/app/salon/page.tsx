@@ -93,7 +93,7 @@ export default function SalonPage() {
           {/* ロゴ — 下端揃え・自然サイズ (デスクトップのみ) */}
           <FadeIn delay={0.15} className="hidden shrink-0 md:block">
             <Image
-              src="/images/RB-logo-light.png"
+              src="/images/logo/RB-logo-light.png"
               alt="RISPLENDERE BROLETTO ロゴ"
               width={0}
               height={0}
@@ -102,7 +102,7 @@ export default function SalonPage() {
               priority
             />
             <Image
-              src="/images/RB-logo-dark.png"
+              src="/images/logo/RB-logo-dark.png"
               alt="RISPLENDERE BROLETTO ロゴ"
               width={0}
               height={0}

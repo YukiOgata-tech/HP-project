@@ -1,5 +1,8 @@
 "use client";
 
+import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
+
 interface ConfirmModalProps {
   open: boolean;
   onClose: () => void;
@@ -21,14 +24,17 @@ export function ConfirmModal({
   cancelLabel = "キャンセル",
   variant = "danger",
 }: ConfirmModalProps) {
-  if (!open) return null;
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => { setMounted(true); }, []);
+
+  if (!open || !mounted) return null;
 
   const confirmCls =
     variant === "danger"
       ? "w-full bg-red-600 px-4 py-3 text-xs font-bold uppercase tracking-widest text-white transition-colors hover:bg-red-700"
       : "w-full bg-(--cta) px-4 py-3 text-xs font-bold uppercase tracking-widest text-(--cta-text) transition-opacity hover:opacity-75";
 
-  return (
+  return createPortal(
     <div className="fixed inset-0 z-[200] flex items-center justify-center px-4">
       {/* オーバーレイ */}
       <div className="absolute inset-0 bg-black/60" onClick={onClose} />
@@ -68,6 +74,7 @@ export function ConfirmModal({
           </button>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }

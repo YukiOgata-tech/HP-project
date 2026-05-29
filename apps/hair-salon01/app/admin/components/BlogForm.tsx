@@ -9,6 +9,7 @@ import type { JSONContent } from "@client-sites/lib/cms/types";
 import { uploadImageToStorage } from "@client-sites/lib/cms/client";
 import { createBlogAction, updateBlogAction } from "../actions/blogs";
 import { ConfirmModal } from "./ConfirmModal";
+import { useLoading } from "../../lib/loading-context";
 
 const SITE_ID = process.env.NEXT_PUBLIC_SITE_ID ?? "hair-salon01";
 
@@ -38,6 +39,7 @@ interface BlogFormProps {
 export function BlogForm({ blog }: BlogFormProps) {
   const router = useRouter();
   const isEdit = !!blog;
+  const { setLoading } = useLoading();
 
   const [title, setTitle] = useState(blog?.title ?? "");
   const [slug, setSlug] = useState(blog?.slug ?? "");
@@ -101,6 +103,7 @@ export function BlogForm({ blog }: BlogFormProps) {
         return;
       }
 
+      setLoading(true);
       router.push("/admin/blogs");
       router.refresh();
     } finally {

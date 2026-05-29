@@ -227,7 +227,7 @@ export default function MenuPage() {
           <FadeIn className="relative h-52 md:h-auto md:w-[45%] md:shrink-0 overflow-hidden bg-(--bg-off)">
             {/* 後ほど実際の画像に差し替え予定 */}
             <Image
-              src="/images/salon-01.jpg"
+              src="/images/salon/salon-01.jpg"
               alt="RISPLENDERE BROLETTOのサロン"
               fill
               sizes="(min-width: 768px) 45vw, 100vw"

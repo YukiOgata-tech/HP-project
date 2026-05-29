@@ -47,7 +47,14 @@
       "mcp__plugin_firebase_firebase__firebase_login",
       "Bash(mv prompt-mobile-lp.md prompt-mobile-rounded.md)",
       "Bash(mv prompt-mobile-ops.md prompt-mobile-sharp.md)",
-      "Bash(dir /s /b \"C:\\\\projects\\\\client-sites\\\\apps\\\\hair-salon01\\\\app\\\\admin\")"
+      "Bash(dir /s /b \"C:\\\\projects\\\\client-sites\\\\apps\\\\hair-salon01\\\\app\\\\admin\")",
+      "Bash(node -e ' *)",
+      "Bash(node -e \"const fs=require\\('fs'\\);const b=fs.readFileSync\\('public/images/RB-logo-light-trans.png'\\);console.log\\(b.readUInt32BE\\(16\\),b.readUInt32BE\\(20\\)\\)\")",
+      "Bash(sed -i 's|/images/hero-01\\\\.jpg|/images/hero/hero-01.jpg|g; s|/images/hero-02\\\\.jpg|/images/hero/hero-02.jpg|g; s|/images/hero-03\\\\.jpg|/images/hero/hero-03.jpg|g' C:/projects/client-sites/apps/hair-salon01/app/components/hero-slider.tsx)",
+      "Bash(sed -i 's|/images/news-top-bg-dark\\\\.png|/images/news/bg-dark.png|g; s|/images/news-top-bg-light\\\\.png|/images/news/bg-light.png|g' C:/projects/client-sites/apps/hair-salon01/app/news/page.tsx C:/projects/client-sites/apps/hair-salon01/app/blog/page.tsx)",
+      "Bash(sed -i 's|/images/original-logo-white-text\\\\.jpg|/images/logo/original-logo-white-text.jpg|g; s|/images/original-logo-black-text\\\\.jpg|/images/logo/original-logo-black-text.jpg|g' C:/projects/client-sites/apps/hair-salon01/app/components/PageLoader.tsx)",
+      "Bash(sed -i 's|/images/RB-logo-light\\\\.png|/images/logo/RB-logo-light.png|g; s|/images/RB-logo-dark\\\\.png|/images/logo/RB-logo-dark.png|g' C:/projects/client-sites/apps/hair-salon01/app/salon/page.tsx)",
+      "Bash(sed -i 's|/images/salon-01\\\\.jpg|/images/salon/salon-01.jpg|g; s|/images/salon-02\\\\.jpg|/images/salon/salon-02.jpg|g' C:/projects/client-sites/apps/hair-salon01/app/page.tsx C:/projects/client-sites/apps/hair-salon01/app/menu/page.tsx)"
     ]
   },
   "enabledMcpjsonServers": [
