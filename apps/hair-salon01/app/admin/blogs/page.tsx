@@ -4,7 +4,7 @@ import { deleteBlogAndRedirect } from "../actions/blogs";
 import {
   AdminPageHeader,
   AdminPrimaryLink,
-  AdminStatCard,
+  AdminStatTable,
   AdminSurface,
   StatusBadge,
 } from "../components/AdminUi";
@@ -18,57 +18,56 @@ export default async function AdminBlogsPage() {
   const drafts = blogs.filter((b) => b.status === "draft");
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-4 md:space-y-8">
       <AdminPageHeader
         eyebrow="Blog Management"
-        title="ブログ記事の作成・更新・整理"
-        description="スタイル紹介やサロン情報など、SEO対策に効果的なブログ記事を管理します。本文中に画像を挿入できます。"
-        actions={<AdminPrimaryLink href="/admin/blogs/new">＋ 新規ブログ記事</AdminPrimaryLink>}
+        title="ブログ管理"
+        description="スタイル紹介やサロン情報など、SEO対策に効果的なブログ記事を管理します。"
+        actions={<AdminPrimaryLink href="/admin/blogs/new">＋ 新規ブログ</AdminPrimaryLink>}
       />
 
-      <div className="grid gap-4 md:grid-cols-3">
-        <AdminStatCard label="All Entries" value={blogs.length} hint="全ブログ記事数" />
-        <AdminStatCard label="Published" value={published.length} hint="公開中の記事" tone="success" />
-        <AdminStatCard label="Drafts" value={drafts.length} hint="下書きの記事" tone="warning" />
-      </div>
+      <AdminStatTable
+        rows={[
+          { labelEn: "Total",     label: "合計",  value: blogs.length,     total: blogs.length, tone: "default" },
+          { labelEn: "Published", label: "公開中", value: published.length, total: blogs.length, tone: "success" },
+          { labelEn: "Drafts",    label: "下書き", value: drafts.length,    total: blogs.length, tone: "warning" },
+        ]}
+      />
 
       {blogs.length === 0 ? (
-        <AdminSurface className="px-6 py-18 text-center">
-          <p className="text-lg font-bold text-(--fg)">まだブログ記事がありません</p>
-          <p className="mt-2 text-sm text-(--fg-subtle)">最初のブログ記事を作成すると、ここに一覧表示されます。</p>
-          <div className="mt-6">
-            <AdminPrimaryLink href="/admin/blogs/new">最初のブログ記事を作成する</AdminPrimaryLink>
+        <AdminSurface className="px-4 py-10 text-center md:px-6 md:py-18">
+          <p className="text-sm font-bold text-(--fg) md:text-lg">まだブログ記事がありません</p>
+          <p className="mt-1 text-xs text-(--fg-subtle) md:mt-2 md:text-sm">最初のブログ記事を作成すると、ここに一覧表示されます。</p>
+          <div className="mt-4 md:mt-6">
+            <AdminPrimaryLink href="/admin/blogs/new">最初の記事を作成する</AdminPrimaryLink>
           </div>
         </AdminSurface>
       ) : (
-        <div className="space-y-4">
+        <div className="space-y-2 md:space-y-4">
           {blogs.map((blog) => (
-            <AdminSurface key={blog.id} className="p-5 md:p-6">
-              <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
-                <div className="min-w-0 space-y-3">
-                  <div className="flex flex-wrap items-center gap-3">
+            <AdminSurface key={blog.id} className="p-3 md:p-6">
+              <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
+                <div className="min-w-0 space-y-1.5 md:space-y-3">
+                  <div className="flex flex-wrap items-center gap-2">
                     <StatusBadge status={blog.status} />
-                    <span className="border border-(--border) px-2 py-0.5 text-xs text-(--fg-subtle)">
+                    <span className="border border-(--border) px-1.5 py-0.5 text-[10px] text-(--fg-subtle)">
                       {blog.category}
                     </span>
-                    <span className="text-xs uppercase tracking-widest text-(--fg-subtle)">
+                    <span className="text-[10px] uppercase tracking-widest text-(--fg-subtle)">
                       {new Date(blog.updatedAt).toLocaleDateString("ja-JP")}
                     </span>
                   </div>
-                  <div className="space-y-2">
-                    <h2 className="font-serif text-xl font-bold text-(--fg)">{blog.title}</h2>
-                    <p className="font-mono text-xs text-(--fg-subtle)">{blog.slug}</p>
-                    <p className="max-w-3xl text-sm leading-7 text-(--fg-subtle)">
+                  <div className="space-y-0.5 md:space-y-2">
+                    <h2 className="line-clamp-1 text-sm font-bold text-(--fg) md:font-serif md:text-xl">{blog.title}</h2>
+                    <p className="hidden font-mono text-xs text-(--fg-subtle) md:block">{blog.slug}</p>
+                    <p className="hidden max-w-3xl text-sm leading-7 text-(--fg-subtle) md:block">
                       {blog.excerpt || "本文中心の記事です。編集画面から内容を確認・更新してください。"}
                     </p>
                   </div>
                   {blog.tags.length > 0 && (
-                    <div className="flex flex-wrap gap-2">
+                    <div className="hidden flex-wrap gap-2 md:flex">
                       {blog.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className="border border-(--border) px-3 py-1 text-xs font-bold uppercase tracking-wider text-(--fg-subtle)"
-                        >
+                        <span key={tag} className="border border-(--border) px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-(--fg-subtle) md:px-3 md:py-1 md:text-xs">
                           {tag}
                         </span>
                       ))}
@@ -76,25 +75,25 @@ export default async function AdminBlogsPage() {
                   )}
                 </div>
 
-                <div className="flex flex-wrap items-center gap-3 lg:justify-end">
+                <div className="flex items-center gap-2 md:flex-wrap md:justify-end md:gap-3">
                   {blog.status === "published" && (
                     <Link
                       href={`/blog/${blog.slug}`}
                       target="_blank"
-                      className="inline-flex items-center border border-(--border) px-4 py-2 text-xs font-bold uppercase tracking-widest text-(--fg-subtle) transition-colors hover:border-(--fg) hover:text-(--fg)"
+                      className="border border-(--border) px-2.5 py-1.5 text-[10px] font-bold uppercase tracking-widest text-(--fg-subtle) transition-colors hover:border-(--fg) hover:text-(--fg) md:px-4 md:py-2 md:text-xs"
                     >
-                      公開ページを見る ↗
+                      公開 ↗
                     </Link>
                   )}
                   <Link
                     href={`/admin/blogs/${blog.id}/edit`}
-                    className="inline-flex items-center bg-(--cta) px-4 py-2 text-xs font-bold uppercase tracking-widest text-(--cta-text) transition-opacity hover:opacity-75"
+                    className="bg-(--cta) px-2.5 py-1.5 text-[10px] font-bold uppercase tracking-widest text-(--cta-text) transition-opacity hover:opacity-75 md:px-4 md:py-2 md:text-xs"
                   >
-                    編集する
+                    編集
                   </Link>
                   <form action={deleteBlogAndRedirect.bind(null, blog.id)}>
                     <ConfirmSubmitButton
-                      className="inline-flex items-center border border-red-200 px-4 py-2 text-xs font-bold uppercase tracking-widest text-red-600 transition-colors hover:border-red-400 hover:bg-red-50"
+                      className="border border-red-200 px-2.5 py-1.5 text-[10px] font-bold uppercase tracking-widest text-red-600 transition-colors hover:border-red-400 hover:bg-red-50 md:px-4 md:py-2 md:text-xs"
                       confirmMessage="このブログ記事を削除しますか？"
                     >
                       削除

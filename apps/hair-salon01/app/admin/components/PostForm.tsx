@@ -8,6 +8,7 @@ import type { Post } from "@client-sites/lib/cms/types";
 import type { JSONContent } from "@client-sites/lib/cms/types";
 import { uploadImageToStorage } from "@client-sites/lib/cms/client";
 import { createPostAction, updatePostAction } from "../actions/posts";
+import { ConfirmModal } from "./ConfirmModal";
 
 const SITE_ID = process.env.NEXT_PUBLIC_SITE_ID ?? "hair-salon01";
 
@@ -42,6 +43,7 @@ export function PostForm({ post }: PostFormProps) {
   );
   const [error, setError] = useState("");
   const [saving, setSaving] = useState(false);
+  const [confirmOpen, setConfirmOpen] = useState(false);
   const isPublished = status === "published";
   const tags = tagsInput
     .split(",")
@@ -62,8 +64,8 @@ export function PostForm({ post }: PostFormProps) {
     []
   );
 
-  async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
+  async function doSave() {
+    setConfirmOpen(false);
     setError("");
     setSaving(true);
 
@@ -94,22 +96,35 @@ export function PostForm({ post }: PostFormProps) {
     }
   }
 
+  function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setConfirmOpen(true);
+  }
+
+  const confirmTitle = isEdit
+    ? isPublished ? "変更を公開しますか？" : "下書きとして保存しますか？"
+    : isPublished ? "記事を公開しますか？" : "下書きとして作成しますか？";
+
+  const confirmDescription = isPublished
+    ? "保存後、すぐにサイトに反映されます。"
+    : "下書きはサイトには表示されません。後から公開できます。";
+
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
-      <div className="grid gap-6 xl:grid-cols-[minmax(0,1.55fr)_minmax(320px,0.85fr)]">
-        <section className="space-y-6">
+    <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
+      <div className="grid gap-4 md:gap-6 xl:grid-cols-[minmax(0,1.55fr)_minmax(300px,0.85fr)]">
+        <section className="space-y-4 md:space-y-6">
 
           {/* 基本情報 */}
-          <div className="border border-(--border) bg-(--card) p-6">
-            <div className="space-y-6">
+          <div className="border border-(--border) bg-(--card) p-3 md:p-6">
+            <div className="space-y-4 md:space-y-6">
               <div>
-                <p className="label-en text-(--fg-subtle)">Basic Info</p>
-                <h2 className="mt-2 font-serif text-xl font-bold text-(--fg)">記事の基本情報</h2>
+                <p className="label-en text-[10px] text-(--fg-subtle) md:text-xs">Basic Info</p>
+                <h2 className="mt-1 text-base font-bold text-(--fg) md:mt-2 md:font-serif md:text-xl">記事の基本情報</h2>
               </div>
 
-              <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-                <div className="space-y-2">
-                  <label className="block text-xs font-bold uppercase tracking-widest text-(--fg-subtle)">
+              <div className="grid grid-cols-1 gap-3 md:grid-cols-2 md:gap-4">
+                <div className="space-y-1.5 md:space-y-2">
+                  <label className="block text-[10px] font-bold uppercase tracking-widest text-(--fg-subtle) md:text-xs">
                     タイトル <span className="text-red-500">*</span>
                   </label>
                   <input
@@ -117,13 +132,13 @@ export function PostForm({ post }: PostFormProps) {
                     value={title}
                     onChange={(e) => handleTitleChange(e.target.value)}
                     required
-                    className="w-full border border-(--border) bg-(--bg) px-4 py-3 text-sm text-(--fg) outline-none transition-colors placeholder:text-(--fg-subtle) focus:border-(--fg)"
+                    className="w-full border border-(--border) bg-(--bg) px-3 py-2.5 text-sm text-(--fg) outline-none transition-colors placeholder:text-(--fg-subtle) focus:border-(--fg) md:px-4 md:py-3"
                     placeholder="記事タイトル"
                   />
                 </div>
 
-                <div className="space-y-2">
-                  <label className="block text-xs font-bold uppercase tracking-widest text-(--fg-subtle)">
+                <div className="space-y-1.5 md:space-y-2">
+                  <label className="block text-[10px] font-bold uppercase tracking-widest text-(--fg-subtle) md:text-xs">
                     スラッグ <span className="text-red-500">*</span>
                   </label>
                   <input
@@ -133,24 +148,24 @@ export function PostForm({ post }: PostFormProps) {
                     required
                     pattern="[a-z0-9\-]+"
                     title="半角英小文字・数字・ハイフンのみ"
-                    className="w-full border border-(--border) bg-(--bg) px-4 py-3 font-mono text-sm text-(--fg) outline-none transition-colors placeholder:text-(--fg-subtle) focus:border-(--fg)"
+                    className="w-full border border-(--border) bg-(--bg) px-3 py-2.5 font-mono text-sm text-(--fg) outline-none transition-colors placeholder:text-(--fg-subtle) focus:border-(--fg) md:px-4 md:py-3"
                     placeholder="my-post-slug"
                   />
-                  <p className="text-xs text-(--fg-subtle)">
-                    URL に使われます。半角英小文字・数字・ハイフンで設定してください。
+                  <p className="text-[10px] text-(--fg-subtle) md:text-xs">
+                    半角英小文字・数字・ハイフンで設定してください。
                   </p>
                 </div>
               </div>
 
-              <div className="space-y-2">
-                <label className="block text-xs font-bold uppercase tracking-widest text-(--fg-subtle)">
+              <div className="space-y-1.5 md:space-y-2">
+                <label className="block text-[10px] font-bold uppercase tracking-widest text-(--fg-subtle) md:text-xs">
                   抜粋
                 </label>
                 <textarea
                   value={excerpt}
                   onChange={(e) => setExcerpt(e.target.value)}
-                  rows={4}
-                  className="w-full resize-none border border-(--border) bg-(--bg) px-4 py-3 text-sm text-(--fg) outline-none transition-colors placeholder:text-(--fg-subtle) focus:border-(--fg)"
+                  rows={3}
+                  className="w-full resize-none border border-(--border) bg-(--bg) px-3 py-2.5 text-sm text-(--fg) outline-none transition-colors placeholder:text-(--fg-subtle) focus:border-(--fg) md:px-4 md:py-3"
                   placeholder="記事の概要。一覧や OGP に使われます。"
                 />
               </div>
@@ -158,11 +173,11 @@ export function PostForm({ post }: PostFormProps) {
           </div>
 
           {/* 本文エディタ */}
-          <div className="border border-(--border) bg-(--card) p-6">
-            <div className="space-y-4">
+          <div className="border border-(--border) bg-(--card) p-3 md:p-6">
+            <div className="space-y-3 md:space-y-4">
               <div>
-                <p className="label-en text-(--fg-subtle)">Content</p>
-                <h2 className="mt-2 font-serif text-xl font-bold text-(--fg)">本文エディタ</h2>
+                <p className="label-en text-[10px] text-(--fg-subtle) md:text-xs">Content</p>
+                <h2 className="mt-1 text-base font-bold text-(--fg) md:mt-2 md:font-serif md:text-xl">本文エディタ</h2>
               </div>
               <div className="overflow-hidden border border-(--border) bg-(--bg)">
                 <TiptapEditor
@@ -177,30 +192,28 @@ export function PostForm({ post }: PostFormProps) {
           </div>
         </section>
 
-        <aside className="space-y-6">
+        <aside className="space-y-4 md:space-y-6">
 
           {/* 公開設定 */}
-          <div className="border border-(--border) bg-(--card) p-6">
-            <div className="space-y-5">
+          <div className="border border-(--border) bg-(--card) p-3 md:p-6">
+            <div className="space-y-3 md:space-y-5">
               <div>
-                <p className="label-en text-(--fg-subtle)">Publish</p>
-                <h2 className="mt-2 font-serif text-xl font-bold text-(--fg)">公開設定</h2>
+                <p className="label-en text-[10px] text-(--fg-subtle) md:text-xs">Publish</p>
+                <h2 className="mt-1 text-base font-bold text-(--fg) md:mt-2 md:font-serif md:text-xl">公開設定</h2>
               </div>
 
-              <div className="border border-(--border) bg-(--card-off) p-4">
-                <div className="flex items-center justify-between gap-4">
+              <div className="border border-(--border) bg-(--card-off) p-3 md:p-4">
+                <div className="flex items-center justify-between gap-3">
                   <div>
-                    <p className="text-sm font-bold text-(--fg)">ステータス</p>
-                    <p className="mt-1 text-xs leading-6 text-(--fg-subtle)">
-                      {isPublished
-                        ? "公開ページに反映される状態です。"
-                        : "下書きのまま保存され、サイトには表示されません。"}
+                    <p className="text-xs font-bold text-(--fg) md:text-sm">ステータス</p>
+                    <p className="mt-0.5 hidden text-xs leading-6 text-(--fg-subtle) md:mt-1 md:block">
+                      {isPublished ? "公開ページに反映されます。" : "下書きで保存されます。"}
                     </p>
                   </div>
                   <select
                     value={status}
                     onChange={(e) => setStatus(e.target.value as "draft" | "published")}
-                    className="border border-(--border) bg-(--bg) px-3 py-2 text-xs font-bold uppercase tracking-widest text-(--fg) outline-none transition-colors focus:border-(--fg)"
+                    className="border border-(--border) bg-(--bg) px-2 py-1.5 text-[10px] font-bold uppercase tracking-widest text-(--fg) outline-none transition-colors focus:border-(--fg) md:px-3 md:py-2 md:text-xs"
                   >
                     <option value="draft">下書き</option>
                     <option value="published">公開</option>
@@ -208,36 +221,36 @@ export function PostForm({ post }: PostFormProps) {
                 </div>
               </div>
 
-              <div className="space-y-2">
-                <label className="block text-xs font-bold uppercase tracking-widest text-(--fg-subtle)">
+              <div className="space-y-1.5 md:space-y-2">
+                <label className="block text-[10px] font-bold uppercase tracking-widest text-(--fg-subtle) md:text-xs">
                   カバー画像 URL
                 </label>
                 <input
                   type="url"
                   value={coverImageUrl}
                   onChange={(e) => setCoverImageUrl(e.target.value)}
-                  className="w-full border border-(--border) bg-(--bg) px-4 py-3 text-sm text-(--fg) outline-none transition-colors placeholder:text-(--fg-subtle) focus:border-(--fg)"
+                  className="w-full border border-(--border) bg-(--bg) px-3 py-2.5 text-sm text-(--fg) outline-none transition-colors placeholder:text-(--fg-subtle) focus:border-(--fg) md:px-4 md:py-3"
                   placeholder="https://..."
                 />
               </div>
 
-              <div className="space-y-2">
-                <label className="block text-xs font-bold uppercase tracking-widest text-(--fg-subtle)">
+              <div className="space-y-1.5 md:space-y-2">
+                <label className="block text-[10px] font-bold uppercase tracking-widest text-(--fg-subtle) md:text-xs">
                   タグ（カンマ区切り）
                 </label>
                 <input
                   type="text"
                   value={tagsInput}
                   onChange={(e) => setTagsInput(e.target.value)}
-                  className="w-full border border-(--border) bg-(--bg) px-4 py-3 text-sm text-(--fg) outline-none transition-colors placeholder:text-(--fg-subtle) focus:border-(--fg)"
+                  className="w-full border border-(--border) bg-(--bg) px-3 py-2.5 text-sm text-(--fg) outline-none transition-colors placeholder:text-(--fg-subtle) focus:border-(--fg) md:px-4 md:py-3"
                   placeholder="お知らせ, ブログ"
                 />
                 {tags.length > 0 && (
-                  <div className="flex flex-wrap gap-2 pt-2">
+                  <div className="flex flex-wrap gap-1.5 pt-1 md:gap-2 md:pt-2">
                     {tags.map((tag) => (
                       <span
                         key={tag}
-                        className="border border-(--border) px-3 py-1 text-xs font-bold uppercase tracking-wider text-(--fg-subtle)"
+                        className="border border-(--border) px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-(--fg-subtle) md:px-3 md:py-1 md:text-xs"
                       >
                         {tag}
                       </span>
@@ -247,14 +260,10 @@ export function PostForm({ post }: PostFormProps) {
               </div>
 
               {coverImageUrl && (
-                <div className="space-y-3 border border-(--border) bg-(--card-off) p-4">
-                  <p className="text-xs font-bold uppercase tracking-widest text-(--fg-subtle)">カバー画像プレビュー</p>
+                <div className="space-y-2 border border-(--border) bg-(--card-off) p-3 md:space-y-3 md:p-4">
+                  <p className="text-[10px] font-bold uppercase tracking-widest text-(--fg-subtle) md:text-xs">カバー画像プレビュー</p>
                   <div className="overflow-hidden border border-(--border)">
-                    <img
-                      src={coverImageUrl}
-                      alt="cover preview"
-                      className="h-44 w-full object-cover"
-                    />
+                    <img src={coverImageUrl} alt="cover preview" className="h-32 w-full object-cover md:h-44" />
                   </div>
                 </div>
               )}
@@ -262,31 +271,31 @@ export function PostForm({ post }: PostFormProps) {
           </div>
 
           {/* 保存操作 */}
-          <div className="border border-(--border) bg-(--card) p-6">
-            <div className="space-y-4">
+          <div className="border border-(--border) bg-(--card) p-3 md:p-6">
+            <div className="space-y-3 md:space-y-4">
               <div>
-                <p className="label-en text-(--fg-subtle)">Actions</p>
-                <h2 className="mt-2 font-serif text-xl font-bold text-(--fg)">保存操作</h2>
+                <p className="label-en text-[10px] text-(--fg-subtle) md:text-xs">Actions</p>
+                <h2 className="mt-1 text-base font-bold text-(--fg) md:mt-2 md:font-serif md:text-xl">保存操作</h2>
               </div>
 
               {error && (
-                <p className="border border-red-200 bg-red-50 px-4 py-3 text-xs text-red-700">
+                <p className="border border-red-200 bg-red-50 px-3 py-2.5 text-xs text-red-700 md:px-4 md:py-3">
                   {error}
                 </p>
               )}
 
-              <div className="space-y-3">
+              <div className="space-y-2 md:space-y-3">
                 <button
                   type="submit"
                   disabled={saving}
-                  className="w-full bg-(--cta) px-5 py-3.5 text-xs font-bold uppercase tracking-widest text-(--cta-text) transition-opacity hover:opacity-75 disabled:cursor-not-allowed disabled:opacity-40"
+                  className="w-full bg-(--cta) px-4 py-3 text-xs font-bold uppercase tracking-widest text-(--cta-text) transition-opacity hover:opacity-75 disabled:cursor-not-allowed disabled:opacity-40 md:px-5 md:py-3.5"
                 >
                   {saving ? "保存中..." : isEdit ? "変更を保存する" : "記事を作成する"}
                 </button>
 
                 <Link
                   href="/admin/posts"
-                  className="flex w-full items-center justify-center border border-(--border) px-5 py-3.5 text-xs font-bold uppercase tracking-widest text-(--fg-subtle) transition-colors hover:border-(--fg) hover:text-(--fg)"
+                  className="flex w-full items-center justify-center border border-(--border) px-4 py-3 text-xs font-bold uppercase tracking-widest text-(--fg-subtle) transition-colors hover:border-(--fg) hover:text-(--fg) md:px-5 md:py-3.5"
                 >
                   キャンセル
                 </Link>
@@ -295,6 +304,16 @@ export function PostForm({ post }: PostFormProps) {
           </div>
         </aside>
       </div>
+
+      <ConfirmModal
+        open={confirmOpen}
+        onClose={() => setConfirmOpen(false)}
+        onConfirm={doSave}
+        title={confirmTitle}
+        description={confirmDescription}
+        confirmLabel={saving ? "保存中..." : isEdit ? "保存する" : "作成する"}
+        variant="primary"
+      />
     </form>
   );
 }

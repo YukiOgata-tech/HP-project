@@ -46,7 +46,8 @@
       "mcp__plugin_firebase_firebase__firestore_get_document",
       "mcp__plugin_firebase_firebase__firebase_login",
       "Bash(mv prompt-mobile-lp.md prompt-mobile-rounded.md)",
-      "Bash(mv prompt-mobile-ops.md prompt-mobile-sharp.md)"
+      "Bash(mv prompt-mobile-ops.md prompt-mobile-sharp.md)",
+      "Bash(dir /s /b \"C:\\\\projects\\\\client-sites\\\\apps\\\\hair-salon01\\\\app\\\\admin\")"
     ]
   },
   "enabledMcpjsonServers": [

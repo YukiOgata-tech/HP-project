@@ -49,5 +49,23 @@ export async function getSessionUser(): Promise<CmsUser | null> {
   const user = await getCmsUser(verified.uid);
   if (!user) return null;
   if (!hasSiteAccess(user, SITE_ID)) return null;
+
+  // Sliding session: reset the 24h timer on every admin page access
+  const newToken = await createSessionToken(user.uid);
+  jar.set(SESSION_COOKIE, newToken, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "lax",
+    maxAge: SESSION_MAX_AGE,
+    path: "/",
+  });
+
   return user;
+}
+
+export async function checkSessionExists(): Promise<boolean> {
+  const jar = await cookies();
+  const token = jar.get(SESSION_COOKIE)?.value;
+  if (!token) return false;
+  return (await verifySessionToken(token)) !== null;
 }

@@ -2,7 +2,7 @@ import Link from "next/link";
 import { getAllApplications } from "@client-sites/lib/cms";
 import {
   AdminPageHeader,
-  AdminStatCard,
+  AdminStatTable,
   AdminSurface,
   AppStatusBadge,
 } from "../components/AdminUi";
@@ -11,6 +11,7 @@ const SITE_ID = process.env.SITE_ID!;
 
 export default async function AdminApplicationsPage() {
   const applications = await getAllApplications(SITE_ID);
+  const total = applications.length;
 
   const counts = {
     new:       applications.filter((a) => a.status === "new").length,
@@ -20,30 +21,32 @@ export default async function AdminApplicationsPage() {
   };
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-4 md:space-y-8">
       <AdminPageHeader
         eyebrow="Recruit"
         title="応募管理"
         description="採用フォームからの応募一覧です。ステータスを更新して選考を進めてください。"
       />
 
-      <div className="grid gap-2 md:gap-4 md:grid-cols-4">
-        <AdminStatCard label="Total"     value={applications.length} hint="応募総数" />
-        <AdminStatCard label="New"       value={counts.new}       hint="未確認の新着" tone="warning" />
-        <AdminStatCard label="Reviewing" value={counts.reviewing} hint="選考中" />
-        <AdminStatCard label="Hired"     value={counts.hired}     hint="採用決定" tone="success" />
-      </div>
+      <AdminStatTable
+        rows={[
+          { labelEn: "Total",     label: "合計",  value: total,          total,          tone: "default" },
+          { labelEn: "New",       label: "新着",  value: counts.new,      total,          tone: "warning" },
+          { labelEn: "Reviewing", label: "選考中", value: counts.reviewing, total,         tone: "default" },
+          { labelEn: "Hired",     label: "採用",  value: counts.hired,    total,          tone: "success" },
+        ]}
+      />
 
       <AdminSurface className="overflow-hidden">
-        <div className="border-b border-(--border) px-6 py-5">
-          <h2 className="text-lg font-bold text-(--fg)">応募一覧</h2>
-          <p className="text-sm text-(--fg-subtle)">新着順に表示しています</p>
+        <div className="border-b border-(--border) px-3 py-3 md:px-6 md:py-5">
+          <h2 className="text-sm font-bold text-(--fg) md:text-lg">応募一覧</h2>
+          <p className="text-[10px] text-(--fg-subtle) md:text-sm">新着順に表示</p>
         </div>
 
         {applications.length === 0 ? (
-          <div className="px-6 py-16 text-center">
-            <p className="text-base font-bold text-(--fg)">まだ応募はありません</p>
-            <p className="mt-2 text-sm text-(--fg-subtle)">
+          <div className="px-4 py-10 text-center md:px-6 md:py-16">
+            <p className="text-sm font-bold text-(--fg)">まだ応募はありません</p>
+            <p className="mt-1 text-xs text-(--fg-subtle) md:mt-2 md:text-sm">
               採用ページのフォームから応募が届くとここに表示されます。
             </p>
           </div>
@@ -53,20 +56,20 @@ export default async function AdminApplicationsPage() {
               <li key={app.id}>
                 <Link
                   href={`/admin/applications/${app.id}`}
-                  className="flex flex-col gap-3 px-6 py-5 transition-colors hover:bg-(--card-off) md:flex-row md:items-center md:justify-between"
+                  className="flex items-center justify-between gap-3 px-3 py-3 transition-colors hover:bg-(--card-off) md:px-6 md:py-5"
                 >
-                  <div className="space-y-1.5">
-                    <div className="flex flex-wrap items-center gap-3">
+                  <div className="min-w-0 flex-1 space-y-1">
+                    <div className="flex items-center gap-2">
                       <AppStatusBadge status={app.status} />
-                      <span className="text-xs uppercase tracking-widest text-(--fg-subtle)">
+                      <span className="text-[10px] text-(--fg-subtle)">
                         {new Date(app.createdAt).toLocaleDateString("ja-JP")}
                       </span>
                     </div>
-                    <p className="font-bold text-(--fg)">{app.name}</p>
-                    <p className="text-sm text-(--fg-subtle)">{app.position}</p>
+                    <p className="text-sm font-bold text-(--fg)">{app.name}</p>
+                    <p className="text-xs text-(--fg-subtle)">{app.position}</p>
                   </div>
-                  <span className="inline-flex items-center border border-(--border) px-4 py-2 text-xs font-bold uppercase tracking-widest text-(--fg-subtle) transition-colors hover:border-(--fg) hover:text-(--fg)">
-                    詳細を見る
+                  <span className="shrink-0 border border-(--border) px-2.5 py-1.5 text-[10px] font-bold uppercase tracking-widest text-(--fg-subtle) md:px-4 md:py-2 md:text-xs">
+                    詳細 →
                   </span>
                 </Link>
               </li>

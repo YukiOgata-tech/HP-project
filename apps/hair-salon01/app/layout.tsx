@@ -5,6 +5,7 @@ import { Breadcrumb } from "./components/breadcrumb";
 import { Footer } from "./components/footer";
 import { Header } from "./components/header";
 import { Providers } from "./providers";
+import { checkSessionExists } from "./admin/actions/session";
 import "./globals.css";
 
 const noto = Noto_Sans_JP({
@@ -95,6 +96,7 @@ export default async function RootLayout({
   const pathname = (await headers()).get("x-admin-pathname");
   const isAdminRoute = pathname?.startsWith("/admin") ?? false;
   const savedTheme = cookieStore.get("theme")?.value as "dark" | "light" | undefined;
+  const isAdmin = !isAdminRoute && await checkSessionExists();
 
   return (
     <html
@@ -111,7 +113,7 @@ export default async function RootLayout({
           />
         )}
         <Providers initialTheme={savedTheme}>
-          {!isAdminRoute && <Header />}
+          {!isAdminRoute && <Header isAdmin={isAdmin} />}
           {!isAdminRoute && <Breadcrumb />}
           {children}
           {!isAdminRoute && <Footer />}

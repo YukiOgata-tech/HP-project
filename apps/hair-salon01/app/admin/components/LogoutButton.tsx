@@ -1,0 +1,31 @@
+"use client";
+
+import { useState } from "react";
+import { deleteSession } from "../actions/session";
+import { ConfirmModal } from "./ConfirmModal";
+
+export function LogoutButton() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <>
+      <button
+        type="button"
+        onClick={() => setOpen(true)}
+        className="text-[10px] font-bold uppercase tracking-widest text-red-500 transition-colors hover:text-red-700"
+      >
+        ログアウト
+      </button>
+
+      <ConfirmModal
+        open={open}
+        onClose={() => setOpen(false)}
+        onConfirm={() => { deleteSession(); }}
+        title="ログアウトしますか？"
+        description="ログアウトするとこの画面を離れ、再度ログインが必要になります。"
+        confirmLabel="ログアウト"
+        variant="danger"
+      />
+    </>
+  );
+}

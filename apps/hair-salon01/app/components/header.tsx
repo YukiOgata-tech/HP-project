@@ -19,7 +19,7 @@ const navLinks = [
   { href: "/#access",  label: "Access"  },
 ];
 
-export function Header() {
+export function Header({ isAdmin = false }: { isAdmin?: boolean }) {
   const pathname = usePathname();
   const [isOpen, setIsOpen]     = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -83,6 +83,14 @@ export function Header() {
 
           {/* Desktop Actions */}
           <div className="hidden items-center gap-2.5 md:flex">
+            {isAdmin && (
+              <Link
+                href="/admin"
+                className="label-en border border-amber-400 px-3 py-1.5 text-amber-600 transition-all hover:bg-amber-50 hover:border-amber-500 dark:text-amber-400 dark:border-amber-500 dark:hover:bg-amber-950/50"
+              >
+                管理ページへ
+              </Link>
+            )}
             {mounted && (
               <button
                 onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
@@ -175,6 +183,15 @@ export function Header() {
               >
                 Reserve
               </a>
+              {isAdmin && (
+                <Link
+                  href="/admin"
+                  onClick={() => setIsOpen(false)}
+                  className="label-en mb-4 border border-amber-400 py-3.5 text-center text-amber-600 transition-colors hover:bg-amber-50 dark:text-amber-400 dark:border-amber-500 dark:hover:bg-amber-950/50"
+                >
+                  管理ページへ
+                </Link>
+              )}
             </nav>
           </motion.div>
         )}

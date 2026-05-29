@@ -33,58 +33,58 @@ export default async function ApplicationDetailPage({
   if (!app) notFound();
 
   const fields = [
-    { label: "氏名",       value: app.name },
-    { label: "電話番号",   value: app.phone },
-    { label: "メール",     value: app.email },
-    { label: "希望職種",   value: app.position },
-    { label: "経験年数",   value: app.experience || "未記入" },
-    { label: "応募日",     value: new Date(app.createdAt).toLocaleDateString("ja-JP", { year: "numeric", month: "long", day: "numeric" }) },
+    { label: "氏名",     value: app.name },
+    { label: "電話番号", value: app.phone },
+    { label: "メール",   value: app.email },
+    { label: "希望職種", value: app.position },
+    { label: "経験年数", value: app.experience || "未記入" },
+    { label: "応募日",   value: new Date(app.createdAt).toLocaleDateString("ja-JP", { year: "numeric", month: "long", day: "numeric" }) },
   ];
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-4 md:space-y-8">
       <AdminPageHeader
         eyebrow="Recruit"
         title={app.name}
-        description={`${app.position} への応募 — ${new Date(app.createdAt).toLocaleDateString("ja-JP")}`}
+        description={`${app.position} への応募`}
         actions={
           <Link
             href="/admin/applications"
-            className="inline-flex items-center border border-(--border) px-5 py-2.5 text-xs font-bold uppercase tracking-widest text-(--fg-subtle) transition-colors hover:border-(--fg) hover:text-(--fg)"
+            className="inline-flex items-center border border-(--border) px-3 py-2 text-[10px] font-bold uppercase tracking-widest text-(--fg-subtle) transition-colors hover:border-(--fg) hover:text-(--fg) md:px-5 md:py-2.5 md:text-xs"
           >
             ← 一覧へ
           </Link>
         }
       />
 
-      <div className="grid gap-6 xl:grid-cols-[1fr_320px]">
+      <div className="grid gap-4 xl:grid-cols-[1fr_280px]">
 
         {/* 応募内容 */}
-        <div className="space-y-6">
+        <div className="space-y-4">
           <AdminSurface>
-            <div className="border-b border-(--border) px-6 py-4">
+            <div className="border-b border-(--border) px-3 py-3 md:px-6 md:py-4">
               <div className="flex items-center gap-3">
                 <AppStatusBadge status={app.status} />
-                <p className="label-en text-(--fg-subtle)">Application Info</p>
+                <p className="label-en text-[10px] text-(--fg-subtle) md:text-xs">Application Info</p>
               </div>
             </div>
 
             <dl className="divide-y divide-(--border)">
               {fields.map(({ label, value }) => (
-                <div key={label} className="grid grid-cols-[8rem_1fr] gap-4 px-6 py-4">
-                  <dt className="text-xs font-bold text-(--fg-subtle)">{label}</dt>
-                  <dd className="text-sm text-(--fg)">{value}</dd>
+                <div key={label} className="grid grid-cols-[6rem_1fr] gap-3 px-3 py-3 md:grid-cols-[8rem_1fr] md:gap-4 md:px-6 md:py-4">
+                  <dt className="text-[10px] font-bold text-(--fg-subtle) md:text-xs">{label}</dt>
+                  <dd className="text-xs text-(--fg) md:text-sm">{value}</dd>
                 </div>
               ))}
             </dl>
           </AdminSurface>
 
-          {/* 志望動機・メッセージ */}
-          <AdminSurface className="p-6">
-            <p className="label-en text-(--fg-subtle)">Message</p>
-            <h2 className="mt-1 font-bold text-(--fg)">志望動機・メッセージ</h2>
-            <div className="mt-4 border border-(--border) bg-(--card-off) p-5">
-              <p className="whitespace-pre-wrap text-sm leading-8 text-(--fg)">
+          {/* 志望動機 */}
+          <AdminSurface className="p-3 md:p-6">
+            <p className="label-en text-[10px] text-(--fg-subtle) md:text-xs">Message</p>
+            <h2 className="mt-1 text-sm font-bold text-(--fg) md:text-base">志望動機・メッセージ</h2>
+            <div className="mt-3 border border-(--border) bg-(--card-off) p-3 md:mt-4 md:p-5">
+              <p className="whitespace-pre-wrap text-xs leading-7 text-(--fg) md:text-sm md:leading-8">
                 {app.message || "（未記入）"}
               </p>
             </div>
@@ -92,20 +92,20 @@ export default async function ApplicationDetailPage({
 
           {/* 履歴書 */}
           {app.resumeUrl && (
-            <AdminSurface className="p-6">
-              <p className="label-en text-(--fg-subtle)">Resume</p>
-              <h2 className="mt-1 font-bold text-(--fg)">添付履歴書</h2>
-              <div className="mt-4 flex items-center gap-4">
-                <span className="min-w-0 flex-1 truncate text-sm text-(--fg-subtle)">
+            <AdminSurface className="p-3 md:p-6">
+              <p className="label-en text-[10px] text-(--fg-subtle) md:text-xs">Resume</p>
+              <h2 className="mt-1 text-sm font-bold text-(--fg) md:text-base">添付履歴書</h2>
+              <div className="mt-3 flex items-center gap-3 md:mt-4 md:gap-4">
+                <span className="min-w-0 flex-1 truncate text-xs text-(--fg-subtle) md:text-sm">
                   {app.resumeFileName ?? "履歴書"}
                 </span>
                 <a
                   href={app.resumeUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="shrink-0 bg-(--cta) px-5 py-2.5 text-xs font-bold uppercase tracking-widest text-(--cta-text) transition-opacity hover:opacity-70"
+                  className="shrink-0 bg-(--cta) px-3 py-2 text-[10px] font-bold uppercase tracking-widest text-(--cta-text) transition-opacity hover:opacity-70 md:px-5 md:py-2.5 md:text-xs"
                 >
-                  ダウンロード
+                  DL
                 </a>
               </div>
             </AdminSurface>
@@ -113,13 +113,13 @@ export default async function ApplicationDetailPage({
         </div>
 
         {/* サイドパネル */}
-        <div className="space-y-6">
+        <div className="space-y-4">
 
           {/* ステータス更新 */}
-          <AdminSurface className="p-6">
-            <p className="label-en text-(--fg-subtle)">Status</p>
-            <h2 className="mt-1 font-bold text-(--fg)">ステータス更新</h2>
-            <div className="mt-4 space-y-3">
+          <AdminSurface className="p-3 md:p-6">
+            <p className="label-en text-[10px] text-(--fg-subtle) md:text-xs">Status</p>
+            <h2 className="mt-1 text-sm font-bold text-(--fg) md:text-base">ステータス更新</h2>
+            <div className="mt-3 grid grid-cols-3 gap-1.5 md:mt-4 md:grid-cols-1 md:gap-3">
               {STATUS_OPTIONS.map(({ value, label }) => (
                 <form
                   key={value}
@@ -128,14 +128,13 @@ export default async function ApplicationDetailPage({
                   <button
                     type="submit"
                     className={[
-                      "w-full border px-4 py-2.5 text-xs font-bold uppercase tracking-widest transition-all",
+                      "w-full border py-2 text-[10px] font-bold uppercase tracking-widest transition-all md:px-4 md:py-2.5 md:text-xs",
                       app.status === value
                         ? "border-(--fg) bg-(--cta) text-(--cta-text)"
                         : "border-(--border) text-(--fg-subtle) hover:border-(--fg) hover:text-(--fg)",
                     ].join(" ")}
                   >
-                    {label}
-                    {app.status === value && " ✓"}
+                    {label}{app.status === value && " ✓"}
                   </button>
                 </form>
               ))}
@@ -143,16 +142,16 @@ export default async function ApplicationDetailPage({
           </AdminSurface>
 
           {/* 削除 */}
-          <AdminSurface className="p-6">
-            <p className="label-en text-(--fg-subtle)">Danger Zone</p>
-            <h2 className="mt-1 font-bold text-(--fg)">応募データの削除</h2>
-            <p className="mt-2 text-xs leading-6 text-(--fg-subtle)">
+          <AdminSurface className="p-3 md:p-6">
+            <p className="label-en text-[10px] text-(--fg-subtle) md:text-xs">Danger Zone</p>
+            <h2 className="mt-1 text-sm font-bold text-(--fg) md:text-base">応募データの削除</h2>
+            <p className="mt-1 text-[10px] leading-5 text-(--fg-subtle) md:mt-2 md:text-xs md:leading-6">
               削除すると元に戻せません。
             </p>
-            <form action={deleteApplicationAndRedirect.bind(null, id)} className="mt-4">
+            <form action={deleteApplicationAndRedirect.bind(null, id)} className="mt-3 md:mt-4">
               <ConfirmSubmitButton
                 confirmMessage={`${app.name} さんの応募データを削除しますか？`}
-                className="w-full border border-red-200 px-4 py-2.5 text-xs font-bold uppercase tracking-widest text-red-600 transition-colors hover:border-red-400 hover:bg-red-50"
+                className="w-full border border-red-200 px-3 py-2 text-[10px] font-bold uppercase tracking-widest text-red-600 transition-colors hover:border-red-400 hover:bg-red-50 md:px-4 md:py-2.5 md:text-xs"
               >
                 削除する
               </ConfirmSubmitButton>
