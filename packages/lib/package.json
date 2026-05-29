@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "create-cms-user": "node --env-file=../../apps/hair-salon01/.env.local scripts/create-cms-user.mjs"
+    "create-cms-user":  "node --env-file=../../apps/hair-salon01/.env.local scripts/create-cms-user.mjs",
+    "manage-cms-user":  "node --env-file=../../apps/hair-salon01/.env.local scripts/manage-cms-user.mjs"
   },
   "exports": {
     ".": "./src/index.ts",

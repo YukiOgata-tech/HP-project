@@ -41,7 +41,12 @@
       "Bash(Get-ChildItem -Path \"C:\\\\projects\\\\client-sites\\\\apps\\\\hair-salon01\" -Recurse -Directory)",
       "Bash(Select-Object -First 20)",
       "mcp__plugin_firebase_firebase__firestore_list_documents",
-      "mcp__plugin_firebase_firebase__firestore_delete_document"
+      "mcp__plugin_firebase_firebase__firestore_delete_document",
+      "mcp__plugin_firebase_firebase__auth_get_users",
+      "mcp__plugin_firebase_firebase__firestore_get_document",
+      "mcp__plugin_firebase_firebase__firebase_login",
+      "Bash(mv prompt-mobile-lp.md prompt-mobile-rounded.md)",
+      "Bash(mv prompt-mobile-ops.md prompt-mobile-sharp.md)"
     ]
   },
   "enabledMcpjsonServers": [
