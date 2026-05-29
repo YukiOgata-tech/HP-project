@@ -270,14 +270,14 @@ body::after {
 .label-en {
   font-size: 0.8rem;
   font-weight: 900;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
 }
 
 @media (min-width: 768px) {
   .label-en {
     font-size: 0.95rem;
-    letter-spacing: 0.25em;
+    letter-spacing: 0.2em;
   }
 }
 
