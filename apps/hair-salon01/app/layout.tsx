@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { cookies, headers } from "next/headers";
 import { Noto_Sans_JP, Playfair_Display } from "next/font/google";
 import { Breadcrumb } from "./components/breadcrumb";
@@ -48,6 +48,15 @@ export const metadata: Metadata = {
     type: "website",
     locale: "ja_JP",
   },
+};
+
+export const viewport: Viewport = {
+  colorScheme: "light dark",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#0a0a0a" },
+  ],
+  viewportFit: "cover",
 };
 
 const localBusinessSchema = {

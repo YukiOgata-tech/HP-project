@@ -29,7 +29,7 @@ export function Breadcrumb() {
   return (
     <nav
       aria-label="パンくずナビゲーション"
-      className="fixed inset-x-0 top-14.25 z-30 border-b border-(--header-border) bg-(--header-bg) backdrop-blur-md"
+      className="fixed inset-x-0 top-[calc(3.5625rem+env(safe-area-inset-top))] z-30 border-b border-(--header-border) bg-(--header-bg)"
     >
       <ol className="mx-auto flex max-w-350 items-center gap-0.5 px-6 py-2">
 
