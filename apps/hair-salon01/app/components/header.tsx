@@ -49,11 +49,11 @@ export function Header({ isAdmin = false }: { isAdmin?: boolean }) {
       {/* ── Header ── */}
       <header
         className={[
-          "fixed inset-x-0 top-0 z-50 bg-(--header-bg) pt-[var(--mobile-safe-top)] transition-all duration-300",
+          "sticky top-0 z-50 bg-(--header-bg) pt-[var(--mobile-safe-top)] transition-all duration-300",
           scrolled ? "border-b border-(--header-border)" : "",
         ].join(" ")}
       >
-        <div className="mx-auto flex max-w-350 items-center justify-between px-6 py-3">
+        <div className="mx-auto flex h-14 max-w-350 items-center justify-between px-6">
 
           {/* Logo */}
           <Link
@@ -162,7 +162,7 @@ export function Header({ isAdmin = false }: { isAdmin?: boolean }) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -6 }}
             transition={{ duration: 0.18, ease: "easeOut" }}
-            className="fixed inset-x-0 top-[var(--site-header-height)] z-40 border-b border-(--border) bg-(--bg) md:hidden"
+            className="relative z-40 border-b border-(--border) bg-(--bg) md:hidden"
           >
             <nav className="mx-auto max-w-350 flex flex-col px-6">
               {navLinks.map(({ href, label }) => (

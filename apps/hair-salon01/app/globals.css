@@ -37,7 +37,7 @@
 
 @media (max-width: 767px) {
   :root {
-    --mobile-safe-top: max(env(safe-area-inset-top), 20px);
+    --mobile-safe-top: env(safe-area-inset-top, 0px);
   }
 }
 
@@ -114,6 +114,25 @@ body {
   background-color: var(--bg);
   color: var(--fg);
   transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+.home-hero-section {
+  margin-top: 0;
+}
+
+.home-hero-visual {
+  min-height: 568px;
+  min-height: max(67svh, 568px);
+}
+
+@media (min-width: 768px) {
+  .home-hero-section {
+    min-height: 67svh;
+  }
+
+  .home-hero-visual {
+    min-height: 0;
+  }
 }
 
 ::selection {

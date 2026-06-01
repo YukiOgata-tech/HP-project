@@ -96,14 +96,14 @@ export default async function Home() {
           モバイル: 全画面スライダー + ブランド上部オーバーレイ + テキスト下部
           デスクトップ: 左スライダー(62%) + 右ブランドパネル(38%)
       ════════════════════════════════════════ */}
-      <section className="mt-[calc(var(--site-header-height)+1rem)] flex flex-col md:mt-10 md:min-h-[67svh] md:flex-row">
+      <section className="home-hero-section flex flex-col md:flex-row">
 
         {/* ─ 左: スライダーエリア ─ */}
         {/*
-          モバイル: min-h-svh で全画面確保 → ヘッダー上部・テキスト下部が重ならない
+          モバイル: 固定の最低高を確保 → Safari の狭い viewport でも縮みすぎない
           デスクトップ: md:min-h-0 で flex-row の高さに従う
         */}
-        <div className="relative min-h-[67svh] flex-1 overflow-hidden md:min-h-0">
+        <div className="home-hero-visual relative flex-1 overflow-hidden">
 
           {/* スライダー背景 */}
           <HeroSlider />
