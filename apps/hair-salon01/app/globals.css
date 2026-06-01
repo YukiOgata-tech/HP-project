@@ -9,6 +9,9 @@
 ═══════════════════════════════════════════════ */
 
 :root {
+  --mobile-safe-top: 0px;
+  --site-header-height: calc(3.5625rem + var(--mobile-safe-top));
+
   --bg:            #ffffff;
   --bg-off:        #f4f4f4;
   --bg-dark:       #0a0a0a;
@@ -30,6 +33,12 @@
 
   --header-bg:     #ffffff;
   --header-border: rgba(0, 0, 0, 0.07);
+}
+
+@media (max-width: 767px) {
+  :root {
+    --mobile-safe-top: max(env(safe-area-inset-top), 20px);
+  }
 }
 
 /* ═══════════════════════════════════════════════

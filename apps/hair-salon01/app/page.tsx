@@ -96,7 +96,7 @@ export default async function Home() {
           モバイル: 全画面スライダー + ブランド上部オーバーレイ + テキスト下部
           デスクトップ: 左スライダー(62%) + 右ブランドパネル(38%)
       ════════════════════════════════════════ */}
-      <section className="mt-[calc(3.5625rem+env(safe-area-inset-top))] flex flex-col md:mt-10 md:min-h-[67svh] md:flex-row">
+      <section className="mt-[calc(var(--site-header-height)+1rem)] flex flex-col md:mt-10 md:min-h-[67svh] md:flex-row">
 
         {/* ─ 左: スライダーエリア ─ */}
         {/*
