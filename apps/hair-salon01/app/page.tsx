@@ -96,7 +96,7 @@ export default async function Home() {
           モバイル: 全画面スライダー + ブランド上部オーバーレイ + テキスト下部
           デスクトップ: 左スライダー(62%) + 右ブランドパネル(38%)
       ════════════════════════════════════════ */}
-      <section className="flex flex-col md:min-h-[67svh] md:flex-row mt-10">
+      <section className="mt-14 flex flex-col md:mt-10 md:min-h-[67svh] md:flex-row">
 
         {/* ─ 左: スライダーエリア ─ */}
         {/*
@@ -338,12 +338,12 @@ export default async function Home() {
               帰れる場所。
             </h2>
 
-            <p className="mt-6 text-sm leading-8 text-(--fg-subtle) md:text-base md:leading-9">
+            <p className="mt-6 text-sm leading-8 text-(--fg-body) md:text-base md:leading-9">
               サロン名「RISPLENDERE BROLETTO」はイタリア語で
               「キラキラ輝く小さな場所」という意味。ブロレットに訪れた方が
               輝いて帰れるよう、願いを込めてつけられた名前です。
             </p>
-            <p className="mt-4 text-sm leading-8 text-(--fg-subtle) md:text-base md:leading-9">
+            <p className="mt-4 text-sm leading-8 text-(--fg-body) md:text-base md:leading-9">
               女性スタッフだけの小さなサロン。細やかな気配りで、
               すべてのお客様のご要望に応えられるサロンを目指しています。
             </p>
