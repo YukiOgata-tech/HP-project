@@ -162,7 +162,7 @@ export function Header({ isAdmin = false }: { isAdmin?: boolean }) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -6 }}
             transition={{ duration: 0.18, ease: "easeOut" }}
-            className="fixed inset-x-0 top-[var(--site-header-height)] z-40 max-h-[calc(100svh-var(--site-header-height))] overflow-y-auto border-b border-(--border) bg-(--bg) md:hidden"
+            className="fixed inset-x-0 top-(--site-header-height) z-40 max-h-[calc(100svh-var(--site-header-height))] overflow-y-auto border-b border-(--border) bg-(--bg) md:hidden"
           >
             <nav className="mx-auto max-w-350 flex flex-col px-6">
               {navLinks.map(({ href, label }) => (
