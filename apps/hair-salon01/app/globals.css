@@ -10,7 +10,7 @@
 
 :root {
   --mobile-safe-top: 0px;
-  --site-header-height: calc(3.5625rem + var(--mobile-safe-top));
+  --site-header-height: calc(3.5rem + var(--mobile-safe-top));
 
   --bg:            #ffffff;
   --bg-off:        #f4f4f4;

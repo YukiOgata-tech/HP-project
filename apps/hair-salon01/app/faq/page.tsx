@@ -152,7 +152,7 @@ export default function FaqPage() {
       />
 
       {/* ── ページヘッダー ── */}
-      <section className="border-b border-(--border) bg-(--bg) px-6 pt-24 pb-12 md:pt-32 md:pb-16">
+      <section className="border-b border-(--border) bg-(--bg) px-6 py-8 sm:pt-20 md:pt-32 md:pb-16">
         <div className="mx-auto max-w-350">
           <FadeUp>
             <Link

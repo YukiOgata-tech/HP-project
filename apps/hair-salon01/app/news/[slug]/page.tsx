@@ -41,7 +41,7 @@ export default async function NewsPostPage({ params }: Props) {
     <main className="bg-(--bg)">
 
       {/* ── ページヘッダー ── */}
-      <section className="border-b border-(--border) bg-(--bg) px-6 pb-14 pt-28 md:pb-16 md:pt-36">
+      <section className="border-b border-(--border) bg-(--bg) px-6 pb-8 pt-8 sm:pt-24 md:pb-16 md:pt-36">
         <div className="mx-auto max-w-3xl">
           <Link
             href="/news"

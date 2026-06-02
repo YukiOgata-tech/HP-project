@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react";
 import { ConfirmModal } from "./ConfirmModal";
+import { useLoading } from "../../lib/loading-context";
 
 interface ConfirmSubmitButtonProps {
   className?: string;
@@ -20,9 +21,11 @@ export function ConfirmSubmitButton({
 }: ConfirmSubmitButtonProps) {
   const [open, setOpen] = useState(false);
   const hiddenRef = useRef<HTMLButtonElement>(null);
+  const { setLoading } = useLoading();
 
   const handleConfirm = () => {
     setOpen(false);
+    setLoading(true);
     hiddenRef.current?.click();
   };
 

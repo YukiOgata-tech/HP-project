@@ -68,7 +68,7 @@ export default function SalonPage() {
       {/* ════════════════════════════════════════
           TOP
       ════════════════════════════════════════ */}
-      <section className="border-b border-(--border) bg-(--bg) px-6 pt-24 md:pt-32">
+      <section className="border-b border-(--border) bg-(--bg) px-6 pt-8 sm:pt-24 md:pt-32">
         <div className="mx-auto flex max-w-350 items-end justify-between gap-10">
 
           {/* テキスト */}

@@ -175,7 +175,7 @@ export default function RecruitPage() {
           ページヘッダー
       ════════════════════════════════════════ */}
       <section className="border-b border-(--border) bg-(--bg-dark)">
-        <div className="mx-auto max-w-350 px-6 pb-10 pt-24 md:pb-20 md:pt-36">
+        <div className="mx-auto max-w-350 px-6 py-8 sm:t-24 md:pb-20 md:pt-36">
           <FadeUp>
             <Link
               href="/"

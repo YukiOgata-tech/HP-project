@@ -44,7 +44,7 @@ export default async function NewsPage() {
       {/* ════════════════════════════════════════
           TOP — 背景画像 (ライト/ダーク切替)
       ════════════════════════════════════════ */}
-      <section className="relative overflow-hidden border-b border-(--border) px-6 pb-10 pt-24 md:pt-28 md:pb-12">
+      <section className="relative overflow-hidden border-b border-(--border) px-6 pb-10 pt-8 sm:pt-24 md:pt-28 md:pb-12">
 
         {/* ライトモード背景 */}
         <Image

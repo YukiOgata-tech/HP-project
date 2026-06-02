@@ -188,7 +188,7 @@ export default function MenuPage() {
         <div className="mx-auto max-w-350 flex flex-col md:flex-row">
 
           {/* 左: テキスト */}
-          <div className="flex-1 px-6 pb-12 pt-24 md:px-14 md:pb-16 md:pt-36">
+          <div className="flex-1 px-6 py-8 sm:pt-24 md:px-14 md:pb-16 md:pt-36">
             <FadeUp>
               <Link
                 href="/"

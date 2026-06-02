@@ -49,7 +49,7 @@ export function Header({ isAdmin = false }: { isAdmin?: boolean }) {
       {/* ── Header ── */}
       <header
         className={[
-          "sticky top-0 z-50 bg-(--header-bg) pt-[var(--mobile-safe-top)] transition-all duration-300",
+          "sticky top-0 z-50 bg-(--header-bg) pt-(--mobile-safe-top) transition-all duration-300",
           scrolled ? "border-b border-(--header-border)" : "",
         ].join(" ")}
       >
@@ -162,14 +162,14 @@ export function Header({ isAdmin = false }: { isAdmin?: boolean }) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -6 }}
             transition={{ duration: 0.18, ease: "easeOut" }}
-            className="relative z-40 border-b border-(--border) bg-(--bg) md:hidden"
+            className="fixed inset-x-0 top-[var(--site-header-height)] z-40 max-h-[calc(100svh-var(--site-header-height))] overflow-y-auto border-b border-(--border) bg-(--bg) md:hidden"
           >
             <nav className="mx-auto max-w-350 flex flex-col px-6">
               {navLinks.map(({ href, label }) => (
                 <Link
                   key={href}
                   href={href}
-                  className="label-en border-b border-(--border-light) py-4 text-(--fg-subtle) transition-colors last:border-b-0 hover:text-(--fg)"
+                  className="label-en border-b border-(--border-light) py-3 text-(--fg-subtle) transition-colors last:border-b-0 hover:text-(--fg)"
                 >
                   {label}
                 </Link>

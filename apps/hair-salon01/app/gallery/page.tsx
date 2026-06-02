@@ -33,11 +33,11 @@ export default function GalleryPage() {
 
       {/* ── ページヘッダー ── */}
       <section className="border-b border-(--border) bg-(--bg-dark)">
-        <div className="mx-auto max-w-350 px-6 pb-12 pt-24 md:pb-16 md:pt-32">
+        <div className="mx-auto max-w-350 px-6 py-8 sm:pt-24 md:pb-16 md:pt-32">
           <FadeUp>
             <Link
               href="/"
-              className="label-en mb-6 inline-flex items-center gap-2 text-white/40 transition-colors hover:text-white/70"
+              className="label-en mb-3 sm:mb-6 inline-flex items-center gap-2 text-white/40 transition-colors hover:text-white/70"
             >
               <ArrowLeft size={12} />
               Back to Home
